@@ -960,4 +960,9 @@
     <string name="settings_refresh_rate_matching_description">Tilpasser skærmens opdateringshastighed til videoen for mere flydende bevægelser. Kræver understøttelse fra skærmen; skærmen kan kortvarigt blive sort ved skift.</string>
     <string name="dashboard_tracked_series">Fulgte serier</string>
     <string name="nav_saved_streams">Gemte streams</string>
+    <string name="settings_epg_phone_qr_start">Vis QR-kode</string>
+    <string name="settings_epg_phone_qr_stop">Stop parring</string>
+    <string name="settings_epg_phone_qr_warning">Sikkerhed: Parring sender loginoplysninger uden kryptering via dit lokale netværk. Brug kun et privat Wi-Fi-netværk, du har tillid til.</string>
+    <string name="settings_epg_phone_qr_complete">Tilføjet</string>
+    <string name="settings_epg_phone_qr_error">Fejl</string>
 </resources>

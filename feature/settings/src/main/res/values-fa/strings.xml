@@ -958,4 +958,9 @@
     <string name="settings_refresh_rate_matching_description">نرخ نوسازی نمایشگر را برای حرکت روان‌تر با ویدیو هماهنگ می‌کند. به پشتیبانی نمایشگر نیاز دارد؛ هنگام تغییر ممکن است صفحه برای لحظه‌ای سیاه شود.</string>
     <string name="dashboard_tracked_series">سریال‌های دنبال‌شده</string>
     <string name="nav_saved_streams">استریم‌های ذخیره‌شده</string>
+    <string name="settings_epg_phone_qr_start">نمایش کد QR</string>
+    <string name="settings_epg_phone_qr_stop">توقف جفت‌سازی</string>
+    <string name="settings_epg_phone_qr_warning">امنیت: اطلاعات ورود هنگام جفت‌سازی بدون رمزگذاری از شبکه محلی شما فرستاده می‌شود. فقط از شبکه خصوصی Wi-Fi مطمئن استفاده کنید.</string>
+    <string name="settings_epg_phone_qr_complete">افزوده شد</string>
+    <string name="settings_epg_phone_qr_error">خطا</string>
 </resources>

@@ -960,4 +960,9 @@
     <string name="settings_refresh_rate_matching_description">Daha akıcı hareket için ekran yenileme hızını videoya uyarlar. Ekran desteği gerektirir; geçiş sırasında ekran kısa süreliğine kararabilir.</string>
     <string name="dashboard_tracked_series">Takip Edilen Diziler</string>
     <string name="nav_saved_streams">Kayıtlı Yayınlar</string>
+    <string name="settings_epg_phone_qr_start">QR kodunu göster</string>
+    <string name="settings_epg_phone_qr_stop">Eşleştirmeyi durdur</string>
+    <string name="settings_epg_phone_qr_warning">Güvenlik: Eşleştirme, oturum açma bilgilerini yerel ağınız üzerinden şifrelemeden gönderir. Yalnızca güvendiğiniz özel bir Wi-Fi ağı kullanın.</string>
+    <string name="settings_epg_phone_qr_complete">Eklendi</string>
+    <string name="settings_epg_phone_qr_error">Hata</string>
 </resources>

@@ -958,4 +958,9 @@
     <string name="settings_refresh_rate_matching_description">Itinutugma ang refresh rate ng display sa video para sa mas maayos na galaw. Kailangan ng suporta ng display; maaaring umitim sandali ang screen kapag nagpapalit.</string>
     <string name="dashboard_tracked_series">Mga Sinusubaybayang Palabas</string>
     <string name="nav_saved_streams">Mga Naka-save na Stream</string>
+    <string name="settings_epg_phone_qr_start">Ipakita ang QR code</string>
+    <string name="settings_epg_phone_qr_stop">Ihinto ang pairing</string>
+    <string name="settings_epg_phone_qr_warning">Seguridad: Ipinapadala ng pagpapares ang mga kredensyal nang walang encryption sa lokal mong network. Gumamit lamang ng pribado at pinagkakatiwalaang Wi-Fi.</string>
+    <string name="settings_epg_phone_qr_complete">Naidagdag</string>
+    <string name="settings_epg_phone_qr_error">Error</string>
 </resources>

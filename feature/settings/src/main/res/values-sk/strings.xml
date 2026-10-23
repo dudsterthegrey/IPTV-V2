@@ -964,4 +964,9 @@
     <string name="settings_refresh_rate_matching_description">Prispôsobí obnovovaciu frekvenciu displeja videu pre plynulejší pohyb. Vyžaduje podporu displeja; pri prepnutí môže obrazovka nakrátko stmavnúť.</string>
     <string name="dashboard_tracked_series">Sledované relácie</string>
     <string name="nav_saved_streams">Uložené streamy</string>
+    <string name="settings_epg_phone_qr_start">Zobraziť QR kód</string>
+    <string name="settings_epg_phone_qr_stop">Zastaviť párovanie</string>
+    <string name="settings_epg_phone_qr_warning">Zabezpečenie: Pri párovaní sa prihlasovacie údaje odosielajú cez miestnu sieť bez šifrovania. Používajte iba dôveryhodnú súkromnú Wi-Fi sieť.</string>
+    <string name="settings_epg_phone_qr_complete">Pridané</string>
+    <string name="settings_epg_phone_qr_error">Chyba</string>
 </resources>

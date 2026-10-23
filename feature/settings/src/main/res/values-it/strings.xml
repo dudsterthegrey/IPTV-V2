@@ -956,4 +956,9 @@
     <string name="settings_refresh_rate_matching_description">Adatta la frequenza di aggiornamento dello schermo al video per movimenti più fluidi. Richiede uno schermo compatibile; durante il cambio lo schermo può diventare nero per un istante.</string>
     <string name="dashboard_tracked_series">Serie seguite</string>
     <string name="nav_saved_streams">Stream salvati</string>
+    <string name="settings_epg_phone_qr_start">Mostra codice QR</string>
+    <string name="settings_epg_phone_qr_stop">Interrompi associazione</string>
+    <string name="settings_epg_phone_qr_warning">Sicurezza: L’associazione invia le credenziali senza crittografia sulla rete locale. Usa solo una rete Wi-Fi privata e affidabile.</string>
+    <string name="settings_epg_phone_qr_complete">Aggiunto</string>
+    <string name="settings_epg_phone_qr_error">Errore</string>
 </resources>

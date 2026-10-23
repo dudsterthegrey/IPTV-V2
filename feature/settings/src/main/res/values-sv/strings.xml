@@ -960,4 +960,9 @@
     <string name="settings_refresh_rate_matching_description">Anpassar skärmens uppdateringsfrekvens till videon för jämnare rörelser. Kräver stöd från skärmen; skärmen kan bli svart en kort stund vid byte.</string>
     <string name="dashboard_tracked_series">Följda serier</string>
     <string name="nav_saved_streams">Sparade strömmar</string>
+    <string name="settings_epg_phone_qr_start">Visa QR-kod</string>
+    <string name="settings_epg_phone_qr_stop">Stoppa parkopplingen</string>
+    <string name="settings_epg_phone_qr_warning">Säkerhet: Parkopplingen skickar inloggningsuppgifter okrypterade via ditt lokala nätverk. Använd endast ett privat Wi-Fi-nätverk som du litar på.</string>
+    <string name="settings_epg_phone_qr_complete">Tillagd</string>
+    <string name="settings_epg_phone_qr_error">Fel</string>
 </resources>

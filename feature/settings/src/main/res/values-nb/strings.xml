@@ -960,4 +960,9 @@
     <string name="settings_refresh_rate_matching_description">Tilpasser skjermens oppdateringsfrekvens til videoen for jevnere bevegelser. Krever støtte fra skjermen; skjermen kan bli svart et øyeblikk ved bytte.</string>
     <string name="dashboard_tracked_series">Fulgte serier</string>
     <string name="nav_saved_streams">Lagrede strømmer</string>
+    <string name="settings_epg_phone_qr_start">Vis QR-kode</string>
+    <string name="settings_epg_phone_qr_stop">Stopp sammenkobling</string>
+    <string name="settings_epg_phone_qr_warning">Sikkerhet: Paringen sender påloggingsinformasjon ukryptert over det lokale nettverket. Bruk bare et privat Wi-Fi-nettverk du stoler på.</string>
+    <string name="settings_epg_phone_qr_complete">Lagt til</string>
+    <string name="settings_epg_phone_qr_error">Feil</string>
 </resources>

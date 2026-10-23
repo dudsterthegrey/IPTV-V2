@@ -958,4 +958,9 @@
     <string name="settings_refresh_rate_matching_description">Përshtat ritmin e rifreskimit të ekranit me videon për lëvizje më të rrjedhshme. Kërkon mbështetje nga ekrani; gjatë ndërrimit ekrani mund të nxihet për pak çaste.</string>
     <string name="dashboard_tracked_series">Serialet e ndjekura</string>
     <string name="nav_saved_streams">Transmetimet e ruajtura</string>
+    <string name="settings_epg_phone_qr_start">Shfaq kodin QR</string>
+    <string name="settings_epg_phone_qr_stop">Ndalo çiftimin</string>
+    <string name="settings_epg_phone_qr_warning">Siguria: Çiftimi dërgon të dhënat e hyrjes pa enkriptim përmes rrjetit lokal. Përdor vetëm një rrjet privat Wi-Fi të besuar.</string>
+    <string name="settings_epg_phone_qr_complete">U shtua</string>
+    <string name="settings_epg_phone_qr_error">Gabim</string>
 </resources>
