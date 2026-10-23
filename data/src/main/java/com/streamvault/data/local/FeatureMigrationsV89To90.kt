@@ -4,8 +4,8 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
- * Rebuilds catalog FTS indexes with Unicode-aware Latin diacritic folding (upstream StreamVault's
- * 87→88; renumbered because IPTV Player already used 88 and 89 for its own tables).
+ * Rebuilds catalog FTS indexes with Latin diacritic folding (upstream StreamVault's
+ * 87→88 and 88→89, folded together; renumbered because IPTV Player already used 88 and 89 for its own tables).
  */
 internal object FeatureMigrationsV89To90 {
     val MIGRATION_89_90 = object : Migration(89, 90) {
@@ -19,7 +19,7 @@ internal object FeatureMigrationsV89To90 {
             db.execSQL("DROP TABLE IF EXISTS `$index`")
             db.execSQL(
                 "CREATE VIRTUAL TABLE IF NOT EXISTS `$index` " +
-                    "USING FTS4(`name` TEXT NOT NULL, tokenize=unicode61 `remove_diacritics=2`, " +
+                    "USING FTS4(`name` TEXT NOT NULL, tokenize=unicode61 `remove_diacritics=1`, " +
                     "content=`$contentTable`)"
             )
             db.execSQL("INSERT INTO `$index`(`$index`) VALUES('rebuild')")
