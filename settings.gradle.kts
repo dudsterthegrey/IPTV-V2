@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StreamVault"
+rootProject.name = "IPTV Player"
 
 include(":app")
 include(":benchmark")
