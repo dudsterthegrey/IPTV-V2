@@ -1,0 +1,198 @@
+package com.streamvault.app.di
+
+import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.util.Log
+import com.streamvault.app.BuildConfig
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.streamvault.data.remote.NetworkTimeoutConfig
+import com.streamvault.data.manager.recording.RecordingHttpClientFactory
+import com.streamvault.data.manager.recording.RecordingNetworkProfile
+import com.streamvault.data.remote.http.DefaultUserAgentInterceptor
+import com.streamvault.data.remote.http.buildAppRequestProfile
+import com.streamvault.data.remote.http.buildAppUserAgent
+import com.streamvault.data.remote.http.buildOpenSubtitlesUserAgent
+import com.streamvault.data.remote.stalker.OkHttpStalkerApiService
+import com.streamvault.data.remote.stalker.StalkerApiService
+import com.streamvault.data.remote.stalker.StalkerRequestCoordinator
+import com.streamvault.data.remote.xtream.XtreamApiService
+import com.streamvault.data.remote.xtream.OkHttpXtreamApiService
+import com.streamvault.data.remote.xtream.XtreamUrlFactory
+import com.streamvault.data.parser.XmltvParser
+import com.streamvault.player.AudioCompatibilityMemoryStore
+import com.streamvault.player.Media3PlayerEngine
+import com.streamvault.player.PlayerEngine
+import com.streamvault.player.PlaybackSupportSnapshotStore
+import com.streamvault.player.playback.applyPlaybackTransportPolicy
+import com.streamvault.player.playback.applyUnsafeTlsBypass
+import com.streamvault.player.di.AuxiliaryPlayerEngine
+import com.streamvault.player.di.MainPlayerEngine
+import com.streamvault.domain.util.LivePlaybackByteTap
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.Cache
+import okhttp3.OkHttpClient
+import java.net.InetSocketAddress
+import java.net.Proxy
+import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
+import java.util.concurrent.TimeUnit.SECONDS
+import javax.inject.Named
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+
+    private const val HTTP_CACHE_MAX_BYTES = 16L * 1024 * 1024
+
+    @Provides
+    @Named("opensubtitlesApiKey")
+    fun provideOpenSubtitlesApiKey(): String = BuildConfig.OPENSUBTITLES_API_KEY
+
+    @Provides
+    @Named("opensubtitlesUserAgent")
+    fun provideOpenSubtitlesUserAgent(): String = buildOpenSubtitlesUserAgent(BuildConfig.VERSION_NAME)
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context
+    ): OkHttpClient {
+        val appUserAgent = buildAppUserAgent(BuildConfig.VERSION_NAME)
+        val isDebuggable = (context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
+        val loggingLevel = if (isDebuggable) {
+            HttpLoggingInterceptor.Level.BASIC
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
+
+        val httpLogger = HttpLoggingInterceptor { message ->
+            Log.d("OkHttp", XtreamUrlFactory.sanitizeLogMessage(message))
+        }.apply {
+            level = loggingLevel
+        }
+
+        return OkHttpClient.Builder()
+            .cache(
+                Cache(
+                    directory = File(context.cacheDir, "streamvault_http_cache"),
+                    maxSize = HTTP_CACHE_MAX_BYTES
+                )
+            )
+            .connectTimeout(NetworkTimeoutConfig.CONNECT_TIMEOUT_SECONDS, SECONDS)
+            .readTimeout(NetworkTimeoutConfig.READ_TIMEOUT_SECONDS, SECONDS)
+            .writeTimeout(NetworkTimeoutConfig.WRITE_TIMEOUT_SECONDS, SECONDS)
+            .addInterceptor(DefaultUserAgentInterceptor(appUserAgent))
+            .addInterceptor(httpLogger)
+            .followRedirects(true)
+            .followSslRedirects(true)
+            .connectionPool(okhttp3.ConnectionPool(10, 5, java.util.concurrent.TimeUnit.MINUTES)) // Allow more idle connections
+            .dispatcher(okhttp3.Dispatcher().apply {
+                maxRequests = 64
+                maxRequestsPerHost = 10 // Increase host limit for Multi-View
+            })
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRecordingHttpClientFactory(okHttpClient: OkHttpClient): RecordingHttpClientFactory =
+        RecordingHttpClientFactory { profile: RecordingNetworkProfile ->
+            val transportPolicy = profile.playbackTransportPolicy
+            val builder = when {
+                transportPolicy != null ->
+                    okHttpClient.newBuilder().applyPlaybackTransportPolicy(transportPolicy)
+                profile.allowInvalidSsl -> okHttpClient.newBuilder().applyUnsafeTlsBypass()
+                else -> okHttpClient.newBuilder()
+            }
+            val proxyHost = profile.proxyHost.trim()
+            val proxyPort = profile.proxyPort
+            if (proxyHost.isNotEmpty() && proxyPort != null) {
+                builder.proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress(proxyHost, proxyPort)))
+            }
+            builder.build()
+        }
+
+    @Provides
+    @Singleton
+    fun provideXtreamApiService(okHttpClient: OkHttpClient, xtreamJson: Json): XtreamApiService =
+        OkHttpXtreamApiService(
+            client = okHttpClient,
+            json = xtreamJson,
+            defaultRequestProfile = buildAppRequestProfile(BuildConfig.VERSION_NAME, ownerTag = "app/xtream")
+        )
+
+    @Provides
+    @Singleton
+    fun provideStalkerApiService(
+        okHttpClient: OkHttpClient,
+        xtreamJson: Json,
+        requestCoordinator: StalkerRequestCoordinator
+    ): StalkerApiService =
+        OkHttpStalkerApiService(okHttpClient, xtreamJson, requestCoordinator = requestCoordinator)
+
+    @Provides
+    @Singleton
+    fun provideXtreamJson(): Json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+        explicitNulls = false
+        coerceInputValues = true
+    }
+
+    @Provides
+    @Singleton
+    fun provideXmltvParser(): XmltvParser = XmltvParser()
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = GsonBuilder().create()
+
+    @Provides
+    @Singleton
+    @MainPlayerEngine
+    fun provideMainPlayerEngine(
+        @ApplicationContext context: Context,
+        okHttpClient: OkHttpClient,
+        playbackCompatibilityRepository: com.streamvault.domain.repository.PlaybackCompatibilityRepository,
+        audioCompatibilityMemoryStore: AudioCompatibilityMemoryStore,
+        playbackSupportSnapshotStore: PlaybackSupportSnapshotStore,
+        livePlaybackByteTap: LivePlaybackByteTap
+    ): PlayerEngine = Media3PlayerEngine(
+        context,
+        okHttpClient,
+        playbackCompatibilityRepository,
+        audioCompatibilityMemoryStore,
+        playbackSupportSnapshotStore,
+        livePlaybackByteTap
+    )
+
+    /**
+     * Factory binding for preview and multiview playback.
+     * Each Provider.get() call returns a fresh engine instance.
+     */
+    @Provides
+    @AuxiliaryPlayerEngine
+    fun provideAuxiliaryPlayerEngine(
+        @ApplicationContext context: Context,
+        okHttpClient: OkHttpClient,
+        playbackCompatibilityRepository: com.streamvault.domain.repository.PlaybackCompatibilityRepository,
+        audioCompatibilityMemoryStore: AudioCompatibilityMemoryStore,
+        playbackSupportSnapshotStore: PlaybackSupportSnapshotStore
+    ): PlayerEngine = Media3PlayerEngine(
+        context,
+        okHttpClient,
+        playbackCompatibilityRepository,
+        audioCompatibilityMemoryStore,
+        playbackSupportSnapshotStore
+    ).apply {
+        enableMediaSession = false
+        bypassAudioFocus = true
+    }
+}

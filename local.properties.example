@@ -1,0 +1,55 @@
+# =============================================================================
+# local.properties — template (versioned)
+# =============================================================================
+#
+# Copy this file to `local.properties` (already gitignored by Android Studio)
+# and uncomment/edit the lines you need:
+#
+#   $ cp local.properties.example local.properties
+#
+# Values declared here are read at build time by `app/build.gradle.kts` and
+# injected into `BuildConfig.*` fields for the `debug` build type only. The
+# OpenSubtitles key can also be provided through the `OPENSUBTITLES_API_KEY`
+# environment variable for beta/release CI builds. Release builds do not read
+# values from this local file.
+#
+# See `docs/DEV_SEEDING.md` for the full opt-in onboarding flow.
+# -----------------------------------------------------------------------------
+
+# --- OpenSubtitles API application key (local debug builds) -------------------
+# Get a key from OpenSubtitles, then add it to your ignored `local.properties`:
+# opensubtitles.api.key=your-opensubtitles-api-key
+# Rebuild the app after changing this value. CI beta/release builds receive the
+# same app key from the GitHub Actions secret OPENSUBTITLES_API_KEY.
+
+# === Trakt app configuration (public client settings) =========================
+# Environment TRAKT_CLIENT_ID / TRAKT_REDIRECT_URI take precedence.
+# Register this HTTPS URI with Trakt and publish assetlinks.json on its domain.
+# trakt.client.id=your-public-streamvault-client-id
+# trakt.redirect.uri=https://your-domain.example/oauth/trakt/callback
+
+
+# === Dev onboarding seeding (optional) ========================================
+#
+# When any of the sections below is populated, WelcomeViewModel will skip the
+# manual onboarding form on first boot (or after `pm clear`) and auto-create
+# a provider through the regular validation pipeline.
+#
+# Priority: Xtream first, then M3U, otherwise normal onboarding.
+
+# --- Option A: Xtream account ------------------------------------------------
+# Use your own credentials. Never commit your real values back — this file
+# (without `.example`) is in .gitignore.
+#
+# xtream.dev.server=http://your-xtream-server.example.org:80
+# xtream.dev.username=your-username
+# xtream.dev.password=your-password
+# xtream.dev.name=My Xtream Dev Server
+
+# --- Option B: Free public M3U playlist --------------------------------------
+# iptv-org maintains a curated, legal aggregation of public IPTV channels
+# at https://iptv-org.github.io/ — pick a country playlist and uncomment.
+# No authentication required, no private data exposed.
+#
+# m3u.dev.url=https://iptv-org.github.io/iptv/countries/fr.m3u
+# m3u.dev.name=iptv-org France

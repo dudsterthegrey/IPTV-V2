@@ -1,0 +1,504 @@
+package com.streamvault.feature.catalog.presentation.series
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
+import com.google.common.truth.Truth.assertThat
+import com.streamvault.feature.catalog.api.CatalogCastPlaybackEvent
+import com.streamvault.feature.catalog.api.CatalogCastPort
+import com.streamvault.feature.catalog.api.CatalogCastRequest
+import com.streamvault.feature.catalog.api.CatalogCastStartResult
+import com.streamvault.feature.catalog.api.CatalogDownloadStarter
+import com.streamvault.feature.catalog.api.CatalogMessage
+import com.streamvault.feature.catalog.api.CatalogStreamPreparer
+import com.streamvault.feature.catalog.api.CatalogUiEvent
+import com.streamvault.feature.catalog.presentation.CatalogMainDispatcherRule
+import com.streamvault.data.preferences.PreferencesRepository
+import com.streamvault.domain.model.Episode
+import com.streamvault.domain.model.ExternalRatings
+import com.streamvault.domain.model.LegacyProvider as Provider
+import com.streamvault.domain.model.ProviderType
+import com.streamvault.domain.model.Result
+import com.streamvault.domain.model.Season
+import com.streamvault.domain.model.Series
+import com.streamvault.domain.model.StreamInfo
+import com.streamvault.domain.model.VodSeriesVariant
+import com.streamvault.domain.repository.DownloadManager
+import com.streamvault.domain.repository.ExternalRatingsRepository
+import com.streamvault.domain.repository.FavoriteRepository
+import com.streamvault.domain.repository.PlaybackHistoryRepository
+import com.streamvault.domain.repository.ProviderRepository
+import com.streamvault.domain.repository.SeriesDetailsUnavailableException
+import com.streamvault.domain.repository.SeriesRepository
+import com.streamvault.domain.trakt.TraktFavoriteActionResult
+import com.streamvault.domain.trakt.TraktFavoriteIdentity
+import com.streamvault.domain.trakt.TraktFavoriteType
+import com.streamvault.domain.trakt.TraktFavorites
+import com.streamvault.domain.trakt.TraktRatingActionResult
+import com.streamvault.domain.trakt.TraktRatingIdentity
+import com.streamvault.domain.trakt.TraktRatingType
+import com.streamvault.domain.trakt.TraktRatingRefreshResult
+import com.streamvault.domain.trakt.TraktRatings
+import com.streamvault.domain.trakt.TraktRatingsState
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Rule
+import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.anyOrNull
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
+
+class SeriesDetailViewModelCastingTest {
+
+    @get:Rule
+    val mainDispatcherRule = CatalogMainDispatcherRule()
+
+    @Test
+    fun `rateOnTrakt sends exact show identity and records successful rating`() = runBlocking {
+        val ratings = RecordingTraktRatings()
+        val viewModel = createViewModel(series = series().copy(tmdbId = 1396L), traktRatings = ratings)
+
+        try {
+            viewModel.uiState.first { it.series != null }
+            val event = async(start = CoroutineStart.UNDISPATCHED) { viewModel.uiEvents.first() }
+            viewModel.rateOnTrakt(9)
+
+            assertThat(withTimeout(5_000L) { event.await() })
+                .isEqualTo(CatalogUiEvent.ShowMessage(CatalogMessage.TraktRatingSaved))
+            assertThat(ratings.writes).containsExactly(TraktRatingIdentity(TraktRatingType.SHOW, 1396L) to 9)
+            assertThat(viewModel.uiState.value.traktUserRating).isEqualTo(9)
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `castEpisode uses selected episode and preserves watch progress`() = runBlocking {
+        val selectedEpisode = episode(id = 22L, episodeNumber = 2, watchProgress = 65_000L)
+        val series = series(episodes = listOf(episode(id = 21L, episodeNumber = 1), selectedEpisode))
+        val castPort = FakeCatalogCastPort(CatalogCastStartResult.RouteSelectionRequired)
+        val viewModel = createViewModel(series = series, castPort = castPort)
+
+        try {
+            val event = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            viewModel.castEpisode(selectedEpisode)
+
+            assertThat(withTimeout(5_000L) { event.await() }).isEqualTo(CatalogUiEvent.OpenCastRouteChooser)
+            assertThat(castPort.lastRequest?.title).isEqualTo("Series - S1E2")
+            assertThat(castPort.lastRequest?.subtitle).isEqualTo("Episode 2")
+            assertThat(castPort.lastRequest?.startPositionMs).isEqualTo(65_000L)
+            assertThat(viewModel.uiState.value.isCasting).isTrue()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `castEpisode emits unavailable message from coordinator result`() = runBlocking {
+        val castPort = FakeCatalogCastPort(CatalogCastStartResult.Unavailable)
+        val viewModel = createViewModel(castPort = castPort)
+
+        try {
+            val event = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            viewModel.castEpisode(episode())
+
+            assertThat(withTimeout(5_000L) { event.await() })
+                .isEqualTo(CatalogUiEvent.ShowMessage(CatalogMessage.CastUnavailable))
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `castEpisode reports session failure after route selection`() = runBlocking {
+        val castPort = FakeCatalogCastPort(CatalogCastStartResult.RouteSelectionRequired)
+        val viewModel = createViewModel(castPort = castPort)
+
+        try {
+            val routeEvent = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            viewModel.castEpisode(episode())
+            assertThat(withTimeout(5_000L) { routeEvent.await() }).isEqualTo(CatalogUiEvent.OpenCastRouteChooser)
+
+            val lifecycleEvent = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            castPort.emit(CatalogCastPlaybackEvent.Finished(false, CatalogMessage.CastSessionFailed))
+
+            assertThat(withTimeout(5_000L) { lifecycleEvent.await() })
+                .isEqualTo(CatalogUiEvent.ShowMessage(CatalogMessage.CastSessionFailed))
+            assertThat(viewModel.uiState.value.isCasting).isFalse()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `castEpisode resets pending state when route selection is cancelled`() = runBlocking {
+        val castPort = FakeCatalogCastPort(CatalogCastStartResult.RouteSelectionRequired)
+        val viewModel = createViewModel(castPort = castPort)
+
+        try {
+            val routeEvent = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            viewModel.castEpisode(episode())
+            assertThat(withTimeout(5_000L) { routeEvent.await() }).isEqualTo(CatalogUiEvent.OpenCastRouteChooser)
+            assertThat(viewModel.uiState.value.isCasting).isTrue()
+
+            castPort.emit(CatalogCastPlaybackEvent.RouteSelectionCancelled)
+
+            withTimeout(5_000L) { viewModel.uiState.first { !it.isCasting } }
+            assertThat(viewModel.uiState.value.isCasting).isFalse()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `castEpisode ignores repeated launches while route selection is pending`() = runBlocking {
+        val castPort = FakeCatalogCastPort(CatalogCastStartResult.RouteSelectionRequired)
+        val viewModel = createViewModel(castPort = castPort)
+
+        try {
+            val routeEvent = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            viewModel.castEpisode(episode())
+            assertThat(withTimeout(5_000L) { routeEvent.await() }).isEqualTo(CatalogUiEvent.OpenCastRouteChooser)
+
+            viewModel.castEpisode(episode(id = 22L, episodeNumber = 2))
+
+            assertThat(castPort.startCount).isEqualTo(1)
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `heart toggle also syncs the series TMDB id to Trakt favorites`() = runBlocking {
+        val favorites = RecordingTraktFavorites()
+        val viewModel = createViewModel(series = series().copy(tmdbId = 1396L), traktFavorites = favorites)
+
+        try {
+            withTimeout(5_000L) { viewModel.uiState.first { it.series != null } }
+            viewModel.toggleFavorite()
+
+            assertThat(withTimeout(5_000L) { favorites.completed.await() }).isEqualTo(Unit)
+            assertThat(favorites.writes).containsExactly(
+                TraktFavoriteIdentity(TraktFavoriteType.SHOW, 1396L) to true,
+            )
+            assertThat(viewModel.uiState.value.series?.isFavorite).isTrue()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `castEpisode explains streams that need proxy rewrite when cast remains unsupported`() = runBlocking {
+        val castPort = FakeCatalogCastPort(CatalogCastStartResult.Unsupported(CatalogMessage.CastUnsupported))
+        val streamInfo = StreamInfo(
+            url = "https://example.test/episode.m3u8",
+            proxyHost = "proxy.example.test",
+            proxyPort = 8080
+        )
+        val viewModel = createViewModel(
+            streamInfo = streamInfo,
+            castPort = castPort
+        )
+
+        try {
+            val event = async(start = CoroutineStart.UNDISPATCHED) { viewModel.castEvents.first() }
+            viewModel.castEpisode(episode())
+
+            assertThat(withTimeout(5_000L) { event.await() })
+                .isEqualTo(CatalogUiEvent.ShowMessage(CatalogMessage.CastUnsupported))
+            assertThat(castPort.lastRequest?.streamInfo).isEqualTo(streamInfo)
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `failed details load marks episodes unavailable`() = runBlocking {
+        val viewModel = createViewModel(
+            detailsResult = Result.error("boom", SeriesDetailsUnavailableException("boom"))
+        )
+
+        try {
+            val state = withTimeout(5_000L) { viewModel.uiState.first { it.detailsUnavailable } }
+
+            assertThat(state.series).isNull()
+            assertThat(state.error).isEqualTo("boom")
+            assertThat(state.detailsUnavailable).isTrue()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `not found error stays visible and is not treated as an episodes load failure`() = runBlocking {
+        val viewModel = createViewModel(detailsResult = Result.error("Series not found"))
+
+        try {
+            val state = withTimeout(5_000L) { viewModel.uiState.first { it.error != null } }
+
+            assertThat(state.series).isNull()
+            assertThat(state.error).isEqualTo("Series not found")
+            assertThat(state.detailsUnavailable).isFalse()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `failed version switch keeps the current series and reports the failure`() = runBlocking {
+        val preferences = mock<PreferencesRepository>()
+        val current = series(episodes = listOf(episode(id = 21L))).copy(logicalGroupId = "group-1")
+        val variantId = 31L
+        val viewModel = createViewModel(
+            series = current,
+            variantSeriesId = variantId,
+            variantDetailsResult = Result.error("variant boom", SeriesDetailsUnavailableException("variant boom")),
+            preferencesRepository = preferences
+        )
+
+        try {
+            viewModel.uiState.first { it.series != null }
+            val event = async(start = CoroutineStart.UNDISPATCHED) { viewModel.uiEvents.first() }
+            viewModel.selectSeriesVariant(variantId)
+
+            assertThat(withTimeout(5_000L) { event.await() })
+                .isEqualTo(CatalogUiEvent.ShowMessage(CatalogMessage.SeriesVariantLoadFailed))
+            assertThat(viewModel.uiState.value.series?.id).isEqualTo(current.id)
+            assertThat(viewModel.uiState.value.detailsUnavailable).isTrue()
+            verify(preferences, never()).setPreferredVodVariant(any(), any(), any())
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `successful version switch saves the preferred version`() = runBlocking {
+        val preferences = mock<PreferencesRepository>()
+        val current = series(episodes = listOf(episode(id = 21L))).copy(logicalGroupId = "group-1")
+        val variantId = 31L
+        val variant = series(episodes = listOf(episode(id = 41L)))
+            .copy(id = variantId, logicalGroupId = "group-1")
+        val viewModel = createViewModel(
+            series = current,
+            variantSeriesId = variantId,
+            variantDetailsResult = Result.success(variant),
+            preferencesRepository = preferences
+        )
+
+        try {
+            viewModel.uiState.first { it.series != null }
+            viewModel.selectSeriesVariant(variantId)
+
+            val state = withTimeout(5_000L) { viewModel.uiState.first { it.series?.id == variantId } }
+            assertThat(state.detailsUnavailable).isFalse()
+            verify(preferences).setPreferredVodVariant(eq(current.providerId), eq("group-1"), eq(variantId))
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `first load failure exposes other versions for recovery`() = runBlocking {
+        val viewModel = createViewModel(
+            detailsResult = Result.error("boom", SeriesDetailsUnavailableException("boom")),
+            variants = listOf(variant(rawSeriesId = 31L), variant(rawSeriesId = 32L))
+        )
+
+        try {
+            val state = withTimeout(5_000L) { viewModel.uiState.first { it.availableVariants.isNotEmpty() } }
+
+            assertThat(state.series).isNull()
+            assertThat(state.availableVariants.map { it.rawSeriesId }).containsExactly(31L, 32L).inOrder()
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    @Test
+    fun `recovery pick loads the chosen version and saves it`() = runBlocking {
+        val preferences = mock<PreferencesRepository>()
+        val variantId = 31L
+        val recovered = series(episodes = listOf(episode(id = 41L)))
+            .copy(id = variantId, logicalGroupId = "group-1")
+        val viewModel = createViewModel(
+            detailsResult = Result.error("boom", SeriesDetailsUnavailableException("boom")),
+            variants = listOf(variant(rawSeriesId = variantId)),
+            variantSeriesId = variantId,
+            variantDetailsResult = Result.success(recovered),
+            preferencesRepository = preferences
+        )
+
+        try {
+            viewModel.uiState.first { it.availableVariants.isNotEmpty() }
+            viewModel.selectSeriesVariant(variantId)
+
+            val state = withTimeout(5_000L) { viewModel.uiState.first { it.series?.id == variantId } }
+            assertThat(state.detailsUnavailable).isFalse()
+            verify(preferences).setPreferredVodVariant(eq(1L), eq("group-1"), eq(variantId))
+        } finally {
+            viewModel.viewModelScope.cancel()
+        }
+    }
+
+    private suspend fun createViewModel(
+        series: Series = series(),
+        streamInfo: StreamInfo = StreamInfo(url = "https://example.test/episode.m3u8"),
+        castPort: FakeCatalogCastPort = FakeCatalogCastPort(),
+        traktFavorites: TraktFavorites = com.streamvault.feature.catalog.presentation.NoopTraktFavorites(),
+        traktRatings: TraktRatings = com.streamvault.feature.catalog.presentation.NoopTraktRatings(),
+        detailsResult: Result<Series> = Result.success(series),
+        variantSeriesId: Long = series.id + 1L,
+        variantDetailsResult: Result<Series>? = null,
+        variants: List<VodSeriesVariant> = emptyList(),
+        preferencesRepository: PreferencesRepository = mock(),
+    ): SeriesDetailViewModel {
+        val provider = Provider(
+            id = series.providerId,
+            name = "Provider",
+            type = ProviderType.XTREAM_CODES,
+            serverUrl = "https://provider.test"
+        )
+        val seriesRepository: SeriesRepository = mock()
+        val providerRepository: ProviderRepository = mock()
+        val playbackHistoryRepository: PlaybackHistoryRepository = mock()
+        val externalRatingsRepository: ExternalRatingsRepository = mock()
+        val favoriteRepository: FavoriteRepository = mock()
+
+        whenever(providerRepository.getActiveProvider()).thenReturn(flowOf(provider))
+        whenever(seriesRepository.getSeriesById(series.id)).thenReturn(series)
+        whenever(seriesRepository.getSeriesDetails(eq(provider.id), eq(series.id), anyOrNull()))
+            .thenReturn(detailsResult)
+        variantDetailsResult?.let { variantResult ->
+            whenever(seriesRepository.getSeriesDetails(eq(provider.id), eq(variantSeriesId), anyOrNull()))
+                .thenReturn(variantResult)
+        }
+        whenever(seriesRepository.getSeriesVariants(eq(series.id))).thenReturn(variants)
+        whenever(preferencesRepository.setPreferredVodVariant(any(), any(), any())).thenReturn(Unit)
+        whenever(seriesRepository.getEpisodeStreamInfo(any()))
+            .thenReturn(Result.success(streamInfo))
+        whenever(favoriteRepository.isFavorite(any(), any(), any()))
+            .thenReturn(false)
+        whenever(playbackHistoryRepository.getUnwatchedCount(any(), any()))
+            .thenReturn(flowOf(0))
+        whenever(externalRatingsRepository.getRatings(any()))
+            .thenReturn(Result.success(ExternalRatings.unavailable()))
+
+        return SeriesDetailViewModel(
+            savedStateHandle = SavedStateHandle(mapOf("seriesId" to series.id)),
+            seriesRepository = seriesRepository,
+            providerRepository = providerRepository,
+            playbackHistoryRepository = playbackHistoryRepository,
+            externalRatingsRepository = externalRatingsRepository,
+            favoriteRepository = favoriteRepository,
+            preferencesRepository = preferencesRepository,
+            streamPreparer = object : CatalogStreamPreparer {
+                override suspend fun prepare(streamInfo: StreamInfo): Result<StreamInfo> =
+                    Result.success(streamInfo)
+            },
+            downloadManager = mock<DownloadManager>(),
+            downloadStarter = object : CatalogDownloadStarter {
+                override fun startDownload(downloadId: String) = Unit
+            },
+            castPort = castPort,
+            traktWatchlist = com.streamvault.feature.catalog.presentation.NoopTraktWatchlist(),
+            traktFavorites = traktFavorites,
+            traktRatings = traktRatings,
+        )
+    }
+
+    private class RecordingTraktFavorites : TraktFavorites {
+        val writes = mutableListOf<Pair<TraktFavoriteIdentity, Boolean>>()
+        val completed = CompletableDeferred<Unit>()
+
+        override suspend fun setFavorited(identity: TraktFavoriteIdentity, favorited: Boolean): TraktFavoriteActionResult {
+            writes += identity to favorited
+            completed.complete(Unit)
+            return TraktFavoriteActionResult.Success
+        }
+    }
+
+    private class FakeCatalogCastPort(
+        var result: CatalogCastStartResult = CatalogCastStartResult.Started
+    ) : CatalogCastPort {
+        private val mutablePlaybackEvents = MutableSharedFlow<CatalogCastPlaybackEvent>(extraBufferCapacity = 8)
+        override val playbackEvents: SharedFlow<CatalogCastPlaybackEvent> = mutablePlaybackEvents.asSharedFlow()
+        var lastRequest: CatalogCastRequest? = null
+
+        override suspend fun startCasting(request: CatalogCastRequest): CatalogCastStartResult {
+            lastRequest = request
+            startCount += 1
+            return result
+        }
+
+        var startCount: Int = 0
+
+        suspend fun emit(event: CatalogCastPlaybackEvent) {
+            mutablePlaybackEvents.emit(event)
+        }
+    }
+
+    private class RecordingTraktRatings : TraktRatings {
+        private val mutableState = kotlinx.coroutines.flow.MutableStateFlow(TraktRatingsState())
+        override val state = mutableState.asStateFlow()
+        val writes = mutableListOf<Pair<TraktRatingIdentity, Int>>()
+        override suspend fun refresh(type: TraktRatingType, force: Boolean) = TraktRatingRefreshResult.Success(0)
+        override suspend fun setRating(identity: TraktRatingIdentity, rating: Int): TraktRatingActionResult {
+            writes += identity to rating
+            mutableState.value = mutableState.value.copy(ratings = mutableState.value.ratings + (identity to rating))
+            return TraktRatingActionResult.Success
+        }
+    }
+
+    private companion object {
+        fun series(episodes: List<Episode> = listOf(episode())) = Series(
+            id = 30L,
+            name = "Series",
+            providerId = 1L,
+            posterUrl = "https://example.test/series.jpg",
+            seasons = listOf(Season(seasonNumber = 1, episodes = episodes))
+        )
+
+        fun episode(
+            id: Long = 21L,
+            episodeNumber: Int = 1,
+            watchProgress: Long = 0L
+        ) = Episode(
+            id = id,
+            title = "Episode $episodeNumber",
+            episodeNumber = episodeNumber,
+            seasonNumber = 1,
+            providerId = 1L,
+            seriesId = 30L,
+            watchProgress = watchProgress
+        )
+
+        fun variant(rawSeriesId: Long) = VodSeriesVariant(
+            rawSeriesId = rawSeriesId,
+            name = "Series",
+            seriesId = rawSeriesId,
+            providerSeriesId = rawSeriesId.toString(),
+            releaseDate = null,
+            tmdbId = null,
+            episodeRunTime = null,
+            rating = 0f,
+            lastModified = 0L,
+            qualityScore = 0,
+            recencyScore = 0L,
+            reliabilityScore = 0,
+            label = "Version $rawSeriesId"
+        )
+    }
+}

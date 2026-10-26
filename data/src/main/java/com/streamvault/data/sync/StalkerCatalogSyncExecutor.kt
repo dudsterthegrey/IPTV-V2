@@ -1,0 +1,1248 @@
+package com.streamvault.data.sync
+
+import android.content.Context
+import android.util.Log
+import com.streamvault.data.local.DatabaseTransactionRunner
+import com.streamvault.data.local.dao.CategoryDao
+import com.streamvault.data.local.dao.ChannelDao
+import com.streamvault.data.local.dao.MovieCategoryHydrationDao
+import com.streamvault.data.local.dao.MovieDao
+import com.streamvault.data.local.dao.SeriesCategoryHydrationDao
+import com.streamvault.data.local.dao.SeriesDao
+import com.streamvault.data.local.dao.StalkerLiveCategoryRetryDao
+import com.streamvault.data.local.dao.VodCategoryHydrationDao
+import com.streamvault.data.local.dao.VodCatalogEntryDao
+import com.streamvault.data.local.entity.CategoryEntity
+import com.streamvault.data.mapper.toEntity
+import com.streamvault.data.preferences.PreferencesRepository
+import com.streamvault.data.remote.dto.XtreamCategory
+import com.streamvault.data.remote.stalker.StalkerApiError
+import com.streamvault.data.remote.stalker.StalkerProvider
+import com.streamvault.data.remote.stalker.StalkerProviderProfile
+import com.streamvault.data.remote.stalker.StalkerRequestCoordinator
+import com.streamvault.data.remote.stalker.StalkerRequestDescriptor
+import com.streamvault.data.remote.stalker.StalkerTelemetry
+import com.streamvault.data.provider.toProviderSnapshot
+import com.streamvault.data.util.UrlSecurityPolicy
+import com.streamvault.domain.model.CatalogLayout
+import com.streamvault.domain.model.Category
+import com.streamvault.domain.model.Channel
+import com.streamvault.domain.model.ContentType
+import com.streamvault.domain.model.LegacyProvider as Provider
+import com.streamvault.domain.model.ProviderEpgSyncMode
+import com.streamvault.domain.model.Result
+import com.streamvault.domain.model.StalkerCatalogMode
+import com.streamvault.domain.model.StalkerRequestPriority
+import com.streamvault.domain.model.SyncMetadata
+import com.streamvault.domain.model.VodSyncMode
+import com.streamvault.domain.repository.ProviderSnapshotRepository
+import com.streamvault.domain.repository.SyncMetadataRepository
+import com.streamvault.domain.sync.Section
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
+import java.io.IOException
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicLong
+import java.util.concurrent.atomic.AtomicInteger
+
+private const val STALKER_EXECUTOR_TAG = "StalkerCatalogSync"
+private const val STALKER_MAX_PARALLEL_CATEGORY_FETCHES = 2
+private const val STALKER_BULK_LIVE_STALL_TIMEOUT_MILLIS = 30_000L
+private const val STALKER_BULK_LIVE_STALL_CHECK_INTERVAL_MILLIS = 1_000L
+private const val STALKER_BULK_LIVE_UNSUPPORTED_TTL_MILLIS = 6 * 60 * 60 * 1000L
+private const val LIVE_CATEGORY_SEQUENTIAL_MODE_WARNING =
+    "Live category sync downgraded to sequential mode after provider stress signals."
+private const val FALLBACK_STAGE_BATCH_SIZE = 500
+
+/** Owns Stalker authentication, full catalog orchestration, and Live repair execution. */
+internal class StalkerCatalogSyncExecutor(
+    private val applicationContext: Context,
+    private val preferencesRepository: PreferencesRepository,
+    private val syncMetadataRepository: SyncMetadataRepository,
+    private val providerSnapshotRepository: ProviderSnapshotRepository?,
+    private val transactionRunner: DatabaseTransactionRunner,
+    private val categoryDao: CategoryDao,
+    private val channelDao: ChannelDao,
+    private val movieCategoryHydrationDao: MovieCategoryHydrationDao,
+    private val seriesCategoryHydrationDao: SeriesCategoryHydrationDao,
+    private val vodCategoryHydrationDao: VodCategoryHydrationDao,
+    private val vodCatalogEntryDao: VodCatalogEntryDao,
+    private val movieDao: MovieDao,
+    private val seriesDao: SeriesDao,
+    private val syncCatalogStore: SyncCatalogStore,
+    private val catalogStager: SyncManagerCatalogStager,
+    private val catalogStrategySupport: SyncManagerCatalogStrategySupport,
+    private val categoryRecoverySupport: SyncManagerXtreamSupport,
+    private val sectionExecutor: StalkerCatalogSectionExecutor,
+    private val readinessTracker: StalkerReadinessTracker,
+    private val stalkerRequestCoordinator: StalkerRequestCoordinator,
+    private val liveCategoryRetryDao: StalkerLiveCategoryRetryDao,
+    private val createProvider: (Provider) -> StalkerProvider,
+    private val syncProviderEpg: suspend (Provider, SyncMetadata, Long, Boolean, ((String) -> Unit)?) -> ProviderGuideSyncResult,
+    private val progress: (Long, ((String) -> Unit)?, String) -> Unit,
+    private val emitCatalogProgress: (Long, Section, Int?, Int?) -> Unit,
+    private val categoryFailureWarning: (String, String, Throwable) -> String,
+    private val sanitizeThrowableMessage: (Throwable?) -> String,
+    private val requiredHiddenCategoryIds: suspend (Long, ContentType) -> Set<Long> = { _, _ -> emptySet() },
+    private val prepareVodCatalog: suspend (Provider, Boolean, List<ContentType>, ((String) -> Unit)?) -> Unit = { _, _, _, _ -> }
+) {
+    suspend fun syncFull(
+        provider: Provider,
+        force: Boolean,
+        onProgress: ((String) -> Unit)?,
+        afterCatalogApply: suspend () -> Unit = {},
+        deferProviderStateUntilCatalogCommit: Boolean = false,
+        bootstrap: Boolean = false
+    ): SyncOutcome {
+        val warnings = mutableListOf<String>()
+        val continuationWork = mutableListOf<SyncContinuation>()
+        var activatedLiveMutations = 0
+        var catalogActivated = false
+        var preservedActiveCatalog = false
+        readinessTracker.start(provider.id)
+        UrlSecurityPolicy.validateStalkerPortalUrl(provider.serverUrl)?.let { message ->
+            throw IllegalStateException(message)
+        }
+        emitCatalogProgress(provider.id, Section.LIVE, null, null)
+        progress(provider.id, onProgress, "Connecting to portal...")
+        val api = createProvider(provider)
+        val authenticatedProvider = requireResult(api.authenticate(), "Failed to authenticate with portal")
+        val effectiveCatalogLayout = authenticatedProvider.catalogLayout
+            .takeUnless { it == CatalogLayout.UNKNOWN }
+            ?: provider.catalogLayout
+        val catalogLayoutChanged =
+            authenticatedProvider.catalogLayout != CatalogLayout.UNKNOWN &&
+                authenticatedProvider.catalogLayout != provider.catalogLayout
+        val catalogLayoutDetectionChanged =
+            catalogLayoutChanged ||
+                authenticatedProvider.catalogLayoutDetectionVersion != provider.catalogLayoutDetectionVersion
+        var catalogCommitCallback = afterCatalogApply
+        if (catalogLayoutDetectionChanged) {
+            suspend fun clearIncompatibleVodCatalog() {
+                if (catalogLayoutChanged) {
+                    categoryDao.deleteByProviderAndType(provider.id, ContentType.MOVIE.name)
+                    categoryDao.deleteByProviderAndType(provider.id, ContentType.SERIES.name)
+                    categoryDao.deleteByProviderAndType(provider.id, ContentType.VOD.name)
+                    movieCategoryHydrationDao.deleteByProvider(provider.id)
+                    seriesCategoryHydrationDao.deleteByProvider(provider.id)
+                    vodCategoryHydrationDao.deleteByProvider(provider.id)
+                    vodCatalogEntryDao.deleteByProvider(provider.id)
+                }
+            }
+
+            if (deferProviderStateUntilCatalogCommit) {
+                val originalCallback = catalogCommitCallback
+                catalogCommitCallback = {
+                    originalCallback()
+                    clearIncompatibleVodCatalog()
+                }
+            } else {
+                transactionRunner.inTransaction {
+                    if (authenticatedProvider.catalogLayout != CatalogLayout.UNKNOWN) {
+                        providerSnapshotRepository?.updateCatalogLayout(
+                            provider.id,
+                            authenticatedProvider.catalogLayout,
+                            authenticatedProvider.catalogLayoutDetectionVersion
+                        )
+                    }
+                    clearIncompatibleVodCatalog()
+                }
+            }
+        }
+        readinessTracker.authenticated(provider.id)
+        reconcileStoredCategoryTypes(provider.id, effectiveCatalogLayout)
+
+        var metadata = syncMetadataRepository.getMetadata(provider.id) ?: SyncMetadata(provider.id)
+        val now = System.currentTimeMillis()
+        var queuedMovieIndex = false
+        var queuedSeriesIndex = false
+        var liveCount = metadata.liveCount
+        var movieCategoryCount = 0
+        var seriesCategoryCount = 0
+
+        if (force || ContentCachePolicy.shouldRefresh(metadata.lastLiveSuccess, ContentCachePolicy.CATALOG_TTL_MILLIS, now)) {
+            progress(provider.id, onProgress, "Downloading Live TV...")
+            val hiddenLiveCategoryIds = preferencesRepository.getHiddenCategoryIds(provider.id, ContentType.LIVE).first()
+            val requiredHiddenLiveCategoryIds = requiredHiddenCategoryIds(provider.id, ContentType.LIVE)
+            val liveCatalogResult = syncLiveCatalogStaged(
+                api = api,
+                provider = provider,
+                hiddenLiveCategoryIds = hiddenLiveCategoryIds,
+                requiredHiddenLiveCategoryIds = requiredHiddenLiveCategoryIds,
+                onProgress = onProgress,
+                afterCatalogApply = catalogCommitCallback,
+                retryPendingCategoriesOnly = !force && !bootstrap
+            )
+            val committedLiveCount = if (liveCatalogResult.catalogApplied) {
+                channelDao.getCount(provider.id).first()
+            } else metadata.liveCount
+            metadata = metadata.copy(
+                lastLiveSync = now,
+                lastLiveSuccess = if (liveCatalogResult.coverageComplete) now
+                else metadata.lastLiveSuccess,
+                liveCount = committedLiveCount
+            )
+            liveCount = committedLiveCount
+            activatedLiveMutations = liveCatalogResult.acceptedCount
+            if (liveCatalogResult.catalogApplied) {
+                catalogActivated = true
+            } else {
+                preservedActiveCatalog = true
+            }
+            syncMetadataRepository.updateMetadata(metadata)
+            emitCatalogProgress(provider.id, Section.LIVE, null, liveCatalogResult.acceptedCount)
+            warnings += liveCatalogResult.warnings
+        }
+        readinessTracker.liveReady(provider.id)
+
+        if (force || catalogLayoutChanged || ContentCachePolicy.shouldRefresh(metadata.lastMovieSuccess, ContentCachePolicy.CATALOG_TTL_MILLIS, now)) {
+            progress(provider.id, onProgress, "Preparing Movies...")
+            val categories = when (val categoriesResult = if (effectiveCatalogLayout == CatalogLayout.UNIFIED_VOD) {
+                api.getUnifiedVodCategories()
+            } else {
+                api.getVodCategories()
+            }) {
+                is Result.Success -> categoriesResult.data
+                is Result.Error -> {
+                    val diagnostic = if (liveCount == 0 && warnings.any(::isStalkerEmptyResponse)) {
+                        stalkerCatalogAccessDiagnostic(api, categoriesResult.message, "empty response")
+                    } else null
+                    throw IllegalStateException(
+                        diagnostic ?: "Failed to load movie categories: ${categoriesResult.message}",
+                        categoriesResult.exception
+                    )
+                }
+                is Result.Loading -> throw IllegalStateException("Unexpected loading state")
+            }
+            emitCatalogProgress(provider.id, Section.VOD, categories.size, metadata.liveCount)
+            val storedCategoryType = if (effectiveCatalogLayout == CatalogLayout.UNIFIED_VOD) ContentType.VOD else ContentType.MOVIE
+            syncCatalogStore.replaceCategories(
+                providerId = provider.id,
+                type = storedCategoryType.name,
+                categories = categories.mapIndexed { index, category ->
+                    CategoryEntity(
+                        providerId = provider.id,
+                        categoryId = category.id,
+                        name = category.name,
+                        parentId = category.parentId,
+                        type = storedCategoryType,
+                        providerOrder = index,
+                        isAdult = category.isAdult
+                    )
+                }
+            )
+            catalogActivated = true
+            if (effectiveCatalogLayout == CatalogLayout.SPLIT) {
+                movieCategoryHydrationDao.deleteByProvider(provider.id)
+            } else {
+                vodCategoryHydrationDao.deleteByProvider(provider.id)
+            }
+            categoryDao.deleteByProviderAndType(
+                provider.id,
+                if (storedCategoryType == ContentType.VOD) ContentType.MOVIE.name else ContentType.VOD.name
+            )
+            movieCategoryCount = categories.size
+            sectionExecutor.queueIndexSection(provider.id, ContentType.MOVIE, categories.size, now)
+            metadata = metadata.copy(
+                lastMovieSync = now,
+                lastMovieAttempt = now,
+                movieCount = movieDao.getCount(provider.id).first(),
+                movieSyncMode = VodSyncMode.PAGED,
+                movieWarningsCount = 0,
+                movieCatalogStale = true
+            )
+            syncMetadataRepository.updateMetadata(metadata)
+            queuedMovieIndex = true
+        }
+
+        if (effectiveCatalogLayout == CatalogLayout.UNIFIED_VOD) {
+            categoryDao.deleteByProviderAndType(provider.id, ContentType.SERIES.name)
+            seriesCategoryHydrationDao.deleteByProvider(provider.id)
+        } else if (force || catalogLayoutChanged || ContentCachePolicy.shouldRefresh(metadata.lastSeriesSuccess, ContentCachePolicy.CATALOG_TTL_MILLIS, now)) {
+            progress(provider.id, onProgress, "Preparing Series...")
+            val categories = when (val categoriesResult = api.getSeriesCategories()) {
+                is Result.Success -> categoriesResult.data
+                is Result.Error -> {
+                    val diagnostic = if (liveCount == 0 && warnings.any(::isStalkerEmptyResponse)) {
+                        stalkerCatalogAccessDiagnostic(api, categoriesResult.message, "empty response")
+                    } else null
+                    throw IllegalStateException(
+                        diagnostic ?: "Failed to load series categories: ${categoriesResult.message}",
+                        categoriesResult.exception
+                    )
+                }
+                is Result.Loading -> throw IllegalStateException("Unexpected loading state")
+            }
+            emitCatalogProgress(provider.id, Section.SERIES, categories.size, metadata.liveCount)
+            syncCatalogStore.replaceCategories(
+                providerId = provider.id,
+                type = ContentType.SERIES.name,
+                categories = categories.mapIndexed { index, category ->
+                    CategoryEntity(
+                        providerId = provider.id,
+                        categoryId = category.id,
+                        name = category.name,
+                        parentId = category.parentId,
+                        type = ContentType.SERIES,
+                        providerOrder = index,
+                        isAdult = category.isAdult
+                    )
+                }
+            )
+            catalogActivated = true
+            seriesCategoryCount = categories.size
+            sectionExecutor.queueIndexSection(provider.id, ContentType.SERIES, categories.size, now)
+            metadata = metadata.copy(
+                lastSeriesSync = now,
+                seriesCount = seriesDao.getCount(provider.id).first()
+            )
+            syncMetadataRepository.updateMetadata(metadata)
+            queuedSeriesIndex = true
+        }
+
+        if (liveCount == 0 && movieCategoryCount == 0 && seriesCategoryCount == 0) {
+            val diagnostic = warnings.firstOrNull { it.contains("no accessible catalog data", ignoreCase = true) }
+                ?: stalkerCatalogAccessDiagnostic(api, "empty response", "empty response")
+            diagnostic?.let { throw IllegalStateException(it) }
+        }
+        readinessTracker.categoriesReady(provider.id)
+
+        val preparedSections = buildList {
+            if (queuedMovieIndex) add(ContentType.MOVIE)
+            if (queuedSeriesIndex) add(ContentType.SERIES)
+        }
+        if (preparedSections.isNotEmpty()) {
+            prepareVodCatalog(provider.copy(catalogLayout = effectiveCatalogLayout), bootstrap, preparedSections, onProgress)
+        }
+
+        if (!bootstrap && queuedMovieIndex) {
+            continuationWork += SyncContinuation(
+                operation = SyncContinuationOperation.INDEX_CATALOG,
+                section = ContentType.MOVIE,
+                reason = "movie category shell is committed; durable item indexing is queued",
+                force = force
+            )
+        }
+        if (!bootstrap && queuedSeriesIndex) {
+            continuationWork += SyncContinuation(
+                operation = SyncContinuationOperation.INDEX_CATALOG,
+                section = ContentType.SERIES,
+                reason = "series category shell is committed; durable item indexing is queued",
+                force = force
+            )
+        }
+        if (bootstrap) {
+            continuationWork += SyncContinuation(
+                operation = SyncContinuationOperation.STALKER_BOOTSTRAP_RESUME,
+                reason = "full live catalog and VOD category shells are committed; fetch every VOD category head"
+            )
+        } else when (provider.epgSyncMode) {
+            ProviderEpgSyncMode.UPFRONT,
+            ProviderEpgSyncMode.BACKGROUND -> {
+                continuationWork += SyncContinuation(
+                    operation = SyncContinuationOperation.REFRESH_GUIDE,
+                    reason = "guide refresh was handed off to background work",
+                    force = force
+                )
+            }
+            ProviderEpgSyncMode.SKIP -> Unit
+        }
+        readinessTracker.ready(provider.id, warnings.size)
+        return SyncOutcome(
+            partial = warnings.isNotEmpty(),
+            warnings = warnings.distinct(),
+            stagedMutations = activatedLiveMutations,
+            continuationWork = continuationWork,
+            activation = when {
+                catalogActivated -> SyncActivation.ACTIVATED_CATALOG
+                preservedActiveCatalog -> SyncActivation.PRESERVED_ACTIVE_CATALOG
+                else -> SyncActivation.NO_CATALOG_CHANGE
+            }
+        )
+    }
+
+    /** Relabels legacy VOD category rows when persisted layout and stored type disagree. */
+    private suspend fun reconcileStoredCategoryTypes(
+        providerId: Long,
+        effectiveCatalogLayout: CatalogLayout
+    ) {
+        if (effectiveCatalogLayout != CatalogLayout.UNIFIED_VOD &&
+            effectiveCatalogLayout != CatalogLayout.SPLIT
+        ) {
+            return
+        }
+        val (expectedType, legacyType) = if (effectiveCatalogLayout == CatalogLayout.UNIFIED_VOD) {
+            ContentType.VOD.name to ContentType.MOVIE.name
+        } else {
+            ContentType.MOVIE.name to ContentType.VOD.name
+        }
+        val expected = categoryDao.getByProviderAndTypeSync(providerId, expectedType)
+        if (expected.isNotEmpty()) return
+        val legacy = categoryDao.getByProviderAndTypeSync(providerId, legacyType)
+        if (legacy.isEmpty()) return
+        val relabeled = categoryDao.retargetType(providerId, legacyType, expectedType)
+        Log.i(
+            STALKER_EXECUTOR_TAG,
+            "Retargeted $relabeled $legacyType categories to $expectedType for provider $providerId " +
+                "to match $effectiveCatalogLayout without re-downloading items."
+        )
+    }
+
+    suspend fun syncLive(
+        provider: Provider,
+        onProgress: ((String) -> Unit)?,
+        retryFailedCategoriesOnly: Boolean = true
+    ): SyncOutcome {
+        val now = System.currentTimeMillis()
+        val warnings = mutableListOf<String>()
+        emitCatalogProgress(provider.id, Section.LIVE, null, null)
+        progress(provider.id, onProgress, "Retrying Live TV...")
+        val api = createProvider(provider)
+        val hiddenLiveCategoryIds = preferencesRepository.getHiddenCategoryIds(provider.id, ContentType.LIVE).first()
+        val requiredHiddenLiveCategoryIds = requiredHiddenCategoryIds(provider.id, ContentType.LIVE)
+        val liveCatalogResult = syncLiveCatalogStaged(
+            api,
+            provider,
+            hiddenLiveCategoryIds,
+            requiredHiddenLiveCategoryIds,
+            onProgress,
+            retryPendingCategoriesOnly = retryFailedCategoriesOnly
+        )
+        val previousMetadata = syncMetadataRepository.getMetadata(provider.id) ?: SyncMetadata(provider.id)
+        val committedLiveCount = if (liveCatalogResult.catalogApplied) {
+            channelDao.getCount(provider.id).first()
+        } else previousMetadata.liveCount
+        val metadata = previousMetadata.copy(
+            lastLiveSync = now,
+            lastLiveSuccess = if (liveCatalogResult.coverageComplete) now
+            else previousMetadata.lastLiveSuccess,
+            liveCount = committedLiveCount
+        )
+        syncMetadataRepository.updateMetadata(metadata)
+        emitCatalogProgress(provider.id, Section.LIVE, null, liveCatalogResult.acceptedCount)
+        warnings += liveCatalogResult.warnings
+        return SyncOutcome(
+            partial = warnings.isNotEmpty(),
+            warnings = warnings.distinct(),
+            stagedMutations = liveCatalogResult.acceptedCount,
+            activation = if (liveCatalogResult.catalogApplied) {
+                SyncActivation.ACTIVATED_CATALOG
+            } else {
+                SyncActivation.PRESERVED_ACTIVE_CATALOG
+            }
+        )
+    }
+
+    private suspend fun syncLiveCatalogStaged(
+        api: StalkerProvider,
+        provider: Provider,
+        hiddenLiveCategoryIds: Set<Long>,
+        requiredHiddenLiveCategoryIds: Set<Long>,
+        onProgress: ((String) -> Unit)?,
+        afterCatalogApply: suspend () -> Unit = {},
+        maxChannels: Int? = null,
+        retryPendingCategoriesOnly: Boolean = false
+    ): StagedStalkerLiveCatalogResult = coroutineScope {
+        val warnings = mutableListOf<String>()
+        var categoriesErrorMessage: String? = null
+        data class CategoryContextLoad(
+            val categories: List<CategoryEntity>?,
+            val errorMessage: String? = null
+        )
+        suspend fun loadPreferredCategories(): CategoryContextLoad {
+            val categoriesResult = stalkerRequestCoordinator.execute(
+                providerId = provider.id,
+                priority = StalkerRequestPriority.OPEN_CATEGORY,
+                descriptor = StalkerRequestDescriptor(
+                    contentType = ContentType.LIVE.name,
+                    action = "GET_CATEGORIES"
+                )
+            ) { api.getLiveCategories() }
+            if (categoriesResult is Result.Error) {
+                stalkerRequestCoordinator.recordFailure(provider.id, categoriesResult.exception)
+            }
+            return when (categoriesResult) {
+                is Result.Success -> CategoryContextLoad(
+                    categoriesResult.data
+                        .map { it.toEntity(provider.id) }
+                        .filterNot { it.categoryId in hiddenLiveCategoryIds && it.categoryId !in requiredHiddenLiveCategoryIds }
+                )
+                is Result.Error -> {
+                    Log.w(
+                        STALKER_EXECUTOR_TAG,
+                        "Stalker live categories failed for provider ${provider.id}; streaming bulk live channels with fallback categories: ${categoriesResult.message}",
+                        categoriesResult.exception
+                    )
+                    CategoryContextLoad(categories = null, errorMessage = categoriesResult.message)
+                }
+                is Result.Loading -> throw IllegalStateException("Unexpected loading state")
+            }
+        }
+
+        var preferredCategories: List<CategoryEntity>? = null
+        var categoryContextApplied = false
+        val categoryContextDeferred = async(start = kotlinx.coroutines.CoroutineStart.UNDISPATCHED) {
+            loadPreferredCategories()
+        }
+        suspend fun awaitCategoryContext(): List<CategoryEntity>? {
+            val loaded = categoryContextDeferred.await()
+            if (!categoryContextApplied) {
+                categoryContextApplied = true
+                preferredCategories = loaded.categories
+                categoriesErrorMessage = loaded.errorMessage
+                if (loaded.errorMessage != null) {
+                    warnings += "Live categories failed; recovered using bulk live channels."
+                }
+            }
+            return preferredCategories
+        }
+        val runtimeProfile = CatalogSyncRuntimeProfile.from(applicationContext)
+        progress(provider.id, onProgress, "Loading live channels...")
+        var fallbackCollector = FallbackCategoryCollector(provider.id, ContentType.LIVE)
+        val seenStreamIds = HashSet<Long>()
+        val batch = ArrayList<Channel>(runtimeProfile.stageBatchSize)
+        var stagedSessionId: Long? = null
+        var acceptedCount = 0
+        var bulkRowsWithResolvedCategories = 0
+
+        suspend fun flushBatch() {
+            if (batch.isEmpty()) return
+            val staged = catalogStager.stageChannelItems(
+                providerId = provider.id,
+                items = batch,
+                seenStreamIds = seenStreamIds,
+                fallbackCollector = fallbackCollector,
+                sessionId = stagedSessionId,
+                useLiveAdmissionCount = true
+            )
+            stagedSessionId = staged.sessionId
+            acceptedCount += staged.acceptedCount
+            batch.clear()
+        }
+
+        suspend fun deleteRetryCategoryIds(categoryIds: Collection<Long>) {
+            categoryIds.distinct().chunked(400).forEach { ids ->
+                if (ids.isNotEmpty()) liveCategoryRetryDao.deleteCategories(provider.id, ids)
+            }
+        }
+
+        suspend fun finalizeStagedImport(
+            completeCategoryIds: Set<Long>? = null,
+            pruneCategories: Boolean = true,
+            coverageComplete: Boolean = false,
+            failedCategoryScopes: List<StalkerLiveCategoryFailure> = emptyList(),
+            retryOnlyPendingCategories: Boolean = false
+        ): StagedStalkerLiveCatalogResult {
+            val hasCompletedScopes = !completeCategoryIds.isNullOrEmpty()
+            val sessionId = stagedSessionId ?: if (hasCompletedScopes) {
+                syncCatalogStore.newSessionId()
+            } else null
+            suspend fun recordFailures() {
+                if (maxChannels != null) return
+                val attemptedAt = System.currentTimeMillis()
+                failedCategoryScopes.forEach { failure ->
+                    liveCategoryRetryDao.recordFailure(
+                        providerId = provider.id,
+                        categoryId = failure.categoryId,
+                        categoryName = failure.categoryName.take(250),
+                        configurationGeneration = provider.stalkerConfigurationGeneration,
+                        attemptedAt = attemptedAt,
+                        errorMessage = failure.errorMessage?.take(1_000)
+                    )
+                }
+            }
+            stagedSessionId?.let { sessionId ->
+                if (hiddenLiveCategoryIds.isNotEmpty()) {
+                    mergeHiddenChannelsIntoStaging(provider.id, sessionId, hiddenLiveCategoryIds)
+                }
+            }
+            val hiddenCategories = if (hiddenLiveCategoryIds.isNotEmpty()) {
+                categoryDao.getByProviderAndTypeSync(provider.id, ContentType.LIVE.name)
+                    .filter { it.categoryId in hiddenLiveCategoryIds }
+            } else emptyList()
+            val categories = (
+                catalogStrategySupport.mergePreferredAndFallbackCategories(
+                    preferredCategories,
+                    fallbackCollector.entities().takeIf { it.isNotEmpty() }
+                ).orEmpty() + hiddenCategories
+            ).distinctBy { it.categoryId to it.type }.takeIf { it.isNotEmpty() }
+            if ((acceptedCount == 0 && !hasCompletedScopes) || sessionId == null) {
+                sessionId?.let { syncCatalogStore.discardStagedImport(provider.id, it) }
+                recordFailures()
+                return StagedStalkerLiveCatalogResult(
+                    acceptedCount = 0,
+                    catalogApplied = false,
+                    coverageComplete = false,
+                    warnings = (warnings + "Live TV returned no usable channels; keeping the last verified Live catalog.").distinct()
+                )
+            }
+            suspend fun updateRetryQueue() {
+                afterCatalogApply()
+                if (maxChannels != null) return
+                if (completeCategoryIds == null) {
+                    liveCategoryRetryDao.deleteForProvider(provider.id)
+                } else {
+                    recordFailures()
+                    if (completeCategoryIds.isNotEmpty()) {
+                        deleteRetryCategoryIds(completeCategoryIds)
+                    }
+                }
+            }
+            when {
+                completeCategoryIds != null -> syncCatalogStore.applyStagedLiveCatalogWithCoverage(
+                    provider.id,
+                    sessionId,
+                    categories,
+                    completeCategoryIds,
+                    pruneCategories,
+                    ::updateRetryQueue
+                )
+                maxChannels != null -> syncCatalogStore.applyStagedLiveCatalogUpsertOnly(
+                    provider.id, sessionId, categories, afterCatalogApply
+                )
+                else -> syncCatalogStore.applyStagedLiveCatalog(
+                    provider.id,
+                    sessionId,
+                    categories
+                ) {
+                    updateRetryQueue()
+                }
+            }
+            val pendingRetries = if (maxChannels == null) {
+                liveCategoryRetryDao.getForProvider(provider.id, provider.stalkerConfigurationGeneration)
+            } else emptyList()
+            val resolvedCoverage = when {
+                maxChannels != null -> false
+                completeCategoryIds == null -> coverageComplete && pendingRetries.isEmpty()
+                retryOnlyPendingCategories -> pendingRetries.isEmpty()
+                else -> coverageComplete && pendingRetries.isEmpty()
+            }
+            return StagedStalkerLiveCatalogResult(
+                acceptedCount = acceptedCount,
+                warnings = warnings,
+                catalogApplied = true,
+                coverageComplete = resolvedCoverage
+            )
+        }
+
+        try {
+            if (maxChannels == null) {
+                liveCategoryRetryDao.deleteForOtherConfigurations(
+                    provider.id,
+                    provider.stalkerConfigurationGeneration
+                )
+            }
+            if (retryPendingCategoriesOnly && maxChannels == null) {
+                val pendingRetries = liveCategoryRetryDao.getForProvider(
+                    provider.id,
+                    provider.stalkerConfigurationGeneration
+                )
+                if (pendingRetries.isNotEmpty()) {
+                    val currentCategories = awaitCategoryContext().orEmpty()
+                    val availableIds = currentCategories.mapTo(HashSet()) { it.categoryId }
+                    val obsoleteIds = pendingRetries.asSequence()
+                        .map { it.categoryId }
+                        .filterNot(availableIds::contains)
+                        .distinct()
+                        .toList()
+                    if (obsoleteIds.isNotEmpty()) {
+                        deleteRetryCategoryIds(obsoleteIds)
+                    }
+                    val pendingIds = pendingRetries.asSequence()
+                        .map { it.categoryId }
+                        .filter(availableIds::contains)
+                        .toSet()
+                    val retryCategories = currentCategories.filter { it.categoryId in pendingIds }
+                    if (retryCategories.isNotEmpty()) {
+                        progress(
+                            provider.id,
+                            onProgress,
+                            "Retrying ${retryCategories.size} failed Live TV categories..."
+                        )
+                        val retryResult = fetchStalkerLiveChannelsByCategory(
+                            provider,
+                            api,
+                            retryCategories.map {
+                                XtreamCategory(it.categoryId.toString(), it.name, isAdult = it.isAdult)
+                            },
+                            onProgress,
+                            runtimeProfile = CatalogSyncRuntimeProfile.from(applicationContext),
+                            maxChannels = null,
+                            hiddenCategoryIds = hiddenLiveCategoryIds,
+                            requiredHiddenCategoryIds = requiredHiddenLiveCategoryIds
+                        )
+                        warnings += retryResult.warnings
+                        stagedSessionId = retryResult.sessionId
+                        acceptedCount = retryResult.acceptedCount
+                        retryResult.fallbackCategories.forEach { category ->
+                            fallbackCollector.record(category.categoryId, category.name, category.isAdult)
+                        }
+                        return@coroutineScope finalizeStagedImport(
+                            completeCategoryIds = retryResult.completeCategoryIds,
+                            pruneCategories = false,
+                            coverageComplete = retryResult.coverageComplete,
+                            failedCategoryScopes = retryResult.failedCategoryScopes,
+                            retryOnlyPendingCategories = true
+                        )
+                    }
+                }
+            }
+            var bulkFailure: Exception? = null
+            val learnedState = api.validatedPortalState()
+            val bulkUnsupportedVerdictFresh = learnedState?.bulkLiveSupported == false &&
+                learnedState.validatedAt > 0L &&
+                System.currentTimeMillis() - learnedState.validatedAt <= STALKER_BULK_LIVE_UNSUPPORTED_TTL_MILLIS
+            val bulkRouteKnownToBeCategoryOnly = bulkUnsupportedVerdictFresh ||
+                learnedState?.bulkLiveCategoryFidelity == false
+            val mayOverlapMetadata = stalkerRequestCoordinator.effectiveConcurrencyLimit(provider.id) > 1 &&
+                !bulkRouteKnownToBeCategoryOnly
+            if (!mayOverlapMetadata) awaitCategoryContext()
+            val shouldTryBulk = (!bulkUnsupportedVerdictFresh && learnedState?.bulkLiveCategoryFidelity != false) ||
+                preferredCategories.isNullOrEmpty()
+            StalkerTelemetry.strategySelected(
+                provider.id,
+                if (shouldTryBulk) "BULK_LIVE" else "CATEGORY_LIVE",
+                when {
+                    shouldTryBulk && learnedState?.bulkLiveSupported == true -> "VALIDATED_CACHE"
+                    shouldTryBulk && learnedState?.bulkLiveSupported == false -> "STALE_UNSUPPORTED_REPROBE"
+                    !shouldTryBulk && learnedState?.bulkLiveCategoryFidelity == false -> "BULK_CATEGORY_FIDELITY_FAILED"
+                    !shouldTryBulk -> "BULK_KNOWN_UNSUPPORTED"
+                    else -> "CAPABILITY_PROBE"
+                }
+            )
+            val streamResult = if (shouldTryBulk) {
+                var attemptNumber = 0
+                stalkerRequestCoordinator.execute(
+                    providerId = provider.id,
+                    priority = StalkerRequestPriority.OPEN_CATEGORY,
+                    descriptor = StalkerRequestDescriptor(
+                        contentType = ContentType.LIVE.name,
+                        action = "STREAM_ALL"
+                    )
+                ) {
+                    withBulkLiveStallTimeout { markBulkProgress, localWork ->
+                        api.streamLiveStreams(
+                            maxChannels = maxChannels,
+                            batchRows = runtimeProfile.stageBatchSize,
+                            batchBytes = runtimeProfile.liveBatchBytes,
+                            onAttemptStart = {
+                                stagedSessionId?.let { syncCatalogStore.discardStagedImport(provider.id, it) }
+                                stagedSessionId = null
+                                acceptedCount = 0
+                                bulkRowsWithResolvedCategories = 0
+                                batch.clear()
+                                seenStreamIds.clear()
+                                fallbackCollector = FallbackCategoryCollector(provider.id, ContentType.LIVE)
+                                if (attemptNumber++ > 0) {
+                                    awaitCategoryContext()
+                                    val reloaded = loadPreferredCategories()
+                                    preferredCategories = reloaded.categories
+                                    categoriesErrorMessage = reloaded.errorMessage
+                                    if (reloaded.errorMessage != null) {
+                                        warnings += "Live categories failed; recovered using bulk live channels."
+                                    }
+                                }
+                                markBulkProgress()
+                            },
+                            awaitCategoryContext = { awaitCategoryContext() },
+                            onReadProgress = markBulkProgress,
+                            onLocalWork = localWork
+                        ) { channel ->
+                            if (channel.categoryId != null && channel.categoryId in hiddenLiveCategoryIds && channel.categoryId !in requiredHiddenLiveCategoryIds) return@streamLiveStreams
+                            if (channel.categoryId != null) bulkRowsWithResolvedCategories++
+                            if (maxChannels == null || acceptedCount + batch.size < maxChannels) batch += channel
+                            if (batch.size >= runtimeProfile.stageBatchSize) {
+                                flushBatch()
+                                progress(provider.id, onProgress, "Loading live channels... $acceptedCount imported")
+                            }
+                        }
+                    }
+                }
+            } else null
+            if (streamResult is Result.Error) {
+                stalkerRequestCoordinator.recordFailure(provider.id, streamResult.exception)
+            }
+            awaitCategoryContext()
+            when (streamResult) {
+                is Result.Success -> {
+                    flushBatch()
+                    if (maxChannels == null) api.recordBulkLiveCapability(true, acceptedCount == 0 || bulkRowsWithResolvedCategories > 0)
+                    return@coroutineScope finalizeStagedImport(
+                        completeCategoryIds = if (maxChannels != null) emptySet() else null,
+                        coverageComplete = maxChannels == null
+                    )
+                }
+                is Result.Error -> {
+                    if (isDefinitiveBulkLiveFailure(streamResult.exception)) api.recordBulkLiveCapability(false)
+                    val diagnostic = stalkerCatalogAccessDiagnostic(api, categoriesErrorMessage.orEmpty(), streamResult.message)
+                    bulkFailure = IllegalStateException(
+                        buildString {
+                            append(streamResult.message.ifBlank { "Failed to load live channels" })
+                            diagnostic?.let { append(' ').append(it) }
+                        },
+                        streamResult.exception
+                    )
+                }
+                is Result.Loading -> throw IllegalStateException("Unexpected loading state")
+                null -> {
+                    bulkFailure = IOException("Bulk live request timed out; switching to category requests.")
+                    progress(provider.id, onProgress, "Bulk live request is slow; loading categories instead...")
+                }
+            }
+
+            stagedSessionId?.let { syncCatalogStore.discardStagedImport(provider.id, it) }
+            stagedSessionId = null
+            acceptedCount = 0
+            batch.clear()
+            seenStreamIds.clear()
+            fallbackCollector = FallbackCategoryCollector(provider.id, ContentType.LIVE)
+            val fallbackCategories = preferredCategories.orEmpty()
+            if (fallbackCategories.isEmpty()) {
+                return@coroutineScope StagedStalkerLiveCatalogResult(
+                    acceptedCount = 0,
+                    warnings = (warnings + listOfNotNull(
+                        "Live TV provider exposed no live channels; continuing with VOD and series only.",
+                        bulkFailure?.let { error -> sanitizeThrowableMessage(error) }?.takeIf { it.isNotBlank() }
+                            ?.let { "Live TV fetch returned no usable channels: $it" }
+                    )).distinct()
+                )
+            }
+            Log.w(STALKER_EXECUTOR_TAG, "Stalker bulk live sync failed for provider ${provider.id}; falling back to category live fetches.", bulkFailure)
+            warnings += "Bulk live request failed; recovered using per-category live fetches."
+            val fallbackResult = fetchStalkerLiveChannelsByCategory(
+                provider,
+                api,
+                fallbackCategories.map { XtreamCategory(it.categoryId.toString(), it.name, isAdult = it.isAdult) },
+                onProgress,
+                runtimeProfile,
+                maxChannels,
+                hiddenLiveCategoryIds,
+                requiredHiddenLiveCategoryIds
+            )
+            warnings += fallbackResult.warnings
+            stagedSessionId = fallbackResult.sessionId
+            acceptedCount = fallbackResult.acceptedCount
+            fallbackResult.fallbackCategories.forEach { category ->
+                fallbackCollector.record(category.categoryId, category.name, category.isAdult)
+            }
+            return@coroutineScope finalizeStagedImport(
+                completeCategoryIds = fallbackResult.completeCategoryIds,
+                pruneCategories = categoriesErrorMessage == null,
+                coverageComplete = fallbackResult.coverageComplete,
+                failedCategoryScopes = fallbackResult.failedCategoryScopes
+            )
+        } catch (error: CancellationException) {
+            withContext(NonCancellable) {
+                stagedSessionId?.let { syncCatalogStore.discardStagedImport(provider.id, it) }
+            }
+            throw error
+        } catch (error: Exception) {
+            stagedSessionId?.let { syncCatalogStore.discardStagedImport(provider.id, it) }
+            throw error
+        } finally {
+            categoryContextDeferred.cancelAndJoin()
+        }
+    }
+
+    private suspend fun mergeHiddenChannelsIntoStaging(
+        providerId: Long,
+        sessionId: Long,
+        hiddenLiveCategoryIds: Set<Long>
+    ) {
+        val hiddenChannels = channelDao.getByProviderSync(providerId)
+            .filter { it.categoryId != null && it.categoryId in hiddenLiveCategoryIds }
+        if (hiddenChannels.isNotEmpty()) syncCatalogStore.stageChannelBatch(providerId, sessionId, hiddenChannels)
+    }
+
+    private suspend fun fetchStalkerLiveChannelsByCategory(
+        provider: Provider,
+        api: StalkerProvider,
+        categories: List<XtreamCategory>,
+        onProgress: ((String) -> Unit)?,
+        runtimeProfile: CatalogSyncRuntimeProfile,
+        maxChannels: Int?,
+        hiddenCategoryIds: Set<Long>,
+        requiredHiddenCategoryIds: Set<Long>
+    ): StalkerLiveCategoryLoadResult {
+        if (categories.isEmpty()) return StalkerLiveCategoryLoadResult()
+
+        data class CategoryAttemptStage(
+            var sessionId: Long,
+            val seenStreamIds: MutableSet<Long> = HashSet(),
+            val bootstrapCandidateIds: MutableSet<Long> = HashSet(),
+            var fallbackCategories: FallbackCategoryCollector,
+            var stagedRows: Boolean = false,
+            var capReached: Boolean = false
+        )
+
+        val activeSessions = ConcurrentHashMap.newKeySet<Long>()
+        val completedStages = ConcurrentHashMap<String, CategoryAttemptStage>()
+        val capReachedCategoryIds = ConcurrentHashMap.newKeySet<String>()
+        val bootstrapSeenIds = HashSet<Long>()
+        var stagedSessionId: Long? = null
+        var stagedAcceptedCount = 0
+        var keepTargetStage = false
+        val fallbackCategories = FallbackCategoryCollector(provider.id, ContentType.LIVE)
+
+        fun newStage(): CategoryAttemptStage {
+            val sessionId = syncCatalogStore.newSessionId()
+            activeSessions += sessionId
+            return CategoryAttemptStage(
+                sessionId = sessionId,
+                fallbackCategories = FallbackCategoryCollector(provider.id, ContentType.LIVE)
+            )
+        }
+
+        suspend fun discardStage(stage: CategoryAttemptStage) {
+            syncCatalogStore.discardStagedImport(provider.id, stage.sessionId)
+            activeSessions.remove(stage.sessionId)
+        }
+
+        suspend fun fetchAndStage(category: XtreamCategory): TimedCategoryOutcome<Channel> {
+            val startedAt = System.currentTimeMillis()
+            val categoryId = category.categoryId.toLongOrNull()
+            var attempt = newStage()
+            var outcome: CategoryFetchOutcome<Channel>
+            try {
+                if (categoryId == null) throw IllegalArgumentException(
+                    "Invalid Stalker live category id '${category.categoryId}'"
+                )
+                val result = stalkerRequestCoordinator.execute(
+                    providerId = provider.id,
+                    priority = StalkerRequestPriority.OPEN_CATEGORY,
+                    descriptor = StalkerRequestDescriptor(
+                        contentType = ContentType.LIVE.name,
+                        action = "STREAM_CATEGORY",
+                        categoryKey = category.categoryId
+                    )
+                ) {
+                    api.streamLiveCategory(
+                        categoryId = categoryId,
+                        batchRows = runtimeProfile.stageBatchSize,
+                        batchBytes = runtimeProfile.liveBatchBytes,
+                        onAttemptStart = {
+                            discardStage(attempt)
+                            attempt = newStage()
+                        }
+                    ) { rows ->
+                        val visibleRows = rows.filterNot { channel ->
+                            channel.categoryId != null &&
+                                channel.categoryId in hiddenCategoryIds &&
+                                channel.categoryId !in requiredHiddenCategoryIds
+                        }
+                        val stageRows = if (maxChannels == null) {
+                            visibleRows
+                        } else {
+                            val remaining = (maxChannels - stagedAcceptedCount).coerceAtLeast(0)
+                            val candidates = ArrayList<Channel>(minOf(visibleRows.size, remaining))
+                            visibleRows.forEach { channel ->
+                                val id = channel.streamId.takeIf { it > 0L } ?: channel.id
+                                if (id <= 0L || id in bootstrapSeenIds || id in attempt.bootstrapCandidateIds) {
+                                    return@forEach
+                                }
+                                if (attempt.bootstrapCandidateIds.size >= remaining) {
+                                    attempt.capReached = true
+                                } else {
+                                    attempt.bootstrapCandidateIds += id
+                                    candidates += channel
+                                }
+                            }
+                            candidates
+                        }
+                        if (stageRows.isNotEmpty()) {
+                            attempt.stagedRows = true
+                            catalogStager.stageChannelItems(
+                                providerId = provider.id,
+                                items = stageRows,
+                                seenStreamIds = attempt.seenStreamIds,
+                                fallbackCollector = attempt.fallbackCategories,
+                                sessionId = attempt.sessionId,
+                                useLiveAdmissionCount = true
+                            )
+                        }
+                    }
+                }
+                when (result) {
+                    is Result.Success -> {
+                        outcome = if (attempt.seenStreamIds.isEmpty()) {
+                            CategoryFetchOutcome.Empty(category.categoryName)
+                        } else {
+                            CategoryFetchOutcome.Success(category.categoryName, emptyList(), attempt.seenStreamIds.size)
+                        }
+                        completedStages[category.categoryId] = attempt
+                    }
+                    is Result.Error -> {
+                        stalkerRequestCoordinator.recordFailure(provider.id, result.exception)
+                        throw IllegalStateException(result.message, result.exception)
+                    }
+                    is Result.Loading -> throw IllegalStateException("Unexpected loading state")
+                }
+            } catch (error: CancellationException) {
+                discardStage(attempt)
+                throw error
+            } catch (error: Throwable) {
+                discardStage(attempt)
+                completedStages.remove(category.categoryId)
+                outcome = CategoryFetchOutcome.Failure(category.categoryName, error)
+            }
+            return TimedCategoryOutcome(category, outcome, System.currentTimeMillis() - startedAt)
+        }
+
+        suspend fun mergeCategoryStage(category: XtreamCategory): Boolean {
+            val attempt = completedStages.remove(category.categoryId) ?: return false
+            if (attempt.capReached) capReachedCategoryIds += category.categoryId
+            if (attempt.stagedRows) {
+                val target = stagedSessionId ?: syncCatalogStore.newSessionId().also { stagedSessionId = it }
+                val moved = syncCatalogStore.mergeCompletedLiveCategory(provider.id, attempt.sessionId, target)
+                stagedAcceptedCount += moved
+                if (maxChannels != null) bootstrapSeenIds += attempt.bootstrapCandidateIds
+            } else if (maxChannels == null) {
+                // A verified empty category still needs a target session so its stale rows can
+                // be pruned transactionally during scope promotion.
+                if (stagedSessionId == null) stagedSessionId = syncCatalogStore.newSessionId()
+            }
+            attempt.fallbackCategories.entities().forEach {
+                fallbackCategories.record(it.categoryId, it.name, it.isAdult)
+            }
+            discardStage(attempt)
+            return true
+        }
+
+        suspend fun mergeCompletedInProviderOrder(outcomes: List<TimedCategoryOutcome<Channel>>) {
+            val successfulIds = outcomes.asSequence()
+                .filter { it.outcome !is CategoryFetchOutcome.Failure }
+                .map { it.category.categoryId }
+                .toSet()
+            categories.forEach { category ->
+                if (category.categoryId in successfulIds) mergeCategoryStage(category)
+            }
+        }
+
+        var finalOutcomes = emptyList<TimedCategoryOutcome<Channel>>()
+        val warnings = mutableListOf<String>()
+        try {
+            val concurrency = if (maxChannels != null) 1 else minOf(
+                categories.size,
+                runtimeProfile.maxCategoryConcurrency,
+                STALKER_MAX_PARALLEL_CATEGORY_FETCHES
+            ).coerceAtLeast(1)
+            if (maxChannels != null) {
+                // Bootstrap is a deterministic prefix: finish one category, merge it, then
+                // stop before requesting later categories as soon as the cap is reached.
+                val attempted = mutableListOf<TimedCategoryOutcome<Channel>>()
+                for ((index, category) in categories.withIndex()) {
+                    if (stagedAcceptedCount >= maxChannels) break
+                    progress(provider.id, onProgress, "Downloading Live TV by category ${index + 1}/${categories.size}...")
+                    val outcome = fetchAndStage(category)
+                    attempted += outcome
+                    if (outcome.outcome !is CategoryFetchOutcome.Failure) mergeCategoryStage(category)
+                    if (category.categoryId in capReachedCategoryIds) break
+                }
+                finalOutcomes = attempted
+            } else {
+                val executionPlan = categoryRecoverySupport.executeCategoryRecoveryPlan(
+                    provider = provider,
+                    categories = categories,
+                    initialConcurrency = concurrency,
+                    sectionLabel = "Live TV",
+                    sequentialModeWarning = LIVE_CATEGORY_SEQUENTIAL_MODE_WARNING,
+                    onProgress = onProgress,
+                    fetch = ::fetchAndStage,
+                    refillWorkers = true,
+                    shouldStopOnFailure = ::isPortalWideStalkerCategoryFailure
+                )
+                var timedOutcomes = executionPlan.outcomes
+                val categoryOutcomes = timedOutcomes.map { it.outcome }
+                val failureCount = timedOutcomes.count { it.outcome is CategoryFetchOutcome.Failure }
+                val fastFailureCount = timedOutcomes.count {
+                    it.elapsedMs <= 5_000L && it.outcome is CategoryFetchOutcome.Failure
+                }
+                val downgradeRecommended = catalogStrategySupport.shouldDowngradeCategorySync(
+                    categories.size, failureCount, fastFailureCount, categoryOutcomes
+                )
+                warnings += executionPlan.warnings
+                val hasPortalWideFailure = categoryOutcomes.filterIsInstance<CategoryFetchOutcome.Failure>()
+                    .any { isPortalWideStalkerCategoryFailure(it.error) }
+                if (executionPlan.stopReason == null && !hasPortalWideFailure && concurrency > 1 &&
+                    catalogStrategySupport.shouldRetryFailedCategories(
+                        categories.size, failureCount, downgradeRecommended, categoryOutcomes
+                    )
+                ) {
+                    val failedRetryTotal = failureCount
+                    progress(provider.id, onProgress, "Retrying failed Live TV categories 0/$failedRetryTotal...")
+                    timedOutcomes = categoryRecoverySupport.continueFailedCategoryOutcomes(
+                        provider,
+                        timedOutcomes,
+                        fetchSequentially = ::fetchAndStage,
+                        onCategoryRetried = { completed, total, _ ->
+                            progress(provider.id, onProgress, "Retrying failed Live TV categories $completed/$total...")
+                        }
+                    )
+                    if (downgradeRecommended) warnings += LIVE_CATEGORY_SEQUENTIAL_MODE_WARNING
+                }
+                finalOutcomes = timedOutcomes
+                mergeCompletedInProviderOrder(finalOutcomes)
+            }
+
+            val finalCategoryOutcomes = finalOutcomes.map { it.outcome }
+            val outcomeWarnings = finalCategoryOutcomes.filterIsInstance<CategoryFetchOutcome.Failure>()
+                .map { categoryFailureWarning("Live TV", it.categoryName, it.error) }
+            val failedCategoryScopes = finalOutcomes.mapNotNull { timedOutcome ->
+                val failure = timedOutcome.outcome as? CategoryFetchOutcome.Failure ?: return@mapNotNull null
+                val categoryId = timedOutcome.category.categoryId.toLongOrNull() ?: return@mapNotNull null
+                if (isPortalWideStalkerCategoryFailure(failure.error)) return@mapNotNull null
+                StalkerLiveCategoryFailure(
+                    categoryId = categoryId,
+                    categoryName = timedOutcome.category.categoryName,
+                    errorMessage = sanitizeThrowableMessage(failure.error).takeIf(String::isNotBlank)
+                )
+            }
+            val completeCategoryIds = finalOutcomes.asSequence()
+                .filter { it.outcome !is CategoryFetchOutcome.Failure }
+                .filterNot { it.category.categoryId in capReachedCategoryIds }
+                .mapNotNull { it.category.categoryId.toLongOrNull() }
+                .toSet()
+            keepTargetStage = true
+            return StalkerLiveCategoryLoadResult(
+                sessionId = stagedSessionId,
+                acceptedCount = stagedAcceptedCount,
+                fallbackCategories = fallbackCategories.entities(),
+                completeCategoryIds = completeCategoryIds,
+                failedCategoryScopes = failedCategoryScopes,
+                coverageComplete = maxChannels == null &&
+                    finalOutcomes.size == categories.size &&
+                    finalOutcomes.all { it.outcome !is CategoryFetchOutcome.Failure },
+                warnings = (outcomeWarnings + warnings).distinct()
+            )
+        } finally {
+            withContext(NonCancellable) {
+                activeSessions.toList().forEach { sessionId ->
+                    syncCatalogStore.discardStagedImport(provider.id, sessionId)
+                }
+                if (!keepTargetStage) {
+                    stagedSessionId?.let { syncCatalogStore.discardStagedImport(provider.id, it) }
+                }
+            }
+        }
+    }
+
+    private suspend fun <T> withBulkLiveStallTimeout(block: suspend (() -> Unit, (Boolean) -> Unit) -> T): T? = coroutineScope {
+        val lastProgressAt = AtomicLong(System.currentTimeMillis())
+        val localWorkCount = AtomicInteger()
+        val streamDeferred = async {
+            block(
+                { lastProgressAt.set(System.currentTimeMillis()) },
+                { started ->
+                    if (started) localWorkCount.incrementAndGet() else {
+                        lastProgressAt.set(System.currentTimeMillis())
+                        localWorkCount.decrementAndGet()
+                    }
+                }
+            )
+        }
+        val watchdog = launch {
+            while (isActive) {
+                delay(STALKER_BULK_LIVE_STALL_CHECK_INTERVAL_MILLIS)
+                if (localWorkCount.get() == 0 && System.currentTimeMillis() - lastProgressAt.get() >= STALKER_BULK_LIVE_STALL_TIMEOUT_MILLIS) {
+                    streamDeferred.cancel()
+                    break
+                }
+            }
+        }
+        try {
+            try {
+                streamDeferred.await()
+            } catch (cancelled: CancellationException) {
+                if (!isActive) throw cancelled
+                null
+            }
+        } finally {
+            watchdog.cancel()
+            streamDeferred.cancel()
+        }
+    }
+
+    private fun isDefinitiveBulkLiveFailure(error: Throwable?): Boolean = when (error) {
+        is StalkerApiError.Authorization,
+        is StalkerApiError.ModelRejected,
+        is StalkerApiError.AccountBlocked,
+        is StalkerApiError.Malformed,
+        is StalkerApiError.ResponseTooLarge,
+        is StalkerApiError.CatalogTruncated,
+        is StalkerApiError.BlockedOrConfiguration -> true
+        else -> false
+    }
+
+    private fun isPortalWideStalkerCategoryFailure(error: Throwable): Boolean =
+        generateSequence(error) { it.cause }.any { cause ->
+            cause is StalkerApiError.Authorization ||
+                cause is StalkerApiError.ModelRejected ||
+                cause is StalkerApiError.AccountBlocked ||
+                cause is StalkerApiError.BlockedOrConfiguration ||
+                cause is StalkerApiError.RateLimited ||
+                cause is StalkerApiError.TransportConsentRequired ||
+                (cause is StalkerApiError.Server && cause.httpStatus in setOf(401, 403))
+        }
+
+    private suspend fun stalkerCatalogAccessDiagnostic(
+        api: StalkerProvider,
+        primaryMessage: String,
+        fallbackMessage: String?
+    ): String? {
+        if (!isStalkerEmptyResponse(primaryMessage) || !isStalkerEmptyResponse(fallbackMessage)) return null
+        val profile = when (val result = api.getAccountProfile()) {
+            is Result.Success -> result.data
+            else -> return null
+        }
+        if (profile.ambiguousState) {
+            return "Portal profile is ambiguous; playback/session validation failed. Check that the MAC is activated and that this portal supports MAG-style playback for the assigned account."
+        }
+        if (profile.authAccess == false &&
+            (profile.accountId?.trim().orEmpty().isBlank() || profile.accountId?.trim() == "0") &&
+            (profile.accountName?.trim().orEmpty().isBlank() || profile.accountName?.trim() == "0")
+        ) {
+            return "Portal authenticated, but the returned Stalker profile indicates this account has no accessible catalog data. Check that the MAC is activated and assigned a live/VOD package on the provider side."
+        }
+        return null
+    }
+
+    private fun isStalkerEmptyResponse(message: String?): Boolean =
+        !message.isNullOrBlank() && message.contains("empty response", ignoreCase = true)
+
+    private fun <T> requireResult(result: Result<T>, fallbackMessage: String): T = when (result) {
+        is Result.Success -> result.data
+        is Result.Error -> throw IllegalStateException(result.message.ifBlank { fallbackMessage }, result.exception)
+        is Result.Loading -> throw IllegalStateException("Unexpected loading state")
+    }
+
+    private data class StalkerLiveCategoryLoadResult(
+        val sessionId: Long? = null,
+        val acceptedCount: Int = 0,
+        val fallbackCategories: List<CategoryEntity> = emptyList(),
+        val completeCategoryIds: Set<Long> = emptySet(),
+        val failedCategoryScopes: List<StalkerLiveCategoryFailure> = emptyList(),
+        val coverageComplete: Boolean = false,
+        val warnings: List<String> = emptyList()
+    )
+
+    private data class StalkerLiveCategoryFailure(
+        val categoryId: Long,
+        val categoryName: String,
+        val errorMessage: String?
+    )
+
+    private data class StagedStalkerLiveCatalogResult(
+        val acceptedCount: Int,
+        val catalogApplied: Boolean = false,
+        val coverageComplete: Boolean = false,
+        val warnings: List<String> = emptyList()
+    )
+}

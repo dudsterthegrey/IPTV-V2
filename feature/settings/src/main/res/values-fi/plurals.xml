@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="settings_timeout_seconds">
+        <item quantity="one">%d sekunti</item>
+        <item quantity="other">%d sekuntia</item>
+    </plurals>
+    <plurals name="settings_timer_minutes">
+        <item quantity="one">%1$d minuutti</item>
+        <item quantity="other">%1$d minuuttia</item>
+    </plurals>
+    <plurals name="settings_top_navigation_count">
+        <item quantity="one">%d välilehti</item>
+        <item quantity="other">%d välilehteä</item>
+    </plurals>
+    <plurals name="settings_home_dashboard_count">
+        <item quantity="one">%d hylly</item>
+        <item quantity="other">%d hyllyä</item>
+    </plurals>
+</resources>

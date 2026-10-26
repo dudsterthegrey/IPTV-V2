@@ -1,0 +1,542 @@
+package com.streamvault.feature.catalog.presentation.series
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.streamvault.feature.catalog.api.CatalogCastPlaybackEvent
+import com.streamvault.feature.catalog.api.CatalogCastPort
+import com.streamvault.feature.catalog.api.CatalogCastRequest
+import com.streamvault.feature.catalog.api.CatalogCastStartResult
+import com.streamvault.feature.catalog.api.CatalogDownloadStarter
+import com.streamvault.feature.catalog.api.CatalogMessage
+import com.streamvault.feature.catalog.api.CatalogStreamPreparer
+import com.streamvault.feature.catalog.api.CatalogUiEvent
+import com.streamvault.feature.catalog.navigation.CatalogRoutePatterns
+import com.streamvault.data.preferences.PreferencesRepository
+import com.streamvault.domain.model.ContentType
+import com.streamvault.domain.model.DownloadContentType
+import com.streamvault.domain.model.DownloadRequest
+import com.streamvault.domain.model.Episode
+import com.streamvault.domain.model.ExternalRatings
+import com.streamvault.domain.model.ExternalRatingsLookup
+import com.streamvault.domain.model.Result
+import com.streamvault.domain.model.Season
+import com.streamvault.domain.model.Series
+import com.streamvault.domain.model.SeriesDetailPresentationHint
+import com.streamvault.domain.model.VodSeriesVariant
+import com.streamvault.domain.repository.DownloadManager
+import com.streamvault.domain.repository.ExternalRatingsRepository
+import com.streamvault.domain.repository.FavoriteRepository
+import com.streamvault.domain.repository.PlaybackHistoryRepository
+import com.streamvault.domain.repository.ProviderRepository
+import com.streamvault.domain.repository.SeriesDetailsUnavailableException
+import com.streamvault.domain.repository.SeriesRepository
+import com.streamvault.domain.trakt.TraktWatchlist
+import com.streamvault.domain.trakt.TraktWatchlistActionResult
+import com.streamvault.domain.trakt.TraktWatchlistFailure
+import com.streamvault.domain.trakt.TraktWatchlistIdentity
+import com.streamvault.domain.trakt.TraktWatchlistType
+import com.streamvault.domain.trakt.TraktFavorites
+import com.streamvault.domain.trakt.TraktFavoriteActionResult
+import com.streamvault.domain.trakt.TraktFavoriteFailure
+import com.streamvault.domain.trakt.TraktFavoriteIdentity
+import com.streamvault.domain.trakt.TraktFavoriteType
+import com.streamvault.domain.trakt.TraktRatings
+import com.streamvault.domain.trakt.TraktRatingActionResult
+import com.streamvault.domain.trakt.TraktRatingIdentity
+import com.streamvault.domain.trakt.TraktRatingType
+import com.streamvault.domain.util.isPlaybackComplete
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class SeriesDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val seriesRepository: SeriesRepository,
+    private val providerRepository: ProviderRepository,
+    private val playbackHistoryRepository: PlaybackHistoryRepository,
+    private val externalRatingsRepository: ExternalRatingsRepository,
+    private val favoriteRepository: FavoriteRepository,
+    private val preferencesRepository: PreferencesRepository,
+    private val streamPreparer: CatalogStreamPreparer,
+    private val downloadManager: DownloadManager,
+    private val downloadStarter: CatalogDownloadStarter,
+    private val castPort: CatalogCastPort,
+    private val traktWatchlist: TraktWatchlist,
+    private val traktFavorites: TraktFavorites,
+    private val traktRatings: TraktRatings,
+) : ViewModel() {
+
+    private val seriesId: Long = checkNotNull(
+        savedStateHandle.get<Long>("seriesId")
+            ?: savedStateHandle.get<String>("seriesId")?.toLongOrNull()
+    )
+    private val knownPresentationHint: SeriesDetailPresentationHint? =
+        savedStateHandle[CatalogRoutePatterns.SERIES_DETAIL_PRESENTATION_HINT_KEY]
+
+    private val _uiState = MutableStateFlow(SeriesDetailUiState())
+    val uiState: StateFlow<SeriesDetailUiState> = _uiState.asStateFlow()
+
+    private val _uiEvents = MutableSharedFlow<CatalogUiEvent>()
+    val uiEvents: SharedFlow<CatalogUiEvent> = _uiEvents.asSharedFlow()
+    val castEvents: SharedFlow<CatalogUiEvent> = uiEvents
+
+    private var castPlaybackReportMode = CastPlaybackReportMode.NONE
+
+    private var providerDetailJob: Job? = null
+    private var unwatchedCountJob: Job? = null
+    private var activeProviderId: Long? = null
+
+    init {
+        observeCastPlaybackEvents()
+        observeTraktWatchlist()
+        observeTraktRatings()
+        viewModelScope.launch {
+            providerRepository.getActiveProvider().collect { provider ->
+                providerDetailJob?.cancel()
+                _uiState.value = SeriesDetailUiState(isLoading = true)
+                if (provider == null) {
+                    _uiState.update { it.copy(isLoading = false, error = "No active provider") }
+                    return@collect
+                }
+                providerDetailJob = launch {
+                    val effectiveProviderId = resolveEffectiveProviderId(provider.id)
+                    activeProviderId = effectiveProviderId
+                    val result = loadSeriesDetailsForProvider(effectiveProviderId, seriesId)
+                    if (result !is Result.Success) {
+                        loadAvailableVariants(seriesId)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeTraktWatchlist() {
+        viewModelScope.launch {
+            traktWatchlist.state.collect { watchlistState ->
+                _uiState.update { current ->
+                    val identity = current.series?.tmdbId?.takeIf { it > 0L }
+                        ?.let { TraktWatchlistIdentity(TraktWatchlistType.SHOW, it) }
+                    current.copy(
+                        traktWatchlistConnected = watchlistState.connected,
+                        traktWatchlistLoaded = watchlistState.loaded,
+                        traktWatchlisted = watchlistState.loaded && identity?.let(watchlistState::contains) == true,
+                        traktWatchlistBusy = watchlistState.isRefreshing ||
+                            (identity != null && identity in watchlistState.updating),
+                        traktWatchlistFailure = watchlistState.failure,
+                    )
+                }
+            }
+        }
+    }
+
+    private fun refreshTraktWatchlist() {
+        if (_uiState.value.series?.tmdbId?.let { it > 0L } != true) return
+        viewModelScope.launch { traktWatchlist.refresh() }
+    }
+
+    private fun observeTraktRatings() {
+        viewModelScope.launch {
+            traktRatings.state.collect { ratingsState ->
+                _uiState.update { current ->
+                    val identity = current.series?.tmdbId?.takeIf { it > 0L }
+                        ?.let { TraktRatingIdentity(TraktRatingType.SHOW, it) }
+                    current.copy(
+                        traktUserRating = identity?.let(ratingsState::rating),
+                        traktRatingBusy = ratingsState.refreshing.contains(TraktRatingType.SHOW) ||
+                            (identity != null && identity in ratingsState.updating),
+                    )
+                }
+            }
+        }
+    }
+
+    private fun refreshTraktRatings() {
+        _uiState.value.series?.tmdbId?.takeIf { it > 0L } ?: return
+        viewModelScope.launch { traktRatings.refresh(TraktRatingType.SHOW) }
+    }
+
+    fun toggleTraktWatchlist() {
+        val series = _uiState.value.series ?: return
+        val tmdbId = series.tmdbId?.takeIf { it > 0L } ?: return
+        val identity = TraktWatchlistIdentity(TraktWatchlistType.SHOW, tmdbId)
+        viewModelScope.launch {
+            val result = traktWatchlist.setWatchlisted(identity, !_uiState.value.traktWatchlisted)
+            if (result is TraktWatchlistActionResult.Failure) {
+                _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.TraktWatchlistFailed))
+            }
+        }
+    }
+
+    private suspend fun resolveEffectiveProviderId(fallbackProviderId: Long): Long {
+        return seriesRepository.getSeriesById(seriesId)?.providerId?.takeIf { it > 0L }
+            ?: fallbackProviderId
+    }
+
+    private suspend fun loadSeriesDetailsForProvider(
+        providerId: Long,
+        requestedSeriesId: Long
+    ): Result<Series> {
+        _uiState.update { it.copy(isLoading = true, error = null) }
+        return try {
+            when (val result = seriesRepository.getSeriesDetails(providerId, requestedSeriesId, knownPresentationHint)) {
+                is Result.Success -> {
+                    val isFavoriteDeferred = viewModelScope.async {
+                        favoriteRepository.isFavorite(providerId, result.data.id, ContentType.SERIES)
+                    }
+                    loadExternalRatings(result.data)
+                    startUnwatchedCountCollection(providerId, result.data.id)
+                    val selectedSeasonNumber = _uiState.value.selectedSeason?.seasonNumber
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            series = result.data.copy(isFavorite = isFavoriteDeferred.await()),
+                            selectedSeason = result.data.seasons.firstOrNull { season ->
+                                season.seasonNumber == selectedSeasonNumber
+                            } ?: result.data.seasons.firstOrNull(),
+                            resumeEpisode = findResumeEpisode(result.data),
+                            error = null,
+                            detailsUnavailable = false
+                        )
+                    }
+                    refreshTraktWatchlist()
+                    refreshTraktRatings()
+                    result
+                }
+                is Result.Error -> {
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            error = result.message,
+                            detailsUnavailable = result.exception is SeriesDetailsUnavailableException
+                        )
+                    }
+                    result
+                }
+                is Result.Loading -> {
+                    _uiState.update { it.copy(isLoading = true) }
+                    result
+                }
+            }
+        } catch (e: Exception) {
+            _uiState.update {
+                it.copy(
+                    isLoading = false,
+                    error = e.message ?: "Failed to load series details",
+                    detailsUnavailable = true
+                )
+            }
+            Result.error(e.message ?: "Failed to load series details", e)
+        }
+    }
+
+    private suspend fun loadAvailableVariants(requestedSeriesId: Long) {
+        val variants = runCatching { seriesRepository.getSeriesVariants(requestedSeriesId) }
+            .getOrDefault(emptyList())
+            .filter { variant -> variant.rawSeriesId > 0L }
+        if (variants.isEmpty()) return
+        _uiState.update { it.copy(availableVariants = variants) }
+    }
+
+    fun selectSeriesVariant(rawSeriesId: Long) {
+        val state = _uiState.value
+        val currentSeries = state.series
+        if (rawSeriesId <= 0L || rawSeriesId == currentSeries?.id || state.isLoading) return
+        viewModelScope.launch {
+            val providerId = currentSeries?.providerId ?: activeProviderId ?: return@launch
+            when (val result = loadSeriesDetailsForProvider(providerId, rawSeriesId)) {
+                is Result.Success -> {
+                    val logicalGroupId = result.data.logicalGroupId.takeIf { it.isNotBlank() }
+                        ?: currentSeries?.logicalGroupId?.takeIf { it.isNotBlank() }
+                    logicalGroupId?.let { groupId ->
+                        preferencesRepository.setPreferredVodVariant(providerId, groupId, rawSeriesId)
+                    }
+                }
+                is Result.Error -> if (currentSeries != null) {
+                    _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.SeriesVariantLoadFailed))
+                }
+                is Result.Loading -> Unit
+            }
+        }
+    }
+
+    fun toggleFavorite() {
+        val series = _uiState.value.series ?: return
+        viewModelScope.launch {
+            val newState = !series.isFavorite
+            if (newState) {
+                favoriteRepository.addFavorite(series.providerId, series.id, ContentType.SERIES)
+            } else {
+                favoriteRepository.removeFavorite(series.providerId, series.id, ContentType.SERIES)
+            }
+            _uiState.update { it.copy(series = series.copy(isFavorite = newState)) }
+            series.tmdbId?.takeIf { it > 0L }?.let { tmdbId ->
+                when (val result = traktFavorites.setFavorited(
+                    TraktFavoriteIdentity(TraktFavoriteType.SHOW, tmdbId), newState,
+                )) {
+                    TraktFavoriteActionResult.Success -> Unit
+                    is TraktFavoriteActionResult.Failure -> if (result.reason != TraktFavoriteFailure.DISCONNECTED &&
+                        result.reason != TraktFavoriteFailure.INCOGNITO) {
+                        _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.TraktFavoriteSyncFailed))
+                    }
+                }
+            }
+        }
+    }
+
+    fun rateOnTrakt(rating: Int) {
+        val series = _uiState.value.series ?: return
+        val tmdbId = series.tmdbId?.takeIf { it > 0L } ?: return
+        if (rating !in 1..10 || _uiState.value.traktRatingBusy) return
+        viewModelScope.launch {
+            _uiState.update { it.copy(traktRatingBusy = true) }
+            try {
+                when (traktRatings.setRating(TraktRatingIdentity(TraktRatingType.SHOW, tmdbId), rating)) {
+                    TraktRatingActionResult.Success -> {
+                        _uiState.update { it.copy(traktUserRating = rating) }
+                        _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.TraktRatingSaved))
+                    }
+                    is TraktRatingActionResult.Failure ->
+                        _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.TraktRatingFailed))
+                }
+            } finally {
+                _uiState.update { it.copy(traktRatingBusy = false) }
+            }
+        }
+    }
+
+    private fun startUnwatchedCountCollection(providerId: Long, selectedSeriesId: Long) {
+        unwatchedCountJob?.cancel()
+        unwatchedCountJob = viewModelScope.launch {
+            playbackHistoryRepository.getUnwatchedCount(
+                providerId = providerId,
+                seriesId = selectedSeriesId
+            ).collect { count ->
+                _uiState.update { it.copy(unwatchedEpisodeCount = count) }
+            }
+        }
+    }
+
+    suspend fun resolveCopyStreamUrl(episode: Episode): Result<String> {
+        val streamInfo = when (val result = seriesRepository.getEpisodeStreamInfo(episode)) {
+            is Result.Success -> result.data
+            is Result.Error -> return Result.error(result.message, result.exception)
+            Result.Loading -> return Result.error("Could not resolve stream URL")
+        }
+        return when (val prepared = streamPreparer.prepare(streamInfo)) {
+            is Result.Success -> prepared.data.url.trim().takeIf { it.isNotBlank() }
+                ?.let { Result.success(it) }
+                ?: Result.error("Could not resolve stream URL")
+            is Result.Error -> Result.error(prepared.message, prepared.exception)
+            Result.Loading -> Result.error("Could not resolve stream URL")
+        }
+    }
+
+    private fun loadExternalRatings(series: Series) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoadingExternalRatings = true) }
+            val ratingsResult = externalRatingsRepository.getRatings(
+                ExternalRatingsLookup(
+                    contentType = ContentType.SERIES,
+                    title = series.name,
+                    releaseYear = series.releaseDate,
+                    tmdbId = series.tmdbId
+                )
+            )
+            _uiState.update { currentState ->
+                when (ratingsResult) {
+                    is Result.Success -> currentState.copy(
+                        isLoadingExternalRatings = false,
+                        externalRatings = ratingsResult.data
+                    )
+                    is Result.Error -> currentState.copy(
+                        isLoadingExternalRatings = false,
+                        externalRatings = ExternalRatings.unavailable()
+                    )
+                    is Result.Loading -> currentState
+                }
+            }
+        }
+    }
+
+    fun selectSeason(season: Season) {
+        _uiState.update { it.copy(selectedSeason = season) }
+    }
+
+    fun downloadEpisode(episode: Episode) {
+        val series = _uiState.value.series ?: return
+        viewModelScope.launch {
+            val resolvedUrl = resolveCopyStreamUrl(episode)
+            when (resolvedUrl) {
+                is Result.Success -> {
+                    val request = DownloadRequest(
+                        providerId = episode.providerId,
+                        contentType = DownloadContentType.SERIES_EPISODE,
+                        contentId = episode.id,
+                        contentName = episode.title,
+                        streamUrl = resolvedUrl.data,
+                        sourceStreamUrl = episode.streamUrl,
+                        sourceStreamId = episode.episodeId.takeIf { it > 0L } ?: episode.id,
+                        containerExtension = episode.containerExtension,
+                        posterUrl = episode.coverUrl,
+                        seriesId = series.id,
+                        seasonNumber = episode.seasonNumber,
+                        episodeNumber = episode.episodeNumber
+                    )
+                    val result = downloadManager.enqueueDownload(request)
+                    when (result) {
+                        is Result.Success -> {
+                            downloadStarter.startDownload(result.data.id)
+                            _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.DownloadStarted))
+                        }
+                        is Result.Error ->
+                            _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.DownloadFailed))
+                        Result.Loading -> Unit
+                    }
+                }
+                is Result.Error ->
+                    _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.DownloadUrlUnavailable))
+                Result.Loading -> Unit
+            }
+        }
+    }
+
+    fun castResumeEpisode() {
+        _uiState.value.resumeEpisode?.let(::castEpisode)
+    }
+
+    fun castEpisode(episode: Episode) {
+        if (_uiState.value.isCasting) return
+        val series = _uiState.value.series ?: return
+        viewModelScope.launch {
+            _uiState.update { it.copy(isCasting = true) }
+            castPlaybackReportMode = CastPlaybackReportMode.NONE
+            var keepCastingPending = false
+            try {
+                val streamInfo = when (val result = seriesRepository.getEpisodeStreamInfo(episode)) {
+                    is Result.Success -> result.data
+                    is Result.Error -> {
+                        _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.CastItemUnavailable))
+                        return@launch
+                    }
+                    Result.Loading -> {
+                        _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.CastItemUnavailable))
+                        return@launch
+                    }
+                }
+                val request = CatalogCastRequest(
+                    streamInfo = streamInfo,
+                    title = "${series.name} - S${episode.seasonNumber}E${episode.episodeNumber}",
+                    subtitle = episode.title,
+                    artworkUrl = episode.coverUrl ?: series.posterUrl ?: series.backdropUrl,
+                    startPositionMs = episode.watchProgress
+                )
+                keepCastingPending = emitCastResult(castPort.startCasting(request))
+            } finally {
+                if (!keepCastingPending) {
+                    _uiState.update { it.copy(isCasting = false) }
+                }
+            }
+        }
+    }
+
+    private fun observeCastPlaybackEvents() {
+        viewModelScope.launch {
+            castPort.playbackEvents.collect { event ->
+                handleCastPlaybackEvent(event)
+            }
+        }
+    }
+
+    private suspend fun handleCastPlaybackEvent(event: CatalogCastPlaybackEvent) {
+        val reportMode = castPlaybackReportMode
+        if (reportMode == CastPlaybackReportMode.NONE) return
+        if (event is CatalogCastPlaybackEvent.RouteSelectionCancelled) {
+            castPlaybackReportMode = CastPlaybackReportMode.NONE
+            _uiState.update { it.copy(isCasting = false) }
+            return
+        }
+        val isSuccess = event is CatalogCastPlaybackEvent.Finished && event.succeeded
+        if (isSuccess && reportMode == CastPlaybackReportMode.FAILURES_ONLY) {
+            castPlaybackReportMode = CastPlaybackReportMode.NONE
+            _uiState.update { it.copy(isCasting = false) }
+            return
+        }
+        castPlaybackReportMode = CastPlaybackReportMode.NONE
+        _uiState.update { it.copy(isCasting = false) }
+        val finished = event as? CatalogCastPlaybackEvent.Finished ?: return
+        _uiEvents.emit(CatalogUiEvent.ShowMessage(finished.message))
+    }
+
+    private suspend fun emitCastResult(result: CatalogCastStartResult): Boolean {
+        _uiEvents.emit(
+            when (result) {
+                CatalogCastStartResult.Started -> {
+                    castPlaybackReportMode = CastPlaybackReportMode.FAILURES_ONLY
+                    CatalogUiEvent.ShowMessage(CatalogMessage.CastStarted)
+                }
+                CatalogCastStartResult.RouteSelectionRequired -> {
+                    castPlaybackReportMode = CastPlaybackReportMode.SUCCESS_AND_FAILURE
+                    CatalogUiEvent.OpenCastRouteChooser
+                }
+                CatalogCastStartResult.Unavailable -> CatalogUiEvent.ShowMessage(CatalogMessage.CastUnavailable)
+                is CatalogCastStartResult.Unsupported -> CatalogUiEvent.ShowMessage(result.message)
+            }
+        )
+        return result == CatalogCastStartResult.Started || result == CatalogCastStartResult.RouteSelectionRequired
+    }
+
+    private fun findResumeEpisode(series: Series): Episode? {
+        val ordered = series.seasons
+            .sortedBy { it.seasonNumber }
+            .flatMap { season -> season.episodes.sortedBy { it.episodeNumber } }
+        // Prefer the most-recently-watched in-progress episode
+        val inProgress = ordered
+            .filter { ep ->
+                ep.watchProgress > 5000L &&
+                    !isPlaybackComplete(ep.watchProgress, ep.durationSeconds.toLong() * 1000L)
+            }
+            .maxByOrNull { it.lastWatchedAt }
+        if (inProgress != null) return inProgress
+        // Fall back to the first episode that has never been started
+        return ordered.firstOrNull { ep -> ep.lastWatchedAt == 0L }
+    }
+}
+
+data class SeriesDetailUiState(
+    val isLoading: Boolean = false,
+    val series: Series? = null,
+    val selectedSeason: Season? = null,
+    val resumeEpisode: Episode? = null,
+    val unwatchedEpisodeCount: Int = 0,
+    val error: String? = null,
+    val detailsUnavailable: Boolean = false,
+    val availableVariants: List<VodSeriesVariant> = emptyList(),
+    val isCasting: Boolean = false,
+    val isLoadingExternalRatings: Boolean = false,
+    val externalRatings: ExternalRatings = ExternalRatings.unavailable(),
+    val traktWatchlistConnected: Boolean = false,
+    val traktWatchlistLoaded: Boolean = false,
+    val traktWatchlisted: Boolean = false,
+    val traktWatchlistBusy: Boolean = false,
+    val traktWatchlistFailure: TraktWatchlistFailure? = null,
+    val traktUserRating: Int? = null,
+    val traktRatingBusy: Boolean = false,
+)
+
+private enum class CastPlaybackReportMode {
+    NONE,
+    FAILURES_ONLY,
+    SUCCESS_AND_FAILURE
+}
