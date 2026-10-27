@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Меню за навигация</string>
+    <string name="voice_search_button">Гласово търсене</string>
+    <string name="voice_search_prompt">Кажете канал, филм или сериал</string>
+    <string name="voice_search_unavailable">Гласовото търсене не е налично на това устройство.</string>
 </resources>

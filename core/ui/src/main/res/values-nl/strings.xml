@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigatiemenu</string>
+    <string name="voice_search_button">Gesproken zoeken</string>
+    <string name="voice_search_prompt">Noem een zender, film of serie</string>
+    <string name="voice_search_unavailable">Gesproken zoeken is niet beschikbaar op dit apparaat.</string>
 </resources>

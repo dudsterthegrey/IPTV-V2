@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigointivalikko</string>
+    <string name="voice_search_button">Puhehaku</string>
+    <string name="voice_search_prompt">Sano kanava, elokuva tai sarja</string>
+    <string name="voice_search_unavailable">Puhehaku ei ole käytettävissä tällä laitteella.</string>
 </resources>

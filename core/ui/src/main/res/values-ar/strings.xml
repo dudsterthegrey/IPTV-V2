@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">قائمة التنقل</string>
+    <string name="voice_search_button">البحث الصوتي</string>
+    <string name="voice_search_prompt">قل اسم قناة أو فيلم أو مسلسل</string>
+    <string name="voice_search_unavailable">البحث الصوتي غير متاح على هذا الجهاز.</string>
 </resources>

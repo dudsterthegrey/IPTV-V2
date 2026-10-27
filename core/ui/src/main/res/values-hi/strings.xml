@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">नेविगेशन मेन्यू</string>
+    <string name="voice_search_button">वॉइस खोज</string>
+    <string name="voice_search_prompt">कोई चैनल, फ़िल्म या सीरीज़ बोलें</string>
+    <string name="voice_search_unavailable">इस डिवाइस पर वॉइस खोज उपलब्ध नहीं है।</string>
 </resources>

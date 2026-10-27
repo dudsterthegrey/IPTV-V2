@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Menu navigasi</string>
+    <string name="voice_search_button">Carian suara</string>
+    <string name="voice_search_prompt">Sebut saluran, filem atau siri</string>
+    <string name="voice_search_unavailable">Carian suara tidak tersedia pada peranti ini.</string>
 </resources>

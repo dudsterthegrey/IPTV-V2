@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">導覽選單</string>
+    <string name="voice_search_button">語音搜尋</string>
+    <string name="voice_search_prompt">說出頻道、電影或影集名稱</string>
+    <string name="voice_search_unavailable">此裝置不支援語音搜尋。</string>
 </resources>

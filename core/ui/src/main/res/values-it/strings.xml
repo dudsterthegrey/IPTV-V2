@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Menu di navigazione</string>
+    <string name="voice_search_button">Ricerca vocale</string>
+    <string name="voice_search_prompt">Pronuncia un canale, un film o una serie</string>
+    <string name="voice_search_unavailable">La ricerca vocale non è disponibile su questo dispositivo.</string>
 </resources>

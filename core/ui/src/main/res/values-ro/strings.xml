@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Meniu de navigare</string>
+    <string name="voice_search_button">Căutare vocală</string>
+    <string name="voice_search_prompt">Spune un canal, un film sau un serial</string>
+    <string name="voice_search_unavailable">Căutarea vocală nu este disponibilă pe acest dispozitiv.</string>
 </resources>

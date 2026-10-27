@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Trình đơn điều hướng</string>
+    <string name="voice_search_button">Tìm kiếm bằng giọng nói</string>
+    <string name="voice_search_prompt">Nói tên kênh, phim hoặc phim bộ</string>
+    <string name="voice_search_unavailable">Tìm kiếm bằng giọng nói không khả dụng trên thiết bị này.</string>
 </resources>

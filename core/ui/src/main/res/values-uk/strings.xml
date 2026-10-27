@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Меню навігації</string>
+    <string name="voice_search_button">Голосовий пошук</string>
+    <string name="voice_search_prompt">Назвіть канал, фільм або серіал</string>
+    <string name="voice_search_unavailable">Голосовий пошук недоступний на цьому пристрої.</string>
 </resources>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">ナビゲーションメニュー</string>
+    <string name="voice_search_button">音声検索</string>
+    <string name="voice_search_prompt">チャンネル、映画、シリーズ名を話してください</string>
+    <string name="voice_search_unavailable">このデバイスでは音声検索を利用できません。</string>
 </resources>

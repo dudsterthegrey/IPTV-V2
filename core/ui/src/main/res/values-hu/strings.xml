@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigációs menü</string>
+    <string name="voice_search_button">Hangalapú keresés</string>
+    <string name="voice_search_prompt">Mondj egy csatornát, filmet vagy sorozatot</string>
+    <string name="voice_search_unavailable">A hangalapú keresés nem érhető el ezen az eszközön.</string>
 </resources>

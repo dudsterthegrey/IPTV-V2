@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Мени за навигацију</string>
+    <string name="voice_search_button">Гласовна претрага</string>
+    <string name="voice_search_prompt">Изговорите канал, филм или серију</string>
+    <string name="voice_search_unavailable">Гласовна претрага није доступна на овом уређају.</string>
 </resources>

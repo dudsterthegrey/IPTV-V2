@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Menu ng nabigasyon</string>
+    <string name="voice_search_button">Paghahanap gamit ang boses</string>
+    <string name="voice_search_prompt">Sabihin ang channel, pelikula, o serye</string>
+    <string name="voice_search_unavailable">Hindi available ang paghahanap gamit ang boses sa device na ito.</string>
 </resources>

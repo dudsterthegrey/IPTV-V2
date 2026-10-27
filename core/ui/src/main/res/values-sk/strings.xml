@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigačná ponuka</string>
+    <string name="voice_search_button">Hlasové vyhľadávanie</string>
+    <string name="voice_search_prompt">Povedzte kanál, film alebo seriál</string>
+    <string name="voice_search_unavailable">Hlasové vyhľadávanie nie je na tomto zariadení dostupné.</string>
 </resources>

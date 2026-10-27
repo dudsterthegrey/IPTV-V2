@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigacijski izbornik</string>
+    <string name="voice_search_button">Glasovno pretraživanje</string>
+    <string name="voice_search_prompt">Izgovorite kanal, film ili seriju</string>
+    <string name="voice_search_unavailable">Glasovno pretraživanje nije dostupno na ovom uređaju.</string>
 </resources>

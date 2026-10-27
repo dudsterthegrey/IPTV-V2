@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Menyja e navigimit</string>
+    <string name="voice_search_button">Kërkim me zë</string>
+    <string name="voice_search_prompt">Thuaj një kanal, film ose serial</string>
+    <string name="voice_search_unavailable">Kërkimi me zë nuk është i disponueshëm në këtë pajisje.</string>
 </resources>

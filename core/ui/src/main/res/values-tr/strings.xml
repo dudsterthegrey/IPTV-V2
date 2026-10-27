@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Gezinme menüsü</string>
+    <string name="voice_search_button">Sesli arama</string>
+    <string name="voice_search_prompt">Bir kanal, film veya dizi adı söyleyin</string>
+    <string name="voice_search_unavailable">Bu cihazda sesli arama kullanılamıyor.</string>
 </resources>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigasjonsmeny</string>
+    <string name="voice_search_button">Talesøk</string>
+    <string name="voice_search_prompt">Si en kanal, film eller serie</string>
+    <string name="voice_search_unavailable">Talesøk er ikke tilgjengelig på denne enheten.</string>
 </resources>

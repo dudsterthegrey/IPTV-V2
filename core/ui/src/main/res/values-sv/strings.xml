@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigeringsmeny</string>
+    <string name="voice_search_button">Röstsökning</string>
+    <string name="voice_search_prompt">Säg en kanal, film eller serie</string>
+    <string name="voice_search_unavailable">Röstsökning är inte tillgänglig på den här enheten.</string>
 </resources>

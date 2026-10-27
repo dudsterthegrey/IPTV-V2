@@ -18,7 +18,8 @@ item could still exist under a different name, so confirm on device before build
       controls plus the remote's Search key; `player/search/PlayerContentSearchPanel.kt`): search live/movies/series while the video keeps playing, then
       switch to the result in place (series → episode list in the panel). V2's player has a
       guide/channel overlay but no catalog search.
-- [ ] **Voice search**: mic button next to the search field, plus the remote's mic button
+- [x] **Voice search** (done 2026-10-27: mic button on the Search screen and the in-player search
+      panel; the remote's Search key opens Search and starts listening; `core/ui/.../VoiceSearch.kt`): mic button next to the search field, plus the remote's mic button
       starting voice input on the search screen. V2 only accepts the system "voice search" intent
       (`ExternalNavigationRequestParser`), with no in-app mic.
 - [ ] **Direct URL and Stream API profile types**: one fixed stream URL, or a URL the app calls
@@ -73,6 +74,14 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       switches in place with live controls; pick a movie → movie controls; pick a series → its
       episodes show in the panel, pick one → it plays. Back closes the episode list, then the panel.
       Also check Back from the new content still returns to where the player was opened from.
+
+- [ ] **Voice search**: on the Search screen press the mic button next to the search box → the
+      speech prompt appears; say a title → it fills the box and searches. Press the remote's
+      Search/mic key from Home → Search opens and starts listening. In the in-player search panel
+      the mic does the same. On real Fire TV, check the mic button works (some Fire OS builds have
+      no speech recognizer: the app should say "Voice search isn't available" instead of crashing).
+      Note: on many remotes the dedicated mic button goes straight to Alexa/Google Assistant and
+      never reaches the app; the Assistant can still open the app's search by voice.
 
 ## Release / Downloader
 

@@ -618,7 +618,7 @@ class StreamVaultPluginManager @Inject constructor(
     }
 
     suspend fun rewriteCastUrl(url: String): String? =
-        rewriteCastUrl(CastMediaRequest(url = url, title = "StreamVault"))
+        rewriteCastUrl(CastMediaRequest(url = url, title = "IPTV Player"))
 
     private fun applyPlaybackPreparationResponse(
         streamInfo: StreamInfo,

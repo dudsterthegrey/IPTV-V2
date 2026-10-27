@@ -45,6 +45,8 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.streamvault.core.navigation.PlayerNavigationRequest
 import com.streamvault.core.ui.components.SearchInput
+import com.streamvault.core.ui.components.VoiceSearchButton
+import com.streamvault.core.ui.components.rememberVoiceSearchLauncher
 import com.streamvault.core.ui.design.AppColors
 import com.streamvault.core.ui.device.rememberIsTelevisionDevice
 import com.streamvault.core.ui.interaction.TvClickableSurface
@@ -70,6 +72,10 @@ internal fun PlayerContentSearchPanel(
     val searchFocusRequester = remember { FocusRequester() }
     val episodesFocusRequester = remember { FocusRequester() }
     var collapsed by rememberSaveable { mutableStateOf(emptySet<String>()) }
+    val voiceSearch = rememberVoiceSearchLauncher { spoken ->
+        onInteracted()
+        viewModel.updateQuery(spoken)
+    }
 
     BackHandler {
         if (seriesDetail != null) viewModel.closeSeries() else onDismiss()
@@ -116,16 +122,23 @@ internal fun PlayerContentSearchPanel(
                         val detail = seriesDetail
                         if (detail == null) {
                             item(key = "input") {
-                                SearchInput(
-                                    value = query,
-                                    onValueChange = {
-                                        onInteracted()
-                                        viewModel.updateQuery(it)
-                                    },
-                                    placeholder = stringResource(R.string.player_search_placeholder),
-                                    focusRequester = searchFocusRequester,
-                                    modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp)
-                                )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    SearchInput(
+                                        value = query,
+                                        onValueChange = {
+                                            onInteracted()
+                                            viewModel.updateQuery(it)
+                                        },
+                                        placeholder = stringResource(R.string.player_search_placeholder),
+                                        focusRequester = searchFocusRequester,
+                                        modifier = Modifier.weight(1f)
+                                    )
+                                    VoiceSearchButton(onClick = voiceSearch::launch)
+                                }
                             }
                             searchResultItems(
                                 results = results,

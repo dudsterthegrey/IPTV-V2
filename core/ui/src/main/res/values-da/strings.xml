@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Navigationsmenu</string>
+    <string name="voice_search_button">Stemmesøgning</string>
+    <string name="voice_search_prompt">Sig en kanal, film eller serie</string>
+    <string name="voice_search_unavailable">Stemmesøgning er ikke tilgængelig på denne enhed.</string>
 </resources>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">เมนูนำทาง</string>
+    <string name="voice_search_button">ค้นหาด้วยเสียง</string>
+    <string name="voice_search_prompt">พูดชื่อช่อง ภาพยนตร์ หรือซีรีส์</string>
+    <string name="voice_search_unavailable">การค้นหาด้วยเสียงไม่พร้อมใช้งานในอุปกรณ์นี้</string>
 </resources>

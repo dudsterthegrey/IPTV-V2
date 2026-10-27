@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Μενού πλοήγησης</string>
+    <string name="voice_search_button">Φωνητική αναζήτηση</string>
+    <string name="voice_search_prompt">Πείτε ένα κανάλι, μια ταινία ή μια σειρά</string>
+    <string name="voice_search_unavailable">Η φωνητική αναζήτηση δεν είναι διαθέσιμη σε αυτή τη συσκευή.</string>
 </resources>

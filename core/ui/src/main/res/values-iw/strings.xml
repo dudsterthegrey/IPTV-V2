@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">תפריט ניווט</string>
+    <string name="voice_search_button">חיפוש קולי</string>
+    <string name="voice_search_prompt">אמרו שם של ערוץ, סרט או סדרה</string>
+    <string name="voice_search_unavailable">חיפוש קולי אינו זמין במכשיר זה.</string>
 </resources>

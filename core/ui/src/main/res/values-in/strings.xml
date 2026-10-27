@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">Menu navigasi</string>
+    <string name="voice_search_button">Penelusuran suara</string>
+    <string name="voice_search_prompt">Ucapkan saluran, film, atau serial</string>
+    <string name="voice_search_unavailable">Penelusuran suara tidak tersedia di perangkat ini.</string>
 </resources>

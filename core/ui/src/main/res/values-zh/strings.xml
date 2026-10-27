@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">导航菜单</string>
+    <string name="voice_search_button">语音搜索</string>
+    <string name="voice_search_prompt">说出频道、电影或剧集名称</string>
+    <string name="voice_search_unavailable">此设备不支持语音搜索。</string>
 </resources>

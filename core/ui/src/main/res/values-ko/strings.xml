@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">탐색 메뉴</string>
+    <string name="voice_search_button">음성 검색</string>
+    <string name="voice_search_prompt">채널, 영화 또는 시리즈 이름을 말하세요</string>
+    <string name="voice_search_unavailable">이 기기에서는 음성 검색을 사용할 수 없습니다.</string>
 </resources>

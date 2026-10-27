@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_menu">منوی پیمایش</string>
+    <string name="voice_search_button">جستجوی صوتی</string>
+    <string name="voice_search_prompt">نام یک کانال، فیلم یا سریال را بگویید</string>
+    <string name="voice_search_unavailable">جستجوی صوتی در این دستگاه در دسترس نیست.</string>
 </resources>

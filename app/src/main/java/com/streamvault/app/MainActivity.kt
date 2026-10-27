@@ -22,6 +22,7 @@ import com.streamvault.app.navigation.ExternalNavigationRequestParser
 import com.streamvault.core.navigation.PlayerNavigationRequest
 import com.streamvault.core.navigation.ExternalNavigationRequest
 import com.streamvault.core.navigation.AppDestination
+import com.streamvault.core.ui.components.VoiceSearchRequests
 import com.streamvault.feature.playback.cast.CastManager
 import com.streamvault.core.ui.theme.StreamVaultTheme
 import com.streamvault.app.ui.time.LocalAppTimeFormat
@@ -312,6 +313,19 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
         if (hasFocus) {
             applyImmersiveSystemUi()
         }
+    }
+
+    /**
+     * The remote's search/mic key when no screen consumed it (the player opens its own search
+     * panel instead): open Search and start voice input there.
+     */
+    override fun onSearchRequested(): Boolean {
+        if (databaseStartupCoordinator.state.value != DatabaseStartupState.Ready) return false
+        VoiceSearchRequests.request()
+        appNavigationCoordinator.submitExternalRequest(
+            ExternalNavigationRequest.Destination(AppDestination.Search())
+        )
+        return true
     }
 
     override fun onNewIntent(intent: Intent) {

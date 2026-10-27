@@ -55,6 +55,9 @@ import androidx.tv.material3.*
 import com.streamvault.feature.catalog.R
 import com.streamvault.feature.catalog.presentation.components.CategoryRow
 import com.streamvault.core.ui.components.SearchInput
+import com.streamvault.core.ui.components.VoiceSearchButton
+import com.streamvault.core.ui.components.VoiceSearchRequests
+import com.streamvault.core.ui.components.rememberVoiceSearchLauncher
 import com.streamvault.feature.catalog.presentation.components.ChannelCard
 import com.streamvault.feature.catalog.presentation.components.CatalogChannelProgressTicker
 import com.streamvault.feature.catalog.presentation.components.MovieCard
@@ -436,6 +439,15 @@ fun SearchScreen(
     val scope = rememberCoroutineScope()
     val selectedStateLabel = stringResource(R.string.a11y_selected)
     val incorrectPinMessage = stringResource(R.string.search_incorrect_pin)
+    val voiceSearch = rememberVoiceSearchLauncher { spoken -> viewModel.submitExternalQuery(spoken) }
+    val voiceSearchPending by VoiceSearchRequests.pending.collectAsStateWithLifecycle()
+
+    // The remote's search/mic key (handled app-wide) lands here and starts listening.
+    LaunchedEffect(voiceSearchPending) {
+        if (voiceSearchPending && VoiceSearchRequests.consume()) {
+            voiceSearch.launch()
+        }
+    }
 
     LaunchedEffect(viewModel, context) {
         viewModel.uiEvents.collect { event ->
@@ -628,6 +640,7 @@ fun SearchScreen(
                     onSearch = {
                         viewModel.onSearchSubmitted()
                     },
+                    onVoiceSearch = voiceSearch::launch,
                     onTabSelected = viewModel::onTabSelected,
                     onRecentQuerySelected = {
                         viewModel.onRecentQuerySelected(it)
@@ -892,6 +905,7 @@ private fun SearchHeroPanel(
     totalResults: Int,
     onQueryChange: (String) -> Unit,
     onSearch: () -> Unit,
+    onVoiceSearch: () -> Unit,
     onTabSelected: (SearchTab) -> Unit,
     onRecentQuerySelected: (String) -> Unit,
     onClearRecentQueries: () -> Unit,
@@ -950,16 +964,23 @@ private fun SearchHeroPanel(
                 )
             }
 
-            SearchInput(
-                value = query,
-                onValueChange = onQueryChange,
-                placeholder = stringResource(R.string.search_hint),
-                focusRequester = focusRequester,
-                onSearch = onSearch,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp)
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SearchInput(
+                    value = query,
+                    onValueChange = onQueryChange,
+                    placeholder = stringResource(R.string.search_hint),
+                    focusRequester = focusRequester,
+                    onSearch = onSearch,
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(52.dp)
+                )
+                VoiceSearchButton(onClick = onVoiceSearch)
+            }
 
             LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 items(SearchTab.values().toList(), key = { it.name }) { tab ->
