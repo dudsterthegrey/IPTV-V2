@@ -35,11 +35,20 @@ data class OpenSubtitlesCredentials(
     val password: String,
 )
 
+/** Supplies the API key the user entered in Settings, if any. */
+fun interface OpenSubtitlesUserApiKeySource {
+    suspend fun loadUserApiKey(): String?
+
+    companion object {
+        val None = OpenSubtitlesUserApiKeySource { null }
+    }
+}
+
 @Singleton
 class OpenSubtitlesSessionStore @Inject constructor(
     @ApplicationContext private val context: Context,
     private val credentialCrypto: CredentialCrypto,
-) {
+) : OpenSubtitlesUserApiKeySource {
     private val dataStore: DataStore<Preferences> by lazy {
         PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
@@ -60,6 +69,25 @@ class OpenSubtitlesSessionStore @Inject constructor(
         if (token.isNullOrBlank() || username.isBlank()) null
         else OpenSubtitlesSession(token, baseUrl, username, allowedDownloads, level, vip, remainingDownloads)
     }
+
+    val userApiKey: Flow<String?> = dataStore.data.map { prefs -> prefs.decryptedUserApiKey() }
+
+    override suspend fun loadUserApiKey(): String? = dataStore.data.first().decryptedUserApiKey()
+
+    /** Stores the user's API key (encrypted), or removes it when [apiKey] is null or blank. */
+    suspend fun saveUserApiKey(apiKey: String?) {
+        val clean = apiKey?.trim().orEmpty()
+        dataStore.edit { prefs ->
+            if (clean.isEmpty()) prefs.remove(KEY_USER_API_KEY)
+            else prefs[KEY_USER_API_KEY] = credentialCrypto.encryptIfNeeded(clean)
+        }
+    }
+
+    private fun Preferences.decryptedUserApiKey(): String? =
+        this[KEY_USER_API_KEY]
+            ?.let { runCatching { credentialCrypto.decryptIfNeeded(it) }.getOrNull() }
+            ?.trim()
+            ?.takeIf { it.isNotEmpty() }
 
     suspend fun loadSession(): OpenSubtitlesSession? {
         val prefs = dataStore.data.first()
@@ -180,5 +208,7 @@ class OpenSubtitlesSessionStore @Inject constructor(
         val KEY_REMAINING_RESET_AT = androidx.datastore.preferences.core.longPreferencesKey("remaining_reset_at")
         val KEY_LEVEL = stringPreferencesKey("level")
         val KEY_VIP = booleanPreferencesKey("vip")
+        // Kept by clearAll(): signing out of an account should not forget the user's API key.
+        val KEY_USER_API_KEY = stringPreferencesKey("user_api_key")
     }
 }

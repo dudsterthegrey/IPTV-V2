@@ -817,6 +817,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Autentificați-vă opțional pentru a vă folosi contul OpenSubtitles. Parola este stocată criptat pe acest dispozitiv.</string>
     <string name="settings_opensubtitles_username">Nume de utilizator</string>
     <string name="settings_opensubtitles_password">Parolă</string>
+    <string name="settings_opensubtitles_api_key">Cheie API</string>
+    <string name="settings_opensubtitles_api_key_custom">Se folosește cheia ta</string>
+    <string name="settings_opensubtitles_api_key_built_in">Se folosește cheia integrată</string>
+    <string name="settings_opensubtitles_api_key_missing">Nesetată. Căutarea online de subtitrări necesită o cheie</string>
+    <string name="settings_opensubtitles_api_key_title">Cheie API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Lipește cheia API de pe opensubtitles.com/consumers. Este stocată criptat pe acest dispozitiv.</string>
+    <string name="settings_opensubtitles_api_key_checking">Se verifică…</string>
+    <string name="settings_opensubtitles_api_key_remove">Elimină cheia mea</string>
     <string name="settings_opensubtitles_sign_in">Autentificați-vă</string>
     <string name="settings_opensubtitles_signing_in">Se autentifică…</string>
     <string name="settings_opensubtitles_sign_out">Deconectați-vă</string>

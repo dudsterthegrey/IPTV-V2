@@ -761,6 +761,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">可选择登录以使用你的 OpenSubtitles 账号。密码会加密存储在此设备上。</string>
     <string name="settings_opensubtitles_username">用户名</string>
     <string name="settings_opensubtitles_password">密码</string>
+    <string name="settings_opensubtitles_api_key">API 密钥</string>
+    <string name="settings_opensubtitles_api_key_custom">正在使用你的密钥</string>
+    <string name="settings_opensubtitles_api_key_built_in">正在使用内置密钥</string>
+    <string name="settings_opensubtitles_api_key_missing">未设置。在线搜索字幕需要密钥</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API 密钥</string>
+    <string name="settings_opensubtitles_api_key_subtitle">粘贴来自 opensubtitles.com/consumers 的 API 密钥。它会加密保存在此设备上。</string>
+    <string name="settings_opensubtitles_api_key_checking">正在检查…</string>
+    <string name="settings_opensubtitles_api_key_remove">移除我的密钥</string>
     <string name="settings_opensubtitles_sign_in">登录</string>
     <string name="settings_opensubtitles_signing_in">正在登录…</string>
     <string name="settings_opensubtitles_sign_out">退出登录</string>

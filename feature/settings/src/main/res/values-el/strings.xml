@@ -819,6 +819,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Συνδεθείτε προαιρετικά για να χρησιμοποιήσετε τον λογαριασμό σας OpenSubtitles. Ο κωδικός σας αποθηκεύεται κρυπτογραφημένος σε αυτήν τη συσκευή.</string>
     <string name="settings_opensubtitles_username">Όνομα χρήστη</string>
     <string name="settings_opensubtitles_password">Κωδικός πρόσβασης</string>
+    <string name="settings_opensubtitles_api_key">Κλειδί API</string>
+    <string name="settings_opensubtitles_api_key_custom">Χρησιμοποιείται το κλειδί σας</string>
+    <string name="settings_opensubtitles_api_key_built_in">Χρησιμοποιείται το ενσωματωμένο κλειδί</string>
+    <string name="settings_opensubtitles_api_key_missing">Δεν έχει οριστεί. Η διαδικτυακή αναζήτηση υποτίτλων χρειάζεται κλειδί</string>
+    <string name="settings_opensubtitles_api_key_title">Κλειδί API του OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Επικολλήστε το κλειδί API από το opensubtitles.com/consumers. Αποθηκεύεται κρυπτογραφημένο σε αυτή τη συσκευή.</string>
+    <string name="settings_opensubtitles_api_key_checking">Έλεγχος…</string>
+    <string name="settings_opensubtitles_api_key_remove">Αφαίρεση του κλειδιού μου</string>
     <string name="settings_opensubtitles_sign_in">Σύνδεση</string>
     <string name="settings_opensubtitles_signing_in">Γίνεται σύνδεση…</string>
     <string name="settings_opensubtitles_sign_out">Αποσύνδεση</string>

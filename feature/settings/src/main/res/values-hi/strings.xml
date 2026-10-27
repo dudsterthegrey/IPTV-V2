@@ -775,6 +775,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">अपने OpenSubtitles खाते के उपयोग के लिए वैकल्पिक रूप से साइन इन करें। आपका पासवर्ड इस डिवाइस पर एन्क्रिप्ट करके सहेजा जाता है।</string>
     <string name="settings_opensubtitles_username">उपयोगकर्ता नाम</string>
     <string name="settings_opensubtitles_password">पासवर्ड</string>
+    <string name="settings_opensubtitles_api_key">API कुंजी</string>
+    <string name="settings_opensubtitles_api_key_custom">आपकी कुंजी का उपयोग हो रहा है</string>
+    <string name="settings_opensubtitles_api_key_built_in">बिल्ट-इन कुंजी का उपयोग हो रहा है</string>
+    <string name="settings_opensubtitles_api_key_missing">सेट नहीं है। ऑनलाइन सबटाइटल खोज के लिए कुंजी चाहिए</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API कुंजी</string>
+    <string name="settings_opensubtitles_api_key_subtitle">opensubtitles.com/consumers से API कुंजी पेस्ट करें। यह इस डिवाइस पर एन्क्रिप्ट करके सहेजी जाती है।</string>
+    <string name="settings_opensubtitles_api_key_checking">जाँच हो रही है…</string>
+    <string name="settings_opensubtitles_api_key_remove">मेरी कुंजी हटाएँ</string>
     <string name="settings_opensubtitles_sign_in">साइन इन करें</string>
     <string name="settings_opensubtitles_signing_in">साइन इन हो रहा है…</string>
     <string name="settings_opensubtitles_sign_out">साइन आउट करें</string>

@@ -775,6 +775,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">برای استفاده از حساب OpenSubtitles خود اختیاری وارد شوید. رمز عبور شما به صورت رمزنگاری‌شده روی این دستگاه ذخیره می‌شود.</string>
     <string name="settings_opensubtitles_username">نام کاربری</string>
     <string name="settings_opensubtitles_password">رمز عبور</string>
+    <string name="settings_opensubtitles_api_key">کلید API</string>
+    <string name="settings_opensubtitles_api_key_custom">از کلید شما استفاده می‌شود</string>
+    <string name="settings_opensubtitles_api_key_built_in">از کلید داخلی استفاده می‌شود</string>
+    <string name="settings_opensubtitles_api_key_missing">تنظیم نشده. جستجوی آنلاین زیرنویس به کلید نیاز دارد</string>
+    <string name="settings_opensubtitles_api_key_title">کلید API برای OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">کلید API را از opensubtitles.com/consumers جای‌گذاری کنید. به‌صورت رمزگذاری‌شده روی این دستگاه ذخیره می‌شود.</string>
+    <string name="settings_opensubtitles_api_key_checking">در حال بررسی…</string>
+    <string name="settings_opensubtitles_api_key_remove">حذف کلید من</string>
     <string name="settings_opensubtitles_sign_in">ورود</string>
     <string name="settings_opensubtitles_signing_in">در حال ورود…</string>
     <string name="settings_opensubtitles_sign_out">خروج</string>

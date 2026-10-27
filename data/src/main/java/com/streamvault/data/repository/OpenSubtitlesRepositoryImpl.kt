@@ -10,6 +10,7 @@ import com.streamvault.data.remote.subtitle.OpenSubtitlesSubtitleDto
 import com.streamvault.data.remote.subtitle.OPENSUBTITLES_DEFAULT_BASE_HOST
 import com.streamvault.domain.manager.OpenSubtitlesAccount
 import com.streamvault.domain.manager.OpenSubtitlesAccountManager
+import com.streamvault.domain.manager.OpenSubtitlesApiKeyStatus
 import com.streamvault.domain.model.ContentType
 import com.streamvault.domain.model.ExternalSubtitle
 import com.streamvault.domain.model.ExternalSubtitleLanguage
@@ -41,6 +42,39 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
     override val account: Flow<OpenSubtitlesAccount?> = sessionStore.session
         .map { it?.toAccount() }
         .distinctUntilChanged()
+
+    override val apiKeyStatus: Flow<OpenSubtitlesApiKeyStatus> = sessionStore.userApiKey
+        .map { userKey ->
+            when {
+                userKey != null -> OpenSubtitlesApiKeyStatus.CUSTOM
+                api.hasBuiltInApiKey -> OpenSubtitlesApiKeyStatus.BUILT_IN
+                else -> OpenSubtitlesApiKeyStatus.MISSING
+            }
+        }
+        .distinctUntilChanged()
+
+    override suspend fun setCustomApiKey(apiKey: String?): Result<Unit> = try {
+        val clean = apiKey?.trim().orEmpty()
+        // Only a definite "bad key" answer blocks saving; being offline should not.
+        val rejected = clean.isNotEmpty() &&
+            (api.languages(apiKeyOverride = clean) as? Result.Error)?.exception
+                .let { it is OpenSubtitlesApiException && it.isApiKeyRejected }
+        if (rejected) {
+            Result.error("OpenSubtitles did not accept that API key. Check it and try again.")
+        } else {
+            sessionMutex.withLock {
+                sessionStore.saveUserApiKey(clean)
+                // A token issued under the old key may not work with the new one; the saved
+                // username and password sign in again on the next request.
+                sessionStore.clearSession()
+            }
+            cachedLanguages = null
+            Result.success(Unit)
+        }
+    } catch (e: Exception) {
+        if (e is CancellationException) throw e
+        Result.error("Could not save the OpenSubtitles API key: ${e.message}", e)
+    }
 
     override suspend fun signIn(username: String, password: String): Result<OpenSubtitlesAccount> {
         val cleanUsername = username.trim()

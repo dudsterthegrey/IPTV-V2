@@ -805,6 +805,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Sign in optionally to use your OpenSubtitles account. Your password is stored encrypted on this device.</string>
     <string name="settings_opensubtitles_username">Username</string>
     <string name="settings_opensubtitles_password">Password</string>
+    <string name="settings_opensubtitles_api_key">API key</string>
+    <string name="settings_opensubtitles_api_key_custom">Using your key</string>
+    <string name="settings_opensubtitles_api_key_built_in">Using the built-in key</string>
+    <string name="settings_opensubtitles_api_key_missing">Not set. Online subtitle search needs a key</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API key</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Paste the API key from opensubtitles.com/consumers. It is stored encrypted on this device.</string>
+    <string name="settings_opensubtitles_api_key_checking">Checking…</string>
+    <string name="settings_opensubtitles_api_key_remove">Remove my key</string>
     <string name="settings_opensubtitles_sign_in">Sign in</string>
     <string name="settings_opensubtitles_signing_in">Signing in…</string>
     <string name="settings_opensubtitles_sign_out">Sign out</string>

@@ -773,6 +773,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">您可以選擇登入，以使用您的 OpenSubtitles 帳號。您的密碼會加密儲存在此裝置上。</string>
     <string name="settings_opensubtitles_username">使用者名稱</string>
     <string name="settings_opensubtitles_password">密碼</string>
+    <string name="settings_opensubtitles_api_key">API 金鑰</string>
+    <string name="settings_opensubtitles_api_key_custom">正在使用你的金鑰</string>
+    <string name="settings_opensubtitles_api_key_built_in">正在使用內建金鑰</string>
+    <string name="settings_opensubtitles_api_key_missing">未設定。線上搜尋字幕需要金鑰</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API 金鑰</string>
+    <string name="settings_opensubtitles_api_key_subtitle">貼上來自 opensubtitles.com/consumers 的 API 金鑰。金鑰會加密儲存在這部裝置上。</string>
+    <string name="settings_opensubtitles_api_key_checking">正在檢查…</string>
+    <string name="settings_opensubtitles_api_key_remove">移除我的金鑰</string>
     <string name="settings_opensubtitles_sign_in">登入</string>
     <string name="settings_opensubtitles_signing_in">正在登入…</string>
     <string name="settings_opensubtitles_sign_out">登出</string>

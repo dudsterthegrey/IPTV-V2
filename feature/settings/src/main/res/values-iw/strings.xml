@@ -777,6 +777,14 @@
     <string name="settings_auto_sync_status_running">מרענן</string>
     <string name="settings_opensubtitles_sign_out_title">להתנתק מ-OpenSubtitles?</string>
     <string name="settings_opensubtitles_password">סיסמה</string>
+    <string name="settings_opensubtitles_api_key">מפתח API</string>
+    <string name="settings_opensubtitles_api_key_custom">נעשה שימוש במפתח שלך</string>
+    <string name="settings_opensubtitles_api_key_built_in">נעשה שימוש במפתח המובנה</string>
+    <string name="settings_opensubtitles_api_key_missing">לא הוגדר. חיפוש כתוביות מקוון דורש מפתח</string>
+    <string name="settings_opensubtitles_api_key_title">מפתח API של OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">הדבק את מפתח ה-API מ-opensubtitles.com/consumers. הוא נשמר מוצפן במכשיר זה.</string>
+    <string name="settings_opensubtitles_api_key_checking">בודק…</string>
+    <string name="settings_opensubtitles_api_key_remove">הסר את המפתח שלי</string>
     <string name="settings_pinned_subtitle_languages_subtitle">בחר אילו שפות כתוביות יופיעו ראשונות. שום דבר לא מוסתר.</string>
     <string name="settings_auto_sync_last_movies">הרענון המוצלח האחרון של סרטים / VOD</string>
     <string name="settings_pinned_subtitle_languages_not_pinned">לא מוצמד</string>

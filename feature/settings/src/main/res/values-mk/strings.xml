@@ -775,6 +775,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Најавете се по избор за да ја користите вашата сметка на OpenSubtitles. Лозинката се чува шифрирана на овој уред.</string>
     <string name="settings_opensubtitles_username">Корисничко име</string>
     <string name="settings_opensubtitles_password">Лозинка</string>
+    <string name="settings_opensubtitles_api_key">API клуч</string>
+    <string name="settings_opensubtitles_api_key_custom">Се користи вашиот клуч</string>
+    <string name="settings_opensubtitles_api_key_built_in">Се користи вградениот клуч</string>
+    <string name="settings_opensubtitles_api_key_missing">Не е поставен. Онлајн пребарувањето титлови бара клуч</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API клуч</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Залепете го API клучот од opensubtitles.com/consumers. Се чува шифриран на овој уред.</string>
+    <string name="settings_opensubtitles_api_key_checking">Се проверува…</string>
+    <string name="settings_opensubtitles_api_key_remove">Отстрани го мојот клуч</string>
     <string name="settings_opensubtitles_sign_in">Најави се</string>
     <string name="settings_opensubtitles_signing_in">Се најавува…</string>
     <string name="settings_opensubtitles_sign_out">Одјави се</string>

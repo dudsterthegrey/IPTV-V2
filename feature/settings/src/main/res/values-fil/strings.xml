@@ -775,6 +775,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Mag-sign in nang opsyonal para magamit ang OpenSubtitles account mo. Naka-encrypt na naka-save ang password mo sa device na ito.</string>
     <string name="settings_opensubtitles_username">Username</string>
     <string name="settings_opensubtitles_password">Password</string>
+    <string name="settings_opensubtitles_api_key">API key</string>
+    <string name="settings_opensubtitles_api_key_custom">Ginagamit ang iyong key</string>
+    <string name="settings_opensubtitles_api_key_built_in">Ginagamit ang built-in na key</string>
+    <string name="settings_opensubtitles_api_key_missing">Hindi nakatakda. Kailangan ng key para sa online na paghahanap ng subtitle</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API key</string>
+    <string name="settings_opensubtitles_api_key_subtitle">I-paste ang API key mula sa opensubtitles.com/consumers. Naka-encrypt itong nakaimbak sa device na ito.</string>
+    <string name="settings_opensubtitles_api_key_checking">Sinusuri…</string>
+    <string name="settings_opensubtitles_api_key_remove">Alisin ang aking key</string>
     <string name="settings_opensubtitles_sign_in">Mag-sign in</string>
     <string name="settings_opensubtitles_signing_in">Nag-sign in…</string>
     <string name="settings_opensubtitles_sign_out">Mag-sign out</string>

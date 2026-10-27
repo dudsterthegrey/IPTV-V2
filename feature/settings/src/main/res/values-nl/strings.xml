@@ -763,6 +763,14 @@
     <string name="settings_auto_sync_status_running">Vernieuwen</string>
     <string name="settings_opensubtitles_sign_out_title">Afmelden bij OpenSubtitles?</string>
     <string name="settings_opensubtitles_password">Wachtwoord</string>
+    <string name="settings_opensubtitles_api_key">API-sleutel</string>
+    <string name="settings_opensubtitles_api_key_custom">Je eigen sleutel wordt gebruikt</string>
+    <string name="settings_opensubtitles_api_key_built_in">De ingebouwde sleutel wordt gebruikt</string>
+    <string name="settings_opensubtitles_api_key_missing">Niet ingesteld. Online ondertitels zoeken vereist een sleutel</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API-sleutel</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Plak de API-sleutel van opensubtitles.com/consumers. Deze wordt versleuteld op dit apparaat opgeslagen.</string>
+    <string name="settings_opensubtitles_api_key_checking">Controleren…</string>
+    <string name="settings_opensubtitles_api_key_remove">Mijn sleutel verwijderen</string>
     <string name="settings_pinned_subtitle_languages_subtitle">Kies welke ondertiteltalen eerst verschijnen. Er wordt niets verborgen.</string>
     <string name="settings_auto_sync_last_movies">Films / VOD laatst succesvol vernieuwd</string>
     <string name="settings_pinned_subtitle_languages_not_pinned">Niet vastgezet</string>

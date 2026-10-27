@@ -710,6 +710,14 @@
     <string name="settings_opensubtitles_connect">Hesabı bağla (isteğe bağlı)</string>
     <string name="settings_opensubtitles_username">Kullanıcı adı</string>
     <string name="settings_opensubtitles_password">Parola</string>
+    <string name="settings_opensubtitles_api_key">API anahtarı</string>
+    <string name="settings_opensubtitles_api_key_custom">Kendi anahtarınız kullanılıyor</string>
+    <string name="settings_opensubtitles_api_key_built_in">Yerleşik anahtar kullanılıyor</string>
+    <string name="settings_opensubtitles_api_key_missing">Ayarlanmadı. Çevrimiçi altyazı araması için anahtar gerekir</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API anahtarı</string>
+    <string name="settings_opensubtitles_api_key_subtitle">API anahtarını opensubtitles.com/consumers adresinden yapıştırın. Bu cihazda şifrelenmiş olarak saklanır.</string>
+    <string name="settings_opensubtitles_api_key_checking">Denetleniyor…</string>
+    <string name="settings_opensubtitles_api_key_remove">Anahtarımı kaldır</string>
     <string name="settings_opensubtitles_remaining">Bugün kalan indirme: %1$d</string>
     <string name="settings_opensubtitles_remaining_one">Bugün 1 indirme kaldı</string>
     <string name="settings_opensubtitles_daily_allowance">Günde %1$d indirme</string>

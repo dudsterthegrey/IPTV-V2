@@ -722,6 +722,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">سجّل الدخول اختياريًا لاستخدام حساب OpenSubtitles الخاص بك. تُخزَّن كلمة المرور مشفّرة على هذا الجهاز.</string>
     <string name="settings_opensubtitles_username">اسم المستخدم</string>
     <string name="settings_opensubtitles_password">كلمة المرور</string>
+    <string name="settings_opensubtitles_api_key">مفتاح API</string>
+    <string name="settings_opensubtitles_api_key_custom">يتم استخدام مفتاحك</string>
+    <string name="settings_opensubtitles_api_key_built_in">يتم استخدام المفتاح المدمج</string>
+    <string name="settings_opensubtitles_api_key_missing">غير مُعيّن. البحث عن الترجمات عبر الإنترنت يحتاج إلى مفتاح</string>
+    <string name="settings_opensubtitles_api_key_title">مفتاح API لـ OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">الصق مفتاح API من opensubtitles.com/consumers. يتم حفظه مشفّرًا على هذا الجهاز.</string>
+    <string name="settings_opensubtitles_api_key_checking">جارٍ التحقق…</string>
+    <string name="settings_opensubtitles_api_key_remove">إزالة مفتاحي</string>
     <string name="settings_opensubtitles_sign_in">تسجيل الدخول</string>
     <string name="settings_opensubtitles_signing_in">جارٍ تسجيل الدخول…</string>
     <string name="settings_opensubtitles_sign_out">تسجيل الخروج</string>

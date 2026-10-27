@@ -741,6 +741,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">OpenSubtitles 계정을 사용하려면 선택적으로 로그인하세요. 비밀번호는 이 기기에 암호화되어 저장됩니다.</string>
     <string name="settings_opensubtitles_username">사용자 이름</string>
     <string name="settings_opensubtitles_password">비밀번호</string>
+    <string name="settings_opensubtitles_api_key">API 키</string>
+    <string name="settings_opensubtitles_api_key_custom">내 키 사용 중</string>
+    <string name="settings_opensubtitles_api_key_built_in">기본 제공 키 사용 중</string>
+    <string name="settings_opensubtitles_api_key_missing">설정되지 않음. 온라인 자막 검색에는 키가 필요합니다</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API 키</string>
+    <string name="settings_opensubtitles_api_key_subtitle">opensubtitles.com/consumers에서 API 키를 붙여 넣으세요. 이 기기에 암호화되어 저장됩니다.</string>
+    <string name="settings_opensubtitles_api_key_checking">확인 중…</string>
+    <string name="settings_opensubtitles_api_key_remove">내 키 제거</string>
     <string name="settings_opensubtitles_sign_in">로그인</string>
     <string name="settings_opensubtitles_signing_in">로그인 중…</string>
     <string name="settings_opensubtitles_sign_out">로그아웃</string>

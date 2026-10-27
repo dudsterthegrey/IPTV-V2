@@ -775,6 +775,14 @@
     <string name="settings_auto_sync_status_running">Opdaterer</string>
     <string name="settings_opensubtitles_sign_out_title">Log ud af OpenSubtitles?</string>
     <string name="settings_opensubtitles_password">Adgangskode</string>
+    <string name="settings_opensubtitles_api_key">API-nøgle</string>
+    <string name="settings_opensubtitles_api_key_custom">Bruger din nøgle</string>
+    <string name="settings_opensubtitles_api_key_built_in">Bruger den indbyggede nøgle</string>
+    <string name="settings_opensubtitles_api_key_missing">Ikke angivet. Online søgning efter undertekster kræver en nøgle</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API-nøgle</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Indsæt API-nøglen fra opensubtitles.com/consumers. Den gemmes krypteret på denne enhed.</string>
+    <string name="settings_opensubtitles_api_key_checking">Kontrollerer…</string>
+    <string name="settings_opensubtitles_api_key_remove">Fjern min nøgle</string>
     <string name="settings_pinned_subtitle_languages_subtitle">Vælg, hvilke undertekstsprog der vises først. Intet skjules.</string>
     <string name="settings_auto_sync_last_movies">Film / VOD\'s seneste vellykkede opdatering</string>
     <string name="settings_pinned_subtitle_languages_not_pinned">Ikke fastgjort</string>

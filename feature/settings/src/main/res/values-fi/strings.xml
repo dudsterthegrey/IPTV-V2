@@ -772,6 +772,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Kirjaudu halutessasi sisään käyttääksesi OpenSubtitles-tiliäsi. Salasanasi tallennetaan salattuna tälle laitteelle.</string>
     <string name="settings_opensubtitles_username">Käyttäjätunnus</string>
     <string name="settings_opensubtitles_password">Salasana</string>
+    <string name="settings_opensubtitles_api_key">API-avain</string>
+    <string name="settings_opensubtitles_api_key_custom">Käytössä on oma avaimesi</string>
+    <string name="settings_opensubtitles_api_key_built_in">Käytössä on sisäänrakennettu avain</string>
+    <string name="settings_opensubtitles_api_key_missing">Ei asetettu. Tekstitysten verkkohaku tarvitsee avaimen</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles-API-avain</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Liitä API-avain osoitteesta opensubtitles.com/consumers. Se tallennetaan salattuna tälle laitteelle.</string>
+    <string name="settings_opensubtitles_api_key_checking">Tarkistetaan…</string>
+    <string name="settings_opensubtitles_api_key_remove">Poista oma avaimeni</string>
     <string name="settings_opensubtitles_sign_in">Kirjaudu sisään</string>
     <string name="settings_opensubtitles_signing_in">Kirjaudutaan sisään…</string>
     <string name="settings_opensubtitles_sign_out">Kirjaudu ulos</string>

@@ -768,6 +768,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Logga in valfritt för att använda ditt OpenSubtitles-konto. Ditt lösenord lagras krypterat på den här enheten.</string>
     <string name="settings_opensubtitles_username">Användarnamn</string>
     <string name="settings_opensubtitles_password">Lösenord</string>
+    <string name="settings_opensubtitles_api_key">API-nyckel</string>
+    <string name="settings_opensubtitles_api_key_custom">Din nyckel används</string>
+    <string name="settings_opensubtitles_api_key_built_in">Den inbyggda nyckeln används</string>
+    <string name="settings_opensubtitles_api_key_missing">Inte angiven. Sökning efter undertexter online kräver en nyckel</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API-nyckel</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Klistra in API-nyckeln från opensubtitles.com/consumers. Den lagras krypterad på den här enheten.</string>
+    <string name="settings_opensubtitles_api_key_checking">Kontrollerar…</string>
+    <string name="settings_opensubtitles_api_key_remove">Ta bort min nyckel</string>
     <string name="settings_opensubtitles_sign_in">Logga in</string>
     <string name="settings_opensubtitles_signing_in">Loggar in…</string>
     <string name="settings_opensubtitles_sign_out">Logga ut</string>

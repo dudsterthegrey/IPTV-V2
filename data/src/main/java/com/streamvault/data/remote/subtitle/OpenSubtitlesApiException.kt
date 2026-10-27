@@ -7,5 +7,6 @@ class OpenSubtitlesApiException(
     val statusCode: Int? = null,
     val isUnauthorized: Boolean = false,
     val isRateLimited: Boolean = false,
+    val isApiKeyRejected: Boolean = false,
     cause: Throwable? = null
 ) : IOException(message, cause)

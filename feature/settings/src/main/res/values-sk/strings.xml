@@ -779,6 +779,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Voliteľne sa prihláste a používajte svoj účet OpenSubtitles. Heslo sa v tomto zariadení ukladá zašifrované.</string>
     <string name="settings_opensubtitles_username">Používateľské meno</string>
     <string name="settings_opensubtitles_password">Heslo</string>
+    <string name="settings_opensubtitles_api_key">Kľúč API</string>
+    <string name="settings_opensubtitles_api_key_custom">Používa sa váš kľúč</string>
+    <string name="settings_opensubtitles_api_key_built_in">Používa sa vstavaný kľúč</string>
+    <string name="settings_opensubtitles_api_key_missing">Nenastavené. Online vyhľadávanie titulkov vyžaduje kľúč</string>
+    <string name="settings_opensubtitles_api_key_title">Kľúč API pre OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Vložte kľúč API z opensubtitles.com/consumers. Ukladá sa šifrovane v tomto zariadení.</string>
+    <string name="settings_opensubtitles_api_key_checking">Overuje sa…</string>
+    <string name="settings_opensubtitles_api_key_remove">Odstrániť môj kľúč</string>
     <string name="settings_opensubtitles_sign_in">Prihlásiť sa</string>
     <string name="settings_opensubtitles_signing_in">Prihlasovanie…</string>
     <string name="settings_opensubtitles_sign_out">Odhlásiť sa</string>

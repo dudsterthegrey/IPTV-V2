@@ -214,6 +214,11 @@ class SettingsViewModel @Inject constructor(
                 _uiState.update { it.copy(openSubtitlesAccount = account) }
             }
         }
+        viewModelScope.launch {
+            openSubtitlesAccountManager.apiKeyStatus.collect { status ->
+                _uiState.update { it.copy(openSubtitlesApiKeyStatus = status) }
+            }
+        }
         registerPreferenceObservers()
         registerXtreamIndexJobObserver()
         registerXtreamLiveOnboardingObserver()
@@ -985,6 +990,16 @@ class SettingsViewModel @Inject constructor(
                     openSubtitlesError = result.errorMessageOrNull(),
                 )
             }
+        }
+    }
+
+    /** Saves (or, with a blank [apiKey], removes) the user's own key; [onSaved] runs only on success. */
+    fun saveOpenSubtitlesApiKey(apiKey: String?, onSaved: () -> Unit) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isOpenSubtitlesBusy = true, openSubtitlesError = null) }
+            val result = openSubtitlesAccountManager.setCustomApiKey(apiKey)
+            _uiState.update { it.copy(isOpenSubtitlesBusy = false, openSubtitlesError = result.errorMessageOrNull()) }
+            if (result.isSuccess) onSaved()
         }
     }
 

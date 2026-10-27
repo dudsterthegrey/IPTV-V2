@@ -828,6 +828,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Masuk secara opsional untuk menggunakan akun OpenSubtitles Anda. Kata sandi Anda disimpan terenkripsi di perangkat ini.</string>
     <string name="settings_opensubtitles_username">Nama pengguna</string>
     <string name="settings_opensubtitles_password">Kata sandi</string>
+    <string name="settings_opensubtitles_api_key">Kunci API</string>
+    <string name="settings_opensubtitles_api_key_custom">Menggunakan kunci Anda</string>
+    <string name="settings_opensubtitles_api_key_built_in">Menggunakan kunci bawaan</string>
+    <string name="settings_opensubtitles_api_key_missing">Belum diatur. Pencarian subtitle online memerlukan kunci</string>
+    <string name="settings_opensubtitles_api_key_title">Kunci API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Tempel kunci API dari opensubtitles.com/consumers. Kunci disimpan terenkripsi di perangkat ini.</string>
+    <string name="settings_opensubtitles_api_key_checking">Memeriksa…</string>
+    <string name="settings_opensubtitles_api_key_remove">Hapus kunci saya</string>
     <string name="settings_opensubtitles_sign_in">Masuk</string>
     <string name="settings_opensubtitles_signing_in">Masuk…</string>
     <string name="settings_opensubtitles_sign_out">Keluar</string>

@@ -30,7 +30,11 @@ class OpenSubtitlesApi @Inject constructor(
     private val gson: Gson,
     @param:Named("opensubtitlesApiKey") private val apiKey: String,
     @param:Named("opensubtitlesUserAgent") private val userAgent: String = "StreamVault vdev",
+    private val userApiKeySource: OpenSubtitlesUserApiKeySource = OpenSubtitlesUserApiKeySource.None,
 ) {
+    /** True when this build carries its own key, so requests work without one entered in Settings. */
+    val hasBuiltInApiKey: Boolean get() = apiKey.isNotBlank()
+
     private val loginRequestMutex = Mutex()
     private var lastLoginRequestStartedAtNanos: Long? = null
 
@@ -130,12 +134,13 @@ class OpenSubtitlesApi @Inject constructor(
 
     suspend fun languages(
         baseUrlHost: String = OPENSUBTITLES_DEFAULT_BASE_HOST,
+        apiKeyOverride: String? = null,
     ): Result<List<OpenSubtitlesLanguageDto>> = try {
         val languages = withContext(Dispatchers.IO) {
             val request = Request.Builder()
                 .url(buildUrl(baseUrlHost, "/infos/languages", emptyMap()))
                 .header("Accept", "application/json")
-                .header("Api-Key", requireApiKey())
+                .header("Api-Key", apiKeyOverride?.trim()?.takeIf { it.isNotEmpty() } ?: requireApiKey())
                 .header("User-Agent", userAgent)
                 .get()
                 .build()
@@ -271,6 +276,8 @@ class OpenSubtitlesApi @Inject constructor(
                         message = "$errorPrefix failed with HTTP ${response.code}",
                         statusCode = response.code,
                         isUnauthorized = response.code == 401,
+                        // OpenSubtitles answers 403 when the Api-Key header itself is unknown or disabled.
+                        isApiKeyRejected = response.code == 401 || response.code == 403,
                         isRateLimited = response.code == 429,
                     )
                 }
@@ -291,10 +298,13 @@ class OpenSubtitlesApi @Inject constructor(
 
     private fun enc(value: String): String = URLEncoder.encode(value, Charsets.UTF_8.name())
 
-    private fun requireApiKey(): String = apiKey.trim().takeIf { it.isNotEmpty() }
-        ?: throw OpenSubtitlesApiException(
-            "OpenSubtitles API key is missing. Add opensubtitles.api.key to the root local.properties file and rebuild."
-        )
+    /** The key entered in Settings wins over the built-in one. */
+    private suspend fun requireApiKey(): String =
+        userApiKeySource.loadUserApiKey()?.trim()?.takeIf { it.isNotEmpty() }
+            ?: apiKey.trim().takeIf { it.isNotEmpty() }
+            ?: throw OpenSubtitlesApiException(
+                "OpenSubtitles API key is missing. Enter your key in Settings > Subtitles."
+            )
 
     private companion object {
         const val REQUEST_TIMEOUT_SECONDS = 30L

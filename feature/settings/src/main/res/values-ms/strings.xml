@@ -773,6 +773,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Log masuk secara pilihan untuk menggunakan akaun OpenSubtitles anda. Kata laluan anda disimpan secara disulitkan pada peranti ini.</string>
     <string name="settings_opensubtitles_username">Nama Pengguna</string>
     <string name="settings_opensubtitles_password">Kata Laluan</string>
+    <string name="settings_opensubtitles_api_key">Kunci API</string>
+    <string name="settings_opensubtitles_api_key_custom">Menggunakan kunci anda</string>
+    <string name="settings_opensubtitles_api_key_built_in">Menggunakan kunci terbina dalam</string>
+    <string name="settings_opensubtitles_api_key_missing">Tidak ditetapkan. Carian sari kata dalam talian memerlukan kunci</string>
+    <string name="settings_opensubtitles_api_key_title">Kunci API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Tampal kunci API dari opensubtitles.com/consumers. Ia disimpan secara disulitkan pada peranti ini.</string>
+    <string name="settings_opensubtitles_api_key_checking">Menyemak…</string>
+    <string name="settings_opensubtitles_api_key_remove">Alih keluar kunci saya</string>
     <string name="settings_opensubtitles_sign_in">Log masuk</string>
     <string name="settings_opensubtitles_signing_in">Sedang log masuk…</string>
     <string name="settings_opensubtitles_sign_out">Log keluar</string>

@@ -75,7 +75,7 @@ class OpenSubtitlesApiDownloadTest {
             val result = api.login("test-user", "test-password")
 
             assertThat(result).isInstanceOf(Result.Error::class.java)
-            assertThat((result as Result.Error).message).contains("opensubtitles.api.key")
+            assertThat((result as Result.Error).message).contains("Settings")
             assertThat(server.requestCount).isEqualTo(0)
         } finally {
             server.shutdown()

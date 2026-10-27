@@ -32,10 +32,10 @@ item could still exist under a different name, so confirm on device before build
 
 ## Partly there: adapt
 
-- [ ] **OpenSubtitles API key**: V2 only reads the key at build time (`opensubtitles.api.key` in
-      `local.properties` → `BuildConfig.OPENSUBTITLES_API_KEY`). V1 let you paste the key (and
-      optional username/password) in Settings. Either add your key to `local.properties` (fast)
-      or add a Settings field (V1 behavior).
+- [x] **OpenSubtitles API key**: Settings > Playback > Subtitles & translation > **API key**.
+      The key you paste wins over any built-in key, is stored encrypted, is checked with
+      OpenSubtitles before saving (a rejected key is refused; being offline is not), and survives
+      signing out of the account. Username/password sign-in was already in V2.
 - [ ] **Multi-View with movies and episodes**: V2's multi-view is live channels only; V1 tiles
       could also play movies and episodes.
 - [ ] **Search results grouped in collapsible Live / Movies / Series sections**: V2 has global
@@ -88,6 +88,11 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       plays. (Direct URL was verified on the emulator 2026-10-27: added Mux's test stream from the
       Saved Streams tab, it played, Back returned to the list.) Also check Edit, Delete, and that
       the keyboard's Next/Done key moves to the next field in the add/edit dialog.
+
+- [ ] **OpenSubtitles API key**: Settings > Playback > Subtitles & translation > **API key** reads
+      "Not set". Paste your key from opensubtitles.com/consumers and press **Save** → row reads
+      "Using your key". Play a movie, open subtitles and search online → results appear. Reopen the
+      dialog → **Remove my key** returns the row to "Not set". A made-up key should be refused.
 
 ## Release / Downloader
 

@@ -809,6 +809,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Logg inn valgfritt for å bruke OpenSubtitles-kontoen din. Passordet lagres kryptert på denne enheten.</string>
     <string name="settings_opensubtitles_username">Brukernavn</string>
     <string name="settings_opensubtitles_password">Passord</string>
+    <string name="settings_opensubtitles_api_key">API-nøkkel</string>
+    <string name="settings_opensubtitles_api_key_custom">Bruker nøkkelen din</string>
+    <string name="settings_opensubtitles_api_key_built_in">Bruker den innebygde nøkkelen</string>
+    <string name="settings_opensubtitles_api_key_missing">Ikke angitt. Nettsøk etter undertekster krever en nøkkel</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API-nøkkel</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Lim inn API-nøkkelen fra opensubtitles.com/consumers. Den lagres kryptert på denne enheten.</string>
+    <string name="settings_opensubtitles_api_key_checking">Kontrollerer…</string>
+    <string name="settings_opensubtitles_api_key_remove">Fjern nøkkelen min</string>
     <string name="settings_opensubtitles_sign_in">Logg inn</string>
     <string name="settings_opensubtitles_signing_in">Logger inn…</string>
     <string name="settings_opensubtitles_sign_out">Logg ut</string>

@@ -763,6 +763,14 @@
     <string name="settings_auto_sync_status_running">Frissítés</string>
     <string name="settings_opensubtitles_sign_out_title">Kijelentkezik az OpenSubtitlesből?</string>
     <string name="settings_opensubtitles_password">Jelszó</string>
+    <string name="settings_opensubtitles_api_key">API-kulcs</string>
+    <string name="settings_opensubtitles_api_key_custom">A saját kulcsod van használatban</string>
+    <string name="settings_opensubtitles_api_key_built_in">A beépített kulcs van használatban</string>
+    <string name="settings_opensubtitles_api_key_missing">Nincs beállítva. Az online feliratkereséshez kulcs szükséges</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API-kulcs</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Illeszd be az API-kulcsot innen: opensubtitles.com/consumers. Titkosítva tárolódik ezen az eszközön.</string>
+    <string name="settings_opensubtitles_api_key_checking">Ellenőrzés…</string>
+    <string name="settings_opensubtitles_api_key_remove">Saját kulcs eltávolítása</string>
     <string name="settings_pinned_subtitle_languages_subtitle">Válassza ki, mely feliratnyelvek jelenjenek meg elsőként. Semmi sem lesz elrejtve.</string>
     <string name="settings_auto_sync_last_movies">Filmek / VOD utolsó sikeres frissítése</string>
     <string name="settings_pinned_subtitle_languages_not_pinned">Nincs rögzítve</string>

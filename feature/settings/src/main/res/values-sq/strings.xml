@@ -775,6 +775,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Hyr opsionalisht për të përdorur llogarinë tënde OpenSubtitles. Fjalëkalimi ruhet i kriptuar në këtë pajisje.</string>
     <string name="settings_opensubtitles_username">Emri i përdoruesit</string>
     <string name="settings_opensubtitles_password">Fjalëkalimi</string>
+    <string name="settings_opensubtitles_api_key">Çelësi API</string>
+    <string name="settings_opensubtitles_api_key_custom">Po përdoret çelësi juaj</string>
+    <string name="settings_opensubtitles_api_key_built_in">Po përdoret çelësi i integruar</string>
+    <string name="settings_opensubtitles_api_key_missing">Nuk është caktuar. Kërkimi online i titrave kërkon një çelës</string>
+    <string name="settings_opensubtitles_api_key_title">Çelësi API i OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Ngjitni çelësin API nga opensubtitles.com/consumers. Ruhet i enkriptuar në këtë pajisje.</string>
+    <string name="settings_opensubtitles_api_key_checking">Po kontrollohet…</string>
+    <string name="settings_opensubtitles_api_key_remove">Hiq çelësin tim</string>
     <string name="settings_opensubtitles_sign_in">Hyr</string>
     <string name="settings_opensubtitles_signing_in">Duke hyrë…</string>
     <string name="settings_opensubtitles_sign_out">Dil</string>

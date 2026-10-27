@@ -767,6 +767,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">任意でサインインして OpenSubtitles アカウントを使用します。パスワードはこのデバイスに暗号化して保存されます。</string>
     <string name="settings_opensubtitles_username">ユーザー名</string>
     <string name="settings_opensubtitles_password">パスワード</string>
+    <string name="settings_opensubtitles_api_key">APIキー</string>
+    <string name="settings_opensubtitles_api_key_custom">自分のキーを使用中</string>
+    <string name="settings_opensubtitles_api_key_built_in">組み込みキーを使用中</string>
+    <string name="settings_opensubtitles_api_key_missing">未設定です。オンライン字幕検索にはキーが必要です</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles APIキー</string>
+    <string name="settings_opensubtitles_api_key_subtitle">opensubtitles.com/consumers のAPIキーを貼り付けてください。このデバイスに暗号化して保存されます。</string>
+    <string name="settings_opensubtitles_api_key_checking">確認中…</string>
+    <string name="settings_opensubtitles_api_key_remove">自分のキーを削除</string>
     <string name="settings_opensubtitles_sign_in">サインイン</string>
     <string name="settings_opensubtitles_signing_in">サインイン中…</string>
     <string name="settings_opensubtitles_sign_out">サインアウト</string>

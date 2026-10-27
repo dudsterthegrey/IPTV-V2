@@ -768,6 +768,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Entre opcionalmente para usar sua conta do OpenSubtitles. Sua senha é armazenada criptografada neste dispositivo.</string>
     <string name="settings_opensubtitles_username">Nome de usuário</string>
     <string name="settings_opensubtitles_password">Senha</string>
+    <string name="settings_opensubtitles_api_key">Chave de API</string>
+    <string name="settings_opensubtitles_api_key_custom">Usando sua chave</string>
+    <string name="settings_opensubtitles_api_key_built_in">Usando a chave integrada</string>
+    <string name="settings_opensubtitles_api_key_missing">Não definida. A busca de legendas online precisa de uma chave</string>
+    <string name="settings_opensubtitles_api_key_title">Chave de API do OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Cole a chave de API de opensubtitles.com/consumers. Ela é armazenada criptografada neste dispositivo.</string>
+    <string name="settings_opensubtitles_api_key_checking">Verificando…</string>
+    <string name="settings_opensubtitles_api_key_remove">Remover minha chave</string>
     <string name="settings_opensubtitles_sign_in">Entrar</string>
     <string name="settings_opensubtitles_signing_in">Entrando…</string>
     <string name="settings_opensubtitles_sign_out">Sair</string>

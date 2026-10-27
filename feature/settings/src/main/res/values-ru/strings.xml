@@ -770,6 +770,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Войдите (необязательно), чтобы использовать аккаунт OpenSubtitles. Ваш пароль хранится на этом устройстве в зашифрованном виде.</string>
     <string name="settings_opensubtitles_username">Имя пользователя</string>
     <string name="settings_opensubtitles_password">Пароль</string>
+    <string name="settings_opensubtitles_api_key">Ключ API</string>
+    <string name="settings_opensubtitles_api_key_custom">Используется ваш ключ</string>
+    <string name="settings_opensubtitles_api_key_built_in">Используется встроенный ключ</string>
+    <string name="settings_opensubtitles_api_key_missing">Не задан. Для онлайн-поиска субтитров нужен ключ</string>
+    <string name="settings_opensubtitles_api_key_title">Ключ API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Вставьте ключ API с opensubtitles.com/consumers. Он хранится в зашифрованном виде на этом устройстве.</string>
+    <string name="settings_opensubtitles_api_key_checking">Проверка…</string>
+    <string name="settings_opensubtitles_api_key_remove">Удалить мой ключ</string>
     <string name="settings_opensubtitles_sign_in">Войти</string>
     <string name="settings_opensubtitles_signing_in">Вход…</string>
     <string name="settings_opensubtitles_sign_out">Выйти</string>

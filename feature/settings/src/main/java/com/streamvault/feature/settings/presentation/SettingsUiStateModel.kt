@@ -12,6 +12,7 @@ import com.streamvault.domain.manager.DriveBackupSnapshot
 import com.streamvault.domain.manager.DriveSignInRequest
 import com.streamvault.domain.manager.DriveSyncStatus
 import com.streamvault.domain.manager.OpenSubtitlesAccount
+import com.streamvault.domain.manager.OpenSubtitlesApiKeyStatus
 import com.streamvault.domain.manager.ProviderCredentials
 import com.streamvault.domain.model.ActiveLiveSource
 import com.streamvault.domain.model.VodCategoryLoadMode
@@ -128,6 +129,7 @@ data class SettingsUiState(
     val openSubtitlesAccount: OpenSubtitlesAccount? = null,
     val isOpenSubtitlesBusy: Boolean = false,
     val openSubtitlesError: String? = null,
+    val openSubtitlesApiKeyStatus: OpenSubtitlesApiKeyStatus = OpenSubtitlesApiKeyStatus.BUILT_IN,
     val wifiMaxVideoHeight: Int? = null,
     val ethernetMaxVideoHeight: Int? = null,
     val playbackQualityPreferences: PlaybackQualityPreferences = PlaybackQualityPreferences(),

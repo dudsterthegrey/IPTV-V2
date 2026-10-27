@@ -773,6 +773,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">ลงชื่อเข้าใช้ (ไม่บังคับ) เพื่อใช้บัญชี OpenSubtitles ของคุณ รหัสผ่านของคุณจะถูกจัดเก็บแบบเข้ารหัสบนอุปกรณ์นี้</string>
     <string name="settings_opensubtitles_username">ชื่อผู้ใช้</string>
     <string name="settings_opensubtitles_password">รหัสผ่าน</string>
+    <string name="settings_opensubtitles_api_key">คีย์ API</string>
+    <string name="settings_opensubtitles_api_key_custom">กำลังใช้คีย์ของคุณ</string>
+    <string name="settings_opensubtitles_api_key_built_in">กำลังใช้คีย์ในตัว</string>
+    <string name="settings_opensubtitles_api_key_missing">ยังไม่ได้ตั้งค่า การค้นหาคำบรรยายออนไลน์ต้องใช้คีย์</string>
+    <string name="settings_opensubtitles_api_key_title">คีย์ API ของ OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">วางคีย์ API จาก opensubtitles.com/consumers คีย์จะถูกเก็บแบบเข้ารหัสในอุปกรณ์นี้</string>
+    <string name="settings_opensubtitles_api_key_checking">กำลังตรวจสอบ…</string>
+    <string name="settings_opensubtitles_api_key_remove">ลบคีย์ของฉัน</string>
     <string name="settings_opensubtitles_sign_in">ลงชื่อเข้าใช้</string>
     <string name="settings_opensubtitles_signing_in">กำลังลงชื่อเข้าใช้…</string>
     <string name="settings_opensubtitles_sign_out">ออกจากระบบ</string>

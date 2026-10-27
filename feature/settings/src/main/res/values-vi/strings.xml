@@ -829,6 +829,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Đăng nhập tùy chọn để dùng tài khoản OpenSubtitles của bạn. Mật khẩu được lưu mã hóa trên thiết bị này.</string>
     <string name="settings_opensubtitles_username">Tên người dùng</string>
     <string name="settings_opensubtitles_password">Mật khẩu</string>
+    <string name="settings_opensubtitles_api_key">Khóa API</string>
+    <string name="settings_opensubtitles_api_key_custom">Đang dùng khóa của bạn</string>
+    <string name="settings_opensubtitles_api_key_built_in">Đang dùng khóa tích hợp</string>
+    <string name="settings_opensubtitles_api_key_missing">Chưa đặt. Tìm phụ đề trực tuyến cần có khóa</string>
+    <string name="settings_opensubtitles_api_key_title">Khóa API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Dán khóa API từ opensubtitles.com/consumers. Khóa được lưu mã hóa trên thiết bị này.</string>
+    <string name="settings_opensubtitles_api_key_checking">Đang kiểm tra…</string>
+    <string name="settings_opensubtitles_api_key_remove">Xóa khóa của tôi</string>
     <string name="settings_opensubtitles_sign_in">Đăng nhập</string>
     <string name="settings_opensubtitles_signing_in">Đang đăng nhập…</string>
     <string name="settings_opensubtitles_sign_out">Đăng xuất</string>

@@ -22,6 +22,7 @@ import androidx.tv.material3.Text
 import com.streamvault.core.ui.components.dialogs.PremiumDialog
 import com.streamvault.core.ui.components.dialogs.PremiumDialogFooterButton
 import com.streamvault.core.ui.theme.OnSurfaceDim
+import com.streamvault.domain.manager.OpenSubtitlesApiKeyStatus
 import com.streamvault.feature.settings.R
 
 @Composable
@@ -35,6 +36,7 @@ internal fun OpenSubtitlesAccountSettings(
         mutableStateOf(openSignInOnStart && uiState.openSubtitlesAccount == null)
     }
     var showSignOut by rememberSaveable { mutableStateOf(false) }
+    var showApiKey by rememberSaveable { mutableStateOf(false) }
     val account = uiState.openSubtitlesAccount
     val remainingDownloads = account?.remainingDownloads
 
@@ -87,7 +89,19 @@ internal fun OpenSubtitlesAccountSettings(
                 modifier = targetFocusModifier,
             )
         }
-        uiState.openSubtitlesError?.let { error ->
+        ClickableSettingsRow(
+            label = stringResource(R.string.settings_opensubtitles_api_key),
+            value = stringResource(
+                when (uiState.openSubtitlesApiKeyStatus) {
+                    OpenSubtitlesApiKeyStatus.CUSTOM -> R.string.settings_opensubtitles_api_key_custom
+                    OpenSubtitlesApiKeyStatus.BUILT_IN -> R.string.settings_opensubtitles_api_key_built_in
+                    OpenSubtitlesApiKeyStatus.MISSING -> R.string.settings_opensubtitles_api_key_missing
+                }
+            ),
+            enabled = !uiState.isOpenSubtitlesBusy,
+            onClick = { showApiKey = true },
+        )
+        uiState.openSubtitlesError?.takeIf { !showApiKey }?.let { error ->
             Text(
                 text = error,
                 color = MaterialTheme.colorScheme.error,
@@ -95,6 +109,63 @@ internal fun OpenSubtitlesAccountSettings(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
         }
+    }
+
+    if (showApiKey) {
+        // Never prefilled: the saved key stays out of the UI once entered.
+        var apiKey by remember { mutableStateOf("") }
+        PremiumDialog(
+            title = stringResource(R.string.settings_opensubtitles_api_key_title),
+            subtitle = stringResource(R.string.settings_opensubtitles_api_key_subtitle),
+            onDismissRequest = { if (!uiState.isOpenSubtitlesBusy) showApiKey = false },
+            widthFraction = 0.58f,
+            heightFraction = null,
+            content = {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    EpgSourceTextField(
+                        value = apiKey,
+                        onValueChange = { apiKey = it },
+                        placeholder = stringResource(R.string.settings_opensubtitles_api_key),
+                        visualTransformation = PasswordVisualTransformation(),
+                        keyboardType = KeyboardType.Password,
+                    )
+                    uiState.openSubtitlesError?.let { error ->
+                        Text(
+                            text = error,
+                            color = MaterialTheme.colorScheme.error,
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                    }
+                }
+            },
+            footer = {
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    PremiumDialogFooterButton(
+                        label = stringResource(R.string.settings_cancel),
+                        onClick = { showApiKey = false },
+                        enabled = !uiState.isOpenSubtitlesBusy,
+                    )
+                    if (uiState.openSubtitlesApiKeyStatus == OpenSubtitlesApiKeyStatus.CUSTOM) {
+                        PremiumDialogFooterButton(
+                            label = stringResource(R.string.settings_opensubtitles_api_key_remove),
+                            onClick = { viewModel.saveOpenSubtitlesApiKey(null) { showApiKey = false } },
+                            enabled = !uiState.isOpenSubtitlesBusy,
+                            destructive = true,
+                        )
+                    }
+                    PremiumDialogFooterButton(
+                        label = if (uiState.isOpenSubtitlesBusy) {
+                            stringResource(R.string.settings_opensubtitles_api_key_checking)
+                        } else {
+                            stringResource(R.string.settings_save)
+                        },
+                        onClick = { viewModel.saveOpenSubtitlesApiKey(apiKey) { showApiKey = false } },
+                        enabled = apiKey.isNotBlank() && !uiState.isOpenSubtitlesBusy,
+                        emphasized = true,
+                    )
+                }
+            },
+        )
     }
 
     if (showSignIn) {

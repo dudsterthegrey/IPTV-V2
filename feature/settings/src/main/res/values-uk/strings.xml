@@ -775,6 +775,14 @@
     <string name="settings_auto_sync_status_running">Оновлення</string>
     <string name="settings_opensubtitles_sign_out_title">Вийти з OpenSubtitles?</string>
     <string name="settings_opensubtitles_password">Пароль</string>
+    <string name="settings_opensubtitles_api_key">Ключ API</string>
+    <string name="settings_opensubtitles_api_key_custom">Використовується ваш ключ</string>
+    <string name="settings_opensubtitles_api_key_built_in">Використовується вбудований ключ</string>
+    <string name="settings_opensubtitles_api_key_missing">Не задано. Для онлайн-пошуку субтитрів потрібен ключ</string>
+    <string name="settings_opensubtitles_api_key_title">Ключ API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Вставте ключ API з opensubtitles.com/consumers. Він зберігається зашифрованим на цьому пристрої.</string>
+    <string name="settings_opensubtitles_api_key_checking">Перевірка…</string>
+    <string name="settings_opensubtitles_api_key_remove">Видалити мій ключ</string>
     <string name="settings_pinned_subtitle_languages_subtitle">Виберіть, які мови субтитрів з’являються першими. Нічого не приховується.</string>
     <string name="settings_auto_sync_last_movies">Останнє успішне оновлення фільмів / VOD</string>
     <string name="settings_pinned_subtitle_languages_not_pinned">Не закріплено</string>

@@ -739,6 +739,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Zaloguj się opcjonalnie, aby korzystać ze swojego konta OpenSubtitles. Hasło jest przechowywane zaszyfrowane na tym urządzeniu.</string>
     <string name="settings_opensubtitles_username">Nazwa użytkownika</string>
     <string name="settings_opensubtitles_password">Hasło</string>
+    <string name="settings_opensubtitles_api_key">Klucz API</string>
+    <string name="settings_opensubtitles_api_key_custom">Używany jest Twój klucz</string>
+    <string name="settings_opensubtitles_api_key_built_in">Używany jest wbudowany klucz</string>
+    <string name="settings_opensubtitles_api_key_missing">Nie ustawiono. Wyszukiwanie napisów online wymaga klucza</string>
+    <string name="settings_opensubtitles_api_key_title">Klucz API OpenSubtitles</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Wklej klucz API ze strony opensubtitles.com/consumers. Jest przechowywany w postaci zaszyfrowanej na tym urządzeniu.</string>
+    <string name="settings_opensubtitles_api_key_checking">Sprawdzanie…</string>
+    <string name="settings_opensubtitles_api_key_remove">Usuń mój klucz</string>
     <string name="settings_opensubtitles_sign_in">Zaloguj się</string>
     <string name="settings_opensubtitles_signing_in">Logowanie…</string>
     <string name="settings_opensubtitles_sign_out">Wyloguj się</string>

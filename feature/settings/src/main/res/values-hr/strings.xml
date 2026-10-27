@@ -777,6 +777,14 @@
     <string name="settings_opensubtitles_sign_in_subtitle">Neobavezno se prijavite za korištenje svog OpenSubtitles računa. Lozinka se pohranjuje šifrirano na ovom uređaju.</string>
     <string name="settings_opensubtitles_username">Korisničko ime</string>
     <string name="settings_opensubtitles_password">Lozinka</string>
+    <string name="settings_opensubtitles_api_key">API ključ</string>
+    <string name="settings_opensubtitles_api_key_custom">Koristi se vaš ključ</string>
+    <string name="settings_opensubtitles_api_key_built_in">Koristi se ugrađeni ključ</string>
+    <string name="settings_opensubtitles_api_key_missing">Nije postavljeno. Mrežno pretraživanje titlova zahtijeva ključ</string>
+    <string name="settings_opensubtitles_api_key_title">OpenSubtitles API ključ</string>
+    <string name="settings_opensubtitles_api_key_subtitle">Zalijepite API ključ s opensubtitles.com/consumers. Pohranjuje se šifrirano na ovom uređaju.</string>
+    <string name="settings_opensubtitles_api_key_checking">Provjera…</string>
+    <string name="settings_opensubtitles_api_key_remove">Ukloni moj ključ</string>
     <string name="settings_opensubtitles_sign_in">Prijavi se</string>
     <string name="settings_opensubtitles_signing_in">Prijava u tijeku…</string>
     <string name="settings_opensubtitles_sign_out">Odjavi se</string>
