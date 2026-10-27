@@ -75,6 +75,8 @@ data class MultiViewUiState(
     val presets: List<MultiViewPresetUiModel> = emptyList(),
     val pinnedAudioSlotIndex: Int? = null,
     val replacementCandidates: List<Channel> = emptyList(),
+    /** True once there is an active provider, so the Replace picker has something to browse. */
+    val canBrowseReplacements: Boolean = false,
     val pickerState: MultiViewPickerState = MultiViewPickerState(),
     val performancePolicy: MultiViewPerformancePolicyUiModel = MultiViewPerformancePolicyUiModel(),
     val telemetry: MultiViewTelemetryUiModel = MultiViewTelemetryUiModel(),
@@ -88,11 +90,23 @@ data class MultiViewPresetUiModel(
     val channelCount: Int
 )
 
+/** What the Replace picker browses. Movies and episodes come back wrapped as [Channel]s. */
+enum class MultiViewPickerSource { LIVE, MOVIES, SERIES }
+
 data class MultiViewPickerState(
+    val source: MultiViewPickerSource = MultiViewPickerSource.LIVE,
     val categories: List<com.streamvault.domain.model.Category> = emptyList(),
     val selectedCategory: com.streamvault.domain.model.Category? = null,
+    /** Series source only: the shows in [selectedCategory], until one is opened. */
+    val seriesList: List<com.streamvault.domain.model.Series> = emptyList(),
+    val filteredSeries: List<com.streamvault.domain.model.Series> = emptyList(),
+    val selectedSeries: com.streamvault.domain.model.Series? = null,
+    /** The pickable items: channels, wrapped movies, or a show's wrapped episodes. */
     val channels: List<Channel> = emptyList(),
     val filteredChannels: List<Channel> = emptyList(),
     val searchQuery: String = "",
     val isLoading: Boolean = false
-)
+) {
+    val isBrowsingSeriesList: Boolean
+        get() = source == MultiViewPickerSource.SERIES && selectedCategory != null && selectedSeries == null
+}

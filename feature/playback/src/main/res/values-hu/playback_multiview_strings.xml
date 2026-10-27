@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">A memóriahasználat magas. A további helyek készenlétben maradnak, amíg a lejátszás stabilizálódik.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">%1$d. évad %2$d. rész · %3$s</string>
+    <string name="multiview_picker_live">Élő TV</string>
+    <string name="multiview_picker_movies">Filmek</string>
+    <string name="multiview_picker_series">Sorozatok</string>
+    <string name="multiview_picker_subtitle">Válaszd az Élő TV-t, a Filmeket vagy a Sorozatokat, majd egy kategóriát.</string>
+    <string name="multiview_picker_search_categories">Kategóriák keresése…</string>
+    <string name="multiview_picker_search_channels">Csatornák keresése…</string>
+    <string name="multiview_picker_search_movies">Filmek keresése…</string>
+    <string name="multiview_picker_search_shows">Sorozatok keresése…</string>
+    <string name="multiview_picker_search_episodes">Epizódok keresése…</string>
+    <string name="multiview_picker_empty">Nincs találat</string>
+    <string name="multiview_picker_back">Vissza</string>
 </resources>

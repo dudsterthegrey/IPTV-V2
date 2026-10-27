@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Minnesbelastningen är hög. Extra rutor förblir i standby tills uppspelningen stabiliseras.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d A%2$d · %3$s</string>
+    <string name="multiview_picker_live">Live-tv</string>
+    <string name="multiview_picker_movies">Filmer</string>
+    <string name="multiview_picker_series">Serier</string>
+    <string name="multiview_picker_subtitle">Välj Live-tv, Filmer eller Serier och sedan en kategori.</string>
+    <string name="multiview_picker_search_categories">Sök kategorier…</string>
+    <string name="multiview_picker_search_channels">Sök kanaler…</string>
+    <string name="multiview_picker_search_movies">Sök filmer…</string>
+    <string name="multiview_picker_search_shows">Sök serier…</string>
+    <string name="multiview_picker_search_episodes">Sök avsnitt…</string>
+    <string name="multiview_picker_empty">Inget hittades</string>
+    <string name="multiview_picker_back">Tillbaka</string>
 </resources>

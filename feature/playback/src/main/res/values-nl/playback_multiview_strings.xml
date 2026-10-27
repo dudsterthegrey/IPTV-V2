@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">De geheugendruk is hoog. Extra slots blijven in stand-by totdat het afspelen stabiliseert.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d A%2$d · %3$s</string>
+    <string name="multiview_picker_live">Live-tv</string>
+    <string name="multiview_picker_movies">Films</string>
+    <string name="multiview_picker_series">Series</string>
+    <string name="multiview_picker_subtitle">Kies Live-tv, Films of Series en daarna een categorie.</string>
+    <string name="multiview_picker_search_categories">Categorieën zoeken…</string>
+    <string name="multiview_picker_search_channels">Zenders zoeken…</string>
+    <string name="multiview_picker_search_movies">Films zoeken…</string>
+    <string name="multiview_picker_search_shows">Series zoeken…</string>
+    <string name="multiview_picker_search_episodes">Afleveringen zoeken…</string>
+    <string name="multiview_picker_empty">Niets gevonden</string>
+    <string name="multiview_picker_back">Terug</string>
 </resources>

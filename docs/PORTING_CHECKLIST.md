@@ -38,9 +38,9 @@ item could still exist under a different name, so confirm on device before build
       signing out of the account. Username/password sign-in was already in V2.
 - [x] **Multi-View with movies and episodes**: while a movie or episode plays, **Split Screen** in
       the player's settings sheet puts it in a Multi-View slot next to live channels. The tile
-      starts where you were. Limits: tiles are added from the player only (the in-grid
-      "Replace" picker still lists channels), presets skip movie/episode tiles, and Stremio or
-      other remote-only titles can't join.
+      starts where you were. Inside Multi-View, **Replace Slot** now has Live TV / Movies / Series
+      tabs (Series goes show → episode list). Limits: presets skip movie/episode tiles, and
+      Stremio or other remote-only titles can't join.
 - [ ] **Search results grouped in collapsible Live / Movies / Series sections**: V2 has global
       search; check on device whether its layout already works for you before changing it.
 
@@ -97,6 +97,11 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       live channel the usual way, then **Launch Split Screen** → the movie tile resumes near where
       you were and plays beside the channel; moving focus switches the audio. Repeat with an
       episode (card shows "S1 E2 · Show name").
+
+- [ ] **Replace Slot with a movie or episode**: in Multi-View press **Replace Slot** → tabs read
+      Live TV / Movies / Series. Movies → a category → a movie fills the focused slot. Series → a
+      category → a show → its episodes listed "S1 E1 · Title" → pick one. Back steps out one
+      level at a time. Works even with no favorites or history.
 
 - [ ] **OpenSubtitles API key**: Settings > Playback > Subtitles & translation > **API key** reads
       "Not set". Paste your key from opensubtitles.com/consumers and press **Save** → row reads

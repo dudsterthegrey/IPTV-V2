@@ -210,7 +210,9 @@ fun MultiViewScreen(
                     showReplacementPicker = false
                     viewModel.resetPicker()
                 },
+                onSelectSource = viewModel::selectPickerSource,
                 onSelectCategory = viewModel::selectPickerCategory,
+                onSelectSeries = viewModel::selectPickerSeries,
                 onBackToCategories = viewModel::backToPickerCategories,
                 onUpdateSearch = viewModel::updatePickerSearch,
                 onVerifyPin = viewModel::verifyPin,
@@ -725,7 +727,7 @@ private fun MultiViewControlHud(
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             TvButton(
                 onClick = onShowReplacementPicker,
-                enabled = uiState.replacementCandidates.isNotEmpty(),
+                enabled = uiState.canBrowseReplacements || uiState.replacementCandidates.isNotEmpty(),
                 modifier = Modifier.focusRequester(firstControlFocusRequester)
             ) {
                 Text(stringResource(R.string.multiview_replace_slot))
@@ -777,7 +779,9 @@ private fun ReplaceSlotDialog(
     pickerState: MultiViewPickerState,
     parentalControlLevel: Int,
     onDismiss: () -> Unit,
+    onSelectSource: (MultiViewPickerSource) -> Unit,
     onSelectCategory: (com.streamvault.domain.model.Category) -> Unit,
+    onSelectSeries: (com.streamvault.domain.model.Series) -> Unit,
     onBackToCategories: () -> Unit,
     onUpdateSearch: (String) -> Unit,
     onVerifyPin: suspend (String) -> Boolean,
@@ -804,11 +808,32 @@ private fun ReplaceSlotDialog(
         parentalControlLevel in 1..2 && (cat.isAdult || cat.isUserProtected)
 
     PremiumDialog(
-        title = if (selectedCategory == null) stringResource(R.string.multiview_replace_title) else selectedCategory.name,
-        subtitle = if (selectedCategory == null) "Choose a category, then pick a channel" else null,
+        title = pickerState.selectedSeries?.name
+            ?: selectedCategory?.name
+            ?: stringResource(R.string.multiview_replace_title),
+        subtitle = if (selectedCategory == null) stringResource(R.string.multiview_picker_subtitle) else null,
         onDismissRequest = onDismiss,
         widthFraction = 0.62f,
         content = {
+            if (selectedCategory == null) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(
+                        MultiViewPickerSource.LIVE to R.string.multiview_picker_live,
+                        MultiViewPickerSource.MOVIES to R.string.multiview_picker_movies,
+                        MultiViewPickerSource.SERIES to R.string.multiview_picker_series,
+                    ).forEach { (source, label) ->
+                        PremiumDialogFooterButton(
+                            label = stringResource(label),
+                            onClick = {
+                                catSearch = ""
+                                onSelectSource(source)
+                            },
+                            emphasized = pickerState.source == source,
+                        )
+                    }
+                }
+            }
+
             // Search bar
             BasicTextField(
                 value = searchQuery,
@@ -824,7 +849,15 @@ private fun ReplaceSlotDialog(
                     Box {
                         if (searchQuery.isEmpty()) {
                             Text(
-                                text = if (selectedCategory == null) "Search categories\u2026" else "Search channels\u2026",
+                                text = stringResource(
+                                    when {
+                                        selectedCategory == null -> R.string.multiview_picker_search_categories
+                                        pickerState.isBrowsingSeriesList -> R.string.multiview_picker_search_shows
+                                        pickerState.source == MultiViewPickerSource.MOVIES -> R.string.multiview_picker_search_movies
+                                        pickerState.source == MultiViewPickerSource.SERIES -> R.string.multiview_picker_search_episodes
+                                        else -> R.string.multiview_picker_search_channels
+                                    }
+                                ),
                                 color = Color.White.copy(alpha = 0.38f),
                                 style = MaterialTheme.typography.bodyMedium
                             )
@@ -851,7 +884,7 @@ private fun ReplaceSlotDialog(
                         else pickerState.categories.filter { it.name.contains(catSearch, ignoreCase = true) }
                     if (filtered.isEmpty()) {
                         Text(
-                            text = "No categories found",
+                            text = stringResource(R.string.multiview_picker_empty),
                             color = Color.White.copy(alpha = 0.5f),
                             style = MaterialTheme.typography.bodyMedium
                         )
@@ -878,11 +911,33 @@ private fun ReplaceSlotDialog(
                         }
                     }
                 }
+                pickerState.isBrowsingSeriesList -> {
+                    val shows = pickerState.filteredSeries
+                    if (shows.isEmpty()) {
+                        Text(
+                            text = stringResource(R.string.multiview_picker_empty),
+                            color = Color.White.copy(alpha = 0.5f),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.height(320.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            items(shows, key = { it.id }) { show ->
+                                PremiumDialogActionButton(
+                                    label = show.name,
+                                    onClick = { onSelectSeries(show) }
+                                )
+                            }
+                        }
+                    }
+                }
                 else -> {
                     val filtered = pickerState.filteredChannels
                     if (filtered.isEmpty() && !pickerState.isLoading) {
                         Text(
-                            text = "No channels found",
+                            text = stringResource(R.string.multiview_picker_empty),
                             color = Color.White.copy(alpha = 0.5f),
                             style = MaterialTheme.typography.bodyMedium
                         )
@@ -905,7 +960,7 @@ private fun ReplaceSlotDialog(
         footer = {
             if (selectedCategory != null) {
                 PremiumDialogFooterButton(
-                    label = "\u2190 Back",
+                    label = stringResource(R.string.multiview_picker_back),
                     onClick = onBackToCategories
                 )
             }

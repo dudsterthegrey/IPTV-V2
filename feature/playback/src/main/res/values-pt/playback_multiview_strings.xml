@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">A pressão de memória está alta. Os slots extras ficam em espera até a reprodução estabilizar.</string>
     <string name="multiview_movie_label">Filme</string>
     <string name="multiview_episode_label">T%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">TV ao vivo</string>
+    <string name="multiview_picker_movies">Filmes</string>
+    <string name="multiview_picker_series">Séries</string>
+    <string name="multiview_picker_subtitle">Escolha TV ao vivo, Filmes ou Séries e depois uma categoria.</string>
+    <string name="multiview_picker_search_categories">Buscar categorias…</string>
+    <string name="multiview_picker_search_channels">Buscar canais…</string>
+    <string name="multiview_picker_search_movies">Buscar filmes…</string>
+    <string name="multiview_picker_search_shows">Buscar séries…</string>
+    <string name="multiview_picker_search_episodes">Buscar episódios…</string>
+    <string name="multiview_picker_empty">Nada encontrado</string>
+    <string name="multiview_picker_back">Voltar</string>
 </resources>

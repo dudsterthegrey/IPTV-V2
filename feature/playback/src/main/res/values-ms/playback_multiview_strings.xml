@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Tekanan memori tinggi. Slot tambahan kekal dalam mod sedia sehingga main balik stabil.</string>
     <string name="multiview_movie_label">Filem</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">TV Langsung</string>
+    <string name="multiview_picker_movies">Filem</string>
+    <string name="multiview_picker_series">Siri</string>
+    <string name="multiview_picker_subtitle">Pilih TV Langsung, Filem atau Siri, kemudian kategori.</string>
+    <string name="multiview_picker_search_categories">Cari kategori…</string>
+    <string name="multiview_picker_search_channels">Cari saluran…</string>
+    <string name="multiview_picker_search_movies">Cari filem…</string>
+    <string name="multiview_picker_search_shows">Cari rancangan…</string>
+    <string name="multiview_picker_search_episodes">Cari episod…</string>
+    <string name="multiview_picker_empty">Tiada apa-apa ditemui</string>
+    <string name="multiview_picker_back">Kembali</string>
 </resources>

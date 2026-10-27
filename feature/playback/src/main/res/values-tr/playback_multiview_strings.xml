@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Bellek baskısı yüksek. Oynatma dengelenene kadar ek yuvalar beklemede kalır.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d B%2$d · %3$s</string>
+    <string name="multiview_picker_live">Canlı TV</string>
+    <string name="multiview_picker_movies">Filmler</string>
+    <string name="multiview_picker_series">Diziler</string>
+    <string name="multiview_picker_subtitle">Canlı TV, Filmler veya Diziler\'i, ardından bir kategori seçin.</string>
+    <string name="multiview_picker_search_categories">Kategorilerde ara…</string>
+    <string name="multiview_picker_search_channels">Kanallarda ara…</string>
+    <string name="multiview_picker_search_movies">Filmlerde ara…</string>
+    <string name="multiview_picker_search_shows">Dizilerde ara…</string>
+    <string name="multiview_picker_search_episodes">Bölümlerde ara…</string>
+    <string name="multiview_picker_empty">Hiçbir şey bulunamadı</string>
+    <string name="multiview_picker_back">Geri</string>
 </resources>

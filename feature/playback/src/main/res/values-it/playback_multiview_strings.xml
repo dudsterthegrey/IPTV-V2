@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">La memoria è quasi esaurita. Gli slot extra restano in standby finché la riproduzione non si stabilizza.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">TV in diretta</string>
+    <string name="multiview_picker_movies">Film</string>
+    <string name="multiview_picker_series">Serie</string>
+    <string name="multiview_picker_subtitle">Scegli TV in diretta, Film o Serie, poi una categoria.</string>
+    <string name="multiview_picker_search_categories">Cerca categorie…</string>
+    <string name="multiview_picker_search_channels">Cerca canali…</string>
+    <string name="multiview_picker_search_movies">Cerca film…</string>
+    <string name="multiview_picker_search_shows">Cerca serie…</string>
+    <string name="multiview_picker_search_episodes">Cerca episodi…</string>
+    <string name="multiview_picker_empty">Nessun risultato</string>
+    <string name="multiview_picker_back">Indietro</string>
 </resources>

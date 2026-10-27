@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">La memoria está muy cargada. Las ranuras extra permanecen en espera hasta que la reproducción se estabilice.</string>
     <string name="multiview_movie_label">Película</string>
     <string name="multiview_episode_label">T%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">TV en directo</string>
+    <string name="multiview_picker_movies">Películas</string>
+    <string name="multiview_picker_series">Series</string>
+    <string name="multiview_picker_subtitle">Elige TV en directo, Películas o Series y luego una categoría.</string>
+    <string name="multiview_picker_search_categories">Buscar categorías…</string>
+    <string name="multiview_picker_search_channels">Buscar canales…</string>
+    <string name="multiview_picker_search_movies">Buscar películas…</string>
+    <string name="multiview_picker_search_shows">Buscar series…</string>
+    <string name="multiview_picker_search_episodes">Buscar episodios…</string>
+    <string name="multiview_picker_empty">No se encontró nada</string>
+    <string name="multiview_picker_back">Atrás</string>
 </resources>

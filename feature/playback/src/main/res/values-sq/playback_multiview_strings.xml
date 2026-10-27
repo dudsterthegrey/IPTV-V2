@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Presioni i kujtesës është i lartë. Vendet shtesë qëndrojnë në pritje derisa riprodhimi të stabilizohet.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">TV live</string>
+    <string name="multiview_picker_movies">Filma</string>
+    <string name="multiview_picker_series">Seriale</string>
+    <string name="multiview_picker_subtitle">Zgjidhni TV live, Filma ose Seriale, pastaj një kategori.</string>
+    <string name="multiview_picker_search_categories">Kërko kategori…</string>
+    <string name="multiview_picker_search_channels">Kërko kanale…</string>
+    <string name="multiview_picker_search_movies">Kërko filma…</string>
+    <string name="multiview_picker_search_shows">Kërko seriale…</string>
+    <string name="multiview_picker_search_episodes">Kërko episode…</string>
+    <string name="multiview_picker_empty">Nuk u gjet asgjë</string>
+    <string name="multiview_picker_back">Prapa</string>
 </resources>

@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Mataas ang presyon sa memorya. Mananatili sa standby ang mga dagdag na slot hanggang sa maging stable ang playback.</string>
     <string name="multiview_movie_label">Pelikula</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">Live TV</string>
+    <string name="multiview_picker_movies">Mga Pelikula</string>
+    <string name="multiview_picker_series">Mga Serye</string>
+    <string name="multiview_picker_subtitle">Pumili ng Live TV, Mga Pelikula o Mga Serye, saka isang kategorya.</string>
+    <string name="multiview_picker_search_categories">Maghanap ng kategorya…</string>
+    <string name="multiview_picker_search_channels">Maghanap ng channel…</string>
+    <string name="multiview_picker_search_movies">Maghanap ng pelikula…</string>
+    <string name="multiview_picker_search_shows">Maghanap ng palabas…</string>
+    <string name="multiview_picker_search_episodes">Maghanap ng episode…</string>
+    <string name="multiview_picker_empty">Walang nahanap</string>
+    <string name="multiview_picker_back">Bumalik</string>
 </resources>

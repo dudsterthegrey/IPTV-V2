@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">فشار حافظه بالاست. جایگاه‌های اضافی تا پایدار شدن پخش در حالت آماده‌به‌کار می‌مانند.</string>
     <string name="multiview_movie_label">فیلم</string>
     <string name="multiview_episode_label">فصل %1$d قسمت %2$d · %3$s</string>
+    <string name="multiview_picker_live">تلویزیون زنده</string>
+    <string name="multiview_picker_movies">فیلم‌ها</string>
+    <string name="multiview_picker_series">سریال‌ها</string>
+    <string name="multiview_picker_subtitle">تلویزیون زنده، فیلم‌ها یا سریال‌ها و سپس یک دسته را انتخاب کنید.</string>
+    <string name="multiview_picker_search_categories">جستجوی دسته‌ها…</string>
+    <string name="multiview_picker_search_channels">جستجوی کانال‌ها…</string>
+    <string name="multiview_picker_search_movies">جستجوی فیلم‌ها…</string>
+    <string name="multiview_picker_search_shows">جستجوی سریال‌ها…</string>
+    <string name="multiview_picker_search_episodes">جستجوی قسمت‌ها…</string>
+    <string name="multiview_picker_empty">چیزی پیدا نشد</string>
+    <string name="multiview_picker_back">بازگشت</string>
 </resources>

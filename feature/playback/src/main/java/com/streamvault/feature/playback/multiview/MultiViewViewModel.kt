@@ -18,6 +18,7 @@ import com.streamvault.domain.repository.FavoriteRepository
 import com.streamvault.domain.repository.MovieRepository
 import com.streamvault.domain.repository.SeriesRepository
 import com.streamvault.domain.model.StreamInfo
+import com.streamvault.domain.model.VodCategoryHydrationRequest
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.usecase.UnlockParentalCategory
@@ -539,20 +540,36 @@ class MultiViewViewModel @Inject constructor(
     }
 
     fun openReplacementPicker() {
+        loadPickerCategories(MultiViewPickerSource.LIVE)
+    }
+
+    fun selectPickerSource(source: MultiViewPickerSource) {
+        if (source == _uiState.value.pickerState.source && _uiState.value.pickerState.categories.isNotEmpty()) return
+        currentProviderId?.let { parentalControlManager.clearUnlockedCategories(it) }
+        loadPickerCategories(source)
+    }
+
+    private fun loadPickerCategories(source: MultiViewPickerSource) {
         val providerId = currentProviderId ?: return
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(
-                pickerState = MultiViewPickerState(isLoading = true)
+                pickerState = MultiViewPickerState(source = source, isLoading = true)
             )
-            val categories = channelRepository.getCategoriesSnapshot(providerId)
+            val categories = when (source) {
+                MultiViewPickerSource.LIVE -> channelRepository.getCategoriesSnapshot(providerId)
+                MultiViewPickerSource.MOVIES -> movieRepository.getCategories(providerId).first()
+                MultiViewPickerSource.SERIES -> seriesRepository.getCategories(providerId).first()
+            }
+            if (_uiState.value.pickerState.source != source) return@launch
             _uiState.value = _uiState.value.copy(
-                pickerState = MultiViewPickerState(categories = categories)
+                pickerState = MultiViewPickerState(source = source, categories = categories)
             )
         }
     }
 
     fun selectPickerCategory(category: Category) {
         val providerId = currentProviderId ?: return
+        val source = _uiState.value.pickerState.source
         parentalControlManager.retainUnlockedCategory(
             providerId = providerId,
             categoryId = category.id.takeIf { !category.isVirtual && it > 0L }
@@ -561,41 +578,143 @@ class MultiViewViewModel @Inject constructor(
             _uiState.value = _uiState.value.copy(
                 pickerState = _uiState.value.pickerState.copy(
                     selectedCategory = category,
+                    selectedSeries = null,
+                    isLoading = true,
+                    searchQuery = "",
+                    seriesList = emptyList(),
+                    filteredSeries = emptyList(),
+                    channels = emptyList(),
+                    filteredChannels = emptyList()
+                )
+            )
+            when (source) {
+                MultiViewPickerSource.LIVE -> {
+                    val channels = if (category.id == com.streamvault.domain.repository.ChannelRepository.ALL_CHANNELS_ID) {
+                        channelRepository.getChannels(providerId).first()
+                    } else {
+                        channelRepository.getChannelsByCategory(providerId, category.id).first()
+                    }
+                    showPickerItems(channels)
+                }
+                MultiViewPickerSource.MOVIES -> {
+                    // Some providers load a category's movies on first open; ask, but never fail on it.
+                    runCatching {
+                        movieRepository.requestCategoryHydration(providerId, category.id, VodCategoryHydrationRequest.OPEN)
+                    }
+                    val movies = movieRepository.getMoviesByCategory(providerId, category.id).first()
+                    showPickerItems(
+                        movies.filter { it.id > 0L }.map { movie ->
+                            multiViewVodChannel(
+                                kind = MultiViewVodKind.MOVIE,
+                                contentId = movie.id,
+                                title = movie.name,
+                                subtitle = category.name,
+                                artworkUrl = movie.posterUrl,
+                                providerId = providerId,
+                            )
+                        }
+                    )
+                }
+                MultiViewPickerSource.SERIES -> {
+                    runCatching {
+                        seriesRepository.requestCategoryHydration(providerId, category.id, VodCategoryHydrationRequest.OPEN)
+                    }
+                    val shows = seriesRepository.getSeriesByCategory(providerId, category.id).first()
+                    _uiState.value = _uiState.value.copy(
+                        pickerState = _uiState.value.pickerState.copy(
+                            seriesList = shows,
+                            filteredSeries = shows,
+                            isLoading = false
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    /** Series source: opens a show and lists every episode, season by season. */
+    fun selectPickerSeries(series: com.streamvault.domain.model.Series) {
+        val providerId = currentProviderId ?: return
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(
+                pickerState = _uiState.value.pickerState.copy(
+                    selectedSeries = series,
                     isLoading = true,
                     searchQuery = "",
                     channels = emptyList(),
                     filteredChannels = emptyList()
                 )
             )
-            val channels = if (category.id == com.streamvault.domain.repository.ChannelRepository.ALL_CHANNELS_ID) {
-                channelRepository.getChannels(providerId).first()
-            } else {
-                channelRepository.getChannelsByCategory(providerId, category.id).first()
-            }
-            _uiState.value = _uiState.value.copy(
-                pickerState = _uiState.value.pickerState.copy(
-                    channels = channels,
-                    filteredChannels = channels,
-                    isLoading = false
-                )
+            val details = (seriesRepository.getSeriesDetails(providerId, series.id) as? Result.Success)?.data
+            val episodes = details?.seasons.orEmpty()
+                .sortedBy { it.seasonNumber }
+                .flatMap { season -> season.episodes.sortedBy { it.episodeNumber } }
+                .filter { it.id > 0L }
+            showPickerItems(
+                episodes.map { episode ->
+                    multiViewVodChannel(
+                        kind = MultiViewVodKind.EPISODE,
+                        contentId = episode.id,
+                        title = "S${episode.seasonNumber} E${episode.episodeNumber} · ${episode.title}",
+                        subtitle = series.name,
+                        artworkUrl = episode.coverUrl ?: series.posterUrl,
+                        providerId = providerId,
+                    )
+                }
             )
         }
     }
 
-    fun updatePickerSearch(query: String) {
-        val state = _uiState.value.pickerState
-        val filtered = if (query.isBlank()) state.channels
-            else state.channels.filter { it.name.contains(query, ignoreCase = true) }
+    private fun showPickerItems(items: List<Channel>) {
         _uiState.value = _uiState.value.copy(
-            pickerState = state.copy(searchQuery = query, filteredChannels = filtered)
+            pickerState = _uiState.value.pickerState.copy(
+                channels = items,
+                filteredChannels = items,
+                isLoading = false
+            )
         )
     }
 
+    fun updatePickerSearch(query: String) {
+        val state = _uiState.value.pickerState
+        _uiState.value = _uiState.value.copy(
+            pickerState = if (state.isBrowsingSeriesList) {
+                state.copy(
+                    searchQuery = query,
+                    filteredSeries = if (query.isBlank()) state.seriesList
+                        else state.seriesList.filter { it.name.contains(query, ignoreCase = true) }
+                )
+            } else {
+                state.copy(
+                    searchQuery = query,
+                    filteredChannels = if (query.isBlank()) state.channels
+                        else state.channels.filter { it.name.contains(query, ignoreCase = true) }
+                )
+            }
+        )
+    }
+
+    /** Steps back one level: episodes, then shows, then categories. */
     fun backToPickerCategories() {
+        val state = _uiState.value.pickerState
+        if (state.selectedSeries != null) {
+            _uiState.value = _uiState.value.copy(
+                pickerState = state.copy(
+                    selectedSeries = null,
+                    channels = emptyList(),
+                    filteredChannels = emptyList(),
+                    filteredSeries = state.seriesList,
+                    searchQuery = ""
+                )
+            )
+            return
+        }
         currentProviderId?.let { parentalControlManager.clearUnlockedCategories(it) }
         _uiState.value = _uiState.value.copy(
-            pickerState = _uiState.value.pickerState.copy(
+            pickerState = state.copy(
                 selectedCategory = null,
+                seriesList = emptyList(),
+                filteredSeries = emptyList(),
                 channels = emptyList(),
                 filteredChannels = emptyList(),
                 searchQuery = ""
@@ -613,16 +732,20 @@ class MultiViewViewModel @Inject constructor(
             preferencesRepository.lastActiveProviderId.collectLatest { providerId ->
                 if (providerId == null || providerId <= 0L) {
                     currentProviderId = null
-                    _uiState.value = _uiState.value.copy(replacementCandidates = emptyList())
+                    _uiState.value = _uiState.value.copy(replacementCandidates = emptyList(), canBrowseReplacements = false)
                     return@collectLatest
                 }
                 currentProviderId = providerId
+                _uiState.value = _uiState.value.copy(canBrowseReplacements = true)
                 combine(
                     favoriteRepository.getFavorites(providerId, com.streamvault.domain.model.ContentType.LIVE),
                     playbackHistoryRepository.getRecentlyWatchedByProvider(providerId, limit = 12)
                 ) { favorites, history ->
                     val favoriteIds = favorites.map { it.contentId }
-                    val historyIds = history.map { it.contentId }
+                    // History mixes movies and episodes in; only live entries are channel ids.
+                    val historyIds = history
+                        .filter { it.contentType == com.streamvault.domain.model.ContentType.LIVE }
+                        .map { it.contentId }
                     (favoriteIds + historyIds)
                         .distinct()
                         .take(16)

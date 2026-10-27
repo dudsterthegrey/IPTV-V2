@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">メモリ使用量が高くなっています。再生が安定するまで、追加スロットは待機します。</string>
     <string name="multiview_movie_label">映画</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">ライブTV</string>
+    <string name="multiview_picker_movies">映画</string>
+    <string name="multiview_picker_series">シリーズ</string>
+    <string name="multiview_picker_subtitle">ライブTV、映画、シリーズのいずれかを選び、次にカテゴリを選んでください。</string>
+    <string name="multiview_picker_search_categories">カテゴリを検索…</string>
+    <string name="multiview_picker_search_channels">チャンネルを検索…</string>
+    <string name="multiview_picker_search_movies">映画を検索…</string>
+    <string name="multiview_picker_search_shows">番組を検索…</string>
+    <string name="multiview_picker_search_episodes">エピソードを検索…</string>
+    <string name="multiview_picker_empty">見つかりませんでした</string>
+    <string name="multiview_picker_back">戻る</string>
 </resources>

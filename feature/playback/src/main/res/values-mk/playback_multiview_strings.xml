@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Притисокот врз меморијата е висок. Дополнителните слотови остануваат во мирување додека репродукцијата не се стабилизира.</string>
     <string name="multiview_movie_label">Филм</string>
     <string name="multiview_episode_label">С%1$d Е%2$d · %3$s</string>
+    <string name="multiview_picker_live">ТВ во живо</string>
+    <string name="multiview_picker_movies">Филмови</string>
+    <string name="multiview_picker_series">Серии</string>
+    <string name="multiview_picker_subtitle">Изберете ТВ во живо, Филмови или Серии, потоа категорија.</string>
+    <string name="multiview_picker_search_categories">Пребарај категории…</string>
+    <string name="multiview_picker_search_channels">Пребарај канали…</string>
+    <string name="multiview_picker_search_movies">Пребарај филмови…</string>
+    <string name="multiview_picker_search_shows">Пребарај серии…</string>
+    <string name="multiview_picker_search_episodes">Пребарај епизоди…</string>
+    <string name="multiview_picker_empty">Ништо не е пронајдено</string>
+    <string name="multiview_picker_back">Назад</string>
 </resources>

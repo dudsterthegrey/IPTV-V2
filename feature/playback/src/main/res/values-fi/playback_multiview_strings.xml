@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Muistin paine on korkea. Ylimääräiset paikat pysyvät valmiustilassa, kunnes toisto vakiintuu.</string>
     <string name="multiview_movie_label">Elokuva</string>
     <string name="multiview_episode_label">K%1$d J%2$d · %3$s</string>
+    <string name="multiview_picker_live">Suora TV</string>
+    <string name="multiview_picker_movies">Elokuvat</string>
+    <string name="multiview_picker_series">Sarjat</string>
+    <string name="multiview_picker_subtitle">Valitse Suora TV, Elokuvat tai Sarjat ja sitten luokka.</string>
+    <string name="multiview_picker_search_categories">Hae luokkia…</string>
+    <string name="multiview_picker_search_channels">Hae kanavia…</string>
+    <string name="multiview_picker_search_movies">Hae elokuvia…</string>
+    <string name="multiview_picker_search_shows">Hae sarjoja…</string>
+    <string name="multiview_picker_search_episodes">Hae jaksoja…</string>
+    <string name="multiview_picker_empty">Mitään ei löytynyt</string>
+    <string name="multiview_picker_back">Takaisin</string>
 </resources>

@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">内存压力很高。额外槽位将保持待机，直到播放稳定。</string>
     <string name="multiview_movie_label">电影</string>
     <string name="multiview_episode_label">第%1$d季 第%2$d集 · %3$s</string>
+    <string name="multiview_picker_live">直播电视</string>
+    <string name="multiview_picker_movies">电影</string>
+    <string name="multiview_picker_series">剧集</string>
+    <string name="multiview_picker_subtitle">选择直播电视、电影或剧集，然后选择一个分类。</string>
+    <string name="multiview_picker_search_categories">搜索分类…</string>
+    <string name="multiview_picker_search_channels">搜索频道…</string>
+    <string name="multiview_picker_search_movies">搜索电影…</string>
+    <string name="multiview_picker_search_shows">搜索剧集…</string>
+    <string name="multiview_picker_search_episodes">搜索单集…</string>
+    <string name="multiview_picker_empty">未找到内容</string>
+    <string name="multiview_picker_back">返回</string>
 </resources>

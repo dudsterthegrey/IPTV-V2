@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Minnebruken er høy. Ekstra spor forblir i standby til avspillingen stabiliseres.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">Direkte-TV</string>
+    <string name="multiview_picker_movies">Filmer</string>
+    <string name="multiview_picker_series">Serier</string>
+    <string name="multiview_picker_subtitle">Velg Direkte-TV, Filmer eller Serier, og deretter en kategori.</string>
+    <string name="multiview_picker_search_categories">Søk i kategorier…</string>
+    <string name="multiview_picker_search_channels">Søk i kanaler…</string>
+    <string name="multiview_picker_search_movies">Søk i filmer…</string>
+    <string name="multiview_picker_search_shows">Søk i serier…</string>
+    <string name="multiview_picker_search_episodes">Søk i episoder…</string>
+    <string name="multiview_picker_empty">Fant ingenting</string>
+    <string name="multiview_picker_back">Tilbake</string>
 </resources>

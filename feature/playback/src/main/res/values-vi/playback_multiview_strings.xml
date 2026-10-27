@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Áp lực bộ nhớ đang cao. Các ô bổ sung sẽ ở trạng thái chờ cho đến khi phát lại ổn định.</string>
     <string name="multiview_movie_label">Phim</string>
     <string name="multiview_episode_label">Mùa %1$d Tập %2$d · %3$s</string>
+    <string name="multiview_picker_live">Truyền hình trực tiếp</string>
+    <string name="multiview_picker_movies">Phim</string>
+    <string name="multiview_picker_series">Phim bộ</string>
+    <string name="multiview_picker_subtitle">Chọn Truyền hình trực tiếp, Phim hoặc Phim bộ, rồi chọn danh mục.</string>
+    <string name="multiview_picker_search_categories">Tìm danh mục…</string>
+    <string name="multiview_picker_search_channels">Tìm kênh…</string>
+    <string name="multiview_picker_search_movies">Tìm phim…</string>
+    <string name="multiview_picker_search_shows">Tìm chương trình…</string>
+    <string name="multiview_picker_search_episodes">Tìm tập…</string>
+    <string name="multiview_picker_empty">Không tìm thấy gì</string>
+    <string name="multiview_picker_back">Quay lại</string>
 </resources>

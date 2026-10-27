@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Нестача пам’яті висока. Додаткові слоти залишаються в очікуванні, доки відтворення не стабілізується.</string>
     <string name="multiview_movie_label">Фільм</string>
     <string name="multiview_episode_label">С%1$d Е%2$d · %3$s</string>
+    <string name="multiview_picker_live">Пряме ТБ</string>
+    <string name="multiview_picker_movies">Фільми</string>
+    <string name="multiview_picker_series">Серіали</string>
+    <string name="multiview_picker_subtitle">Виберіть Пряме ТБ, Фільми або Серіали, потім категорію.</string>
+    <string name="multiview_picker_search_categories">Пошук категорій…</string>
+    <string name="multiview_picker_search_channels">Пошук каналів…</string>
+    <string name="multiview_picker_search_movies">Пошук фільмів…</string>
+    <string name="multiview_picker_search_shows">Пошук серіалів…</string>
+    <string name="multiview_picker_search_episodes">Пошук серій…</string>
+    <string name="multiview_picker_empty">Нічого не знайдено</string>
+    <string name="multiview_picker_back">Назад</string>
 </resources>

@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Η πίεση μνήμης είναι υψηλή. Οι επιπλέον θέσεις παραμένουν σε αναμονή μέχρι να σταθεροποιηθεί η αναπαραγωγή.</string>
     <string name="multiview_movie_label">Ταινία</string>
     <string name="multiview_episode_label">Σ%1$d Ε%2$d · %3$s</string>
+    <string name="multiview_picker_live">Ζωντανή TV</string>
+    <string name="multiview_picker_movies">Ταινίες</string>
+    <string name="multiview_picker_series">Σειρές</string>
+    <string name="multiview_picker_subtitle">Επιλέξτε Ζωντανή TV, Ταινίες ή Σειρές και μετά μια κατηγορία.</string>
+    <string name="multiview_picker_search_categories">Αναζήτηση κατηγοριών…</string>
+    <string name="multiview_picker_search_channels">Αναζήτηση καναλιών…</string>
+    <string name="multiview_picker_search_movies">Αναζήτηση ταινιών…</string>
+    <string name="multiview_picker_search_shows">Αναζήτηση σειρών…</string>
+    <string name="multiview_picker_search_episodes">Αναζήτηση επεισοδίων…</string>
+    <string name="multiview_picker_empty">Δεν βρέθηκε τίποτα</string>
+    <string name="multiview_picker_back">Πίσω</string>
 </resources>

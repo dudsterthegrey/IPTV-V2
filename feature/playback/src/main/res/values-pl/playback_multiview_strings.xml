@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">Ciśnienie pamięci jest wysokie. Dodatkowe gniazda pozostają w trybie gotowości do czasu ustabilizowania się odtwarzania.</string>
     <string name="multiview_movie_label">Film</string>
     <string name="multiview_episode_label">S%1$d O%2$d · %3$s</string>
+    <string name="multiview_picker_live">Telewizja na żywo</string>
+    <string name="multiview_picker_movies">Filmy</string>
+    <string name="multiview_picker_series">Seriale</string>
+    <string name="multiview_picker_subtitle">Wybierz Telewizję na żywo, Filmy lub Seriale, a potem kategorię.</string>
+    <string name="multiview_picker_search_categories">Szukaj kategorii…</string>
+    <string name="multiview_picker_search_channels">Szukaj kanałów…</string>
+    <string name="multiview_picker_search_movies">Szukaj filmów…</string>
+    <string name="multiview_picker_search_shows">Szukaj seriali…</string>
+    <string name="multiview_picker_search_episodes">Szukaj odcinków…</string>
+    <string name="multiview_picker_empty">Nic nie znaleziono</string>
+    <string name="multiview_picker_back">Wstecz</string>
 </resources>

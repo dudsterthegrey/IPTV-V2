@@ -220,6 +220,52 @@ class MultiViewViewModelTest {
         assertThat(manager.startPositionFor(tile.id)).isEqualTo(0L)
     }
 
+    @Test
+    fun replacePicker_browsesMoviesAndSeriesEpisodesAsPickableTiles() {
+        whenever(preferences.lastActiveProviderId).thenReturn(flowOf(1L))
+        whenever(favorites.getFavorites(1L, com.streamvault.domain.model.ContentType.LIVE)).thenReturn(flowOf(emptyList()))
+        whenever(history.getRecentlyWatchedByProvider(1L, 12)).thenReturn(flowOf(emptyList()))
+        val movieCategory = com.streamvault.domain.model.Category(id = 5, name = "Action")
+        whenever(movies.getCategories(1L)).thenReturn(flowOf(listOf(movieCategory)))
+        whenever(movies.getMoviesByCategory(1L, 5L)).thenReturn(flowOf(listOf(Movie(id = 42, name = "Heat"))))
+        val show = com.streamvault.domain.model.Series(id = 9, name = "Show")
+        val seriesCategory = com.streamvault.domain.model.Category(id = 6, name = "Drama")
+        whenever(series.getCategories(1L)).thenReturn(flowOf(listOf(seriesCategory)))
+        whenever(series.getSeriesByCategory(1L, 6L)).thenReturn(flowOf(listOf(show)))
+        val episode = com.streamvault.domain.model.Episode(id = 77, title = "Pilot", episodeNumber = 1, seasonNumber = 1)
+        wheneverBlocking { series.getSeriesDetails(1L, 9L, null) }.thenReturn(
+            Result.success(show.copy(seasons = listOf(com.streamvault.domain.model.Season(seasonNumber = 1, episodes = listOf(episode)))))
+        )
+        val viewModel = createViewModel()
+        dispatcher.scheduler.runCurrent()
+        assertThat(viewModel.uiState.value.canBrowseReplacements).isTrue()
+
+        viewModel.selectPickerSource(MultiViewPickerSource.MOVIES)
+        dispatcher.scheduler.runCurrent()
+        viewModel.selectPickerCategory(movieCategory)
+        dispatcher.scheduler.runCurrent()
+        val movieTile = viewModel.uiState.value.pickerState.filteredChannels.single()
+        assertThat(movieTile.multiViewVodKind).isEqualTo(MultiViewVodKind.MOVIE)
+        assertThat(movieTile.streamId).isEqualTo(42L)
+
+        viewModel.selectPickerSource(MultiViewPickerSource.SERIES)
+        dispatcher.scheduler.runCurrent()
+        viewModel.selectPickerCategory(seriesCategory)
+        dispatcher.scheduler.runCurrent()
+        assertThat(viewModel.uiState.value.pickerState.isBrowsingSeriesList).isTrue()
+        viewModel.selectPickerSeries(show)
+        dispatcher.scheduler.runCurrent()
+        val episodeTile = viewModel.uiState.value.pickerState.filteredChannels.single()
+        assertThat(episodeTile.multiViewVodKind).isEqualTo(MultiViewVodKind.EPISODE)
+        assertThat(episodeTile.name).isEqualTo("S1 E1 · Pilot")
+
+        viewModel.backToPickerCategories()
+        assertThat(viewModel.uiState.value.pickerState.isBrowsingSeriesList).isTrue()
+        viewModel.backToPickerCategories()
+        assertThat(viewModel.uiState.value.pickerState.selectedCategory).isNull()
+        clear(viewModel)
+    }
+
     private fun channel(id: Long) = Channel(
         id = id,
         name = "Channel $id",

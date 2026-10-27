@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">मेमोरी पर दबाव अधिक है। प्लेबैक स्थिर होने तक अतिरिक्त स्लॉट स्टैंडबाय में रहेंगे।</string>
     <string name="multiview_movie_label">फ़िल्म</string>
     <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
+    <string name="multiview_picker_live">लाइव टीवी</string>
+    <string name="multiview_picker_movies">फ़िल्में</string>
+    <string name="multiview_picker_series">सीरीज़</string>
+    <string name="multiview_picker_subtitle">लाइव टीवी, फ़िल्में या सीरीज़ चुनें, फिर एक श्रेणी।</string>
+    <string name="multiview_picker_search_categories">श्रेणियाँ खोजें…</string>
+    <string name="multiview_picker_search_channels">चैनल खोजें…</string>
+    <string name="multiview_picker_search_movies">फ़िल्में खोजें…</string>
+    <string name="multiview_picker_search_shows">शो खोजें…</string>
+    <string name="multiview_picker_search_episodes">एपिसोड खोजें…</string>
+    <string name="multiview_picker_empty">कुछ नहीं मिला</string>
+    <string name="multiview_picker_back">वापस</string>
 </resources>

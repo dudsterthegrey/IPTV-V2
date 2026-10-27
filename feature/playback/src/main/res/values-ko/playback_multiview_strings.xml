@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">메모리 압박이 높습니다. 재생이 안정될 때까지 추가 슬롯은 대기 상태로 유지됩니다.</string>
     <string name="multiview_movie_label">영화</string>
     <string name="multiview_episode_label">시즌 %1$d %2$d화 · %3$s</string>
+    <string name="multiview_picker_live">실시간 TV</string>
+    <string name="multiview_picker_movies">영화</string>
+    <string name="multiview_picker_series">시리즈</string>
+    <string name="multiview_picker_subtitle">실시간 TV, 영화 또는 시리즈를 고른 다음 카테고리를 선택하세요.</string>
+    <string name="multiview_picker_search_categories">카테고리 검색…</string>
+    <string name="multiview_picker_search_channels">채널 검색…</string>
+    <string name="multiview_picker_search_movies">영화 검색…</string>
+    <string name="multiview_picker_search_shows">프로그램 검색…</string>
+    <string name="multiview_picker_search_episodes">에피소드 검색…</string>
+    <string name="multiview_picker_empty">찾은 항목이 없습니다</string>
+    <string name="multiview_picker_back">뒤로</string>
 </resources>

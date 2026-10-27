@@ -45,4 +45,15 @@
     <string name="multiview_low_memory_warning">ความจำตึงตัวสูง สล็อตเพิ่มเติมจะอยู่ในสแตนด์บายจนกว่าการเล่นจะเสถียร</string>
     <string name="multiview_movie_label">ภาพยนตร์</string>
     <string name="multiview_episode_label">ซีซัน %1$d ตอน %2$d · %3$s</string>
+    <string name="multiview_picker_live">ทีวีสด</string>
+    <string name="multiview_picker_movies">ภาพยนตร์</string>
+    <string name="multiview_picker_series">ซีรีส์</string>
+    <string name="multiview_picker_subtitle">เลือกทีวีสด ภาพยนตร์ หรือซีรีส์ แล้วเลือกหมวดหมู่</string>
+    <string name="multiview_picker_search_categories">ค้นหาหมวดหมู่…</string>
+    <string name="multiview_picker_search_channels">ค้นหาช่อง…</string>
+    <string name="multiview_picker_search_movies">ค้นหาภาพยนตร์…</string>
+    <string name="multiview_picker_search_shows">ค้นหารายการ…</string>
+    <string name="multiview_picker_search_episodes">ค้นหาตอน…</string>
+    <string name="multiview_picker_empty">ไม่พบรายการ</string>
+    <string name="multiview_picker_back">ย้อนกลับ</string>
 </resources>
