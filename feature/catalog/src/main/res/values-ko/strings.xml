@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">시청 기록을 지우지 못했습니다. 다시 시도하세요.</string>
     <string name="series_tracking_failed">새 에피소드 추적을 업데이트하지 못했습니다. 다시 시도하세요.</string>
     <string name="dashboard_tracked_series">추적 중인 프로그램</string>
+    <string name="saved_streams_title">저장된 스트림</string>
+    <string name="saved_streams_subtitle">저장한 개별 스트림: 직접 링크 또는 매번 새 링크를 주는 Stream API.</string>
+    <string name="saved_streams_add">스트림 추가</string>
+    <string name="saved_streams_empty">저장된 스트림이 아직 없습니다. 직접 스트림 링크나 링크를 반환하는 Stream API URL을 추가하세요.</string>
+    <string name="saved_streams_play_failed">이 스트림을 시작하지 못했습니다. 링크 또는 Stream API에 연결할 수 있는지 확인하세요.</string>
+    <string name="saved_streams_resolving">스트림 링크 가져오는 중…</string>
+    <string name="saved_streams_kind_direct">직접 URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">수정</string>
+    <string name="saved_streams_delete">삭제</string>
+    <string name="saved_streams_add_title">스트림 추가</string>
+    <string name="saved_streams_edit_title">스트림 수정</string>
+    <string name="saved_streams_name">이름</string>
+    <string name="saved_streams_stream_url">스트림 URL</string>
+    <string name="saved_streams_api_url">Stream API URL</string>
+    <string name="saved_streams_direct_hint">링크를 그대로 재생합니다(http, https, rtsp, rtmp 등).</string>
+    <string name="saved_streams_api_hint">재생할 때마다 호출되며, 스트림 링크를 일반 텍스트 또는 {\"url\": \"…\"} 같은 JSON으로 반환해야 합니다.</string>
+    <string name="saved_streams_invalid">이름과 올바른 링크를 입력하세요.</string>
+    <string name="saved_streams_cancel">취소</string>
+    <string name="saved_streams_save">저장</string>
+    <string name="saved_streams_delete_title">스트림을 삭제할까요?</string>
+    <string name="saved_streams_delete_body">“%1$s”이(가) 저장된 스트림에서 삭제됩니다.</string>
 </resources>

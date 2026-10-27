@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Povijest gledanja nije moguće očistiti. Pokušajte ponovno.</string>
     <string name="series_tracking_failed">Praćenje novih epizoda nije moguće ažurirati. Pokušajte ponovno.</string>
     <string name="dashboard_tracked_series">Praćene serije</string>
+    <string name="saved_streams_title">Spremljeni streamovi</string>
+    <string name="saved_streams_subtitle">Pojedinačni streamovi koje ste spremili: izravna poveznica ili Stream API koji svaki put daje novu poveznicu.</string>
+    <string name="saved_streams_add">Dodaj stream</string>
+    <string name="saved_streams_empty">Još nema spremljenih streamova. Dodajte izravnu poveznicu na stream ili URL Stream API-ja koji je vraća.</string>
+    <string name="saved_streams_play_failed">Stream nije moguće pokrenuti. Provjerite poveznicu ili je li Stream API dostupan.</string>
+    <string name="saved_streams_resolving">Dohvaćanje poveznice na stream…</string>
+    <string name="saved_streams_kind_direct">Izravni URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Uredi</string>
+    <string name="saved_streams_delete">Izbriši</string>
+    <string name="saved_streams_add_title">Dodaj stream</string>
+    <string name="saved_streams_edit_title">Uredi stream</string>
+    <string name="saved_streams_name">Naziv</string>
+    <string name="saved_streams_stream_url">URL streama</string>
+    <string name="saved_streams_api_url">URL Stream API-ja</string>
+    <string name="saved_streams_direct_hint">Poveznica se reproducira kakva jest (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Poziva se pri svakoj reprodukciji; treba vratiti poveznicu kao običan tekst ili JSON poput {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Unesite naziv i valjanu poveznicu.</string>
+    <string name="saved_streams_cancel">Odustani</string>
+    <string name="saved_streams_save">Spremi</string>
+    <string name="saved_streams_delete_title">Izbrisati stream?</string>
+    <string name="saved_streams_delete_body">„%1$s” bit će uklonjen iz spremljenih streamova.</string>
 </resources>

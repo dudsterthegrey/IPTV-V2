@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">A megtekintési előzmények törlése nem sikerült. Próbáld újra.</string>
     <string name="series_tracking_failed">Az új epizódok követését nem sikerült frissíteni. Próbáld újra.</string>
     <string name="dashboard_tracked_series">Követett sorozatok</string>
+    <string name="saved_streams_title">Mentett streamek</string>
+    <string name="saved_streams_subtitle">Egyedi streamek, amelyeket elmentettél: közvetlen link vagy Stream API, amely mindig új linket ad.</string>
+    <string name="saved_streams_add">Stream hozzáadása</string>
+    <string name="saved_streams_empty">Még nincs mentett stream. Adj hozzá egy közvetlen streamlinket vagy egy azt visszaadó Stream API URL-t.</string>
+    <string name="saved_streams_play_failed">A stream nem indítható. Ellenőrizd a linket, vagy hogy elérhető-e a Stream API.</string>
+    <string name="saved_streams_resolving">Streamlink lekérése…</string>
+    <string name="saved_streams_kind_direct">Közvetlen URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Szerkesztés</string>
+    <string name="saved_streams_delete">Törlés</string>
+    <string name="saved_streams_add_title">Stream hozzáadása</string>
+    <string name="saved_streams_edit_title">Stream szerkesztése</string>
+    <string name="saved_streams_name">Név</string>
+    <string name="saved_streams_stream_url">Stream URL</string>
+    <string name="saved_streams_api_url">Stream API URL</string>
+    <string name="saved_streams_direct_hint">A link változtatás nélkül lesz lejátszva (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Minden lejátszáskor meghívódik; a streamlinket egyszerű szövegként vagy JSON-ként kell visszaadnia, pl. {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Adj meg egy nevet és egy érvényes linket.</string>
+    <string name="saved_streams_cancel">Mégse</string>
+    <string name="saved_streams_save">Mentés</string>
+    <string name="saved_streams_delete_title">Törlöd a streamet?</string>
+    <string name="saved_streams_delete_body">A(z) „%1$s” törlődik a mentett streamek közül.</string>
 </resources>

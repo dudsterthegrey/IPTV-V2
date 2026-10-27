@@ -955,4 +955,5 @@
     <string name="settings_refresh_rate_matching">Prispôsobiť snímkovej frekvencii obsahu</string>
     <string name="settings_refresh_rate_matching_description">Prispôsobí obnovovaciu frekvenciu displeja videu pre plynulejší pohyb. Vyžaduje podporu displeja; pri prepnutí môže obrazovka nakrátko stmavnúť.</string>
     <string name="dashboard_tracked_series">Sledované relácie</string>
+    <string name="nav_saved_streams">Uložené streamy</string>
 </resources>

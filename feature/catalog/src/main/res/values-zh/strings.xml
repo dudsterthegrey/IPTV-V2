@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">无法清除观看记录，请重试。</string>
     <string name="series_tracking_failed">无法更新新剧集追踪，请重试。</string>
     <string name="dashboard_tracked_series">追踪的节目</string>
+    <string name="saved_streams_title">已保存的直播流</string>
+    <string name="saved_streams_subtitle">你保存的单个直播流：直接链接，或每次返回新链接的 Stream API。</string>
+    <string name="saved_streams_add">添加直播流</string>
+    <string name="saved_streams_empty">还没有保存的直播流。添加直接的直播流链接，或返回链接的 Stream API 地址。</string>
+    <string name="saved_streams_play_failed">无法开始播放此直播流。请检查链接，或 Stream API 是否可访问。</string>
+    <string name="saved_streams_resolving">正在获取直播流链接…</string>
+    <string name="saved_streams_kind_direct">直接链接</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">编辑</string>
+    <string name="saved_streams_delete">删除</string>
+    <string name="saved_streams_add_title">添加直播流</string>
+    <string name="saved_streams_edit_title">编辑直播流</string>
+    <string name="saved_streams_name">名称</string>
+    <string name="saved_streams_stream_url">直播流地址</string>
+    <string name="saved_streams_api_url">Stream API 地址</string>
+    <string name="saved_streams_direct_hint">链接将按原样播放（http、https、rtsp、rtmp 等）。</string>
+    <string name="saved_streams_api_hint">每次播放时都会调用；它应以纯文本或类似 {\"url\": \"…\"} 的 JSON 返回直播流链接。</string>
+    <string name="saved_streams_invalid">请输入名称和有效链接。</string>
+    <string name="saved_streams_cancel">取消</string>
+    <string name="saved_streams_save">保存</string>
+    <string name="saved_streams_delete_title">删除直播流？</string>
+    <string name="saved_streams_delete_body">“%1$s”将从已保存的直播流中移除。</string>
 </resources>

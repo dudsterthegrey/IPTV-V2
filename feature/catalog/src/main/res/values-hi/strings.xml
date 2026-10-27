@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">देखने का इतिहास साफ़ नहीं किया जा सका। फिर से कोशिश करें।</string>
     <string name="series_tracking_failed">नए एपिसोड की ट्रैकिंग अपडेट नहीं हो सकी। फिर से कोशिश करें।</string>
     <string name="dashboard_tracked_series">ट्रैक किए गए शो</string>
+    <string name="saved_streams_title">सहेजी गई स्ट्रीम</string>
+    <string name="saved_streams_subtitle">आपकी सहेजी गई अलग-अलग स्ट्रीम: एक सीधा लिंक, या Stream API जो हर बार नया लिंक देता है।</string>
+    <string name="saved_streams_add">स्ट्रीम जोड़ें</string>
+    <string name="saved_streams_empty">अभी कोई सहेजी गई स्ट्रीम नहीं है। सीधा स्ट्रीम लिंक या ऐसा Stream API URL जोड़ें जो लिंक लौटाए।</string>
+    <string name="saved_streams_play_failed">यह स्ट्रीम शुरू नहीं हो सकी। लिंक जाँचें, या देखें कि Stream API उपलब्ध है या नहीं।</string>
+    <string name="saved_streams_resolving">स्ट्रीम लिंक लिया जा रहा है…</string>
+    <string name="saved_streams_kind_direct">सीधा URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">संपादित करें</string>
+    <string name="saved_streams_delete">हटाएँ</string>
+    <string name="saved_streams_add_title">स्ट्रीम जोड़ें</string>
+    <string name="saved_streams_edit_title">स्ट्रीम संपादित करें</string>
+    <string name="saved_streams_name">नाम</string>
+    <string name="saved_streams_stream_url">स्ट्रीम URL</string>
+    <string name="saved_streams_api_url">Stream API URL</string>
+    <string name="saved_streams_direct_hint">लिंक जैसा है वैसा ही चलाया जाता है (http, https, rtsp, rtmp…)।</string>
+    <string name="saved_streams_api_hint">हर बार चलाने पर इसे कॉल किया जाता है; इसे स्ट्रीम लिंक सादे टेक्स्ट या {\"url\": \"…\"} जैसे JSON में लौटाना चाहिए।</string>
+    <string name="saved_streams_invalid">एक नाम और मान्य लिंक दर्ज करें।</string>
+    <string name="saved_streams_cancel">रद्द करें</string>
+    <string name="saved_streams_save">सहेजें</string>
+    <string name="saved_streams_delete_title">स्ट्रीम हटाएँ?</string>
+    <string name="saved_streams_delete_body">“%1$s” को सहेजी गई स्ट्रीम से हटा दिया जाएगा।</string>
 </resources>

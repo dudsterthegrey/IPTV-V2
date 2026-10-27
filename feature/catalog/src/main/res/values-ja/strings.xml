@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">視聴履歴を消去できませんでした。もう一度お試しください。</string>
     <string name="series_tracking_failed">新しいエピソードの追跡を更新できませんでした。もう一度お試しください。</string>
     <string name="dashboard_tracked_series">追跡中の番組</string>
+    <string name="saved_streams_title">保存したストリーム</string>
+    <string name="saved_streams_subtitle">保存した個別のストリーム：直接リンク、または毎回新しいリンクを返す Stream API。</string>
+    <string name="saved_streams_add">ストリームを追加</string>
+    <string name="saved_streams_empty">保存したストリームはまだありません。直接のストリームリンク、またはリンクを返す Stream API の URL を追加してください。</string>
+    <string name="saved_streams_play_failed">このストリームを開始できませんでした。リンク、または Stream API に接続できるか確認してください。</string>
+    <string name="saved_streams_resolving">ストリームのリンクを取得中…</string>
+    <string name="saved_streams_kind_direct">直接 URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">編集</string>
+    <string name="saved_streams_delete">削除</string>
+    <string name="saved_streams_add_title">ストリームを追加</string>
+    <string name="saved_streams_edit_title">ストリームを編集</string>
+    <string name="saved_streams_name">名前</string>
+    <string name="saved_streams_stream_url">ストリーム URL</string>
+    <string name="saved_streams_api_url">Stream API の URL</string>
+    <string name="saved_streams_direct_hint">リンクはそのまま再生されます（http、https、rtsp、rtmp など）。</string>
+    <string name="saved_streams_api_hint">再生のたびに呼び出されます。ストリームのリンクをプレーンテキスト、または {\"url\": \"…\"} のような JSON で返す必要があります。</string>
+    <string name="saved_streams_invalid">名前と有効なリンクを入力してください。</string>
+    <string name="saved_streams_cancel">キャンセル</string>
+    <string name="saved_streams_save">保存</string>
+    <string name="saved_streams_delete_title">ストリームを削除しますか？</string>
+    <string name="saved_streams_delete_body">「%1$s」を保存したストリームから削除します。</string>
 </resources>

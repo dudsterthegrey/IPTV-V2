@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Nie udało się wyczyścić historii oglądania. Spróbuj ponownie.</string>
     <string name="series_tracking_failed">Nie udało się zaktualizować śledzenia nowych odcinków. Spróbuj ponownie.</string>
     <string name="dashboard_tracked_series">Śledzone seriale</string>
+    <string name="saved_streams_title">Zapisane strumienie</string>
+    <string name="saved_streams_subtitle">Pojedyncze strumienie, które zapisano: bezpośredni link lub Stream API, które za każdym razem podaje nowy link.</string>
+    <string name="saved_streams_add">Dodaj strumień</string>
+    <string name="saved_streams_empty">Brak zapisanych strumieni. Dodaj bezpośredni link do strumienia lub adres Stream API, który go zwraca.</string>
+    <string name="saved_streams_play_failed">Nie udało się uruchomić strumienia. Sprawdź link lub czy Stream API jest dostępne.</string>
+    <string name="saved_streams_resolving">Pobieranie linku do strumienia…</string>
+    <string name="saved_streams_kind_direct">Bezpośredni URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Edytuj</string>
+    <string name="saved_streams_delete">Usuń</string>
+    <string name="saved_streams_add_title">Dodaj strumień</string>
+    <string name="saved_streams_edit_title">Edytuj strumień</string>
+    <string name="saved_streams_name">Nazwa</string>
+    <string name="saved_streams_stream_url">URL strumienia</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Link jest odtwarzany bez zmian (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Wywoływane przy każdym odtworzeniu; powinno zwracać link jako zwykły tekst lub JSON, np. {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Wpisz nazwę i prawidłowy link.</string>
+    <string name="saved_streams_cancel">Anuluj</string>
+    <string name="saved_streams_save">Zapisz</string>
+    <string name="saved_streams_delete_title">Usunąć strumień?</string>
+    <string name="saved_streams_delete_body">„%1$s” zostanie usunięty z zapisanych strumieni.</string>
 </resources>

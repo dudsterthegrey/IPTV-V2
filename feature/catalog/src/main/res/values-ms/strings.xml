@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Tidak dapat mengosongkan sejarah tontonan. Cuba lagi.</string>
     <string name="series_tracking_failed">Tidak dapat mengemas kini penjejakan episod baharu. Cuba lagi.</string>
     <string name="dashboard_tracked_series">Rancangan Dijejak</string>
+    <string name="saved_streams_title">Strim Disimpan</string>
+    <string name="saved_streams_subtitle">Strim tunggal yang anda simpan: pautan terus, atau Stream API yang memberi pautan baharu setiap kali.</string>
+    <string name="saved_streams_add">Tambah strim</string>
+    <string name="saved_streams_empty">Belum ada strim disimpan. Tambah pautan strim terus, atau URL Stream API yang mengembalikannya.</string>
+    <string name="saved_streams_play_failed">Tidak dapat memulakan strim ini. Semak pautan, atau sama ada Stream API boleh dicapai.</string>
+    <string name="saved_streams_resolving">Mendapatkan pautan strim…</string>
+    <string name="saved_streams_kind_direct">URL terus</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Edit</string>
+    <string name="saved_streams_delete">Padam</string>
+    <string name="saved_streams_add_title">Tambah strim</string>
+    <string name="saved_streams_edit_title">Edit strim</string>
+    <string name="saved_streams_name">Nama</string>
+    <string name="saved_streams_stream_url">URL strim</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Pautan dimainkan seadanya (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Dipanggil setiap kali dimainkan; ia perlu mengembalikan pautan strim sebagai teks biasa atau JSON seperti {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Masukkan nama dan pautan yang sah.</string>
+    <string name="saved_streams_cancel">Batal</string>
+    <string name="saved_streams_save">Simpan</string>
+    <string name="saved_streams_delete_title">Padam strim?</string>
+    <string name="saved_streams_delete_body">“%1$s” akan dialih keluar daripada Strim Disimpan.</string>
 </resources>

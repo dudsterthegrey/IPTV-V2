@@ -1026,4 +1026,5 @@
     <string name="settings_refresh_rate_matching">Match content frame rate</string>
     <string name="settings_refresh_rate_matching_description">Match the display refresh rate to the video for smoother motion. Requires display support; switching may briefly blank the screen.</string>
     <string name="dashboard_tracked_series">Tracked Shows</string>
+    <string name="nav_saved_streams">Saved Streams</string>
 </resources>

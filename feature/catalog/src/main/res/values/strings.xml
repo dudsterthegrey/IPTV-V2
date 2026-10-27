@@ -415,4 +415,26 @@
     <string name="series_watch_history_clear_failed">Couldn’t clear the watch history. Try again.</string>
     <string name="series_tracking_failed">Couldn’t update new-episode tracking. Try again.</string>
     <string name="dashboard_tracked_series">Tracked Shows</string>
+    <string name="saved_streams_title">Saved Streams</string>
+    <string name="saved_streams_subtitle">Single streams you saved: a direct link, or a Stream API that hands out a fresh link each time.</string>
+    <string name="saved_streams_add">Add stream</string>
+    <string name="saved_streams_empty">No saved streams yet. Add a direct stream link, or a Stream API URL that returns one.</string>
+    <string name="saved_streams_play_failed">Couldn’t start this stream. Check the link, or whether the Stream API is reachable.</string>
+    <string name="saved_streams_resolving">Getting stream link…</string>
+    <string name="saved_streams_kind_direct">Direct URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Edit</string>
+    <string name="saved_streams_delete">Delete</string>
+    <string name="saved_streams_add_title">Add stream</string>
+    <string name="saved_streams_edit_title">Edit stream</string>
+    <string name="saved_streams_name">Name</string>
+    <string name="saved_streams_stream_url">Stream URL</string>
+    <string name="saved_streams_api_url">Stream API URL</string>
+    <string name="saved_streams_direct_hint">The link is played as-is (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Called every time you play; it should return the stream link as plain text or JSON like {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Enter a name and a valid link.</string>
+    <string name="saved_streams_cancel">Cancel</string>
+    <string name="saved_streams_save">Save</string>
+    <string name="saved_streams_delete_title">Delete stream?</string>
+    <string name="saved_streams_delete_body">“%1$s” will be removed from Saved Streams.</string>
 </resources>

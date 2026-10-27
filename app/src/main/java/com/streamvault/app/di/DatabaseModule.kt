@@ -103,4 +103,5 @@ object DatabaseModule {
     @Provides fun provideStremioAddonDao(db: StreamVaultDatabase): StremioAddonDao = db.stremioAddonDao()
     @Provides fun provideStremioPlaybackHistoryDao(db: StreamVaultDatabase): StremioPlaybackHistoryDao = db.stremioPlaybackHistoryDao()
     @Provides fun provideTrackedSeriesDao(db: StreamVaultDatabase): TrackedSeriesDao = db.trackedSeriesDao()
+    @Provides fun provideSavedStreamDao(db: StreamVaultDatabase): SavedStreamDao = db.savedStreamDao()
 }

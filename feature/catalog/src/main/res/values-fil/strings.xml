@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Hindi ma-clear ang history ng panonood. Subukan ulit.</string>
     <string name="series_tracking_failed">Hindi ma-update ang pagsubaybay sa bagong episode. Subukan ulit.</string>
     <string name="dashboard_tracked_series">Mga Sinusubaybayang Palabas</string>
+    <string name="saved_streams_title">Mga Naka-save na Stream</string>
+    <string name="saved_streams_subtitle">Mga solong stream na na-save mo: direktang link, o Stream API na nagbibigay ng bagong link tuwing gagamitin.</string>
+    <string name="saved_streams_add">Magdagdag ng stream</string>
+    <string name="saved_streams_empty">Wala pang naka-save na stream. Magdagdag ng direktang link ng stream, o URL ng Stream API na nagbabalik nito.</string>
+    <string name="saved_streams_play_failed">Hindi masimulan ang stream na ito. Tingnan ang link, o kung naaabot ang Stream API.</string>
+    <string name="saved_streams_resolving">Kinukuha ang link ng stream…</string>
+    <string name="saved_streams_kind_direct">Direktang URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">I-edit</string>
+    <string name="saved_streams_delete">I-delete</string>
+    <string name="saved_streams_add_title">Magdagdag ng stream</string>
+    <string name="saved_streams_edit_title">I-edit ang stream</string>
+    <string name="saved_streams_name">Pangalan</string>
+    <string name="saved_streams_stream_url">URL ng stream</string>
+    <string name="saved_streams_api_url">URL ng Stream API</string>
+    <string name="saved_streams_direct_hint">Pinapatugtog ang link nang ganoon mismo (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Tinatawag tuwing magpe-play; dapat itong magbalik ng link ng stream bilang plain text o JSON tulad ng {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Maglagay ng pangalan at wastong link.</string>
+    <string name="saved_streams_cancel">Kanselahin</string>
+    <string name="saved_streams_save">I-save</string>
+    <string name="saved_streams_delete_title">I-delete ang stream?</string>
+    <string name="saved_streams_delete_body">Aalisin ang “%1$s” sa Mga Naka-save na Stream.</string>
 </resources>

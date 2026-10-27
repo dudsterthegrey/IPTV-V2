@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Không thể xóa lịch sử xem. Hãy thử lại.</string>
     <string name="series_tracking_failed">Không thể cập nhật việc theo dõi tập mới. Hãy thử lại.</string>
     <string name="dashboard_tracked_series">Chương trình đang theo dõi</string>
+    <string name="saved_streams_title">Luồng đã lưu</string>
+    <string name="saved_streams_subtitle">Các luồng riêng lẻ bạn đã lưu: liên kết trực tiếp, hoặc Stream API trả về liên kết mới mỗi lần.</string>
+    <string name="saved_streams_add">Thêm luồng</string>
+    <string name="saved_streams_empty">Chưa có luồng nào được lưu. Thêm liên kết luồng trực tiếp, hoặc URL Stream API trả về liên kết.</string>
+    <string name="saved_streams_play_failed">Không thể phát luồng này. Hãy kiểm tra liên kết, hoặc Stream API có truy cập được không.</string>
+    <string name="saved_streams_resolving">Đang lấy liên kết luồng…</string>
+    <string name="saved_streams_kind_direct">URL trực tiếp</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Sửa</string>
+    <string name="saved_streams_delete">Xóa</string>
+    <string name="saved_streams_add_title">Thêm luồng</string>
+    <string name="saved_streams_edit_title">Sửa luồng</string>
+    <string name="saved_streams_name">Tên</string>
+    <string name="saved_streams_stream_url">URL luồng</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Liên kết được phát nguyên trạng (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Được gọi mỗi lần phát; cần trả về liên kết luồng dạng văn bản thuần hoặc JSON như {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Nhập tên và liên kết hợp lệ.</string>
+    <string name="saved_streams_cancel">Hủy</string>
+    <string name="saved_streams_save">Lưu</string>
+    <string name="saved_streams_delete_title">Xóa luồng?</string>
+    <string name="saved_streams_delete_body">“%1$s” sẽ bị xóa khỏi Luồng đã lưu.</string>
 </resources>

@@ -22,7 +22,8 @@ item could still exist under a different name, so confirm on device before build
       panel; the remote's Search key opens Search and starts listening; `core/ui/.../VoiceSearch.kt`): mic button next to the search field, plus the remote's mic button
       starting voice input on the search screen. V2 only accepts the system "voice search" intent
       (`ExternalNavigationRequestParser`), with no in-app mic.
-- [ ] **Direct URL and Stream API profile types**: one fixed stream URL, or a URL the app calls
+- [x] **Direct URL and Stream API profile types** (done 2026-10-27 as a **Saved Streams** tab, not as
+      provider types; `presentation/savedstreams/`, `SavedStreamRepository`): one fixed stream URL, or a URL the app calls
       to get a fresh stream URL (plain text or JSON `{"url": ...}`). V2 supports Xtream, M3U,
       Stalker and Jellyfin only.
 - [ ] **Teal color scheme**: V1 palette background `#0F766E`, surface `#159188`, accent
@@ -82,6 +83,11 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       no speech recognizer: the app should say "Voice search isn't available" instead of crashing).
       Note: on many remotes the dedicated mic button goes straight to Alexa/Google Assistant and
       never reaches the app; the Assistant can still open the app's search by voice.
+
+- [ ] **Saved Streams, Stream API**: add a Stream API entry pointing at a real API and check it
+      plays. (Direct URL was verified on the emulator 2026-10-27: added Mux's test stream from the
+      Saved Streams tab, it played, Back returned to the list.) Also check Edit, Delete, and that
+      the keyboard's Next/Done key moves to the next field in the add/edit dialog.
 
 ## Release / Downloader
 

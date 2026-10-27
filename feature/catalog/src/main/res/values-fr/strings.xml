@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Impossible d’effacer l’historique de visionnage. Réessayez.</string>
     <string name="series_tracking_failed">Impossible de mettre à jour le suivi des nouveaux épisodes. Réessayez.</string>
     <string name="dashboard_tracked_series">Séries suivies</string>
+    <string name="saved_streams_title">Flux enregistrés</string>
+    <string name="saved_streams_subtitle">Flux uniques que vous avez enregistrés : un lien direct, ou une Stream API qui fournit un nouveau lien à chaque fois.</string>
+    <string name="saved_streams_add">Ajouter un flux</string>
+    <string name="saved_streams_empty">Aucun flux enregistré pour l’instant. Ajoutez un lien de flux direct, ou l’URL d’une Stream API qui en renvoie un.</string>
+    <string name="saved_streams_play_failed">Impossible de lancer ce flux. Vérifiez le lien, ou si la Stream API est joignable.</string>
+    <string name="saved_streams_resolving">Récupération du lien du flux…</string>
+    <string name="saved_streams_kind_direct">URL directe</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Modifier</string>
+    <string name="saved_streams_delete">Supprimer</string>
+    <string name="saved_streams_add_title">Ajouter un flux</string>
+    <string name="saved_streams_edit_title">Modifier le flux</string>
+    <string name="saved_streams_name">Nom</string>
+    <string name="saved_streams_stream_url">URL du flux</string>
+    <string name="saved_streams_api_url">URL de la Stream API</string>
+    <string name="saved_streams_direct_hint">Le lien est lu tel quel (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Appelée à chaque lecture ; elle doit renvoyer le lien du flux en texte brut ou en JSON comme {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Saisissez un nom et un lien valide.</string>
+    <string name="saved_streams_cancel">Annuler</string>
+    <string name="saved_streams_save">Enregistrer</string>
+    <string name="saved_streams_delete_title">Supprimer le flux ?</string>
+    <string name="saved_streams_delete_body">« %1$s » sera retiré des flux enregistrés.</string>
 </resources>

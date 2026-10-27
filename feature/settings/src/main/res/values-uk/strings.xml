@@ -957,4 +957,5 @@
     <string name="settings_refresh_rate_matching">Узгоджувати частоту з відеовмістом</string>
     <string name="settings_refresh_rate_matching_description">Узгоджує частоту оновлення екрана з відео для плавнішого руху. Потрібна підтримка екрана; під час перемикання екран може ненадовго згаснути.</string>
     <string name="dashboard_tracked_series">Відстежувані серіали</string>
+    <string name="nav_saved_streams">Збережені потоки</string>
 </resources>

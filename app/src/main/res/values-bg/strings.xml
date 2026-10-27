@@ -347,4 +347,5 @@
     <string name="torrent_storage_check_failed">Свободното място не можа да бъде проверено. Възпроизвеждането на торент не може да продължи безопасно.</string>
     <string name="nav_extensions">Разширения</string>
     <string name="nav_sports">Спорт</string>
+    <string name="nav_saved_streams">Запазени потоци</string>
 </resources>

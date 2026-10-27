@@ -951,4 +951,5 @@
     <string name="settings_refresh_rate_matching">Afstemmen op de beeldsnelheid van inhoud</string>
     <string name="settings_refresh_rate_matching_description">Stemt de vernieuwingsfrequentie van het scherm af op de video voor vloeiendere bewegingen. Vereist schermondersteuning; bij het omschakelen kan het scherm kort zwart worden.</string>
     <string name="dashboard_tracked_series">Gevolgde series</string>
+    <string name="nav_saved_streams">Opgeslagen streams</string>
 </resources>

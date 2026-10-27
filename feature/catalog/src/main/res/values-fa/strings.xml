@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">پاک کردن سابقه تماشا ممکن نشد. دوباره تلاش کنید.</string>
     <string name="series_tracking_failed">به‌روزرسانی دنبال کردن قسمت‌های جدید ممکن نشد. دوباره تلاش کنید.</string>
     <string name="dashboard_tracked_series">سریال‌های دنبال‌شده</string>
+    <string name="saved_streams_title">استریم‌های ذخیره‌شده</string>
+    <string name="saved_streams_subtitle">استریم‌های تکی که ذخیره کرده‌اید: یک پیوند مستقیم یا Stream API که هر بار پیوند تازه می‌دهد.</string>
+    <string name="saved_streams_add">افزودن استریم</string>
+    <string name="saved_streams_empty">هنوز استریمی ذخیره نشده است. یک پیوند مستقیم یا نشانی Stream API که پیوند برمی‌گرداند اضافه کنید.</string>
+    <string name="saved_streams_play_failed">پخش این استریم ممکن نشد. پیوند یا در دسترس بودن Stream API را بررسی کنید.</string>
+    <string name="saved_streams_resolving">در حال دریافت پیوند استریم…</string>
+    <string name="saved_streams_kind_direct">نشانی مستقیم</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">ویرایش</string>
+    <string name="saved_streams_delete">حذف</string>
+    <string name="saved_streams_add_title">افزودن استریم</string>
+    <string name="saved_streams_edit_title">ویرایش استریم</string>
+    <string name="saved_streams_name">نام</string>
+    <string name="saved_streams_stream_url">نشانی استریم</string>
+    <string name="saved_streams_api_url">نشانی Stream API</string>
+    <string name="saved_streams_direct_hint">پیوند همان‌طور که هست پخش می‌شود (http، https، rtsp، rtmp…).</string>
+    <string name="saved_streams_api_hint">در هر پخش فراخوانی می‌شود و باید پیوند استریم را به‌صورت متن ساده یا JSON مانند {\"url\": \"…\"} برگرداند.</string>
+    <string name="saved_streams_invalid">یک نام و پیوند معتبر وارد کنید.</string>
+    <string name="saved_streams_cancel">لغو</string>
+    <string name="saved_streams_save">ذخیره</string>
+    <string name="saved_streams_delete_title">استریم حذف شود؟</string>
+    <string name="saved_streams_delete_body">«%1$s» از استریم‌های ذخیره‌شده حذف می‌شود.</string>
 </resources>

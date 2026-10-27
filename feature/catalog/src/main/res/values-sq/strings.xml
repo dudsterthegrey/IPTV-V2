@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Historiku i shikimit nuk mund të pastrohej. Provo përsëri.</string>
     <string name="series_tracking_failed">Ndjekja e episodeve të reja nuk mund të përditësohej. Provo përsëri.</string>
     <string name="dashboard_tracked_series">Serialet e ndjekura</string>
+    <string name="saved_streams_title">Transmetimet e ruajtura</string>
+    <string name="saved_streams_subtitle">Transmetime të veçanta që ke ruajtur: një lidhje e drejtpërdrejtë ose një Stream API që jep lidhje të re çdo herë.</string>
+    <string name="saved_streams_add">Shto transmetim</string>
+    <string name="saved_streams_empty">Ende nuk ka transmetime të ruajtura. Shto një lidhje të drejtpërdrejtë ose URL-në e një Stream API që e kthen.</string>
+    <string name="saved_streams_play_failed">Transmetimi nuk mund të nisej. Kontrollo lidhjen ose nëse Stream API është i arritshëm.</string>
+    <string name="saved_streams_resolving">Po merret lidhja e transmetimit…</string>
+    <string name="saved_streams_kind_direct">URL e drejtpërdrejtë</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Redakto</string>
+    <string name="saved_streams_delete">Fshi</string>
+    <string name="saved_streams_add_title">Shto transmetim</string>
+    <string name="saved_streams_edit_title">Redakto transmetimin</string>
+    <string name="saved_streams_name">Emri</string>
+    <string name="saved_streams_stream_url">URL e transmetimit</string>
+    <string name="saved_streams_api_url">URL e Stream API</string>
+    <string name="saved_streams_direct_hint">Lidhja luhet ashtu siç është (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Thirret sa herë që luan; duhet të kthejë lidhjen si tekst të thjeshtë ose JSON si {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Fut një emër dhe një lidhje të vlefshme.</string>
+    <string name="saved_streams_cancel">Anulo</string>
+    <string name="saved_streams_save">Ruaj</string>
+    <string name="saved_streams_delete_title">Të fshihet transmetimi?</string>
+    <string name="saved_streams_delete_body">“%1$s” do të hiqet nga transmetimet e ruajtura.</string>
 </resources>

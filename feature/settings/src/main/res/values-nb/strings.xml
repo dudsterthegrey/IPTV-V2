@@ -951,4 +951,5 @@
     <string name="settings_refresh_rate_matching">Tilpass til innholdets bildefrekvens</string>
     <string name="settings_refresh_rate_matching_description">Tilpasser skjermens oppdateringsfrekvens til videoen for jevnere bevegelser. Krever støtte fra skjermen; skjermen kan bli svart et øyeblikk ved bytte.</string>
     <string name="dashboard_tracked_series">Fulgte serier</string>
+    <string name="nav_saved_streams">Lagrede strømmer</string>
 </resources>

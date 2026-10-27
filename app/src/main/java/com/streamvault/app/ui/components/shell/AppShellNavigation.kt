@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
@@ -151,6 +152,7 @@ internal fun rememberAppDestinationItems(
 private fun AppTopLevelDestination.toDestinationItem(): AppDestinationItem = when (this) {
     AppTopLevelDestination.HOME -> AppDestinationItem(Routes.HOME, R.string.nav_home, Icons.Default.Home)
     AppTopLevelDestination.LIVE_TV -> AppDestinationItem(Routes.LIVE_TV, R.string.nav_live_tv, Icons.Default.PlayArrow)
+    AppTopLevelDestination.SAVED_STREAMS -> AppDestinationItem(Routes.SAVED_STREAMS, R.string.nav_saved_streams, Icons.Default.Link)
     AppTopLevelDestination.SPORTS -> AppDestinationItem(Routes.SPORTS, R.string.nav_sports, Icons.Default.SportsSoccer)
     AppTopLevelDestination.MOVIES -> AppDestinationItem(Routes.MOVIES, R.string.nav_movies, Icons.Default.Star)
     AppTopLevelDestination.SERIES -> AppDestinationItem(Routes.SERIES, R.string.nav_series, Icons.Default.Menu)

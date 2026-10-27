@@ -946,4 +946,5 @@
     <string name="settings_refresh_rate_matching">配合內容影格率</string>
     <string name="settings_refresh_rate_matching_description">依照影片調整顯示器更新率，讓動態畫面更流暢。需要顯示器支援；切換時螢幕可能會短暫變黑。</string>
     <string name="dashboard_tracked_series">追蹤的節目</string>
+    <string name="nav_saved_streams">已儲存的串流</string>
 </resources>

@@ -947,4 +947,5 @@
     <string name="settings_refresh_rate_matching">匹配内容帧率</string>
     <string name="settings_refresh_rate_matching_description">根据视频调整显示器刷新率，让运动画面更流畅。需要显示器支持；切换时屏幕可能会短暂变黑。</string>
     <string name="dashboard_tracked_series">追踪的节目</string>
+    <string name="nav_saved_streams">已保存的直播流</string>
 </resources>

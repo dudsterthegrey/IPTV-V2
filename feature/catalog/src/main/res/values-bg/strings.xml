@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Историята на гледане не можа да бъде изчистена. Опитайте отново.</string>
     <string name="series_tracking_failed">Следенето на нови епизоди не можа да бъде обновено. Опитайте отново.</string>
     <string name="dashboard_tracked_series">Следени сериали</string>
+    <string name="saved_streams_title">Запазени потоци</string>
+    <string name="saved_streams_subtitle">Отделни потоци, които сте запазили: директна връзка или Stream API, който всеки път дава нова връзка.</string>
+    <string name="saved_streams_add">Добавяне на поток</string>
+    <string name="saved_streams_empty">Още няма запазени потоци. Добавете директна връзка към поток или URL на Stream API, който връща такава.</string>
+    <string name="saved_streams_play_failed">Потокът не можа да стартира. Проверете връзката или дали Stream API е достъпен.</string>
+    <string name="saved_streams_resolving">Получаване на връзка към потока…</string>
+    <string name="saved_streams_kind_direct">Директен URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Редактиране</string>
+    <string name="saved_streams_delete">Изтриване</string>
+    <string name="saved_streams_add_title">Добавяне на поток</string>
+    <string name="saved_streams_edit_title">Редактиране на поток</string>
+    <string name="saved_streams_name">Име</string>
+    <string name="saved_streams_stream_url">URL на потока</string>
+    <string name="saved_streams_api_url">URL на Stream API</string>
+    <string name="saved_streams_direct_hint">Връзката се възпроизвежда както е (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Извиква се при всяко пускане; трябва да връща връзката към потока като обикновен текст или JSON, напр. {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Въведете име и валидна връзка.</string>
+    <string name="saved_streams_cancel">Отказ</string>
+    <string name="saved_streams_save">Запазване</string>
+    <string name="saved_streams_delete_title">Да се изтрие ли потокът?</string>
+    <string name="saved_streams_delete_body">„%1$s“ ще бъде премахнат от запазените потоци.</string>
 </resources>

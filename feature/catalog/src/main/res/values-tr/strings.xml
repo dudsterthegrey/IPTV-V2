@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">İzleme geçmişi temizlenemedi. Tekrar deneyin.</string>
     <string name="series_tracking_failed">Yeni bölüm takibi güncellenemedi. Tekrar deneyin.</string>
     <string name="dashboard_tracked_series">Takip Edilen Diziler</string>
+    <string name="saved_streams_title">Kayıtlı Yayınlar</string>
+    <string name="saved_streams_subtitle">Kaydettiğiniz tekil yayınlar: doğrudan bağlantı veya her seferinde yeni bağlantı veren bir Stream API.</string>
+    <string name="saved_streams_add">Yayın ekle</string>
+    <string name="saved_streams_empty">Henüz kayıtlı yayın yok. Doğrudan bir yayın bağlantısı veya bağlantı döndüren bir Stream API URL’si ekleyin.</string>
+    <string name="saved_streams_play_failed">Bu yayın başlatılamadı. Bağlantıyı veya Stream API’ye erişilebildiğini kontrol edin.</string>
+    <string name="saved_streams_resolving">Yayın bağlantısı alınıyor…</string>
+    <string name="saved_streams_kind_direct">Doğrudan URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Düzenle</string>
+    <string name="saved_streams_delete">Sil</string>
+    <string name="saved_streams_add_title">Yayın ekle</string>
+    <string name="saved_streams_edit_title">Yayını düzenle</string>
+    <string name="saved_streams_name">Ad</string>
+    <string name="saved_streams_stream_url">Yayın URL’si</string>
+    <string name="saved_streams_api_url">Stream API URL’si</string>
+    <string name="saved_streams_direct_hint">Bağlantı olduğu gibi oynatılır (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Her oynatmada çağrılır; yayın bağlantısını düz metin veya {\"url\": \"…\"} gibi JSON olarak döndürmelidir.</string>
+    <string name="saved_streams_invalid">Bir ad ve geçerli bir bağlantı girin.</string>
+    <string name="saved_streams_cancel">İptal</string>
+    <string name="saved_streams_save">Kaydet</string>
+    <string name="saved_streams_delete_title">Yayın silinsin mi?</string>
+    <string name="saved_streams_delete_body">“%1$s” Kayıtlı Yayınlar’dan kaldırılacak.</string>
 </resources>

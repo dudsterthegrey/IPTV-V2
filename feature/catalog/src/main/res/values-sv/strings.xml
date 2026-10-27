@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Det gick inte att rensa visningshistoriken. Försök igen.</string>
     <string name="series_tracking_failed">Det gick inte att uppdatera bevakningen av nya avsnitt. Försök igen.</string>
     <string name="dashboard_tracked_series">Följda serier</string>
+    <string name="saved_streams_title">Sparade strömmar</string>
+    <string name="saved_streams_subtitle">Enskilda strömmar du har sparat: en direktlänk, eller ett Stream API som ger en ny länk varje gång.</string>
+    <string name="saved_streams_add">Lägg till ström</string>
+    <string name="saved_streams_empty">Inga sparade strömmar än. Lägg till en direkt strömlänk, eller en Stream API-URL som returnerar en.</string>
+    <string name="saved_streams_play_failed">Det gick inte att starta strömmen. Kontrollera länken, eller om Stream API:t går att nå.</string>
+    <string name="saved_streams_resolving">Hämtar strömlänk…</string>
+    <string name="saved_streams_kind_direct">Direkt URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Redigera</string>
+    <string name="saved_streams_delete">Ta bort</string>
+    <string name="saved_streams_add_title">Lägg till ström</string>
+    <string name="saved_streams_edit_title">Redigera ström</string>
+    <string name="saved_streams_name">Namn</string>
+    <string name="saved_streams_stream_url">Ström-URL</string>
+    <string name="saved_streams_api_url">Stream API-URL</string>
+    <string name="saved_streams_direct_hint">Länken spelas upp som den är (http, https, rtsp, rtmp …).</string>
+    <string name="saved_streams_api_hint">Anropas vid varje uppspelning; den ska returnera strömlänken som ren text eller JSON som {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Ange ett namn och en giltig länk.</string>
+    <string name="saved_streams_cancel">Avbryt</string>
+    <string name="saved_streams_save">Spara</string>
+    <string name="saved_streams_delete_title">Ta bort strömmen?</string>
+    <string name="saved_streams_delete_body">”%1$s” tas bort från Sparade strömmar.</string>
 </resources>

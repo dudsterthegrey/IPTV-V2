@@ -949,4 +949,5 @@
     <string name="settings_refresh_rate_matching">تطبیق با نرخ فریم محتوا</string>
     <string name="settings_refresh_rate_matching_description">نرخ نوسازی نمایشگر را برای حرکت روان‌تر با ویدیو هماهنگ می‌کند. به پشتیبانی نمایشگر نیاز دارد؛ هنگام تغییر ممکن است صفحه برای لحظه‌ای سیاه شود.</string>
     <string name="dashboard_tracked_series">سریال‌های دنبال‌شده</string>
+    <string name="nav_saved_streams">استریم‌های ذخیره‌شده</string>
 </resources>

@@ -951,4 +951,5 @@
     <string name="settings_refresh_rate_matching">Anpassa till innehållets bildfrekvens</string>
     <string name="settings_refresh_rate_matching_description">Anpassar skärmens uppdateringsfrekvens till videon för jämnare rörelser. Kräver stöd från skärmen; skärmen kan bli svart en kort stund vid byte.</string>
     <string name="dashboard_tracked_series">Följda serier</string>
+    <string name="nav_saved_streams">Sparade strömmar</string>
 </resources>

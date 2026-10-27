@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Kijkgeschiedenis kon niet worden gewist. Probeer het opnieuw.</string>
     <string name="series_tracking_failed">Het volgen van nieuwe afleveringen kon niet worden bijgewerkt. Probeer het opnieuw.</string>
     <string name="dashboard_tracked_series">Gevolgde series</string>
+    <string name="saved_streams_title">Opgeslagen streams</string>
+    <string name="saved_streams_subtitle">Losse streams die je hebt opgeslagen: een directe link, of een Stream API die elke keer een nieuwe link geeft.</string>
+    <string name="saved_streams_add">Stream toevoegen</string>
+    <string name="saved_streams_empty">Nog geen opgeslagen streams. Voeg een directe streamlink toe, of een Stream API-URL die er een teruggeeft.</string>
+    <string name="saved_streams_play_failed">Deze stream kon niet worden gestart. Controleer de link, of of de Stream API bereikbaar is.</string>
+    <string name="saved_streams_resolving">Streamlink ophalen…</string>
+    <string name="saved_streams_kind_direct">Directe URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Bewerken</string>
+    <string name="saved_streams_delete">Verwijderen</string>
+    <string name="saved_streams_add_title">Stream toevoegen</string>
+    <string name="saved_streams_edit_title">Stream bewerken</string>
+    <string name="saved_streams_name">Naam</string>
+    <string name="saved_streams_stream_url">Stream-URL</string>
+    <string name="saved_streams_api_url">Stream API-URL</string>
+    <string name="saved_streams_direct_hint">De link wordt ongewijzigd afgespeeld (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Wordt bij elke weergave aangeroepen; moet de streamlink teruggeven als platte tekst of JSON zoals {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Voer een naam en een geldige link in.</string>
+    <string name="saved_streams_cancel">Annuleren</string>
+    <string name="saved_streams_save">Opslaan</string>
+    <string name="saved_streams_delete_title">Stream verwijderen?</string>
+    <string name="saved_streams_delete_body">‘%1$s’ wordt verwijderd uit Opgeslagen streams.</string>
 </resources>

@@ -952,4 +952,5 @@
     <string name="settings_refresh_rate_matching">Uskladi s brzinom kadrova sadržaja</string>
     <string name="settings_refresh_rate_matching_description">Usklađuje frekvenciju osvježavanja zaslona s videozapisom za glađe pokrete. Zahtijeva podršku zaslona; zaslon se pri promjeni može nakratko zacrniti.</string>
     <string name="dashboard_tracked_series">Praćene serije</string>
+    <string name="nav_saved_streams">Spremljeni streamovi</string>
 </resources>

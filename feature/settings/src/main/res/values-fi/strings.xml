@@ -951,4 +951,5 @@
     <string name="settings_refresh_rate_matching">Mukauta sisällön kuvataajuuteen</string>
     <string name="settings_refresh_rate_matching_description">Mukauttaa näytön virkistystaajuuden videoon liikkeen sulavoittamiseksi. Edellyttää näytön tukea; näyttö voi pimentyä hetkeksi vaihdon aikana.</string>
     <string name="dashboard_tracked_series">Seuratut sarjat</string>
+    <string name="nav_saved_streams">Tallennetut striimit</string>
 </resources>

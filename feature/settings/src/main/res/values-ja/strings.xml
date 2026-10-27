@@ -949,4 +949,5 @@
     <string name="settings_refresh_rate_matching">コンテンツのフレームレートに合わせる</string>
     <string name="settings_refresh_rate_matching_description">映像の動きを滑らかにするため、画面のリフレッシュレートを動画に合わせます。対応するディスプレイが必要です。切り替え時に画面が一瞬暗くなることがあります。</string>
     <string name="dashboard_tracked_series">追跡中の番組</string>
+    <string name="nav_saved_streams">保存したストリーム</string>
 </resources>

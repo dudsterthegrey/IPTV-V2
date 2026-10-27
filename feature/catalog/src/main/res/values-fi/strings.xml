@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Katseluhistorian tyhjentäminen epäonnistui. Yritä uudelleen.</string>
     <string name="series_tracking_failed">Uusien jaksojen seurannan päivittäminen epäonnistui. Yritä uudelleen.</string>
     <string name="dashboard_tracked_series">Seuratut sarjat</string>
+    <string name="saved_streams_title">Tallennetut striimit</string>
+    <string name="saved_streams_subtitle">Yksittäiset tallentamasi striimit: suora linkki tai Stream API, joka antaa joka kerta uuden linkin.</string>
+    <string name="saved_streams_add">Lisää striimi</string>
+    <string name="saved_streams_empty">Ei vielä tallennettuja striimejä. Lisää suora striimilinkki tai Stream API -osoite, joka palauttaa sellaisen.</string>
+    <string name="saved_streams_play_failed">Striimin käynnistys epäonnistui. Tarkista linkki tai Stream API:n saatavuus.</string>
+    <string name="saved_streams_resolving">Haetaan striimilinkkiä…</string>
+    <string name="saved_streams_kind_direct">Suora URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Muokkaa</string>
+    <string name="saved_streams_delete">Poista</string>
+    <string name="saved_streams_add_title">Lisää striimi</string>
+    <string name="saved_streams_edit_title">Muokkaa striimiä</string>
+    <string name="saved_streams_name">Nimi</string>
+    <string name="saved_streams_stream_url">Striimin URL</string>
+    <string name="saved_streams_api_url">Stream API -URL</string>
+    <string name="saved_streams_direct_hint">Linkki toistetaan sellaisenaan (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Kutsutaan joka toistolla; sen pitää palauttaa striimilinkki tekstinä tai JSONina, esim. {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Anna nimi ja kelvollinen linkki.</string>
+    <string name="saved_streams_cancel">Peruuta</string>
+    <string name="saved_streams_save">Tallenna</string>
+    <string name="saved_streams_delete_title">Poistetaanko striimi?</string>
+    <string name="saved_streams_delete_body">”%1$s” poistetaan tallennetuista striimeistä.</string>
 </resources>

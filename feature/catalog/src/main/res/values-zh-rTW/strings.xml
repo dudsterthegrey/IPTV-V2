@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">無法清除觀看紀錄，請再試一次。</string>
     <string name="series_tracking_failed">無法更新新集數追蹤，請再試一次。</string>
     <string name="dashboard_tracked_series">追蹤的節目</string>
+    <string name="saved_streams_title">已儲存的串流</string>
+    <string name="saved_streams_subtitle">你儲存的單一串流：直接連結，或每次提供新連結的 Stream API。</string>
+    <string name="saved_streams_add">新增串流</string>
+    <string name="saved_streams_empty">尚未儲存任何串流。新增直接的串流連結，或會回傳連結的 Stream API 網址。</string>
+    <string name="saved_streams_play_failed">無法開始播放這個串流。請檢查連結，或 Stream API 是否可連線。</string>
+    <string name="saved_streams_resolving">正在取得串流連結…</string>
+    <string name="saved_streams_kind_direct">直接網址</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">編輯</string>
+    <string name="saved_streams_delete">刪除</string>
+    <string name="saved_streams_add_title">新增串流</string>
+    <string name="saved_streams_edit_title">編輯串流</string>
+    <string name="saved_streams_name">名稱</string>
+    <string name="saved_streams_stream_url">串流網址</string>
+    <string name="saved_streams_api_url">Stream API 網址</string>
+    <string name="saved_streams_direct_hint">連結會直接播放（http、https、rtsp、rtmp 等）。</string>
+    <string name="saved_streams_api_hint">每次播放時都會呼叫；它應以純文字或類似 {\"url\": \"…\"} 的 JSON 回傳串流連結。</string>
+    <string name="saved_streams_invalid">請輸入名稱和有效連結。</string>
+    <string name="saved_streams_cancel">取消</string>
+    <string name="saved_streams_save">儲存</string>
+    <string name="saved_streams_delete_title">要刪除串流嗎？</string>
+    <string name="saved_streams_delete_body">「%1$s」將從已儲存的串流中移除。</string>
 </resources>

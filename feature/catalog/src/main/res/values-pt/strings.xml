@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Não foi possível limpar o histórico de reprodução. Tente novamente.</string>
     <string name="series_tracking_failed">Não foi possível atualizar o acompanhamento de novos episódios. Tente novamente.</string>
     <string name="dashboard_tracked_series">Séries acompanhadas</string>
+    <string name="saved_streams_title">Streams salvos</string>
+    <string name="saved_streams_subtitle">Streams avulsos que você salvou: um link direto ou uma Stream API que gera um link novo a cada vez.</string>
+    <string name="saved_streams_add">Adicionar stream</string>
+    <string name="saved_streams_empty">Nenhum stream salvo ainda. Adicione um link direto ou a URL de uma Stream API que retorne um.</string>
+    <string name="saved_streams_play_failed">Não foi possível iniciar este stream. Verifique o link ou se a Stream API está acessível.</string>
+    <string name="saved_streams_resolving">Obtendo o link do stream…</string>
+    <string name="saved_streams_kind_direct">URL direta</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Editar</string>
+    <string name="saved_streams_delete">Excluir</string>
+    <string name="saved_streams_add_title">Adicionar stream</string>
+    <string name="saved_streams_edit_title">Editar stream</string>
+    <string name="saved_streams_name">Nome</string>
+    <string name="saved_streams_stream_url">URL do stream</string>
+    <string name="saved_streams_api_url">URL da Stream API</string>
+    <string name="saved_streams_direct_hint">O link é reproduzido como está (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">É chamada a cada reprodução; deve retornar o link como texto simples ou JSON como {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Informe um nome e um link válido.</string>
+    <string name="saved_streams_cancel">Cancelar</string>
+    <string name="saved_streams_save">Salvar</string>
+    <string name="saved_streams_delete_title">Excluir stream?</string>
+    <string name="saved_streams_delete_body">“%1$s” será removido dos streams salvos.</string>
 </resources>

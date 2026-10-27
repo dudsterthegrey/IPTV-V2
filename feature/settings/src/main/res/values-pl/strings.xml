@@ -957,4 +957,5 @@
     <string name="settings_refresh_rate_matching">Dopasuj do liczby klatek treści</string>
     <string name="settings_refresh_rate_matching_description">Dopasowuje częstotliwość odświeżania ekranu do filmu, aby ruch był płynniejszy. Wymaga obsługi przez ekran; podczas zmiany ekran może na chwilę zgasnąć.</string>
     <string name="dashboard_tracked_series">Śledzone seriale</string>
+    <string name="nav_saved_streams">Zapisane strumienie</string>
 </resources>

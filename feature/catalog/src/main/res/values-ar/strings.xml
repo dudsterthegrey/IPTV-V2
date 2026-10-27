@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">تعذّر مسح سجل المشاهدة. حاول مرة أخرى.</string>
     <string name="series_tracking_failed">تعذّر تحديث تتبّع الحلقات الجديدة. حاول مرة أخرى.</string>
     <string name="dashboard_tracked_series">العروض المتتبَّعة</string>
+    <string name="saved_streams_title">البث المحفوظ</string>
+    <string name="saved_streams_subtitle">بثوث فردية حفظتها: رابط مباشر، أو Stream API يقدّم رابطًا جديدًا في كل مرة.</string>
+    <string name="saved_streams_add">إضافة بث</string>
+    <string name="saved_streams_empty">لا يوجد بث محفوظ بعد. أضف رابط بث مباشر، أو عنوان Stream API يُرجع رابطًا.</string>
+    <string name="saved_streams_play_failed">تعذّر تشغيل هذا البث. تحقّق من الرابط أو من إمكانية الوصول إلى Stream API.</string>
+    <string name="saved_streams_resolving">جارٍ الحصول على رابط البث…</string>
+    <string name="saved_streams_kind_direct">رابط مباشر</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">تعديل</string>
+    <string name="saved_streams_delete">حذف</string>
+    <string name="saved_streams_add_title">إضافة بث</string>
+    <string name="saved_streams_edit_title">تعديل البث</string>
+    <string name="saved_streams_name">الاسم</string>
+    <string name="saved_streams_stream_url">رابط البث</string>
+    <string name="saved_streams_api_url">عنوان Stream API</string>
+    <string name="saved_streams_direct_hint">يتم تشغيل الرابط كما هو (http وhttps وrtsp وrtmp…).</string>
+    <string name="saved_streams_api_hint">يُستدعى في كل تشغيل، ويجب أن يُرجع رابط البث كنص عادي أو JSON مثل {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">أدخل اسمًا ورابطًا صالحًا.</string>
+    <string name="saved_streams_cancel">إلغاء</string>
+    <string name="saved_streams_save">حفظ</string>
+    <string name="saved_streams_delete_title">حذف البث؟</string>
+    <string name="saved_streams_delete_body">ستتم إزالة «%1$s» من البث المحفوظ.</string>
 </resources>

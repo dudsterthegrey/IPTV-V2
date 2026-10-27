@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Tidak dapat menghapus riwayat tontonan. Coba lagi.</string>
     <string name="series_tracking_failed">Tidak dapat memperbarui pelacakan episode baru. Coba lagi.</string>
     <string name="dashboard_tracked_series">Acara yang Dilacak</string>
+    <string name="saved_streams_title">Streaming Tersimpan</string>
+    <string name="saved_streams_subtitle">Streaming tunggal yang Anda simpan: link langsung, atau Stream API yang memberi link baru setiap kali.</string>
+    <string name="saved_streams_add">Tambah streaming</string>
+    <string name="saved_streams_empty">Belum ada streaming tersimpan. Tambahkan link streaming langsung, atau URL Stream API yang mengembalikannya.</string>
+    <string name="saved_streams_play_failed">Tidak dapat memulai streaming ini. Periksa link-nya, atau apakah Stream API dapat dijangkau.</string>
+    <string name="saved_streams_resolving">Mengambil link streaming…</string>
+    <string name="saved_streams_kind_direct">URL langsung</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Edit</string>
+    <string name="saved_streams_delete">Hapus</string>
+    <string name="saved_streams_add_title">Tambah streaming</string>
+    <string name="saved_streams_edit_title">Edit streaming</string>
+    <string name="saved_streams_name">Nama</string>
+    <string name="saved_streams_stream_url">URL streaming</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Link diputar apa adanya (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Dipanggil setiap kali diputar; harus mengembalikan link streaming sebagai teks biasa atau JSON seperti {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Masukkan nama dan link yang valid.</string>
+    <string name="saved_streams_cancel">Batal</string>
+    <string name="saved_streams_save">Simpan</string>
+    <string name="saved_streams_delete_title">Hapus streaming?</string>
+    <string name="saved_streams_delete_body">“%1$s” akan dihapus dari Streaming Tersimpan.</string>
 </resources>

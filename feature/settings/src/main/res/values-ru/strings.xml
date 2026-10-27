@@ -957,4 +957,5 @@
     <string name="settings_refresh_rate_matching">Подстраивать частоту под видеоконтент</string>
     <string name="settings_refresh_rate_matching_description">Подстраивает частоту обновления экрана под видео для более плавного движения. Требуется поддержка экрана; при переключении экран может ненадолго погаснуть.</string>
     <string name="dashboard_tracked_series">Отслеживаемые сериалы</string>
+    <string name="nav_saved_streams">Сохранённые потоки</string>
 </resources>

@@ -951,4 +951,5 @@
     <string name="settings_refresh_rate_matching">Igazítás a tartalom képkockasebességéhez</string>
     <string name="settings_refresh_rate_matching_description">A kijelző frissítési gyakoriságát a videóhoz igazítja az egyenletesebb mozgásért. Kijelzőtámogatást igényel; váltáskor a képernyő rövid időre elsötétülhet.</string>
     <string name="dashboard_tracked_series">Követett sorozatok</string>
+    <string name="nav_saved_streams">Mentett streamek</string>
 </resources>

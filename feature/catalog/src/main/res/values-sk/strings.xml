@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Históriu pozerania sa nepodarilo vymazať. Skúste to znova.</string>
     <string name="series_tracking_failed">Sledovanie nových dielov sa nepodarilo aktualizovať. Skúste to znova.</string>
     <string name="dashboard_tracked_series">Sledované relácie</string>
+    <string name="saved_streams_title">Uložené streamy</string>
+    <string name="saved_streams_subtitle">Jednotlivé streamy, ktoré ste si uložili: priamy odkaz alebo Stream API, ktoré zakaždým dá nový odkaz.</string>
+    <string name="saved_streams_add">Pridať stream</string>
+    <string name="saved_streams_empty">Zatiaľ žiadne uložené streamy. Pridajte priamy odkaz na stream alebo URL Stream API, ktoré ho vráti.</string>
+    <string name="saved_streams_play_failed">Stream sa nepodarilo spustiť. Skontrolujte odkaz alebo dostupnosť Stream API.</string>
+    <string name="saved_streams_resolving">Získava sa odkaz na stream…</string>
+    <string name="saved_streams_kind_direct">Priama URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Upraviť</string>
+    <string name="saved_streams_delete">Odstrániť</string>
+    <string name="saved_streams_add_title">Pridať stream</string>
+    <string name="saved_streams_edit_title">Upraviť stream</string>
+    <string name="saved_streams_name">Názov</string>
+    <string name="saved_streams_stream_url">URL streamu</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Odkaz sa prehrá tak, ako je (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Volá sa pri každom prehrávaní; má vrátiť odkaz ako obyčajný text alebo JSON, napr. {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Zadajte názov a platný odkaz.</string>
+    <string name="saved_streams_cancel">Zrušiť</string>
+    <string name="saved_streams_save">Uložiť</string>
+    <string name="saved_streams_delete_title">Odstrániť stream?</string>
+    <string name="saved_streams_delete_body">„%1$s“ sa odstráni z uložených streamov.</string>
 </resources>

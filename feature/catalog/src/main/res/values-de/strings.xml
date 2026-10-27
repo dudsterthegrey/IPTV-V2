@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Der Wiedergabeverlauf konnte nicht gelöscht werden. Bitte erneut versuchen.</string>
     <string name="series_tracking_failed">Die Verfolgung neuer Folgen konnte nicht aktualisiert werden. Bitte erneut versuchen.</string>
     <string name="dashboard_tracked_series">Verfolgte Serien</string>
+    <string name="saved_streams_title">Gespeicherte Streams</string>
+    <string name="saved_streams_subtitle">Einzelne Streams, die du gespeichert hast: ein Direktlink oder eine Stream-API, die jedes Mal einen neuen Link liefert.</string>
+    <string name="saved_streams_add">Stream hinzufügen</string>
+    <string name="saved_streams_empty">Noch keine gespeicherten Streams. Füge einen direkten Stream-Link oder eine Stream-API-URL hinzu, die einen liefert.</string>
+    <string name="saved_streams_play_failed">Der Stream konnte nicht gestartet werden. Prüfe den Link oder ob die Stream-API erreichbar ist.</string>
+    <string name="saved_streams_resolving">Stream-Link wird abgerufen…</string>
+    <string name="saved_streams_kind_direct">Direkte URL</string>
+    <string name="saved_streams_kind_api">Stream-API</string>
+    <string name="saved_streams_edit">Bearbeiten</string>
+    <string name="saved_streams_delete">Löschen</string>
+    <string name="saved_streams_add_title">Stream hinzufügen</string>
+    <string name="saved_streams_edit_title">Stream bearbeiten</string>
+    <string name="saved_streams_name">Name</string>
+    <string name="saved_streams_stream_url">Stream-URL</string>
+    <string name="saved_streams_api_url">Stream-API-URL</string>
+    <string name="saved_streams_direct_hint">Der Link wird unverändert abgespielt (http, https, rtsp, rtmp …).</string>
+    <string name="saved_streams_api_hint">Wird bei jeder Wiedergabe aufgerufen und sollte den Stream-Link als reinen Text oder als JSON wie {\"url\": \"…\"} liefern.</string>
+    <string name="saved_streams_invalid">Gib einen Namen und einen gültigen Link ein.</string>
+    <string name="saved_streams_cancel">Abbrechen</string>
+    <string name="saved_streams_save">Speichern</string>
+    <string name="saved_streams_delete_title">Stream löschen?</string>
+    <string name="saved_streams_delete_body">„%1$s“ wird aus den gespeicherten Streams entfernt.</string>
 </resources>

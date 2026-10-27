@@ -7,6 +7,7 @@ enum class AppTopLevelDestination(
 ) {
     HOME("home", AppLandingDestination.HOME),
     LIVE_TV("live_tv", AppLandingDestination.LIVE_TV),
+    SAVED_STREAMS("saved_streams"),
     SPORTS("sports", AppLandingDestination.SPORTS),
     MOVIES("movies", AppLandingDestination.MOVIES),
     SERIES("series", AppLandingDestination.SERIES),
@@ -20,6 +21,7 @@ enum class AppTopLevelDestination(
         val defaultOrder: List<AppTopLevelDestination> = listOf(
             HOME,
             LIVE_TV,
+            SAVED_STREAMS,
             SPORTS,
             MOVIES,
             SERIES,

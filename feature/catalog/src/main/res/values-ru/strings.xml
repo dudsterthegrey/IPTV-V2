@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Не удалось очистить историю просмотра. Повторите попытку.</string>
     <string name="series_tracking_failed">Не удалось обновить отслеживание новых серий. Повторите попытку.</string>
     <string name="dashboard_tracked_series">Отслеживаемые сериалы</string>
+    <string name="saved_streams_title">Сохранённые потоки</string>
+    <string name="saved_streams_subtitle">Отдельные сохранённые потоки: прямая ссылка или Stream API, который каждый раз выдаёт новую ссылку.</string>
+    <string name="saved_streams_add">Добавить поток</string>
+    <string name="saved_streams_empty">Сохранённых потоков пока нет. Добавьте прямую ссылку на поток или URL Stream API, который её возвращает.</string>
+    <string name="saved_streams_play_failed">Не удалось запустить поток. Проверьте ссылку или доступность Stream API.</string>
+    <string name="saved_streams_resolving">Получение ссылки на поток…</string>
+    <string name="saved_streams_kind_direct">Прямой URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Изменить</string>
+    <string name="saved_streams_delete">Удалить</string>
+    <string name="saved_streams_add_title">Добавить поток</string>
+    <string name="saved_streams_edit_title">Изменить поток</string>
+    <string name="saved_streams_name">Название</string>
+    <string name="saved_streams_stream_url">URL потока</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Ссылка воспроизводится как есть (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Вызывается при каждом воспроизведении; должен возвращать ссылку обычным текстом или JSON вида {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Введите название и корректную ссылку.</string>
+    <string name="saved_streams_cancel">Отмена</string>
+    <string name="saved_streams_save">Сохранить</string>
+    <string name="saved_streams_delete_title">Удалить поток?</string>
+    <string name="saved_streams_delete_body">«%1$s» будет удалён из сохранённых потоков.</string>
 </resources>

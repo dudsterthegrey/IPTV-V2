@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">Историју гледања није могуће обрисати. Покушајте поново.</string>
     <string name="series_tracking_failed">Праћење нових епизода није могуће ажурирати. Покушајте поново.</string>
     <string name="dashboard_tracked_series">Праћене серије</string>
+    <string name="saved_streams_title">Сачувани стримови</string>
+    <string name="saved_streams_subtitle">Појединачни стримови које сте сачували: директна веза или Stream API који сваки пут даје нову везу.</string>
+    <string name="saved_streams_add">Додај стрим</string>
+    <string name="saved_streams_empty">Још нема сачуваних стримова. Додајте директну везу ка стриму или URL Stream API-ја који је враћа.</string>
+    <string name="saved_streams_play_failed">Стрим није могуће покренути. Проверите везу или да ли је Stream API доступан.</string>
+    <string name="saved_streams_resolving">Преузимање везе ка стриму…</string>
+    <string name="saved_streams_kind_direct">Директни URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Измени</string>
+    <string name="saved_streams_delete">Обриши</string>
+    <string name="saved_streams_add_title">Додај стрим</string>
+    <string name="saved_streams_edit_title">Измени стрим</string>
+    <string name="saved_streams_name">Назив</string>
+    <string name="saved_streams_stream_url">URL стрима</string>
+    <string name="saved_streams_api_url">URL Stream API-ја</string>
+    <string name="saved_streams_direct_hint">Веза се репродукује онаква каква јесте (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Позива се при свакој репродукцији; треба да врати везу као обичан текст или JSON попут {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Унесите назив и исправну везу.</string>
+    <string name="saved_streams_cancel">Откажи</string>
+    <string name="saved_streams_save">Сачувај</string>
+    <string name="saved_streams_delete_title">Обрисати стрим?</string>
+    <string name="saved_streams_delete_body">„%1$s“ ће бити уклоњен из сачуваних стримова.</string>
 </resources>

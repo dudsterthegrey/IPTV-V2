@@ -19,6 +19,12 @@ class RoutesTest {
     }
 
     @Test
+    fun `saved streams route round-trips`() {
+        assertThat(AppRouteCodec.encode(AppDestination.SavedStreams)).isEqualTo(Routes.SAVED_STREAMS)
+        assertThat(AppRouteCodec.decode(Routes.SAVED_STREAMS)).isEqualTo(AppDestination.SavedStreams)
+    }
+
+    @Test
     fun `livePlayer preserves playback context`() {
         val request = Channel(
                 id = 42L,

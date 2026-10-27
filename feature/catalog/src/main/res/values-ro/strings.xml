@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Istoricul de vizionare nu a putut fi șters. Încearcă din nou.</string>
     <string name="series_tracking_failed">Urmărirea episoadelor noi nu a putut fi actualizată. Încearcă din nou.</string>
     <string name="dashboard_tracked_series">Seriale urmărite</string>
+    <string name="saved_streams_title">Fluxuri salvate</string>
+    <string name="saved_streams_subtitle">Fluxuri individuale pe care le-ai salvat: un link direct sau un Stream API care oferă de fiecare dată un link nou.</string>
+    <string name="saved_streams_add">Adaugă flux</string>
+    <string name="saved_streams_empty">Niciun flux salvat încă. Adaugă un link direct de flux sau un URL Stream API care returnează unul.</string>
+    <string name="saved_streams_play_failed">Fluxul nu a putut porni. Verifică linkul sau dacă Stream API este accesibil.</string>
+    <string name="saved_streams_resolving">Se obține linkul fluxului…</string>
+    <string name="saved_streams_kind_direct">URL direct</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Editează</string>
+    <string name="saved_streams_delete">Șterge</string>
+    <string name="saved_streams_add_title">Adaugă flux</string>
+    <string name="saved_streams_edit_title">Editează fluxul</string>
+    <string name="saved_streams_name">Nume</string>
+    <string name="saved_streams_stream_url">URL flux</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Linkul este redat ca atare (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Este apelat la fiecare redare; trebuie să returneze linkul ca text simplu sau JSON precum {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Introdu un nume și un link valid.</string>
+    <string name="saved_streams_cancel">Anulează</string>
+    <string name="saved_streams_save">Salvează</string>
+    <string name="saved_streams_delete_title">Ștergi fluxul?</string>
+    <string name="saved_streams_delete_body">„%1$s” va fi eliminat din fluxurile salvate.</string>
 </resources>

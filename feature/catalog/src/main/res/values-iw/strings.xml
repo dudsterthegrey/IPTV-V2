@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">לא ניתן היה לנקות את היסטוריית הצפייה. נסו שוב.</string>
     <string name="series_tracking_failed">לא ניתן היה לעדכן את המעקב אחר פרקים חדשים. נסו שוב.</string>
     <string name="dashboard_tracked_series">סדרות במעקב</string>
+    <string name="saved_streams_title">שידורים שמורים</string>
+    <string name="saved_streams_subtitle">שידורים בודדים ששמרתם: קישור ישיר, או Stream API שנותן קישור חדש בכל פעם.</string>
+    <string name="saved_streams_add">הוספת שידור</string>
+    <string name="saved_streams_empty">עדיין אין שידורים שמורים. הוסיפו קישור ישיר לשידור, או כתובת Stream API שמחזירה קישור.</string>
+    <string name="saved_streams_play_failed">לא ניתן היה להפעיל את השידור. בדקו את הקישור או אם ה-Stream API זמין.</string>
+    <string name="saved_streams_resolving">מקבל קישור לשידור…</string>
+    <string name="saved_streams_kind_direct">כתובת ישירה</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">עריכה</string>
+    <string name="saved_streams_delete">מחיקה</string>
+    <string name="saved_streams_add_title">הוספת שידור</string>
+    <string name="saved_streams_edit_title">עריכת שידור</string>
+    <string name="saved_streams_name">שם</string>
+    <string name="saved_streams_stream_url">כתובת השידור</string>
+    <string name="saved_streams_api_url">כתובת Stream API</string>
+    <string name="saved_streams_direct_hint">הקישור מופעל כפי שהוא (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">נקרא בכל הפעלה; עליו להחזיר את קישור השידור כטקסט פשוט או כ-JSON כמו {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">הזינו שם וקישור תקין.</string>
+    <string name="saved_streams_cancel">ביטול</string>
+    <string name="saved_streams_save">שמירה</string>
+    <string name="saved_streams_delete_title">למחוק את השידור?</string>
+    <string name="saved_streams_delete_body">„%1$s” יוסר מהשידורים השמורים.</string>
 </resources>

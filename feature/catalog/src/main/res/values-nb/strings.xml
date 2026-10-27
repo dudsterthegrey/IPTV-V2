@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Kunne ikke tømme visningshistorikken. Prøv igjen.</string>
     <string name="series_tracking_failed">Kunne ikke oppdatere sporingen av nye episoder. Prøv igjen.</string>
     <string name="dashboard_tracked_series">Fulgte serier</string>
+    <string name="saved_streams_title">Lagrede strømmer</string>
+    <string name="saved_streams_subtitle">Enkeltstrømmer du har lagret: en direkte lenke, eller et Stream API som gir en ny lenke hver gang.</string>
+    <string name="saved_streams_add">Legg til strøm</string>
+    <string name="saved_streams_empty">Ingen lagrede strømmer ennå. Legg til en direkte strømlenke, eller en Stream API-URL som returnerer en.</string>
+    <string name="saved_streams_play_failed">Kunne ikke starte strømmen. Sjekk lenken, eller om Stream API-et kan nås.</string>
+    <string name="saved_streams_resolving">Henter strømlenke…</string>
+    <string name="saved_streams_kind_direct">Direkte URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Rediger</string>
+    <string name="saved_streams_delete">Slett</string>
+    <string name="saved_streams_add_title">Legg til strøm</string>
+    <string name="saved_streams_edit_title">Rediger strøm</string>
+    <string name="saved_streams_name">Navn</string>
+    <string name="saved_streams_stream_url">Strøm-URL</string>
+    <string name="saved_streams_api_url">Stream API-URL</string>
+    <string name="saved_streams_direct_hint">Lenken spilles av som den er (http, https, rtsp, rtmp …).</string>
+    <string name="saved_streams_api_hint">Kalles ved hver avspilling; den skal returnere strømlenken som ren tekst eller JSON som {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Skriv inn et navn og en gyldig lenke.</string>
+    <string name="saved_streams_cancel">Avbryt</string>
+    <string name="saved_streams_save">Lagre</string>
+    <string name="saved_streams_delete_title">Slette strømmen?</string>
+    <string name="saved_streams_delete_body">«%1$s» fjernes fra Lagrede strømmer.</string>
 </resources>

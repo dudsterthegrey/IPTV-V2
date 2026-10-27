@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Afspilningshistorikken kunne ikke ryddes. Prøv igen.</string>
     <string name="series_tracking_failed">Sporing af nye afsnit kunne ikke opdateres. Prøv igen.</string>
     <string name="dashboard_tracked_series">Fulgte serier</string>
+    <string name="saved_streams_title">Gemte streams</string>
+    <string name="saved_streams_subtitle">Enkelte streams, du har gemt: et direkte link eller et Stream API, der giver et nyt link hver gang.</string>
+    <string name="saved_streams_add">Tilføj stream</string>
+    <string name="saved_streams_empty">Ingen gemte streams endnu. Tilføj et direkte streamlink eller en Stream API-URL, der returnerer et.</string>
+    <string name="saved_streams_play_failed">Streamen kunne ikke startes. Tjek linket, eller om Stream API’et kan nås.</string>
+    <string name="saved_streams_resolving">Henter streamlink…</string>
+    <string name="saved_streams_kind_direct">Direkte URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Rediger</string>
+    <string name="saved_streams_delete">Slet</string>
+    <string name="saved_streams_add_title">Tilføj stream</string>
+    <string name="saved_streams_edit_title">Rediger stream</string>
+    <string name="saved_streams_name">Navn</string>
+    <string name="saved_streams_stream_url">Stream-URL</string>
+    <string name="saved_streams_api_url">Stream API-URL</string>
+    <string name="saved_streams_direct_hint">Linket afspilles, som det er (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Kaldes ved hver afspilning; det skal returnere streamlinket som ren tekst eller JSON som {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Indtast et navn og et gyldigt link.</string>
+    <string name="saved_streams_cancel">Annuller</string>
+    <string name="saved_streams_save">Gem</string>
+    <string name="saved_streams_delete_title">Slet stream?</string>
+    <string name="saved_streams_delete_body">“%1$s” fjernes fra Gemte streams.</string>
 </resources>

@@ -380,4 +380,26 @@
     <string name="series_watch_history_clear_failed">Δεν ήταν δυνατή η διαγραφή του ιστορικού προβολής. Δοκιμάστε ξανά.</string>
     <string name="series_tracking_failed">Δεν ήταν δυνατή η ενημέρωση της παρακολούθησης νέων επεισοδίων. Δοκιμάστε ξανά.</string>
     <string name="dashboard_tracked_series">Σειρές που παρακολουθείτε</string>
+    <string name="saved_streams_title">Αποθηκευμένες ροές</string>
+    <string name="saved_streams_subtitle">Μεμονωμένες ροές που αποθηκεύσατε: άμεσος σύνδεσμος ή Stream API που δίνει νέο σύνδεσμο κάθε φορά.</string>
+    <string name="saved_streams_add">Προσθήκη ροής</string>
+    <string name="saved_streams_empty">Δεν υπάρχουν ακόμη αποθηκευμένες ροές. Προσθέστε άμεσο σύνδεσμο ροής ή URL Stream API που επιστρέφει έναν.</string>
+    <string name="saved_streams_play_failed">Δεν ήταν δυνατή η έναρξη της ροής. Ελέγξτε τον σύνδεσμο ή αν το Stream API είναι προσβάσιμο.</string>
+    <string name="saved_streams_resolving">Λήψη συνδέσμου ροής…</string>
+    <string name="saved_streams_kind_direct">Άμεσο URL</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">Επεξεργασία</string>
+    <string name="saved_streams_delete">Διαγραφή</string>
+    <string name="saved_streams_add_title">Προσθήκη ροής</string>
+    <string name="saved_streams_edit_title">Επεξεργασία ροής</string>
+    <string name="saved_streams_name">Όνομα</string>
+    <string name="saved_streams_stream_url">URL ροής</string>
+    <string name="saved_streams_api_url">URL Stream API</string>
+    <string name="saved_streams_direct_hint">Ο σύνδεσμος αναπαράγεται όπως είναι (http, https, rtsp, rtmp…).</string>
+    <string name="saved_streams_api_hint">Καλείται σε κάθε αναπαραγωγή· πρέπει να επιστρέφει τον σύνδεσμο ροής ως απλό κείμενο ή JSON όπως {\"url\": \"…\"}.</string>
+    <string name="saved_streams_invalid">Εισαγάγετε όνομα και έγκυρο σύνδεσμο.</string>
+    <string name="saved_streams_cancel">Ακύρωση</string>
+    <string name="saved_streams_save">Αποθήκευση</string>
+    <string name="saved_streams_delete_title">Διαγραφή ροής;</string>
+    <string name="saved_streams_delete_body">Το «%1$s» θα αφαιρεθεί από τις αποθηκευμένες ροές.</string>
 </resources>

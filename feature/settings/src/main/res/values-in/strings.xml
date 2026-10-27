@@ -951,4 +951,5 @@
     <string name="settings_refresh_rate_matching">Sesuaikan dengan laju bingkai konten</string>
     <string name="settings_refresh_rate_matching_description">Menyesuaikan laju penyegaran layar dengan video agar gerakan lebih mulus. Memerlukan dukungan layar; layar mungkin menjadi hitam sesaat saat berganti.</string>
     <string name="dashboard_tracked_series">Acara yang Dilacak</string>
+    <string name="nav_saved_streams">Streaming Tersimpan</string>
 </resources>

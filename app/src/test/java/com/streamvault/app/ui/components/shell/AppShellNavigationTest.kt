@@ -22,6 +22,7 @@ class AppShellNavigationTest {
             .containsExactly(
                 Routes.HOME,
                 Routes.LIVE_TV,
+                Routes.SAVED_STREAMS,
                 Routes.SPORTS,
                 Routes.MOVIES,
                 Routes.SERIES,

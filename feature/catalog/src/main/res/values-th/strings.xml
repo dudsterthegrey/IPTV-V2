@@ -366,4 +366,26 @@
     <string name="series_watch_history_clear_failed">ไม่สามารถล้างประวัติการรับชมได้ โปรดลองอีกครั้ง</string>
     <string name="series_tracking_failed">ไม่สามารถอัปเดตการติดตามตอนใหม่ได้ โปรดลองอีกครั้ง</string>
     <string name="dashboard_tracked_series">รายการที่ติดตาม</string>
+    <string name="saved_streams_title">สตรีมที่บันทึกไว้</string>
+    <string name="saved_streams_subtitle">สตรีมเดี่ยวที่คุณบันทึกไว้: ลิงก์โดยตรง หรือ Stream API ที่ให้ลิงก์ใหม่ทุกครั้ง</string>
+    <string name="saved_streams_add">เพิ่มสตรีม</string>
+    <string name="saved_streams_empty">ยังไม่มีสตรีมที่บันทึกไว้ เพิ่มลิงก์สตรีมโดยตรง หรือ URL ของ Stream API ที่ส่งลิงก์กลับมา</string>
+    <string name="saved_streams_play_failed">ไม่สามารถเริ่มสตรีมนี้ได้ โปรดตรวจสอบลิงก์ หรือว่าเข้าถึง Stream API ได้หรือไม่</string>
+    <string name="saved_streams_resolving">กำลังรับลิงก์สตรีม…</string>
+    <string name="saved_streams_kind_direct">URL โดยตรง</string>
+    <string name="saved_streams_kind_api">Stream API</string>
+    <string name="saved_streams_edit">แก้ไข</string>
+    <string name="saved_streams_delete">ลบ</string>
+    <string name="saved_streams_add_title">เพิ่มสตรีม</string>
+    <string name="saved_streams_edit_title">แก้ไขสตรีม</string>
+    <string name="saved_streams_name">ชื่อ</string>
+    <string name="saved_streams_stream_url">URL ของสตรีม</string>
+    <string name="saved_streams_api_url">URL ของ Stream API</string>
+    <string name="saved_streams_direct_hint">ลิงก์จะเล่นตามที่เป็น (http, https, rtsp, rtmp…)</string>
+    <string name="saved_streams_api_hint">จะถูกเรียกทุกครั้งที่เล่น และต้องส่งลิงก์สตรีมกลับมาเป็นข้อความธรรมดาหรือ JSON เช่น {\"url\": \"…\"}</string>
+    <string name="saved_streams_invalid">ป้อนชื่อและลิงก์ที่ถูกต้อง</string>
+    <string name="saved_streams_cancel">ยกเลิก</string>
+    <string name="saved_streams_save">บันทึก</string>
+    <string name="saved_streams_delete_title">ลบสตรีมไหม</string>
+    <string name="saved_streams_delete_body">“%1$s” จะถูกนำออกจากสตรีมที่บันทึกไว้</string>
 </resources>
