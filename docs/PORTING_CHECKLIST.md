@@ -26,7 +26,7 @@ item could still exist under a different name, so confirm on device before build
       provider types; `presentation/savedstreams/`, `SavedStreamRepository`): one fixed stream URL, or a URL the app calls
       to get a fresh stream URL (plain text or JSON `{"url": ...}`). V2 supports Xtream, M3U,
       Stalker and Jellyfin only.
-- [ ] **Teal color scheme**: V1 palette background `#0F766E`, surface `#159188`, accent
+- [ ] **Teal color scheme** (deferred 2026-10-27: keeping V2's current theme for now; revisit later): V1 palette background `#0F766E`, surface `#159188`, accent
       `#5EEAD4`, white text. V2 has an "Ocean" theme, but it is dark navy-teal, not V1's teal.
       Add it as a selectable theme in `core/ui/.../design/AppPalette.kt`.
 
