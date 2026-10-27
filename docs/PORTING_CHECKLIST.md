@@ -50,6 +50,22 @@ item could still exist under a different name, so confirm on device before build
 - Multi-view for live channels, with audio focus on one tile
 - Settings, backup/restore, parental controls, themes, 38 languages
 
+## To test on device (after porting, with a real provider)
+
+Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`Television_1080p`).
+
+- [ ] **New-episode tracking**: on a series page press **Track new episodes** → button reads
+      "Tracking new episodes" and the show appears in Home's **Tracked Shows** row; pressing again
+      removes it.
+- [ ] **NEW badge**: real new episodes take days, so ask Claude to lower the show's
+      `known_episode_count` and reset `last_checked_at` in the app's `tracked_series` table (app
+      stopped). Reopen Home → red NEW badge on the show's poster (Home and Series screens) and a
+      **Clear NEW badge** button on its page; pressing it removes the badge. Repeat, then play any
+      episode for a few seconds → badge clears by itself.
+- [ ] **Clear watch history**: play two episodes of a show about a minute each, press **Clear
+      watch history** → confirmation names the show; after **Clear history** a "Watch history
+      cleared" message appears and the episodes lose their progress. Another show's progress stays.
+
 ## Release / Downloader
 
 - [ ] Release signing with your own keystore (V1's is in `C:\Android Studio\IPTVPlayer\Keys`)
