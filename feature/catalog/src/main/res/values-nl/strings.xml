@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Je beoordeling is opgeslagen op Trakt.</string>
 <string name="trakt_rating_failed">Je beoordeling kon niet op Trakt worden opgeslagen.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player heeft de wijziging opgeslagen, maar kon de Trakt-favorieten niet bijwerken. Probeer het opnieuw.</string>
+    <string name="series_track_new_episodes">Nieuwe afleveringen volgen</string>
+    <string name="series_tracking_new_episodes">Nieuwe afleveringen worden gevolgd</string>
+    <string name="series_new_episodes_badge">NIEUW</string>
+    <string name="series_new_episodes_clear_badge">NIEUW-label wissen</string>
+    <string name="series_clear_watch_history">Kijkgeschiedenis wissen</string>
+    <string name="series_clear_watch_history_title">Kijkgeschiedenis wissen?</string>
+    <string name="series_clear_watch_history_body">Hiermee worden bekeken afleveringen en hervatpunten alleen voor %1$s gereset. Andere series worden niet beïnvloed.</string>
+    <string name="series_clear_watch_history_cancel">Annuleren</string>
+    <string name="series_clear_watch_history_confirm">Geschiedenis wissen</string>
+    <string name="series_watch_history_cleared">Kijkgeschiedenis voor deze serie gewist.</string>
+    <string name="series_watch_history_clear_failed">Kijkgeschiedenis kon niet worden gewist. Probeer het opnieuw.</string>
+    <string name="series_tracking_failed">Het volgen van nieuwe afleveringen kon niet worden bijgewerkt. Probeer het opnieuw.</string>
+    <string name="dashboard_tracked_series">Gevolgde series</string>
 </resources>

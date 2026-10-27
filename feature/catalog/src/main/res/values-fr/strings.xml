@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Votre note a été enregistrée sur Trakt.</string>
 <string name="trakt_rating_failed">Impossible d’enregistrer votre note sur Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player a enregistré la modification, mais n’a pas pu mettre à jour vos favoris Trakt. Réessayez.</string>
+    <string name="series_track_new_episodes">Suivre les nouveaux épisodes</string>
+    <string name="series_tracking_new_episodes">Nouveaux épisodes suivis</string>
+    <string name="series_new_episodes_badge">NOUVEAU</string>
+    <string name="series_new_episodes_clear_badge">Retirer le badge NOUVEAU</string>
+    <string name="series_clear_watch_history">Effacer l’historique de visionnage</string>
+    <string name="series_clear_watch_history_title">Effacer l’historique de visionnage ?</string>
+    <string name="series_clear_watch_history_body">Cela réinitialise les épisodes vus et les points de reprise uniquement pour %1$s. Les autres séries ne sont pas concernées.</string>
+    <string name="series_clear_watch_history_cancel">Annuler</string>
+    <string name="series_clear_watch_history_confirm">Effacer l’historique</string>
+    <string name="series_watch_history_cleared">Historique de visionnage effacé pour cette série.</string>
+    <string name="series_watch_history_clear_failed">Impossible d’effacer l’historique de visionnage. Réessayez.</string>
+    <string name="series_tracking_failed">Impossible de mettre à jour le suivi des nouveaux épisodes. Réessayez.</string>
+    <string name="dashboard_tracked_series">Séries suivies</string>
 </resources>

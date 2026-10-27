@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">نیاز به همگام‌سازی</string>
   <string name="vod_unavailable_subtitle">این سرویس‌دهنده کاتالوگ‌های جداگانه فیلم و سریال ارائه می‌دهد.</string>
   <string name="vod_unavailable_title">VOD در دسترس نیست</string>
+    <string name="series_track_new_episodes">دنبال کردن قسمت‌های جدید</string>
+    <string name="series_tracking_new_episodes">قسمت‌های جدید دنبال می‌شوند</string>
+    <string name="series_new_episodes_badge">جدید</string>
+    <string name="series_new_episodes_clear_badge">حذف نشان «جدید»</string>
+    <string name="series_clear_watch_history">پاک کردن سابقه تماشا</string>
+    <string name="series_clear_watch_history_title">سابقه تماشا پاک شود؟</string>
+    <string name="series_clear_watch_history_body">این کار قسمت‌های دیده‌شده و نقاط ادامه پخش را فقط برای %1$s بازنشانی می‌کند. سریال‌های دیگر تغییری نمی‌کنند.</string>
+    <string name="series_clear_watch_history_cancel">لغو</string>
+    <string name="series_clear_watch_history_confirm">پاک کردن سابقه</string>
+    <string name="series_watch_history_cleared">سابقه تماشای این سریال پاک شد.</string>
+    <string name="series_watch_history_clear_failed">پاک کردن سابقه تماشا ممکن نشد. دوباره تلاش کنید.</string>
+    <string name="series_tracking_failed">به‌روزرسانی دنبال کردن قسمت‌های جدید ممکن نشد. دوباره تلاش کنید.</string>
+    <string name="dashboard_tracked_series">سریال‌های دنبال‌شده</string>
 </resources>

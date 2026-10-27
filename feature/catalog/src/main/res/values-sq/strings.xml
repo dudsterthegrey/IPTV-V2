@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">Kërkohet sinkronizim</string>
   <string name="vod_unavailable_subtitle">Ky ofrues ekspozon katalogë të veçantë për Filmat dhe Serialet.</string>
   <string name="vod_unavailable_title">VOD nuk disponohet</string>
+    <string name="series_track_new_episodes">Ndiq episodet e reja</string>
+    <string name="series_tracking_new_episodes">Po ndiqen episodet e reja</string>
+    <string name="series_new_episodes_badge">E RE</string>
+    <string name="series_new_episodes_clear_badge">Hiq shenjën E RE</string>
+    <string name="series_clear_watch_history">Pastro historikun e shikimit</string>
+    <string name="series_clear_watch_history_title">Të pastrohet historiku i shikimit?</string>
+    <string name="series_clear_watch_history_body">Kjo rivendos episodet e shikuara dhe pikat e rifillimit vetëm për %1$s. Serialet e tjera nuk preken.</string>
+    <string name="series_clear_watch_history_cancel">Anulo</string>
+    <string name="series_clear_watch_history_confirm">Pastro historikun</string>
+    <string name="series_watch_history_cleared">Historiku i shikimit për këtë serial u pastrua.</string>
+    <string name="series_watch_history_clear_failed">Historiku i shikimit nuk mund të pastrohej. Provo përsëri.</string>
+    <string name="series_tracking_failed">Ndjekja e episodeve të reja nuk mund të përditësohej. Provo përsëri.</string>
+    <string name="dashboard_tracked_series">Serialet e ndjekura</string>
 </resources>

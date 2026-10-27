@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Оценка сохранена в Trakt.</string>
 <string name="trakt_rating_failed">Не удалось сохранить оценку в Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player сохранил изменение, но не смог обновить избранное Trakt. Попробуйте снова.</string>
+    <string name="series_track_new_episodes">Отслеживать новые серии</string>
+    <string name="series_tracking_new_episodes">Новые серии отслеживаются</string>
+    <string name="series_new_episodes_badge">НОВОЕ</string>
+    <string name="series_new_episodes_clear_badge">Убрать метку НОВОЕ</string>
+    <string name="series_clear_watch_history">Очистить историю просмотра</string>
+    <string name="series_clear_watch_history_title">Очистить историю просмотра?</string>
+    <string name="series_clear_watch_history_body">Будут сброшены просмотренные серии и точки продолжения только для %1$s. Другие сериалы не затрагиваются.</string>
+    <string name="series_clear_watch_history_cancel">Отмена</string>
+    <string name="series_clear_watch_history_confirm">Очистить историю</string>
+    <string name="series_watch_history_cleared">История просмотра этого сериала очищена.</string>
+    <string name="series_watch_history_clear_failed">Не удалось очистить историю просмотра. Повторите попытку.</string>
+    <string name="series_tracking_failed">Не удалось обновить отслеживание новых серий. Повторите попытку.</string>
+    <string name="dashboard_tracked_series">Отслеживаемые сериалы</string>
 </resources>

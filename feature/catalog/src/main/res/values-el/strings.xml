@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Η βαθμολογία σας αποθηκεύτηκε στο Trakt.</string>
 <string name="trakt_rating_failed">Δεν ήταν δυνατή η αποθήκευση της βαθμολογίας σας στο Trakt.</string>
 <string name="trakt_favorite_sync_failed">Το IPTV Player αποθήκευσε την αλλαγή, αλλά δεν μπόρεσε να ενημερώσει τα αγαπημένα του Trakt. Δοκιμάστε ξανά.</string>
+    <string name="series_track_new_episodes">Παρακολούθηση νέων επεισοδίων</string>
+    <string name="series_tracking_new_episodes">Παρακολουθούνται νέα επεισόδια</string>
+    <string name="series_new_episodes_badge">ΝΕΟ</string>
+    <string name="series_new_episodes_clear_badge">Κατάργηση σήματος ΝΕΟ</string>
+    <string name="series_clear_watch_history">Διαγραφή ιστορικού προβολής</string>
+    <string name="series_clear_watch_history_title">Διαγραφή ιστορικού προβολής;</string>
+    <string name="series_clear_watch_history_body">Θα γίνει επαναφορά των επεισοδίων που έχετε δει και των σημείων συνέχισης μόνο για το %1$s. Οι άλλες σειρές δεν επηρεάζονται.</string>
+    <string name="series_clear_watch_history_cancel">Ακύρωση</string>
+    <string name="series_clear_watch_history_confirm">Διαγραφή ιστορικού</string>
+    <string name="series_watch_history_cleared">Το ιστορικό προβολής για αυτή τη σειρά διαγράφηκε.</string>
+    <string name="series_watch_history_clear_failed">Δεν ήταν δυνατή η διαγραφή του ιστορικού προβολής. Δοκιμάστε ξανά.</string>
+    <string name="series_tracking_failed">Δεν ήταν δυνατή η ενημέρωση της παρακολούθησης νέων επεισοδίων. Δοκιμάστε ξανά.</string>
+    <string name="dashboard_tracked_series">Σειρές που παρακολουθείτε</string>
 </resources>

@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Nota ta a fost salvată pe Trakt.</string>
 <string name="trakt_rating_failed">Nu s-a putut salva nota pe Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player a salvat modificarea, dar nu a putut actualiza Favoritele Trakt. Încearcă din nou.</string>
+    <string name="series_track_new_episodes">Urmărește episoadele noi</string>
+    <string name="series_tracking_new_episodes">Se urmăresc episoadele noi</string>
+    <string name="series_new_episodes_badge">NOU</string>
+    <string name="series_new_episodes_clear_badge">Elimină eticheta NOU</string>
+    <string name="series_clear_watch_history">Șterge istoricul de vizionare</string>
+    <string name="series_clear_watch_history_title">Ștergi istoricul de vizionare?</string>
+    <string name="series_clear_watch_history_body">Aceasta resetează episoadele vizionate și punctele de reluare doar pentru %1$s. Celelalte seriale nu sunt afectate.</string>
+    <string name="series_clear_watch_history_cancel">Anulează</string>
+    <string name="series_clear_watch_history_confirm">Șterge istoricul</string>
+    <string name="series_watch_history_cleared">Istoricul de vizionare pentru acest serial a fost șters.</string>
+    <string name="series_watch_history_clear_failed">Istoricul de vizionare nu a putut fi șters. Încearcă din nou.</string>
+    <string name="series_tracking_failed">Urmărirea episoadelor noi nu a putut fi actualizată. Încearcă din nou.</string>
+    <string name="dashboard_tracked_series">Seriale urmărite</string>
 </resources>

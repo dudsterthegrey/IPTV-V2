@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">Je potrebná synchronizácia</string>
   <string name="vod_unavailable_subtitle">Tento poskytovateľ ponúka samostatné katalógy filmov a seriálov.</string>
   <string name="vod_unavailable_title">VOD nie je k dispozícii</string>
+    <string name="series_track_new_episodes">Sledovať nové diely</string>
+    <string name="series_tracking_new_episodes">Nové diely sa sledujú</string>
+    <string name="series_new_episodes_badge">NOVÉ</string>
+    <string name="series_new_episodes_clear_badge">Odstrániť štítok NOVÉ</string>
+    <string name="series_clear_watch_history">Vymazať históriu pozerania</string>
+    <string name="series_clear_watch_history_title">Vymazať históriu pozerania?</string>
+    <string name="series_clear_watch_history_body">Týmto sa resetujú pozreté diely a body pokračovania iba pre %1$s. Ostatné relácie nebudú ovplyvnené.</string>
+    <string name="series_clear_watch_history_cancel">Zrušiť</string>
+    <string name="series_clear_watch_history_confirm">Vymazať históriu</string>
+    <string name="series_watch_history_cleared">História pozerania tejto relácie bola vymazaná.</string>
+    <string name="series_watch_history_clear_failed">Históriu pozerania sa nepodarilo vymazať. Skúste to znova.</string>
+    <string name="series_tracking_failed">Sledovanie nových dielov sa nepodarilo aktualizovať. Skúste to znova.</string>
+    <string name="dashboard_tracked_series">Sledované relácie</string>
 </resources>

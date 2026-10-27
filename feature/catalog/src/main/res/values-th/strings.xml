@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">ต้องซิงค์</string>
   <string name="vod_unavailable_subtitle">ผู้ให้บริการนี้มีแค็ตตาล็อกภาพยนตร์และซีรีส์แยกกัน</string>
   <string name="vod_unavailable_title">VOD ใช้งานไม่ได้</string>
+    <string name="series_track_new_episodes">ติดตามตอนใหม่</string>
+    <string name="series_tracking_new_episodes">กำลังติดตามตอนใหม่</string>
+    <string name="series_new_episodes_badge">ใหม่</string>
+    <string name="series_new_episodes_clear_badge">ล้างป้าย “ใหม่”</string>
+    <string name="series_clear_watch_history">ล้างประวัติการรับชม</string>
+    <string name="series_clear_watch_history_title">ล้างประวัติการรับชมไหม</string>
+    <string name="series_clear_watch_history_body">การดำเนินการนี้จะรีเซ็ตตอนที่ดูแล้วและจุดเล่นต่อเฉพาะของ %1$s เท่านั้น รายการอื่นจะไม่ได้รับผลกระทบ</string>
+    <string name="series_clear_watch_history_cancel">ยกเลิก</string>
+    <string name="series_clear_watch_history_confirm">ล้างประวัติ</string>
+    <string name="series_watch_history_cleared">ล้างประวัติการรับชมของรายการนี้แล้ว</string>
+    <string name="series_watch_history_clear_failed">ไม่สามารถล้างประวัติการรับชมได้ โปรดลองอีกครั้ง</string>
+    <string name="series_tracking_failed">ไม่สามารถอัปเดตการติดตามตอนใหม่ได้ โปรดลองอีกครั้ง</string>
+    <string name="dashboard_tracked_series">รายการที่ติดตาม</string>
 </resources>

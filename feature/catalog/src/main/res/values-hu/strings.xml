@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Az értékelésed mentve a Traktra.</string>
 <string name="trakt_rating_failed">Nem sikerült menteni az értékelésedet a Traktra.</string>
 <string name="trakt_favorite_sync_failed">A IPTV Player mentette a módosítást, de nem sikerült frissítenie a Trakt kedvenceket. Próbáld újra.</string>
+    <string name="series_track_new_episodes">Új epizódok követése</string>
+    <string name="series_tracking_new_episodes">Új epizódok követése bekapcsolva</string>
+    <string name="series_new_episodes_badge">ÚJ</string>
+    <string name="series_new_episodes_clear_badge">ÚJ jelölés törlése</string>
+    <string name="series_clear_watch_history">Megtekintési előzmények törlése</string>
+    <string name="series_clear_watch_history_title">Törlöd a megtekintési előzményeket?</string>
+    <string name="series_clear_watch_history_body">Ez csak a(z) %1$s megnézett epizódjait és folytatási pontjait állítja vissza. Más sorozatokat nem érint.</string>
+    <string name="series_clear_watch_history_cancel">Mégse</string>
+    <string name="series_clear_watch_history_confirm">Előzmények törlése</string>
+    <string name="series_watch_history_cleared">A sorozat megtekintési előzményei törölve.</string>
+    <string name="series_watch_history_clear_failed">A megtekintési előzmények törlése nem sikerült. Próbáld újra.</string>
+    <string name="series_tracking_failed">Az új epizódok követését nem sikerült frissíteni. Próbáld újra.</string>
+    <string name="dashboard_tracked_series">Követett sorozatok</string>
 </resources>

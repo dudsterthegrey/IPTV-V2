@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Arvosanasi tallennettiin Traktiin.</string>
 <string name="trakt_rating_failed">Arvosanan tallentaminen Traktiin epäonnistui.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player tallensi muutoksen, mutta Trakt-suosikkeja ei voitu päivittää. Yritä uudelleen.</string>
+    <string name="series_track_new_episodes">Seuraa uusia jaksoja</string>
+    <string name="series_tracking_new_episodes">Uusia jaksoja seurataan</string>
+    <string name="series_new_episodes_badge">UUSI</string>
+    <string name="series_new_episodes_clear_badge">Poista UUSI-merkki</string>
+    <string name="series_clear_watch_history">Tyhjennä katseluhistoria</string>
+    <string name="series_clear_watch_history_title">Tyhjennetäänkö katseluhistoria?</string>
+    <string name="series_clear_watch_history_body">Tämä nollaa katsotut jaksot ja jatkamiskohdat vain sarjalta %1$s. Muihin sarjoihin tämä ei vaikuta.</string>
+    <string name="series_clear_watch_history_cancel">Peruuta</string>
+    <string name="series_clear_watch_history_confirm">Tyhjennä historia</string>
+    <string name="series_watch_history_cleared">Tämän sarjan katseluhistoria tyhjennettiin.</string>
+    <string name="series_watch_history_clear_failed">Katseluhistorian tyhjentäminen epäonnistui. Yritä uudelleen.</string>
+    <string name="series_tracking_failed">Uusien jaksojen seurannan päivittäminen epäonnistui. Yritä uudelleen.</string>
+    <string name="dashboard_tracked_series">Seuratut sarjat</string>
 </resources>

@@ -39,5 +39,8 @@ interface PlaybackHistoryRepository {
     suspend fun removeFromHistory(contentId: Long, contentType: ContentType, providerId: Long): Result<Unit>
     suspend fun clearAllHistory(): Result<Unit>
     suspend fun clearHistoryForProvider(providerId: Long): Result<Unit>
+    /** Clears watched/resume state for one series (its episodes and the series row) only. */
+    suspend fun clearHistoryForSeries(providerId: Long, seriesId: Long): Result<Unit> =
+        Result.error("Clearing series history is unavailable")
     suspend fun clearLiveHistoryForProvider(providerId: Long): Result<Unit>
 }

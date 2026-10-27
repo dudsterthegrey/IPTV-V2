@@ -82,7 +82,8 @@ class PlaybackHistoryRepositoryImplTest {
         preferencesRepository = preferencesRepository,
         movieDao = movieDao,
         episodeDao = episodeDao,
-        transactionRunner = transactionRunner
+        transactionRunner = transactionRunner,
+        trackedSeriesDao = mock()
     )
 
     private fun movieHistory(

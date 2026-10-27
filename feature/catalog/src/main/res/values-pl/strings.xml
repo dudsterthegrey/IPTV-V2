@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Twoja ocena została zapisana w Trakt.</string>
 <string name="trakt_rating_failed">Nie udało się zapisać oceny w Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player zapisał zmianę, ale nie udało się zaktualizować ulubionych Trakt. Spróbuj ponownie.</string>
+    <string name="series_track_new_episodes">Śledź nowe odcinki</string>
+    <string name="series_tracking_new_episodes">Śledzenie nowych odcinków</string>
+    <string name="series_new_episodes_badge">NOWE</string>
+    <string name="series_new_episodes_clear_badge">Usuń plakietkę NOWE</string>
+    <string name="series_clear_watch_history">Wyczyść historię oglądania</string>
+    <string name="series_clear_watch_history_title">Wyczyścić historię oglądania?</string>
+    <string name="series_clear_watch_history_body">Spowoduje to zresetowanie obejrzanych odcinków i punktów wznowienia tylko dla %1$s. Inne seriale nie zostaną zmienione.</string>
+    <string name="series_clear_watch_history_cancel">Anuluj</string>
+    <string name="series_clear_watch_history_confirm">Wyczyść historię</string>
+    <string name="series_watch_history_cleared">Historia oglądania tego serialu została wyczyszczona.</string>
+    <string name="series_watch_history_clear_failed">Nie udało się wyczyścić historii oglądania. Spróbuj ponownie.</string>
+    <string name="series_tracking_failed">Nie udało się zaktualizować śledzenia nowych odcinków. Spróbuj ponownie.</string>
+    <string name="dashboard_tracked_series">Śledzone seriale</string>
 </resources>

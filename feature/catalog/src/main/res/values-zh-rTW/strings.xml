@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">需要同步</string>
   <string name="vod_unavailable_subtitle">此供應商分別提供電影和影集目錄。</string>
   <string name="vod_unavailable_title">VOD 無法使用</string>
+    <string name="series_track_new_episodes">追蹤新集數</string>
+    <string name="series_tracking_new_episodes">正在追蹤新集數</string>
+    <string name="series_new_episodes_badge">新</string>
+    <string name="series_new_episodes_clear_badge">清除「新」標記</string>
+    <string name="series_clear_watch_history">清除觀看紀錄</string>
+    <string name="series_clear_watch_history_title">清除觀看紀錄？</string>
+    <string name="series_clear_watch_history_body">這只會重設 %1$s 的已觀看集數與續播位置，不會影響其他節目。</string>
+    <string name="series_clear_watch_history_cancel">取消</string>
+    <string name="series_clear_watch_history_confirm">清除紀錄</string>
+    <string name="series_watch_history_cleared">已清除此節目的觀看紀錄。</string>
+    <string name="series_watch_history_clear_failed">無法清除觀看紀錄，請再試一次。</string>
+    <string name="series_tracking_failed">無法更新新集數追蹤，請再試一次。</string>
+    <string name="dashboard_tracked_series">追蹤的節目</string>
 </resources>

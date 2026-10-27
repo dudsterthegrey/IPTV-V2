@@ -48,6 +48,9 @@ enum class CatalogMessage {
     TraktRatingSaved,
     TraktRatingFailed,
     SeriesVariantLoadFailed,
+    SeriesWatchHistoryCleared,
+    SeriesWatchHistoryClearFailed,
+    SeriesTrackingFailed,
 }
 
 sealed interface CatalogCastStartResult {

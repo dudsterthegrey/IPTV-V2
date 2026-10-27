@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">Нужна е синхронизация</string>
   <string name="vod_unavailable_subtitle">Този доставчик предоставя отделни каталози с филми и сериали.</string>
   <string name="vod_unavailable_title">VOD не е достъпно</string>
+    <string name="series_track_new_episodes">Следи за нови епизоди</string>
+    <string name="series_tracking_new_episodes">Следят се нови епизоди</string>
+    <string name="series_new_episodes_badge">НОВО</string>
+    <string name="series_new_episodes_clear_badge">Изчисти значката НОВО</string>
+    <string name="series_clear_watch_history">Изчисти историята на гледане</string>
+    <string name="series_clear_watch_history_title">Да се изчисти ли историята на гледане?</string>
+    <string name="series_clear_watch_history_body">Това нулира гледаните епизоди и точките за продължаване само за %1$s. Другите сериали не се засягат.</string>
+    <string name="series_clear_watch_history_cancel">Отказ</string>
+    <string name="series_clear_watch_history_confirm">Изчисти историята</string>
+    <string name="series_watch_history_cleared">Историята на гледане за този сериал е изчистена.</string>
+    <string name="series_watch_history_clear_failed">Историята на гледане не можа да бъде изчистена. Опитайте отново.</string>
+    <string name="series_tracking_failed">Следенето на нови епизоди не можа да бъде обновено. Опитайте отново.</string>
+    <string name="dashboard_tracked_series">Следени сериали</string>
 </resources>

@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Nilai Anda tersimpan di Trakt.</string>
 <string name="trakt_rating_failed">Nilai Anda tidak dapat disimpan di Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player menyimpan perubahan, tetapi tidak dapat memperbarui Favorit Trakt. Coba lagi.</string>
+    <string name="series_track_new_episodes">Lacak episode baru</string>
+    <string name="series_tracking_new_episodes">Melacak episode baru</string>
+    <string name="series_new_episodes_badge">BARU</string>
+    <string name="series_new_episodes_clear_badge">Hapus lencana BARU</string>
+    <string name="series_clear_watch_history">Hapus riwayat tontonan</string>
+    <string name="series_clear_watch_history_title">Hapus riwayat tontonan?</string>
+    <string name="series_clear_watch_history_body">Ini akan mereset episode yang sudah ditonton dan titik lanjut hanya untuk %1$s. Acara lain tidak terpengaruh.</string>
+    <string name="series_clear_watch_history_cancel">Batal</string>
+    <string name="series_clear_watch_history_confirm">Hapus riwayat</string>
+    <string name="series_watch_history_cleared">Riwayat tontonan untuk acara ini telah dihapus.</string>
+    <string name="series_watch_history_clear_failed">Tidak dapat menghapus riwayat tontonan. Coba lagi.</string>
+    <string name="series_tracking_failed">Tidak dapat memperbarui pelacakan episode baru. Coba lagi.</string>
+    <string name="dashboard_tracked_series">Acara yang Dilacak</string>
 </resources>

@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">評価をTraktに保存しました。</string>
 <string name="trakt_rating_failed">評価をTraktに保存できませんでした。</string>
 <string name="trakt_favorite_sync_failed">IPTV Playerで変更を保存しましたが、Traktのお気に入りを更新できませんでした。もう一度お試しください。</string>
+    <string name="series_track_new_episodes">新しいエピソードを追跡</string>
+    <string name="series_tracking_new_episodes">新しいエピソードを追跡中</string>
+    <string name="series_new_episodes_badge">NEW</string>
+    <string name="series_new_episodes_clear_badge">NEW バッジを消去</string>
+    <string name="series_clear_watch_history">視聴履歴を消去</string>
+    <string name="series_clear_watch_history_title">視聴履歴を消去しますか？</string>
+    <string name="series_clear_watch_history_body">%1$s の視聴済みエピソードと再開位置のみをリセットします。他の番組には影響しません。</string>
+    <string name="series_clear_watch_history_cancel">キャンセル</string>
+    <string name="series_clear_watch_history_confirm">履歴を消去</string>
+    <string name="series_watch_history_cleared">この番組の視聴履歴を消去しました。</string>
+    <string name="series_watch_history_clear_failed">視聴履歴を消去できませんでした。もう一度お試しください。</string>
+    <string name="series_tracking_failed">新しいエピソードの追跡を更新できませんでした。もう一度お試しください。</string>
+    <string name="dashboard_tracked_series">追跡中の番組</string>
 </resources>

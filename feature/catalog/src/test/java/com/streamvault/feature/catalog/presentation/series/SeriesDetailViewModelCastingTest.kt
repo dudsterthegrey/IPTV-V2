@@ -416,6 +416,18 @@ class SeriesDetailViewModelCastingTest {
             traktWatchlist = com.streamvault.feature.catalog.presentation.NoopTraktWatchlist(),
             traktFavorites = traktFavorites,
             traktRatings = traktRatings,
+            trackedSeriesRepository = object : com.streamvault.domain.repository.TrackedSeriesRepository {
+                override fun observeTrackedSeries(providerId: Long) =
+                    kotlinx.coroutines.flow.flowOf(emptyList<com.streamvault.domain.model.TrackedSeries>())
+                override fun observeTrackedSeries(providerId: Long, seriesId: Long) =
+                    kotlinx.coroutines.flow.flowOf<com.streamvault.domain.model.TrackedSeries?>(null)
+                override fun observeSeriesWithNewEpisodes() =
+                    kotlinx.coroutines.flow.flowOf(emptySet<Pair<Long, Long>>())
+                override suspend fun track(series: Series) = Result.success(Unit)
+                override suspend fun untrack(providerId: Long, seriesId: Long) = Result.success(Unit)
+                override suspend fun clearNewEpisodes(providerId: Long, seriesId: Long) = Result.success(Unit)
+                override suspend fun checkForNewEpisodes(providerId: Long, minIntervalMs: Long) = Result.success(0)
+            },
         )
     }
 

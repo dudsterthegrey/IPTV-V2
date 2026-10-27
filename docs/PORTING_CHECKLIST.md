@@ -6,11 +6,12 @@ item could still exist under a different name, so confirm on device before build
 
 ## Missing in V2: port these
 
-- [ ] **New-episode tracking ("Catch-Up" in V1)**: mark a series to track, red badge on its card
+- [x] **New-episode tracking ("Catch-Up" in V1)** (done 2026-10-26: "Track new episodes" on the
+      series page, red NEW badge on series cards, "Tracked Shows" Home row, `TrackedSeriesRepository`): mark a series to track, red badge on its card
       when a new episode appears, Track / Clear Badge buttons on the details page, badge clears
       only when cleared or an episode is watched. Needs a new name in V2, because V2 already uses
       "catch-up" for provider replay/archive TV.
-- [ ] **Clear watch history for one show**: button on the series details page, with a
+- [x] **Clear watch history for one show** (done 2026-10-26: `PlaybackHistoryRepository.clearHistoryForSeries`): button on the series details page, with a
       confirmation that says other shows aren't touched. V2 can only clear history for a whole
       provider (`PlaybackHistoryRepository.clearHistoryForProvider`).
 - [ ] **In-player search panel**: search live/movies/series while the video keeps playing, then

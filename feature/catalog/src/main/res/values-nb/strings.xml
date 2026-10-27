@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Vurderingen ble lagret på Trakt.</string>
 <string name="trakt_rating_failed">Kunne ikke lagre vurderingen på Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player lagret endringen, men kunne ikke oppdatere Trakt-favorittene. Prøv igjen.</string>
+    <string name="series_track_new_episodes">Følg nye episoder</string>
+    <string name="series_tracking_new_episodes">Følger nye episoder</string>
+    <string name="series_new_episodes_badge">NY</string>
+    <string name="series_new_episodes_clear_badge">Fjern NY-merket</string>
+    <string name="series_clear_watch_history">Tøm visningshistorikk</string>
+    <string name="series_clear_watch_history_title">Vil du tømme visningshistorikken?</string>
+    <string name="series_clear_watch_history_body">Dette tilbakestiller sette episoder og fortsettelsespunkter kun for %1$s. Andre serier påvirkes ikke.</string>
+    <string name="series_clear_watch_history_cancel">Avbryt</string>
+    <string name="series_clear_watch_history_confirm">Tøm historikk</string>
+    <string name="series_watch_history_cleared">Visningshistorikken for denne serien er tømt.</string>
+    <string name="series_watch_history_clear_failed">Kunne ikke tømme visningshistorikken. Prøv igjen.</string>
+    <string name="series_tracking_failed">Kunne ikke oppdatere sporingen av nye episoder. Prøv igjen.</string>
+    <string name="dashboard_tracked_series">Fulgte serier</string>
 </resources>

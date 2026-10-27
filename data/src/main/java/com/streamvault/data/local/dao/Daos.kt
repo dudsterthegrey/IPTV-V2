@@ -3685,6 +3685,13 @@ interface PlaybackHistoryDao {
 
     @Query("DELETE FROM playback_history WHERE provider_id = :providerId AND content_type = :contentType")
     suspend fun deleteByProviderAndType(providerId: Long, contentType: String)
+
+    @Query(
+        "DELETE FROM playback_history WHERE provider_id = :providerId AND (" +
+            "(content_type = 'SERIES_EPISODE' AND series_id = :seriesId) OR " +
+            "(content_type = 'SERIES' AND content_id = :seriesId))"
+    )
+    suspend fun deleteBySeries(providerId: Long, seriesId: Long): Int
 }
 
 @Dao

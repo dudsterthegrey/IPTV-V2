@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">Kailangan ng Sync</string>
   <string name="vod_unavailable_subtitle">Naglalabas ang provider na ito ng hiwalay na catalog para sa Mga Pelikula at Serye.</string>
   <string name="vod_unavailable_title">Hindi available ang VOD</string>
+    <string name="series_track_new_episodes">Subaybayan ang mga bagong episode</string>
+    <string name="series_tracking_new_episodes">Sinusubaybayan ang mga bagong episode</string>
+    <string name="series_new_episodes_badge">BAGO</string>
+    <string name="series_new_episodes_clear_badge">Alisin ang BAGO na badge</string>
+    <string name="series_clear_watch_history">I-clear ang history ng panonood</string>
+    <string name="series_clear_watch_history_title">I-clear ang history ng panonood?</string>
+    <string name="series_clear_watch_history_body">Ire-reset nito ang mga napanood na episode at resume point para sa %1$s lang. Hindi maaapektuhan ang ibang palabas.</string>
+    <string name="series_clear_watch_history_cancel">Kanselahin</string>
+    <string name="series_clear_watch_history_confirm">I-clear ang history</string>
+    <string name="series_watch_history_cleared">Na-clear ang history ng panonood para sa palabas na ito.</string>
+    <string name="series_watch_history_clear_failed">Hindi ma-clear ang history ng panonood. Subukan ulit.</string>
+    <string name="series_tracking_failed">Hindi ma-update ang pagsubaybay sa bagong episode. Subukan ulit.</string>
+    <string name="dashboard_tracked_series">Mga Sinusubaybayang Palabas</string>
 </resources>

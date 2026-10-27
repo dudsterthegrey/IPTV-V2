@@ -4,6 +4,7 @@ import com.streamvault.data.local.DatabaseTransactionRunner
 import com.streamvault.data.local.dao.EpisodeDao
 import com.streamvault.data.local.dao.MovieDao
 import com.streamvault.data.local.dao.PlaybackHistoryDao
+import com.streamvault.data.local.dao.TrackedSeriesDao
 import com.streamvault.data.mapper.toDomain
 import com.streamvault.data.mapper.toEntity
 import com.streamvault.domain.model.ContentType
@@ -44,7 +45,8 @@ class PlaybackHistoryRepositoryImpl @Inject constructor(
     private val preferencesRepository: PreferencesRepository,
     private val movieDao: MovieDao,
     private val episodeDao: EpisodeDao,
-    private val transactionRunner: DatabaseTransactionRunner
+    private val transactionRunner: DatabaseTransactionRunner,
+    private val trackedSeriesDao: TrackedSeriesDao
 ) : PlaybackHistoryRepository {
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val pendingResumeUpdates = ConcurrentHashMap<PlaybackKey, PlaybackHistory>()
@@ -237,6 +239,11 @@ class PlaybackHistoryRepositoryImpl @Inject constructor(
                 }
                 clearPendingResumeUpdateLocked(key)
             }
+            val watchedSeriesId = history.seriesId
+            if (history.contentType == ContentType.SERIES_EPISODE && watchedSeriesId != null) {
+                // Watching an episode of a tracked show dismisses its new-episode badge.
+                trackedSeriesDao.clearNewEpisodes(history.providerId, watchedSeriesId)
+            }
             Result.success(Unit)
         } catch (cancelled: CancellationException) {
             throw cancelled
@@ -326,6 +333,23 @@ class PlaybackHistoryRepositoryImpl @Inject constructor(
         throw cancelled
     } catch (e: Exception) {
         Result.error("Failed to clear provider playback history", e)
+    }
+
+    override suspend fun clearHistoryForSeries(providerId: Long, seriesId: Long): Result<Unit> = try {
+        pendingProgressMutex.withLock {
+            // Pending resume keys don't carry the series id, so persist them first and delete after.
+            flushPendingResumeUpdatesLocked()
+            transactionRunner.inTransaction {
+                dao.deleteBySeries(providerId, seriesId)
+                episodeDao.syncWatchProgressFromHistoryByProvider(providerId)
+            }
+            publishPendingResumeUpdates()
+        }
+        Result.success(Unit)
+    } catch (cancelled: CancellationException) {
+        throw cancelled
+    } catch (e: Exception) {
+        Result.error("Failed to clear series playback history", e)
     }
 
     override suspend fun clearLiveHistoryForProvider(providerId: Long): Result<Unit> = try {

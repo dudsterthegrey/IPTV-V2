@@ -402,4 +402,17 @@
   <string name="vod_sync_needed_title">Sync needed</string>
   <string name="vod_unavailable_subtitle">This provider exposes separate Movies and Series catalogs.</string>
   <string name="vod_unavailable_title">VOD is unavailable</string>
+    <string name="series_track_new_episodes">Track new episodes</string>
+    <string name="series_tracking_new_episodes">Tracking new episodes</string>
+    <string name="series_new_episodes_badge">NEW</string>
+    <string name="series_new_episodes_clear_badge">Clear NEW badge</string>
+    <string name="series_clear_watch_history">Clear watch history</string>
+    <string name="series_clear_watch_history_title">Clear watch history?</string>
+    <string name="series_clear_watch_history_body">This resets watched episodes and resume points for %1$s only. Other shows are not affected.</string>
+    <string name="series_clear_watch_history_cancel">Cancel</string>
+    <string name="series_clear_watch_history_confirm">Clear history</string>
+    <string name="series_watch_history_cleared">Watch history cleared for this show.</string>
+    <string name="series_watch_history_clear_failed">Couldn’t clear the watch history. Try again.</string>
+    <string name="series_tracking_failed">Couldn’t update new-episode tracking. Try again.</string>
+    <string name="dashboard_tracked_series">Tracked Shows</string>
 </resources>

@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Ditt betyg har sparats på Trakt.</string>
 <string name="trakt_rating_failed">Det gick inte att spara ditt betyg på Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player sparade ändringen men kunde inte uppdatera dina Trakt-favoriter. Försök igen.</string>
+    <string name="series_track_new_episodes">Följ nya avsnitt</string>
+    <string name="series_tracking_new_episodes">Följer nya avsnitt</string>
+    <string name="series_new_episodes_badge">NY</string>
+    <string name="series_new_episodes_clear_badge">Ta bort NY-märket</string>
+    <string name="series_clear_watch_history">Rensa visningshistorik</string>
+    <string name="series_clear_watch_history_title">Rensa visningshistoriken?</string>
+    <string name="series_clear_watch_history_body">Detta återställer sedda avsnitt och fortsättningspunkter endast för %1$s. Andra serier påverkas inte.</string>
+    <string name="series_clear_watch_history_cancel">Avbryt</string>
+    <string name="series_clear_watch_history_confirm">Rensa historik</string>
+    <string name="series_watch_history_cleared">Visningshistoriken för den här serien har rensats.</string>
+    <string name="series_watch_history_clear_failed">Det gick inte att rensa visningshistoriken. Försök igen.</string>
+    <string name="series_tracking_failed">Det gick inte att uppdatera bevakningen av nya avsnitt. Försök igen.</string>
+    <string name="dashboard_tracked_series">Följda serier</string>
 </resources>

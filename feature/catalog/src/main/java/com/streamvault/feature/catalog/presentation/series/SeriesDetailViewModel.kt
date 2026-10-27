@@ -31,6 +31,7 @@ import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.repository.SeriesDetailsUnavailableException
 import com.streamvault.domain.repository.SeriesRepository
+import com.streamvault.domain.repository.TrackedSeriesRepository
 import com.streamvault.domain.trakt.TraktWatchlist
 import com.streamvault.domain.trakt.TraktWatchlistActionResult
 import com.streamvault.domain.trakt.TraktWatchlistFailure
@@ -76,6 +77,7 @@ class SeriesDetailViewModel @Inject constructor(
     private val traktWatchlist: TraktWatchlist,
     private val traktFavorites: TraktFavorites,
     private val traktRatings: TraktRatings,
+    private val trackedSeriesRepository: TrackedSeriesRepository,
 ) : ViewModel() {
 
     private val seriesId: Long = checkNotNull(
@@ -95,6 +97,7 @@ class SeriesDetailViewModel @Inject constructor(
     private var castPlaybackReportMode = CastPlaybackReportMode.NONE
 
     private var providerDetailJob: Job? = null
+    private var trackingJob: Job? = null
     private var unwatchedCountJob: Job? = null
     private var activeProviderId: Long? = null
 
@@ -113,6 +116,7 @@ class SeriesDetailViewModel @Inject constructor(
                 providerDetailJob = launch {
                     val effectiveProviderId = resolveEffectiveProviderId(provider.id)
                     activeProviderId = effectiveProviderId
+                    observeTracking(effectiveProviderId)
                     val result = loadSeriesDetailsForProvider(effectiveProviderId, seriesId)
                     if (result !is Result.Success) {
                         loadAvailableVariants(seriesId)
@@ -267,6 +271,60 @@ class SeriesDetailViewModel @Inject constructor(
                     _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.SeriesVariantLoadFailed))
                 }
                 is Result.Loading -> Unit
+            }
+        }
+    }
+
+    private fun observeTracking(providerId: Long) {
+        trackingJob?.cancel()
+        trackingJob = viewModelScope.launch {
+            trackedSeriesRepository.observeTrackedSeries(providerId, seriesId).collect { tracked ->
+                _uiState.update {
+                    it.copy(
+                        isTrackingNewEpisodes = tracked != null,
+                        hasNewEpisodes = tracked?.hasNewEpisodes == true
+                    )
+                }
+            }
+        }
+        viewModelScope.launch {
+            // Refresh this show's badge state when its page opens (throttled per show).
+            trackedSeriesRepository.checkForNewEpisodes(providerId)
+        }
+    }
+
+    fun toggleNewEpisodeTracking() {
+        val series = _uiState.value.series ?: return
+        val providerId = activeProviderId ?: return
+        viewModelScope.launch {
+            val result = if (_uiState.value.isTrackingNewEpisodes) {
+                trackedSeriesRepository.untrack(providerId, seriesId)
+            } else {
+                trackedSeriesRepository.track(series.copy(id = seriesId, providerId = providerId))
+            }
+            if (result !is Result.Success) {
+                _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.SeriesTrackingFailed))
+            }
+        }
+    }
+
+    fun clearNewEpisodeBadge() {
+        val providerId = activeProviderId ?: return
+        viewModelScope.launch {
+            trackedSeriesRepository.clearNewEpisodes(providerId, seriesId)
+        }
+    }
+
+    fun clearWatchHistory() {
+        val providerId = activeProviderId ?: return
+        viewModelScope.launch {
+            when (playbackHistoryRepository.clearHistoryForSeries(providerId, seriesId)) {
+                is Result.Success -> {
+                    _uiState.update { it.copy(resumeEpisode = null) }
+                    loadSeriesDetailsForProvider(providerId, seriesId)
+                    _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.SeriesWatchHistoryCleared))
+                }
+                else -> _uiEvents.emit(CatalogUiEvent.ShowMessage(CatalogMessage.SeriesWatchHistoryClearFailed))
             }
         }
     }
@@ -533,6 +591,8 @@ data class SeriesDetailUiState(
     val traktWatchlistFailure: TraktWatchlistFailure? = null,
     val traktUserRating: Int? = null,
     val traktRatingBusy: Boolean = false,
+    val isTrackingNewEpisodes: Boolean = false,
+    val hasNewEpisodes: Boolean = false,
 )
 
 private enum class CastPlaybackReportMode {

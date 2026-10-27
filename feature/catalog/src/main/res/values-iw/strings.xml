@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">הדירוג נשמר ב‑Trakt.</string>
 <string name="trakt_rating_failed">לא ניתן לשמור את הדירוג ב‑Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player שמר את השינוי, אך לא הצליח לעדכן את המועדפים ב‑Trakt. נסו שוב.</string>
+    <string name="series_track_new_episodes">מעקב אחר פרקים חדשים</string>
+    <string name="series_tracking_new_episodes">מתבצע מעקב אחר פרקים חדשים</string>
+    <string name="series_new_episodes_badge">חדש</string>
+    <string name="series_new_episodes_clear_badge">הסרת התג „חדש”</string>
+    <string name="series_clear_watch_history">ניקוי היסטוריית צפייה</string>
+    <string name="series_clear_watch_history_title">לנקות את היסטוריית הצפייה?</string>
+    <string name="series_clear_watch_history_body">פעולה זו מאפסת את הפרקים שנצפו ונקודות ההמשך עבור %1$s בלבד. סדרות אחרות לא יושפעו.</string>
+    <string name="series_clear_watch_history_cancel">ביטול</string>
+    <string name="series_clear_watch_history_confirm">ניקוי היסטוריה</string>
+    <string name="series_watch_history_cleared">היסטוריית הצפייה של הסדרה נוקתה.</string>
+    <string name="series_watch_history_clear_failed">לא ניתן היה לנקות את היסטוריית הצפייה. נסו שוב.</string>
+    <string name="series_tracking_failed">לא ניתן היה לעדכן את המעקב אחר פרקים חדשים. נסו שוב.</string>
+    <string name="dashboard_tracked_series">סדרות במעקב</string>
 </resources>

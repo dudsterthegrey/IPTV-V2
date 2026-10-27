@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">تم حفظ تقييمك في Trakt.</string>
 <string name="trakt_rating_failed">تعذر حفظ تقييمك في Trakt.</string>
 <string name="trakt_favorite_sync_failed">حفظ IPTV Player التغيير، لكن تعذر تحديث مفضلات Trakt. حاول مرة أخرى.</string>
+    <string name="series_track_new_episodes">تتبّع الحلقات الجديدة</string>
+    <string name="series_tracking_new_episodes">يتم تتبّع الحلقات الجديدة</string>
+    <string name="series_new_episodes_badge">جديد</string>
+    <string name="series_new_episodes_clear_badge">إزالة شارة «جديد»</string>
+    <string name="series_clear_watch_history">مسح سجل المشاهدة</string>
+    <string name="series_clear_watch_history_title">مسح سجل المشاهدة؟</string>
+    <string name="series_clear_watch_history_body">سيؤدي هذا إلى إعادة تعيين الحلقات التي تمت مشاهدتها ونقاط الاستئناف لـ %1$s فقط. لن تتأثر العروض الأخرى.</string>
+    <string name="series_clear_watch_history_cancel">إلغاء</string>
+    <string name="series_clear_watch_history_confirm">مسح السجل</string>
+    <string name="series_watch_history_cleared">تم مسح سجل المشاهدة لهذا العرض.</string>
+    <string name="series_watch_history_clear_failed">تعذّر مسح سجل المشاهدة. حاول مرة أخرى.</string>
+    <string name="series_tracking_failed">تعذّر تحديث تتبّع الحلقات الجديدة. حاول مرة أخرى.</string>
+    <string name="dashboard_tracked_series">العروض المتتبَّعة</string>
 </resources>

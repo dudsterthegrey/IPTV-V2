@@ -92,6 +92,9 @@ abstract class RepositoryModule {
     abstract fun bindFavoriteRepository(impl: FavoriteRepositoryImpl): FavoriteRepository
 
     @Binds @Singleton
+    abstract fun bindTrackedSeriesRepository(impl: TrackedSeriesRepositoryImpl): TrackedSeriesRepository
+
+    @Binds @Singleton
     abstract fun bindCategoryRepository(impl: CategoryRepositoryImpl): CategoryRepository
 
     @Binds @Singleton

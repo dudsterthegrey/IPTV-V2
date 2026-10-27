@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Deine Bewertung wurde auf Trakt gespeichert.</string>
 <string name="trakt_rating_failed">Deine Bewertung konnte nicht auf Trakt gespeichert werden.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player hat die Änderung gespeichert, konnte aber die Trakt-Favoriten nicht aktualisieren. Versuche es erneut.</string>
+    <string name="series_track_new_episodes">Neue Folgen verfolgen</string>
+    <string name="series_tracking_new_episodes">Neue Folgen werden verfolgt</string>
+    <string name="series_new_episodes_badge">NEU</string>
+    <string name="series_new_episodes_clear_badge">NEU-Markierung entfernen</string>
+    <string name="series_clear_watch_history">Wiedergabeverlauf löschen</string>
+    <string name="series_clear_watch_history_title">Wiedergabeverlauf löschen?</string>
+    <string name="series_clear_watch_history_body">Dadurch werden gesehene Folgen und Fortsetzungspunkte nur für %1$s zurückgesetzt. Andere Serien sind nicht betroffen.</string>
+    <string name="series_clear_watch_history_cancel">Abbrechen</string>
+    <string name="series_clear_watch_history_confirm">Verlauf löschen</string>
+    <string name="series_watch_history_cleared">Wiedergabeverlauf für diese Serie gelöscht.</string>
+    <string name="series_watch_history_clear_failed">Der Wiedergabeverlauf konnte nicht gelöscht werden. Bitte erneut versuchen.</string>
+    <string name="series_tracking_failed">Die Verfolgung neuer Folgen konnte nicht aktualisiert werden. Bitte erneut versuchen.</string>
+    <string name="dashboard_tracked_series">Verfolgte Serien</string>
 </resources>

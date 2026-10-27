@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Tu puntuación se guardó en Trakt.</string>
 <string name="trakt_rating_failed">No se pudo guardar tu puntuación en Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player guardó el cambio, pero no pudo actualizar tus favoritos de Trakt. Inténtalo de nuevo.</string>
+    <string name="series_track_new_episodes">Seguir episodios nuevos</string>
+    <string name="series_tracking_new_episodes">Siguiendo episodios nuevos</string>
+    <string name="series_new_episodes_badge">NUEVO</string>
+    <string name="series_new_episodes_clear_badge">Quitar la etiqueta NUEVO</string>
+    <string name="series_clear_watch_history">Borrar historial de reproducción</string>
+    <string name="series_clear_watch_history_title">¿Borrar el historial de reproducción?</string>
+    <string name="series_clear_watch_history_body">Esto restablece los episodios vistos y los puntos de reanudación solo de %1$s. Las demás series no se ven afectadas.</string>
+    <string name="series_clear_watch_history_cancel">Cancelar</string>
+    <string name="series_clear_watch_history_confirm">Borrar historial</string>
+    <string name="series_watch_history_cleared">Se borró el historial de reproducción de esta serie.</string>
+    <string name="series_watch_history_clear_failed">No se pudo borrar el historial de reproducción. Inténtalo de nuevo.</string>
+    <string name="series_tracking_failed">No se pudo actualizar el seguimiento de episodios nuevos. Inténtalo de nuevo.</string>
+    <string name="dashboard_tracked_series">Series seguidas</string>
 </resources>

@@ -25,6 +25,7 @@ import com.streamvault.domain.model.VirtualCategoryIds
 import com.streamvault.domain.repository.ChannelRepository
 import com.streamvault.domain.repository.CombinedM3uRepository
 import com.streamvault.domain.repository.FavoriteRepository
+import com.streamvault.domain.repository.TrackedSeriesRepository
 import com.streamvault.domain.repository.MovieRepository
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
@@ -80,7 +81,8 @@ class DashboardViewModel @Inject constructor(
     private val appUpdatePort: CatalogAppUpdatePort,
     private val recordingManager: RecordingManager,
     private val traktAccount: TraktAccount,
-    private val traktWatchlist: TraktWatchlist
+    private val traktWatchlist: TraktWatchlist,
+    private val trackedSeriesRepository: TrackedSeriesRepository
 ) : ViewModel() {
     private companion object {
         const val FAVORITE_CHANNEL_LIMIT = 12
@@ -372,6 +374,9 @@ class DashboardViewModel @Inject constructor(
             )
         }
         val contentShelves = contentShelvesWithFavorites
+            .combine(observeTrackedSeries(provider.id).onStart { emit(emptyList()) }) { shelves, trackedSeries ->
+                shelves.copy(trackedSeries = trackedSeries)
+            }
             .combine(topRatedMovieShelf.onStart { emit(emptyList()) }) { shelves, topRatedMovies ->
                 shelves.copy(topRatedMovies = topRatedMovies)
             }
@@ -441,6 +446,7 @@ class DashboardViewModel @Inject constructor(
                 continueWatchingDegraded = snapshot.shelves.continueWatchingDegraded,
                 favoriteMovies = snapshot.shelves.favoriteMovies,
                 favoriteSeries = snapshot.shelves.favoriteSeries,
+                trackedSeries = snapshot.shelves.trackedSeries,
                 traktWatchlistMovies = snapshot.shelves.traktWatchlistMovies,
                 traktWatchlistSeries = snapshot.shelves.traktWatchlistSeries,
                 recentMovies = snapshot.shelves.recentMovies,
@@ -511,6 +517,19 @@ class DashboardViewModel @Inject constructor(
                 movies
                     .filter { !shouldHideVodFromHome(it, level) }
                     .take(MOVIE_SHELF_LIMIT)
+            }
+
+    /** Tracked shows, those with new episodes first; opening Home also re-checks them (throttled). */
+    private fun observeTrackedSeries(providerId: Long): Flow<List<Series>> =
+        trackedSeriesRepository.observeTrackedSeries(providerId)
+            .onStart {
+                viewModelScope.launch { trackedSeriesRepository.checkForNewEpisodes(providerId) }
+            }
+            .map { tracked -> tracked.map { it.seriesId }.take(SERIES_SHELF_LIMIT) }
+            .distinctUntilChanged()
+            .flatMapLatest(::loadSeriesByOrderedIds)
+            .combine(preferencesRepository.parentalControlLevel) { series, level ->
+                series.filter { !shouldHideVodFromHome(it, level) }
             }
 
     private fun observeFavoriteSeries(providerIds: List<Long>): Flow<List<Series>> =
@@ -950,6 +969,7 @@ private data class DashboardContentShelves(
     val continueWatchingDegraded: Boolean = false,
     val favoriteMovies: List<Movie> = emptyList(),
     val favoriteSeries: List<Series> = emptyList(),
+    val trackedSeries: List<Series> = emptyList(),
     val traktWatchlistMovies: List<Movie> = emptyList(),
     val traktWatchlistSeries: List<Series> = emptyList(),
     val recentMovies: List<Movie>,
@@ -984,6 +1004,7 @@ data class DashboardUiState(
     val continueWatchingDegraded: Boolean = false,
     val favoriteMovies: List<Movie> = emptyList(),
     val favoriteSeries: List<Series> = emptyList(),
+    val trackedSeries: List<Series> = emptyList(),
     val traktWatchlistMovies: List<Movie> = emptyList(),
     val traktWatchlistSeries: List<Series> = emptyList(),
     val recentMovies: List<Movie> = emptyList(),

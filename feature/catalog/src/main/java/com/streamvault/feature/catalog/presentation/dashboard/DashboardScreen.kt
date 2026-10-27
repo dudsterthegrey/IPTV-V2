@@ -279,6 +279,19 @@ fun DashboardScreen(
                         MovieCard(movie = movie, onClick = { onMovieClick(movie) })
                     }
 
+                    AppHomeDashboardShelf.TRACKED_SERIES -> CategoryRow(
+                        title = stringResource(R.string.dashboard_tracked_series),
+                        items = uiState.trackedSeries,
+                        keySelector = { it.id },
+                        onSeeAll = { onDestinationRequested(AppDestination.Series) }
+                    ) { series ->
+                        SeriesCard(
+                            series = series,
+                            subtitle = series.releaseDate ?: stringResource(R.string.dashboard_updated_series_badge),
+                            onClick = { onSeriesClick(series) }
+                        )
+                    }
+
                     AppHomeDashboardShelf.FAVORITE_SERIES -> CategoryRow(
                         title = stringResource(R.string.dashboard_favorite_series),
                         items = uiState.favoriteSeries,

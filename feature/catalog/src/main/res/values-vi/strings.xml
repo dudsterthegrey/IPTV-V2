@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Đã lưu điểm của bạn vào Trakt.</string>
 <string name="trakt_rating_failed">Không thể lưu điểm của bạn vào Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player đã lưu thay đổi nhưng không thể cập nhật Mục yêu thích Trakt. Hãy thử lại.</string>
+    <string name="series_track_new_episodes">Theo dõi tập mới</string>
+    <string name="series_tracking_new_episodes">Đang theo dõi tập mới</string>
+    <string name="series_new_episodes_badge">MỚI</string>
+    <string name="series_new_episodes_clear_badge">Xóa nhãn MỚI</string>
+    <string name="series_clear_watch_history">Xóa lịch sử xem</string>
+    <string name="series_clear_watch_history_title">Xóa lịch sử xem?</string>
+    <string name="series_clear_watch_history_body">Thao tác này chỉ đặt lại các tập đã xem và điểm tiếp tục của %1$s. Các chương trình khác không bị ảnh hưởng.</string>
+    <string name="series_clear_watch_history_cancel">Hủy</string>
+    <string name="series_clear_watch_history_confirm">Xóa lịch sử</string>
+    <string name="series_watch_history_cleared">Đã xóa lịch sử xem của chương trình này.</string>
+    <string name="series_watch_history_clear_failed">Không thể xóa lịch sử xem. Hãy thử lại.</string>
+    <string name="series_tracking_failed">Không thể cập nhật việc theo dõi tập mới. Hãy thử lại.</string>
+    <string name="dashboard_tracked_series">Chương trình đang theo dõi</string>
 </resources>

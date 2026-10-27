@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">सिंक आवश्यक</string>
   <string name="vod_unavailable_subtitle">यह प्रदाता अलग फ़िल्म और सीरीज़ कैटलॉग प्रदान करता है।</string>
   <string name="vod_unavailable_title">VOD उपलब्ध नहीं है</string>
+    <string name="series_track_new_episodes">नए एपिसोड ट्रैक करें</string>
+    <string name="series_tracking_new_episodes">नए एपिसोड ट्रैक किए जा रहे हैं</string>
+    <string name="series_new_episodes_badge">नया</string>
+    <string name="series_new_episodes_clear_badge">“नया” बैज हटाएँ</string>
+    <string name="series_clear_watch_history">देखने का इतिहास साफ़ करें</string>
+    <string name="series_clear_watch_history_title">देखने का इतिहास साफ़ करें?</string>
+    <string name="series_clear_watch_history_body">इससे केवल %1$s के देखे गए एपिसोड और फिर से शुरू करने के बिंदु रीसेट होंगे। अन्य शो प्रभावित नहीं होंगे।</string>
+    <string name="series_clear_watch_history_cancel">रद्द करें</string>
+    <string name="series_clear_watch_history_confirm">इतिहास साफ़ करें</string>
+    <string name="series_watch_history_cleared">इस शो का देखने का इतिहास साफ़ कर दिया गया।</string>
+    <string name="series_watch_history_clear_failed">देखने का इतिहास साफ़ नहीं किया जा सका। फिर से कोशिश करें।</string>
+    <string name="series_tracking_failed">नए एपिसोड की ट्रैकिंग अपडेट नहीं हो सकी। फिर से कोशिश करें।</string>
+    <string name="dashboard_tracked_series">ट्रैक किए गए शो</string>
 </resources>

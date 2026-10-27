@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.Tv as TvIcon
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -482,6 +483,12 @@ fun MovieCard(
     }
 }
 
+/**
+ * (providerId, seriesId) pairs of tracked series that have new episodes. Provided once at the app
+ * root so every [SeriesCard] can show the badge without each screen passing it down.
+ */
+val LocalSeriesWithNewEpisodes = compositionLocalOf<Set<Pair<Long, Long>>> { emptySet() }
+
 @Composable
 fun SeriesCard(
     series: Series,
@@ -498,8 +505,14 @@ fun SeriesCard(
     width: Dp = 136.dp,
     height: Dp = 204.dp
 ) {
+    val hasNewEpisodes = (series.providerId to series.id) in LocalSeriesWithNewEpisodes.current
+    val newEpisodesLabel = stringResource(R.string.series_new_episodes_badge)
     val seriesDescription = buildString {
         append(series.name)
+        if (hasNewEpisodes && !isLocked) {
+            append(". ")
+            append(newEpisodesLabel)
+        }
         subtitle?.takeIf { it.isNotBlank() }?.let {
             append(". ")
             append(it)
@@ -598,8 +611,26 @@ fun SeriesCard(
                     )
                 }
             }
+
+            if (hasNewEpisodes) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(start = 6.dp, bottom = 8.dp)
+                        .background(NewEpisodesBadgeColor, RoundedCornerShape(4.dp))
+                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                ) {
+                    Text(
+                        text = newEpisodesLabel,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.White
+                    )
+                }
+            }
         }
     }
 }
+
+private val NewEpisodesBadgeColor = Color(0xFFE53935)
 
 

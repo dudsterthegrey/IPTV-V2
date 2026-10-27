@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">Penyegerakan diperlukan</string>
   <string name="vod_unavailable_subtitle">Penyedia ini menyediakan katalog Filem dan Siri yang berasingan.</string>
   <string name="vod_unavailable_title">VOD tidak tersedia</string>
+    <string name="series_track_new_episodes">Jejak episod baharu</string>
+    <string name="series_tracking_new_episodes">Menjejak episod baharu</string>
+    <string name="series_new_episodes_badge">BAHARU</string>
+    <string name="series_new_episodes_clear_badge">Kosongkan lencana BAHARU</string>
+    <string name="series_clear_watch_history">Kosongkan sejarah tontonan</string>
+    <string name="series_clear_watch_history_title">Kosongkan sejarah tontonan?</string>
+    <string name="series_clear_watch_history_body">Ini menetapkan semula episod yang telah ditonton dan titik sambung semula untuk %1$s sahaja. Rancangan lain tidak terjejas.</string>
+    <string name="series_clear_watch_history_cancel">Batal</string>
+    <string name="series_clear_watch_history_confirm">Kosongkan sejarah</string>
+    <string name="series_watch_history_cleared">Sejarah tontonan untuk rancangan ini telah dikosongkan.</string>
+    <string name="series_watch_history_clear_failed">Tidak dapat mengosongkan sejarah tontonan. Cuba lagi.</string>
+    <string name="series_tracking_failed">Tidak dapat mengemas kini penjejakan episod baharu. Cuba lagi.</string>
+    <string name="dashboard_tracked_series">Rancangan Dijejak</string>
 </resources>

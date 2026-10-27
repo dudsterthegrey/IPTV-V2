@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">评分已保存到 Trakt。</string>
 <string name="trakt_rating_failed">无法将评分保存到 Trakt。</string>
 <string name="trakt_favorite_sync_failed">IPTV Player 已保存更改，但无法更新 Trakt 收藏夹。请重试。</string>
+    <string name="series_track_new_episodes">追踪新剧集</string>
+    <string name="series_tracking_new_episodes">正在追踪新剧集</string>
+    <string name="series_new_episodes_badge">新</string>
+    <string name="series_new_episodes_clear_badge">清除“新”标记</string>
+    <string name="series_clear_watch_history">清除观看记录</string>
+    <string name="series_clear_watch_history_title">清除观看记录？</string>
+    <string name="series_clear_watch_history_body">这只会重置 %1$s 的已观看剧集和续播位置，不会影响其他节目。</string>
+    <string name="series_clear_watch_history_cancel">取消</string>
+    <string name="series_clear_watch_history_confirm">清除记录</string>
+    <string name="series_watch_history_cleared">已清除此节目的观看记录。</string>
+    <string name="series_watch_history_clear_failed">无法清除观看记录，请重试。</string>
+    <string name="series_tracking_failed">无法更新新剧集追踪，请重试。</string>
+    <string name="dashboard_tracked_series">追踪的节目</string>
 </resources>

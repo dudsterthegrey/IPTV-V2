@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Din bedømmelse blev gemt på Trakt.</string>
 <string name="trakt_rating_failed">Kunne ikke gemme din bedømmelse på Trakt.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player gemte ændringen, men kunne ikke opdatere Trakt-favoritter. Prøv igen.</string>
+    <string name="series_track_new_episodes">Følg nye afsnit</string>
+    <string name="series_tracking_new_episodes">Følger nye afsnit</string>
+    <string name="series_new_episodes_badge">NY</string>
+    <string name="series_new_episodes_clear_badge">Fjern NY-mærket</string>
+    <string name="series_clear_watch_history">Ryd afspilningshistorik</string>
+    <string name="series_clear_watch_history_title">Ryd afspilningshistorik?</string>
+    <string name="series_clear_watch_history_body">Dette nulstiller sete afsnit og genoptagelsespunkter kun for %1$s. Andre serier påvirkes ikke.</string>
+    <string name="series_clear_watch_history_cancel">Annuller</string>
+    <string name="series_clear_watch_history_confirm">Ryd historik</string>
+    <string name="series_watch_history_cleared">Afspilningshistorikken for denne serie er ryddet.</string>
+    <string name="series_watch_history_clear_failed">Afspilningshistorikken kunne ikke ryddes. Prøv igen.</string>
+    <string name="series_tracking_failed">Sporing af nye afsnit kunne ikke opdateres. Prøv igen.</string>
+    <string name="dashboard_tracked_series">Fulgte serier</string>
 </resources>

@@ -8,6 +8,9 @@ import android.os.StrictMode
 import android.util.Rational
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.streamvault.domain.repository.TrackedSeriesRepository
+import com.streamvault.feature.catalog.presentation.components.LocalSeriesWithNewEpisodes
+import kotlinx.coroutines.flow.flowOf
 import androidx.activity.viewModels
 import androidx.core.view.doOnPreDraw
 import com.streamvault.app.cast.CastRouteChooserActivity
@@ -113,6 +116,10 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
     @Inject
     lateinit var databaseStartupCoordinator: DatabaseStartupCoordinator
 
+    // Lazy: the repository opens the database, which must wait for the startup gate.
+    @Inject
+    lateinit var trackedSeriesRepository: dagger.Lazy<TrackedSeriesRepository>
+
     private val _pictureInPictureModeFlow = MutableStateFlow(false)
     val pictureInPictureModeFlow: StateFlow<Boolean> = _pictureInPictureModeFlow.asStateFlow()
 
@@ -196,6 +203,13 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
             val appTimeFormat by preferencesRepository.appTimeFormat.collectAsState(initial = com.streamvault.domain.model.AppTimeFormat.SYSTEM)
             val appTheme by preferencesRepository.appTheme.collectAsState(initial = AppTheme.DEFAULT)
             val databaseStartupState by databaseStartupCoordinator.state.collectAsState()
+            val seriesWithNewEpisodes by remember(databaseStartupState) {
+                if (databaseStartupState == DatabaseStartupState.Ready) {
+                    trackedSeriesRepository.get().observeSeriesWithNewEpisodes()
+                } else {
+                    flowOf(emptySet())
+                }
+            }.collectAsState(initial = emptySet())
             val currentContext = LocalContext.current
             
             val deviceConfiguration = LocalConfiguration.current
@@ -239,7 +253,8 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
                 LocalLayoutDirection provides layoutDirection,
                 LocalAppTimeFormat provides appTimeFormat,
                 LocalLiveTimeFormat provides appTimeFormat,
-                LocalUiTimeFormat provides appTimeFormat.toUiTimeFormat()
+                LocalUiTimeFormat provides appTimeFormat.toUiTimeFormat(),
+                LocalSeriesWithNewEpisodes provides seriesWithNewEpisodes
             ) {
                 StreamVaultTheme(themeId = appTheme.storageValue) {
                     when (val state = databaseStartupState) {

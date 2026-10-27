@@ -353,4 +353,17 @@
   <string name="vod_sync_needed_title">Potrebna je sinkronizacija</string>
   <string name="vod_unavailable_subtitle">Ovaj pružatelj nudi odvojene kataloge filmova i serija.</string>
   <string name="vod_unavailable_title">VOD nije dostupan</string>
+    <string name="series_track_new_episodes">Prati nove epizode</string>
+    <string name="series_tracking_new_episodes">Nove epizode se prate</string>
+    <string name="series_new_episodes_badge">NOVO</string>
+    <string name="series_new_episodes_clear_badge">Ukloni oznaku NOVO</string>
+    <string name="series_clear_watch_history">Očisti povijest gledanja</string>
+    <string name="series_clear_watch_history_title">Očistiti povijest gledanja?</string>
+    <string name="series_clear_watch_history_body">Ovo poništava pogledane epizode i točke nastavka samo za %1$s. Ostale serije nisu zahvaćene.</string>
+    <string name="series_clear_watch_history_cancel">Odustani</string>
+    <string name="series_clear_watch_history_confirm">Očisti povijest</string>
+    <string name="series_watch_history_cleared">Povijest gledanja za ovu seriju je očišćena.</string>
+    <string name="series_watch_history_clear_failed">Povijest gledanja nije moguće očistiti. Pokušajte ponovno.</string>
+    <string name="series_tracking_failed">Praćenje novih epizoda nije moguće ažurirati. Pokušajte ponovno.</string>
+    <string name="dashboard_tracked_series">Praćene serije</string>
 </resources>

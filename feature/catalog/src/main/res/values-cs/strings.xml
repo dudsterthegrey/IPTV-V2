@@ -367,4 +367,17 @@
 <string name="trakt_rating_saved">Hodnocení bylo uloženo do Traktu.</string>
 <string name="trakt_rating_failed">Hodnocení se nepodařilo uložit do Traktu.</string>
 <string name="trakt_favorite_sync_failed">IPTV Player změnu uložil, ale nepodařilo se aktualizovat Oblíbené na Traktu. Zkuste to znovu.</string>
+    <string name="series_track_new_episodes">Sledovat nové díly</string>
+    <string name="series_tracking_new_episodes">Nové díly se sledují</string>
+    <string name="series_new_episodes_badge">NOVÉ</string>
+    <string name="series_new_episodes_clear_badge">Odebrat štítek NOVÉ</string>
+    <string name="series_clear_watch_history">Vymazat historii sledování</string>
+    <string name="series_clear_watch_history_title">Vymazat historii sledování?</string>
+    <string name="series_clear_watch_history_body">Tímto se resetují zhlédnuté díly a místa pro pokračování pouze pro %1$s. Ostatní pořady nebudou ovlivněny.</string>
+    <string name="series_clear_watch_history_cancel">Zrušit</string>
+    <string name="series_clear_watch_history_confirm">Vymazat historii</string>
+    <string name="series_watch_history_cleared">Historie sledování tohoto pořadu byla vymazána.</string>
+    <string name="series_watch_history_clear_failed">Historii sledování se nepodařilo vymazat. Zkuste to znovu.</string>
+    <string name="series_tracking_failed">Sledování nových dílů se nepodařilo aktualizovat. Zkuste to znovu.</string>
+    <string name="dashboard_tracked_series">Sledované pořady</string>
 </resources>

@@ -34,7 +34,8 @@ class TraktHistoryImportDaoTest {
         val preferences = mock<PreferencesRepository>()
         whenever(preferences.isIncognitoMode).thenReturn(flowOf(false))
         return PlaybackHistoryRepositoryImpl(database.playbackHistoryDao(), preferences,
-            database.movieDao(), database.episodeDao(), RoomDatabaseTransactionRunner(database))
+            database.movieDao(), database.episodeDao(), RoomDatabaseTransactionRunner(database),
+            database.trackedSeriesDao())
     }
     private suspend fun provider() {
         database.providerDao().insert(ProviderEntity(id = 1, name = "Synthetic", type = ProviderType.M3U,

@@ -29,6 +29,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.NewReleases
+import androidx.compose.material.icons.filled.NotificationsActive
+import androidx.compose.material.icons.outlined.NotificationsNone
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.Composable
@@ -66,6 +70,7 @@ import com.streamvault.feature.catalog.api.CatalogUiEvent
 import com.streamvault.feature.catalog.presentation.catalogMessageText
 import com.streamvault.feature.catalog.presentation.components.EpisodeRowCard
 import com.streamvault.feature.catalog.presentation.components.DetailActionButton
+import com.streamvault.feature.catalog.presentation.components.dialogs.ClearSeriesWatchHistoryDialog
 import com.streamvault.feature.catalog.presentation.components.DetailSectionHeading
 import com.streamvault.feature.catalog.presentation.components.ExternalRatingsStrip
 import com.streamvault.feature.catalog.presentation.components.formatVodRatingLabel
@@ -107,6 +112,7 @@ fun SeriesDetailScreen(
     val series = uiState.series
     val context = LocalContext.current
     var ratingDialogOpen by remember { mutableStateOf(false) }
+    var clearHistoryDialogOpen by remember { mutableStateOf(false) }
 
     LaunchedEffect(viewModel, context, platformHost) {
         viewModel.uiEvents.collect { event ->
@@ -162,6 +168,11 @@ fun SeriesDetailScreen(
         onToggleTraktWatchlist = viewModel::toggleTraktWatchlist,
         onRateOnTrakt = { ratingDialogOpen = true },
         onToggleFavorite = viewModel::toggleFavorite,
+        isTrackingNewEpisodes = uiState.isTrackingNewEpisodes,
+        hasNewEpisodes = uiState.hasNewEpisodes,
+        onToggleTracking = viewModel::toggleNewEpisodeTracking,
+        onClearNewBadge = viewModel::clearNewEpisodeBadge,
+        onClearWatchHistory = { clearHistoryDialogOpen = true },
         onSelectVariant = viewModel::selectSeriesVariant,
         onSeasonSelected = viewModel::selectSeason,
         onEpisodeClick = { episode -> onEpisodeClick(episode, series) },
@@ -180,6 +191,16 @@ fun SeriesDetailScreen(
         onCastEpisode = viewModel::castEpisode,
         onBack = onBack
     )
+    if (clearHistoryDialogOpen) {
+        ClearSeriesWatchHistoryDialog(
+            seriesName = series.name,
+            onDismissRequest = { clearHistoryDialogOpen = false },
+            onConfirm = {
+                clearHistoryDialogOpen = false
+                viewModel.clearWatchHistory()
+            }
+        )
+    }
     if (ratingDialogOpen) {
         TraktRatingDialog(
             currentRating = uiState.traktUserRating,
@@ -238,6 +259,11 @@ private fun SeriesDetailContent(
     onToggleTraktWatchlist: () -> Unit,
     onRateOnTrakt: () -> Unit,
     onToggleFavorite: () -> Unit,
+    isTrackingNewEpisodes: Boolean,
+    hasNewEpisodes: Boolean,
+    onToggleTracking: () -> Unit,
+    onClearNewBadge: () -> Unit,
+    onClearWatchHistory: () -> Unit,
     onSelectVariant: (Long) -> Unit,
     onSeasonSelected: (Season) -> Unit,
     onEpisodeClick: (Episode) -> Unit,
@@ -408,6 +434,13 @@ private fun SeriesDetailContent(
                             if (resumeEpisode == null) {
                                 SeriesDetailFavoriteAction(series = series, onToggleFavorite = onToggleFavorite)
                             }
+                            SeriesTrackingActions(
+                                isTracking = isTrackingNewEpisodes,
+                                hasNewEpisodes = hasNewEpisodes,
+                                onToggleTracking = onToggleTracking,
+                                onClearNewBadge = onClearNewBadge,
+                                onClearWatchHistory = onClearWatchHistory
+                            )
                         }
                     }
                 } else {
@@ -497,6 +530,13 @@ private fun SeriesDetailContent(
                             if (resumeEpisode == null) {
                                 SeriesDetailFavoriteAction(series = series, onToggleFavorite = onToggleFavorite)
                             }
+                            SeriesTrackingActions(
+                                isTracking = isTrackingNewEpisodes,
+                                hasNewEpisodes = hasNewEpisodes,
+                                onToggleTracking = onToggleTracking,
+                                onClearNewBadge = onClearNewBadge,
+                                onClearWatchHistory = onClearWatchHistory
+                            )
                         }
                     }
                 }
@@ -722,6 +762,43 @@ private fun SeriesDetailActions(
             onCast, enabled = !isCasting
         ) }
         item { SeriesDetailFavoriteAction(series = series, onToggleFavorite = onToggleFavorite) }
+    }
+}
+
+@Composable
+private fun SeriesTrackingActions(
+    isTracking: Boolean,
+    hasNewEpisodes: Boolean,
+    onToggleTracking: () -> Unit,
+    onClearNewBadge: () -> Unit,
+    onClearWatchHistory: () -> Unit
+) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+        item {
+            DetailActionButton(
+                label = stringResource(
+                    if (isTracking) R.string.series_tracking_new_episodes else R.string.series_track_new_episodes
+                ),
+                onClick = onToggleTracking,
+                icon = if (isTracking) Icons.Filled.NotificationsActive else Icons.Outlined.NotificationsNone
+            )
+        }
+        if (hasNewEpisodes) {
+            item {
+                DetailActionButton(
+                    label = stringResource(R.string.series_new_episodes_clear_badge),
+                    onClick = onClearNewBadge,
+                    icon = Icons.Filled.NewReleases
+                )
+            }
+        }
+        item {
+            DetailActionButton(
+                label = stringResource(R.string.series_clear_watch_history),
+                onClick = onClearWatchHistory,
+                icon = Icons.Filled.History
+            )
+        }
     }
 }
 
