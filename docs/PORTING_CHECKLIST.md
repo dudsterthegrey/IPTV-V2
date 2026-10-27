@@ -36,8 +36,11 @@ item could still exist under a different name, so confirm on device before build
       The key you paste wins over any built-in key, is stored encrypted, is checked with
       OpenSubtitles before saving (a rejected key is refused; being offline is not), and survives
       signing out of the account. Username/password sign-in was already in V2.
-- [ ] **Multi-View with movies and episodes**: V2's multi-view is live channels only; V1 tiles
-      could also play movies and episodes.
+- [x] **Multi-View with movies and episodes**: while a movie or episode plays, **Split Screen** in
+      the player's settings sheet puts it in a Multi-View slot next to live channels. The tile
+      starts where you were. Limits: tiles are added from the player only (the in-grid
+      "Replace" picker still lists channels), presets skip movie/episode tiles, and Stremio or
+      other remote-only titles can't join.
 - [ ] **Search results grouped in collapsible Live / Movies / Series sections**: V2 has global
       search; check on device whether its layout already works for you before changing it.
 
@@ -88,6 +91,12 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       plays. (Direct URL was verified on the emulator 2026-10-27: added Mux's test stream from the
       Saved Streams tab, it played, Back returned to the list.) Also check Edit, Delete, and that
       the keyboard's Next/Done key moves to the next field in the add/edit dialog.
+
+- [ ] **Multi-View with a movie**: play a movie, stop at a few minutes in, open the player's
+      settings → **Split Screen**, pick a slot → the slot card shows the title and "Movie". Add a
+      live channel the usual way, then **Launch Split Screen** → the movie tile resumes near where
+      you were and plays beside the channel; moving focus switches the audio. Repeat with an
+      episode (card shows "S1 E2 · Show name").
 
 - [ ] **OpenSubtitles API key**: Settings > Playback > Subtitles & translation > **API key** reads
       "Not set". Paste your key from opensubtitles.com/consumers and press **Save** → row reads

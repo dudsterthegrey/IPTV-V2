@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Alvorlig</string>
     <string name="multiview_thermal_critical">Kritisk</string>
     <string name="multiview_low_memory_warning">Minnebruken er høy. Ekstra spor forblir i standby til avspillingen stabiliseres.</string>
+    <string name="multiview_movie_label">Film</string>
+    <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
 </resources>

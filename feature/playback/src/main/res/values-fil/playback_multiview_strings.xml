@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Malubha</string>
     <string name="multiview_thermal_critical">Kritikal</string>
     <string name="multiview_low_memory_warning">Mataas ang presyon sa memorya. Mananatili sa standby ang mga dagdag na slot hanggang sa maging stable ang playback.</string>
+    <string name="multiview_movie_label">Pelikula</string>
+    <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
 </resources>

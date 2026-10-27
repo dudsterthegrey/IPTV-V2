@@ -21,6 +21,23 @@ class MultiViewManager @Inject constructor() {
 
     val hasAnyChannel: Boolean get() = _slots.value.any { it != null }
 
+    // Where a movie or episode tile should start, keyed by its slot channel id. Only set when
+    // playback is handed over from the full-screen player, so the tile picks up where you were.
+    private val startPositions = mutableMapOf<Long, Long>()
+
+    fun setStartPosition(channelId: Long, positionMs: Long) {
+        synchronized(startPositions) {
+            if (positionMs > 0L) startPositions[channelId] = positionMs else startPositions.remove(channelId)
+        }
+    }
+
+    fun startPositionFor(channelId: Long): Long = synchronized(startPositions) { startPositions[channelId] ?: 0L }
+
+    private fun pruneStartPositions() {
+        val queued = _slots.value.mapNotNullTo(mutableSetOf()) { it?.id }
+        synchronized(startPositions) { startPositions.keys.retainAll(queued) }
+    }
+
     /** Place a channel in a specific slot index (0–3). Replaces whatever was there. */
     fun setChannel(slotIndex: Int, channel: Channel) {
         if (slotIndex !in 0 until MAX_SLOTS) return
@@ -34,23 +51,27 @@ class MultiViewManager @Inject constructor() {
                 slots[slotIndex] = channel
             }
         }
+        pruneStartPositions()
     }
 
     /** Clear a specific slot. */
     fun clearSlot(slotIndex: Int) {
         if (slotIndex !in 0 until MAX_SLOTS) return
         _slots.update { current -> current.toMutableList().also { it[slotIndex] = null } }
+        pruneStartPositions()
     }
 
     /** Clear all slots. */
     fun clearAll() {
         _slots.update { List(MAX_SLOTS) { null } }
+        pruneStartPositions()
     }
 
     /** Atomically replace all slot assignments. `plan` must have exactly MAX_SLOTS entries. */
     fun setSlots(plan: List<Channel?>) {
         require(plan.size == MAX_SLOTS)
         _slots.update { plan.toList() }
+        pruneStartPositions()
     }
 
     /** Returns true if the given channel is in any slot. */

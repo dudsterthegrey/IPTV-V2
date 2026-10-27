@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Severe</string>
     <string name="multiview_thermal_critical">Critical</string>
     <string name="multiview_low_memory_warning">Memory pressure is high. Extra slots stay in standby until playback stabilizes.</string>
+    <string name="multiview_movie_label">Movie</string>
+    <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
 </resources>

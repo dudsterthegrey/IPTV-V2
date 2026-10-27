@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">E rëndë</string>
     <string name="multiview_thermal_critical">Kritike</string>
     <string name="multiview_low_memory_warning">Presioni i kujtesës është i lartë. Vendet shtesë qëndrojnë në pritje derisa riprodhimi të stabilizohet.</string>
+    <string name="multiview_movie_label">Film</string>
+    <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
 </resources>

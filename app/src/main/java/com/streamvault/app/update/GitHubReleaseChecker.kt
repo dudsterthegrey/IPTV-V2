@@ -28,16 +28,19 @@ data class GitHubReleaseInfo(
 )
 
 @Singleton
-class GitHubReleaseChecker @Inject constructor(
-    private val okHttpClient: OkHttpClient
+class GitHubReleaseChecker internal constructor(
+    private val okHttpClient: OkHttpClient,
+    private val updatesEnabled: Boolean,
 ) {
+    @Inject constructor(okHttpClient: OkHttpClient) : this(okHttpClient, BuildConfig.APP_UPDATES_ENABLED)
+
     private companion object {
         private const val MAX_RESPONSE_BYTES = 512 * 1024L
         private val STRUCTURED_TAG_REGEX = Regex("""^v?(.+?)\+(\d+)$""", RegexOption.IGNORE_CASE)
     }
 
     suspend fun fetchLatestRelease(): Result<GitHubReleaseInfo> = withContext(Dispatchers.IO) {
-        if (!BuildConfig.APP_UPDATES_ENABLED) {
+        if (!updatesEnabled) {
             return@withContext Result.error("App updates are not available in this build")
         }
         try {

@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">חמור</string>
     <string name="multiview_thermal_critical">קריטי</string>
     <string name="multiview_low_memory_warning">לחץ הזיכרון גבוה. חריצים נוספים נשארים במצב המתנה עד שההשמעה מתייצבת.</string>
+    <string name="multiview_movie_label">סרט</string>
+    <string name="multiview_episode_label">ע%1$d פ%2$d · %3$s</string>
 </resources>

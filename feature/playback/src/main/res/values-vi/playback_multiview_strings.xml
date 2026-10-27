@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Nặng</string>
     <string name="multiview_thermal_critical">Nguy cấp</string>
     <string name="multiview_low_memory_warning">Áp lực bộ nhớ đang cao. Các ô bổ sung sẽ ở trạng thái chờ cho đến khi phát lại ổn định.</string>
+    <string name="multiview_movie_label">Phim</string>
+    <string name="multiview_episode_label">Mùa %1$d Tập %2$d · %3$s</string>
 </resources>

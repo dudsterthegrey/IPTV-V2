@@ -348,6 +348,19 @@ fun PlayerScreen(
         viewModel.recordLiveVariantObservation(playbackState, videoFormat)
     }
 
+    // Live channels go to Multi-View as themselves; movies and episodes are wrapped for it.
+    val multiViewMovieLabel = stringResource(R.string.multiview_movie_label)
+    val multiViewEpisodeFormat = stringResource(R.string.multiview_episode_label)
+    val splitScreenItem = currentChannel ?: if (modalState.showSplitDialog) {
+        remember(modalState.showSplitDialog) {
+            viewModel.multiViewItemForCurrentVod(multiViewMovieLabel) { season, episode, series ->
+                String.format(multiViewEpisodeFormat, season, episode, series)
+            }
+        }
+    } else {
+        null
+    }
+
     PlayerTopLevelModalHost(
         viewModel = viewModel,
         isInPictureInPictureMode = isInPictureInPictureMode,
@@ -358,11 +371,12 @@ fun PlayerScreen(
             modalState = modalState.dismiss()
         },
         showSplitDialog = modalState.showSplitDialog,
-        currentChannel = currentChannel,
+        currentChannel = splitScreenItem,
         onDismissSplitDialog = { modalState = modalState.dismiss() },
         splitScreenPlanner = splitScreenPlanner,
         onLaunchMultiView = {
             modalState = modalState.dismiss()
+            viewModel.rememberMultiViewStartPosition(splitScreenItem?.takeIf { currentChannel == null })
             viewModel.handOffPlaybackToMultiView()
             onNavigate?.invoke(AppDestination.MultiView)
         }

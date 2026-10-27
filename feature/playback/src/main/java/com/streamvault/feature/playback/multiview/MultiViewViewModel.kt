@@ -15,6 +15,9 @@ import com.streamvault.domain.model.Result
 import com.streamvault.domain.model.ProviderType
 import com.streamvault.domain.repository.ChannelRepository
 import com.streamvault.domain.repository.FavoriteRepository
+import com.streamvault.domain.repository.MovieRepository
+import com.streamvault.domain.repository.SeriesRepository
+import com.streamvault.domain.model.StreamInfo
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.usecase.UnlockParentalCategory
@@ -46,7 +49,9 @@ class MultiViewViewModel @Inject constructor(
     private val playbackHistoryRepository: PlaybackHistoryRepository,
     private val providerRepository: ProviderRepository,
     private val parentalControlManager: ParentalControlManager,
-    private val unlockParentalCategory: UnlockParentalCategory
+    private val unlockParentalCategory: UnlockParentalCategory,
+    private val movieRepository: MovieRepository,
+    private val seriesRepository: SeriesRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MultiViewUiState())
@@ -284,7 +289,7 @@ class MultiViewViewModel @Inject constructor(
                             preferencesRepository.playerFastRetryOnTransientFailures.first()
                         )
                         localEngine.setPlaybackBufferMode(preferencesRepository.playerPlaybackBufferMode.first())
-                        val streamInfo = when (val result = channelRepository.getStreamInfo(channel)) {
+                        val streamInfo = when (val result = resolveSlotStreamInfo(channel)) {
                             is Result.Success -> result.data
                             is Result.Error -> throw IllegalStateException(result.message)
                             Result.Loading -> throw IllegalStateException("Stream info still loading for ${slot.title}")
@@ -294,6 +299,9 @@ class MultiViewViewModel @Inject constructor(
                             return@launch
                         }
                         localEngine.prepare(streamInfo)
+                        multiViewManager.startPositionFor(channel.id)
+                            .takeIf { it > 0L && channel.multiViewVodKind != null }
+                            ?.let(localEngine::seekTo)
                         localEngine.play()
 
                         // Success: publish engine
@@ -344,6 +352,18 @@ class MultiViewViewModel @Inject constructor(
         showSelectionBorderTemporarily()
         startTelemetryMonitoring()
     }
+
+    /** Live channels resolve through the channel repository; movie and episode tiles through their own. */
+    private suspend fun resolveSlotStreamInfo(channel: Channel): Result<StreamInfo> =
+        when (channel.multiViewVodKind) {
+            null -> channelRepository.getStreamInfo(channel)
+            MultiViewVodKind.MOVIE -> movieRepository.getMovie(channel.streamId)
+                ?.let { movieRepository.getStreamInfo(it) }
+                ?: Result.error("This movie is no longer available.")
+            MultiViewVodKind.EPISODE -> seriesRepository.getEpisodeById(channel.streamId)
+                ?.let { seriesRepository.getEpisodeStreamInfo(it) }
+                ?: Result.error("This episode is no longer available.")
+        }
 
     fun setFocus(slotIndex: Int) {
         if (_uiState.value.focusedSlotIndex != slotIndex) {

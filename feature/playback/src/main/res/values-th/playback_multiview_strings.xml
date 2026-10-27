@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">รุนแรง</string>
     <string name="multiview_thermal_critical">วิกฤต</string>
     <string name="multiview_low_memory_warning">ความจำตึงตัวสูง สล็อตเพิ่มเติมจะอยู่ในสแตนด์บายจนกว่าการเล่นจะเสถียร</string>
+    <string name="multiview_movie_label">ภาพยนตร์</string>
+    <string name="multiview_episode_label">ซีซัน %1$d ตอน %2$d · %3$s</string>
 </resources>

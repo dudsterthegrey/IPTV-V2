@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Súlyos</string>
     <string name="multiview_thermal_critical">Kritikus</string>
     <string name="multiview_low_memory_warning">A memóriahasználat magas. A további helyek készenlétben maradnak, amíg a lejátszás stabilizálódik.</string>
+    <string name="multiview_movie_label">Film</string>
+    <string name="multiview_episode_label">%1$d. évad %2$d. rész · %3$s</string>
 </resources>

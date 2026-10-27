@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Severă</string>
     <string name="multiview_thermal_critical">Critic</string>
     <string name="multiview_low_memory_warning">Presiunea memoriei este mare. Sloturile suplimentare rămân în standby până când redarea se stabilizează.</string>
+    <string name="multiview_movie_label">Film</string>
+    <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
 </resources>

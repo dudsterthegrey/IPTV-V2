@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Сериозно</string>
     <string name="multiview_thermal_critical">Критично</string>
     <string name="multiview_low_memory_warning">Натоварването на паметта е високо. Допълнителните слотове остават в готовност, докато възпроизвеждането се стабилизира.</string>
+    <string name="multiview_movie_label">Филм</string>
+    <string name="multiview_episode_label">С%1$d Е%2$d · %3$s</string>
 </resources>

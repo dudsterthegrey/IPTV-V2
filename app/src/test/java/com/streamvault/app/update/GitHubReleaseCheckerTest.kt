@@ -28,6 +28,16 @@ class GitHubReleaseCheckerTest {
     }
 
     @Test
+    fun `builds with updates turned off never call GitHub`() = kotlinx.coroutines.test.runTest {
+        val client = mock<OkHttpClient>()
+
+        val result = GitHubReleaseChecker(client, updatesEnabled = false).fetchLatestRelease()
+
+        assertThat(result).isInstanceOf(com.streamvault.domain.model.Result.Error::class.java)
+        org.mockito.kotlin.verifyNoInteractions(client)
+    }
+
+    @Test
     fun `http failures are returned as errors`() = kotlinx.coroutines.test.runTest {
         val client = mock<OkHttpClient>()
         val call = mock<Call>()
@@ -37,7 +47,7 @@ class GitHubReleaseCheckerTest {
         whenever(response.isSuccessful).thenReturn(false)
         whenever(response.code).thenReturn(429)
 
-        val result = GitHubReleaseChecker(client).fetchLatestRelease()
+        val result = GitHubReleaseChecker(client, updatesEnabled = true).fetchLatestRelease()
 
         assertThat(result).isInstanceOf(com.streamvault.domain.model.Result.Error::class.java)
         assertThat((result as com.streamvault.domain.model.Result.Error).message).contains("429")
@@ -57,7 +67,7 @@ class GitHubReleaseCheckerTest {
         whenever(body.contentType()).thenReturn(null)
         whenever(body.byteStream()).thenReturn(ByteArrayInputStream("{not-json".toByteArray()))
 
-        val result = GitHubReleaseChecker(client).fetchLatestRelease()
+        val result = GitHubReleaseChecker(client, updatesEnabled = true).fetchLatestRelease()
 
         assertThat(result).isInstanceOf(com.streamvault.domain.model.Result.Error::class.java)
         assertThat((result as com.streamvault.domain.model.Result.Error).message)

@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">شدید</string>
     <string name="multiview_thermal_critical">بحرانی</string>
     <string name="multiview_low_memory_warning">فشار حافظه بالاست. جایگاه‌های اضافی تا پایدار شدن پخش در حالت آماده‌به‌کار می‌مانند.</string>
+    <string name="multiview_movie_label">فیلم</string>
+    <string name="multiview_episode_label">فصل %1$d قسمت %2$d · %3$s</string>
 </resources>

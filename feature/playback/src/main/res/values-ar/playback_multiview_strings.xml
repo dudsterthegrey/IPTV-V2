@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">شديد</string>
     <string name="multiview_thermal_critical">حرج</string>
     <string name="multiview_low_memory_warning">الضغط على الذاكرة مرتفع. تبقى الفتحات الإضافية في وضع الاستعداد حتى يستقر التشغيل.</string>
+    <string name="multiview_movie_label">فيلم</string>
+    <string name="multiview_episode_label">م%1$d ح%2$d · %3$s</string>
 </resources>

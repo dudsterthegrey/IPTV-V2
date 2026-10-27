@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">severo</string>
     <string name="multiview_thermal_critical">Crítico</string>
     <string name="multiview_low_memory_warning">La memoria está muy cargada. Las ranuras extra permanecen en espera hasta que la reproducción se estabilice.</string>
+    <string name="multiview_movie_label">Película</string>
+    <string name="multiview_episode_label">T%1$d E%2$d · %3$s</string>
 </resources>

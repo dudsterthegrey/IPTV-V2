@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Vakava</string>
     <string name="multiview_thermal_critical">Kriittinen</string>
     <string name="multiview_low_memory_warning">Muistin paine on korkea. Ylimääräiset paikat pysyvät valmiustilassa, kunnes toisto vakiintuu.</string>
+    <string name="multiview_movie_label">Elokuva</string>
+    <string name="multiview_episode_label">K%1$d J%2$d · %3$s</string>
 </resources>

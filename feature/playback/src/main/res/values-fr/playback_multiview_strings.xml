@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Sévère</string>
     <string name="multiview_thermal_critical">Critique</string>
     <string name="multiview_low_memory_warning">La pression mémoire est élevée. Les emplacements supplémentaires restent en veille jusqu’à ce que la lecture se stabilise.</string>
+    <string name="multiview_movie_label">Film</string>
+    <string name="multiview_episode_label">S%1$d É%2$d · %3$s</string>
 </resources>

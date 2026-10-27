@@ -100,6 +100,7 @@ class PlayerViewModel @Inject constructor(
     internal val downloadExternalSubtitleUseCase: DownloadExternalSubtitle,
     internal val getExternalSubtitleLanguagesUseCase: GetExternalSubtitleLanguages,
     internal val openSubtitlesAccountManager: OpenSubtitlesAccountManager,
+    internal val multiViewManager: com.streamvault.feature.playback.multiview.MultiViewManager,
 ) : ViewModel() {
     companion object {
         private const val MIN_WATCHED_FOR_AUTO_PLAY_MS = 5_000L

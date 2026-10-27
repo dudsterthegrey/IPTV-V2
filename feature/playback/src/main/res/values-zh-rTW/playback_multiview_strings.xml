@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">嚴重</string>
     <string name="multiview_thermal_critical">危急</string>
     <string name="multiview_low_memory_warning">記憶體壓力過高。額外插槽會保持待機，直到播放穩定為止。</string>
+    <string name="multiview_movie_label">電影</string>
+    <string name="multiview_episode_label">第%1$d季 第%2$d集 · %3$s</string>
 </resources>

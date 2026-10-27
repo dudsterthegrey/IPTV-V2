@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Alvorlig</string>
     <string name="multiview_thermal_critical">Kritisk</string>
     <string name="multiview_low_memory_warning">Hukommelsespresset er højt. Ekstra pladser forbliver i standby, indtil afspilningen stabiliseres.</string>
+    <string name="multiview_movie_label">Film</string>
+    <string name="multiview_episode_label">S%1$d A%2$d · %3$s</string>
 </resources>

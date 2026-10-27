@@ -43,4 +43,6 @@
     <string name="multiview_thermal_severe">Teruk</string>
     <string name="multiview_thermal_critical">Kritikal</string>
     <string name="multiview_low_memory_warning">Tekanan memori tinggi. Slot tambahan kekal dalam mod sedia sehingga main balik stabil.</string>
+    <string name="multiview_movie_label">Filem</string>
+    <string name="multiview_episode_label">S%1$d E%2$d · %3$s</string>
 </resources>

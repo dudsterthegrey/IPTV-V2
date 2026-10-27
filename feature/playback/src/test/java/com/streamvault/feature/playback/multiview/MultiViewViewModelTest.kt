@@ -8,6 +8,14 @@ import com.streamvault.domain.manager.ParentalControlManager
 import com.streamvault.domain.model.Channel
 import com.streamvault.domain.repository.ChannelRepository
 import com.streamvault.domain.repository.FavoriteRepository
+import com.streamvault.domain.repository.MovieRepository
+import com.streamvault.domain.repository.SeriesRepository
+import com.streamvault.domain.model.Movie
+import com.streamvault.domain.model.Result
+import com.streamvault.domain.model.StreamInfo
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verifyBlocking
+import org.mockito.kotlin.wheneverBlocking
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.settings.PlayerPreferences
@@ -48,6 +56,8 @@ class MultiViewViewModelTest {
     private val providers: ProviderRepository = mock()
     private val parentalControl: ParentalControlManager = mock()
     private val unlockParentalCategory: UnlockParentalCategory = mock()
+    private val movies: MovieRepository = mock()
+    private val series: SeriesRepository = mock()
 
     @Before
     fun setUp() {
@@ -156,8 +166,59 @@ class MultiViewViewModelTest {
         playbackHistoryRepository = history,
         providerRepository = providers,
         parentalControlManager = parentalControl,
-        unlockParentalCategory = unlockParentalCategory
+        unlockParentalCategory = unlockParentalCategory,
+        movieRepository = movies,
+        seriesRepository = series,
     )
+
+    @Test
+    fun movieTile_resolvesThroughTheMovieLibraryAndResumesWhereThePlayerWas() {
+        whenever(preferences.multiViewPerformanceMode).thenReturn(flowOf(MultiViewPerformanceMode.MAXIMUM.name))
+        whenever(preferences.playerFastRetryOnTransientFailures).thenReturn(flowOf(false))
+        whenever(preferences.playerPlaybackBufferMode).thenReturn(flowOf(com.streamvault.domain.model.PlaybackBufferMode.AUTO))
+        whenever(playerEngine.error).thenReturn(flowOf(null))
+        val movie = Movie(id = 42, name = "Heat")
+        wheneverBlocking { movies.getMovie(42) }.thenReturn(movie)
+        wheneverBlocking { movies.getStreamInfo(movie) }.thenReturn(Result.success(StreamInfo(url = "https://example.test/heat.mp4")))
+        val tile = multiViewVodChannel(MultiViewVodKind.MOVIE, contentId = 42, title = "Heat")
+        manager.setSlots(listOf(tile, null, null, null))
+        manager.setStartPosition(tile.id, 90_000L)
+        val viewModel = createViewModel()
+        dispatcher.scheduler.runCurrent()
+
+        viewModel.initSlots()
+        dispatcher.scheduler.runCurrent()
+
+        verify(playerEngine).prepare(StreamInfo(url = "https://example.test/heat.mp4"))
+        verify(playerEngine).seekTo(90_000L)
+        verifyBlocking(channels, never()) { getStreamInfo(any(), any()) }
+        clear(viewModel)
+    }
+
+    @Test
+    fun vodTiles_neverCollideWithChannelsAndAreRecognisedByKind() {
+        val movie = multiViewVodChannel(MultiViewVodKind.MOVIE, contentId = 7, title = "M")
+        val episode = multiViewVodChannel(MultiViewVodKind.EPISODE, contentId = 7, title = "E")
+
+        assertThat(movie.id).isLessThan(0L)
+        assertThat(episode.id).isLessThan(0L)
+        assertThat(movie.id).isNotEqualTo(episode.id)
+        assertThat(movie.multiViewVodKind).isEqualTo(MultiViewVodKind.MOVIE)
+        assertThat(episode.multiViewVodKind).isEqualTo(MultiViewVodKind.EPISODE)
+        assertThat(episode.streamId).isEqualTo(7L)
+        assertThat(channel(7).multiViewVodKind).isNull()
+    }
+
+    @Test
+    fun startPositions_areForgottenWhenTheTileLeavesMultiView() {
+        val tile = multiViewVodChannel(MultiViewVodKind.EPISODE, contentId = 3, title = "E")
+        manager.setChannel(0, tile)
+        manager.setStartPosition(tile.id, 5_000L)
+
+        manager.clearSlot(0)
+
+        assertThat(manager.startPositionFor(tile.id)).isEqualTo(0L)
+    }
 
     private fun channel(id: Long) = Channel(
         id = id,
