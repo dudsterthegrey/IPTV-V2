@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Audiotrack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ClosedCaption
@@ -64,6 +65,7 @@ internal fun VodPlayerControlsOverlay(
     onSeekNextChapter: () -> Unit,
     onOpenChapters: () -> Unit,
     onOpenEpisodes: () -> Unit,
+    onOpenContentSearch: () -> Unit = {},
     canPlayPreviousEpisode: Boolean = false,
     canPlayNextEpisode: Boolean = false,
     onPlayPreviousEpisode: () -> Unit = {},
@@ -208,6 +210,11 @@ internal fun VodPlayerControlsOverlay(
                             onClick = onOpenEpisodes
                         )
                     }
+                    VodActionButton(
+                        icon = Icons.Default.Search,
+                        label = stringResource(R.string.player_search_action),
+                        onClick = onOpenContentSearch
+                    )
                     if (overlayState.showSubtitleAction) {
                         VodActionButton(
                             icon = Icons.Default.ClosedCaption,

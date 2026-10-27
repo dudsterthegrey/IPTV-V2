@@ -151,6 +151,7 @@ fun PlayerControlsOverlay(
     audioVideoSyncEnabled: Boolean = false,
     showEpisodesAction: Boolean = false,
     onOpenEpisodes: () -> Unit = {},
+    onOpenContentSearch: () -> Unit = {},
     onOpenSplitScreen: () -> Unit,
     onEnterPictureInPicture: () -> Unit = {},
     onToggleMute: () -> Unit,
@@ -247,6 +248,7 @@ fun PlayerControlsOverlay(
                 audioVideoSyncEnabled = audioVideoSyncEnabled,
                 showEpisodesAction = showEpisodesAction,
                 onOpenEpisodes = onOpenEpisodes,
+                onOpenContentSearch = onOpenContentSearch,
                 onOpenSplitScreen = onOpenSplitScreen,
                 onEnterPictureInPicture = onEnterPictureInPicture,
                 onToggleMute = onToggleMute,
@@ -594,6 +596,7 @@ private fun PlayerBottomBar(
     audioVideoSyncEnabled: Boolean,
     showEpisodesAction: Boolean,
     onOpenEpisodes: () -> Unit,
+    onOpenContentSearch: () -> Unit = {},
     onOpenSplitScreen: () -> Unit,
     onEnterPictureInPicture: () -> Unit,
     onToggleMute: () -> Unit,
@@ -736,6 +739,7 @@ private fun PlayerBottomBar(
                         audioVideoSyncEnabled = audioVideoSyncEnabled,
                         showEpisodesAction = showEpisodesAction,
                         onOpenEpisodes = onOpenEpisodes,
+                        onOpenContentSearch = onOpenContentSearch,
                         onEnterPictureInPicture = onEnterPictureInPicture,
                         onToggleMute = onToggleMute,
                         isCastConnected = isCastConnected,
@@ -1045,6 +1049,7 @@ private fun PlayerVodInfo(
     onOpenAudioVideoSync: () -> Unit,
     showEpisodesAction: Boolean,
     onOpenEpisodes: () -> Unit,
+    onOpenContentSearch: () -> Unit = {},
     onEnterPictureInPicture: () -> Unit,
     onToggleMute: () -> Unit,
     isCastConnected: Boolean,
@@ -1107,6 +1112,7 @@ private fun PlayerVodInfo(
         if (showEpisodesAction) {
             add(PlayerActionSpec("episodes", stringResource(R.string.player_episodes), onOpenEpisodes))
         }
+        add(PlayerActionSpec("content_search", stringResource(R.string.player_search_action), onOpenContentSearch))
         if (showExternalPlayerAction) {
             add(PlayerActionSpec("external_player", stringResource(R.string.player_open_in_external_player), onOpenExternalPlayer))
         }

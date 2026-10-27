@@ -23,6 +23,7 @@ internal enum class PlayerBackAction {
     CLOSE_VARIANT_SELECTION,
     CLOSE_TRACK_SELECTION,
     CLOSE_SUBTITLE_SEARCH,
+    CLOSE_CONTENT_SEARCH,
     TOGGLE_DIAGNOSTICS,
     CLOSE_CHANNEL_INFO,
     CLOSE_LIVE_OVERLAYS,
@@ -50,6 +51,7 @@ internal data class PlayerBackNavigationState(
     val showIdleStandbyTimerDialog: Boolean = false,
     val hasTrackSelection: Boolean = false,
     val showSubtitleSearch: Boolean = false,
+    val showContentSearch: Boolean = false,
     val showVariantSelection: Boolean = false,
     val showDiagnostics: Boolean = false,
     val showChannelInfoOverlay: Boolean = false,
@@ -77,6 +79,7 @@ internal fun playerBackAction(state: PlayerBackNavigationState): PlayerBackActio
     state.showIdleStandbyTimerDialog -> PlayerBackAction.CLOSE_IDLE_STANDBY_TIMER
     state.showVariantSelection -> PlayerBackAction.CLOSE_VARIANT_SELECTION
     state.showSubtitleSearch -> PlayerBackAction.CLOSE_SUBTITLE_SEARCH
+    state.showContentSearch -> PlayerBackAction.CLOSE_CONTENT_SEARCH
     state.hasTrackSelection -> PlayerBackAction.CLOSE_TRACK_SELECTION
     state.showDiagnostics -> PlayerBackAction.TOGGLE_DIAGNOSTICS
     state.showChannelInfoOverlay -> PlayerBackAction.CLOSE_CHANNEL_INFO

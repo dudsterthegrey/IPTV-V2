@@ -97,6 +97,8 @@ import com.streamvault.feature.playback.player.overlay.NextEpisodeCountdownOverl
 import com.streamvault.feature.playback.player.overlay.SkipChapterOverlay
 import com.streamvault.feature.playback.player.LiveClockOverlay
 import com.streamvault.core.navigation.AppDestination
+import com.streamvault.feature.playback.player.search.PlayerContentSearchPanel
+import com.streamvault.core.navigation.PlayerNavigationRequest
 import com.streamvault.core.navigation.StremioPlaybackReference
 import com.streamvault.core.navigation.StremioSubtitlePlaybackSource
 
@@ -134,6 +136,7 @@ fun PlayerScreen(
     returnDestination: AppDestination? = null,
     onBack: () -> Unit,
     onNavigate: ((AppDestination) -> Unit)? = null,
+    onOpenContent: ((PlayerNavigationRequest) -> Unit)? = null,
     playbackPlatformHost: PlaybackPlatformHost? = null,
     splitScreenPlanner: @Composable (Channel, () -> Unit, () -> Unit) -> Unit = { _, _, _ -> },
     viewModel: PlayerViewModel = hiltViewModel()
@@ -514,6 +517,7 @@ fun PlayerScreen(
                     showIdleStandbyTimerDialog = modalState.showIdleStandbyTimerDialog,
                     hasTrackSelection = modalState.trackSelection != null,
                     showSubtitleSearch = modalState.showSubtitleSearch,
+                    showContentSearch = modalState.showContentSearch,
                     showVariantSelection = modalState.showVariantSelection,
                     showDiagnostics = showDiagnostics,
                     showChannelInfoOverlay = showChannelInfoOverlay,
@@ -541,6 +545,7 @@ fun PlayerScreen(
                 PlayerBackAction.CLOSE_IDLE_STANDBY_TIMER -> modalState = modalState.dismiss()
                 PlayerBackAction.CLOSE_VARIANT_SELECTION -> modalState = modalState.dismiss()
                 PlayerBackAction.CLOSE_TRACK_SELECTION -> modalState = modalState.dismiss()
+                PlayerBackAction.CLOSE_CONTENT_SEARCH -> modalState = modalState.dismiss()
                 PlayerBackAction.CLOSE_SUBTITLE_SEARCH -> {
                     viewModel.cancelExternalSubtitleSearch()
                     modalState = modalState.dismiss()
@@ -587,6 +592,7 @@ fun PlayerScreen(
             showProgramHistory = modalState.showProgramHistory,
             showSplitDialog = modalState.showSplitDialog,
             showEpisodePicker = modalState.showEpisodePicker,
+            showContentSearch = modalState.showContentSearch,
             showControls = showControls,
             hasPendingNumericChannelInput = viewModel.hasPendingNumericChannelInput(),
             canOpenEpisodePicker = contentType == "SERIES_EPISODE" &&
@@ -658,6 +664,11 @@ fun PlayerScreen(
                     return@onKeyEvent false
                 }
                 viewModel.notifyUserActivity()
+                if (event.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_SEARCH && !modalState.hasVisibleModal) {
+                    // The remote's search/mic key opens catalog search over playback.
+                    modalState = modalState.open(PlayerModal.ContentSearch)
+                    return@onKeyEvent true
+                }
                 val decision = playerInputDecisionAtEvent(
                     stateProvider = playerInputState,
                     key = playerInputKey(event.nativeKeyEvent)
@@ -928,6 +939,7 @@ fun PlayerScreen(
             onOpenIdleStandbyTimer = { modalState = modalState.open(PlayerModal.IdleStandbyTimer) },
             onOpenAudioVideoSync = { modalState = modalState.open(PlayerModal.AudioVideoOffset) },
             onOpenEpisodes = { modalState = modalState.open(PlayerModal.EpisodePicker) },
+            onOpenContentSearch = { modalState = modalState.open(PlayerModal.ContentSearch) },
             onOpenChapters = { modalState = modalState.open(PlayerModal.ChapterSelection) },
             onOpenPlaybackSettings = { modalState = modalState.open(PlayerModal.PlaybackSettings) },
             showChapterSheet = modalState.showChapterSelection,
@@ -1083,6 +1095,17 @@ fun PlayerScreen(
             },
             onDismissModal = { modalState = modalState.dismiss() }
         )
+
+        if (!isInPictureInPictureMode && modalState.showContentSearch && onOpenContent != null) {
+            PlayerContentSearchPanel(
+                onPlay = { request ->
+                    modalState = modalState.dismiss()
+                    onOpenContent(request)
+                },
+                onDismiss = { modalState = modalState.dismiss() },
+                onInteracted = viewModel::notifyUserActivity
+            )
+        }
 
         // --- Overlays ---
         PlayerDiagnosticsHost(

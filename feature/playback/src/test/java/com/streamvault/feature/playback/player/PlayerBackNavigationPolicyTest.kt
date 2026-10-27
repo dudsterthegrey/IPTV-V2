@@ -49,6 +49,17 @@ class PlayerBackNavigationPolicyTest {
     }
 
     @Test
+    fun `content search panel closes before live overlays and controls`() {
+        val state = PlayerBackNavigationState(
+            showContentSearch = true,
+            showChannelListOverlay = true,
+            showControls = true
+        )
+
+        assertThat(playerBackAction(state)).isEqualTo(PlayerBackAction.CLOSE_CONTENT_SEARCH)
+    }
+
+    @Test
     fun `live overlays close before controls`() {
         val state = PlayerBackNavigationState(
             showChannelListOverlay = true,

@@ -27,6 +27,16 @@ class PlayerInputPolicyTest {
     }
 
     @Test
+    fun `preview does not zap channels while the content search panel is open`() {
+        val decision = playerPreviewInputDecision(
+            state = liveState(showContentSearch = true),
+            key = PlayerInputKey.DpadUp
+        )
+
+        assertThat(decision).isEqualTo(PlayerInputDecision(PlayerInputAction.Pass))
+    }
+
+    @Test
     fun `preview ignores channel zapping for non-live content`() {
         val decision = playerPreviewInputDecision(
             state = liveState(contentType = "MOVIE"),
@@ -272,6 +282,7 @@ class PlayerInputPolicyTest {
         showProgramHistory: Boolean = false,
         showSplitDialog: Boolean = false,
         showEpisodePicker: Boolean = false,
+        showContentSearch: Boolean = false,
         showControls: Boolean = false,
         hasPendingNumericChannelInput: Boolean = false,
         canOpenEpisodePicker: Boolean = false,
@@ -297,6 +308,7 @@ class PlayerInputPolicyTest {
         showProgramHistory = showProgramHistory,
         showSplitDialog = showSplitDialog,
         showEpisodePicker = showEpisodePicker,
+        showContentSearch = showContentSearch,
         showControls = showControls,
         hasPendingNumericChannelInput = hasPendingNumericChannelInput,
         canOpenEpisodePicker = canOpenEpisodePicker,

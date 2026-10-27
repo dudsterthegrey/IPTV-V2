@@ -66,6 +66,7 @@ internal fun VodPlaybackSettingsSheet(
     onEnterPictureInPicture: () -> Unit,
     onOpenExternalPlayer: () -> Unit,
     onOpenEpisodes: () -> Unit,
+    onOpenContentSearch: () -> Unit = {},
     onOpenSplitScreen: () -> Unit,
     onCast: () -> Unit,
     onStopCasting: () -> Unit,
@@ -87,6 +88,7 @@ internal fun VodPlaybackSettingsSheet(
         add(VodSettingsAction("mute", stringResource(if (isMuted) R.string.player_unmute else R.string.player_mute), onClick = onToggleMute))
         add(VodSettingsAction("pip", stringResource(R.string.player_picture_in_picture), onClick = onEnterPictureInPicture))
         if (state.showEpisodesAction) add(VodSettingsAction("episodes", stringResource(R.string.player_episodes), onClick = onOpenEpisodes))
+        add(VodSettingsAction("content_search", stringResource(R.string.player_search_action), onClick = onOpenContentSearch))
         if (state.showExternalPlayerAction) {
             add(VodSettingsAction("external", stringResource(R.string.player_open_in_external_player), onClick = onOpenExternalPlayer))
         }

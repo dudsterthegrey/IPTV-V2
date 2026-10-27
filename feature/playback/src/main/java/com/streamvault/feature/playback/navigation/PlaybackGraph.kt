@@ -2,6 +2,7 @@ package com.streamvault.feature.playback.navigation
 
 import android.util.Log
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -15,6 +16,7 @@ import com.streamvault.feature.playback.multiview.MultiViewScreen
 import com.streamvault.feature.playback.player.PlayerScreen
 
 private const val PLAYBACK_NAVIGATION_TAG = "PlaybackNavigation"
+private const val SWITCHED_PLAYER_REQUEST_KEY = "switched_player_request"
 
 fun NavGraphBuilder.registerPlaybackGraph(
     actions: NavigationActions,
@@ -22,7 +24,12 @@ fun NavGraphBuilder.registerPlaybackGraph(
     consumePlayerRequest: (NavBackStackEntry) -> PlayerNavigationRequest?
 ) {
     composable(PlaybackRoutePatterns.PLAYER) { backStackEntry ->
-        val playerRequest = consumePlayerRequest(backStackEntry)
+        // The in-player search panel swaps what this player plays without leaving the screen;
+        // the swap is kept on the entry so rotation and process death keep the new content.
+        val playerRequest = backStackEntry.savedStateHandle
+            .getStateFlow<PlayerNavigationRequest?>(SWITCHED_PLAYER_REQUEST_KEY, null)
+            .collectAsState().value
+            ?: consumePlayerRequest(backStackEntry)
         val safePlayerRequest = safePlayerNavigationRequest(playerRequest)
         if (safePlayerRequest == null) {
             LaunchedEffect(playerRequest) {
@@ -68,6 +75,10 @@ fun NavGraphBuilder.registerPlaybackGraph(
                 stremioMediaRequestHeaders = safePlayerRequest.stremioMediaRequestHeaders,
                 stremioInlineSubtitles = safePlayerRequest.stremioInlineSubtitles,
                 onBack = { actions.returnTo(safePlayerRequest.returnDestination) },
+                onOpenContent = { request ->
+                    backStackEntry.savedStateHandle[SWITCHED_PLAYER_REQUEST_KEY] =
+                        request.copy(returnDestination = safePlayerRequest.returnDestination)
+                },
                 playbackPlatformHost = platformHost,
                 splitScreenPlanner = { pendingChannel, onDismiss, onLaunch ->
                     MultiViewPlannerDialog(

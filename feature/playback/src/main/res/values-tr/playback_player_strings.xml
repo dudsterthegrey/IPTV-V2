@@ -307,4 +307,18 @@
 <string name="player_trakt_sent">Trakt hizmetine gönderildi</string>
     <string name="player_trakt_badge">TRAKT</string>
     <string name="player_schedule_by_time">Saate gÃ¶re planla</string>     <string name="player_schedule_by_time_title">KaydÄ± planla</string>     <string name="player_schedule_by_time_start">BaÅŸlangÄ±Ã§</string>     <string name="player_schedule_by_time_duration">SÃ¼re</string>     <string name="player_schedule_by_time_repeat">Yinele</string>     <string name="player_schedule_by_time_once">Bir kez</string>     <string name="player_schedule_by_time_daily">GÃ¼nlÃ¼k</string>     <string name="player_schedule_by_time_weekly">HaftalÄ±k</string>     <string name="player_schedule_by_time_confirm">Planla</string>     <string name="player_schedule_by_time_cancel">Ä°ptal</string>     <string name="player_schedule_by_time_duration_hm">%1$d sa %2$d dk</string>     <string name="player_schedule_by_time_duration_h">%1$d sa</string>     <string name="player_schedule_by_time_duration_m">%1$d dk</string>     <string name="player_recording_needs_live_channel">KayÄ±t iÃ§in canlÄ± bir kanal gerekir.</string>     <string name="player_recording_started_notice">%1$s iÃ§in kayÄ±t baÅŸlatÄ±ldÄ±.</string>     <string name="player_recording_scheduled_notice">%1$s planlandÄ±.</string>     <string name="player_recording_scheduled_daily_notice">%1$s gÃ¼nlÃ¼k planlandÄ±.</string>     <string name="player_recording_scheduled_weekly_notice">%1$s haftalÄ±k planlandÄ±.</string>     <string name="player_recording_failed_notice">KayÄ±t planlanamadÄ±.</string>     <string name="player_recording_stopped_notice">KayÄ±t durduruldu.</string>
+    <string name="player_search_action">Ara</string>
+    <string name="player_search_title">İzlerken ara</string>
+    <string name="player_search_placeholder">Kanallar, filmler, diziler</string>
+    <string name="player_search_hint_min_chars">Aramak için en az 2 harf yazın.</string>
+    <string name="player_search_loading">Aranıyor…</string>
+    <string name="player_search_no_results">Hiçbir şey bulunamadı.</string>
+    <string name="player_search_section_live">Canlı TV (%1$d)</string>
+    <string name="player_search_section_movies">Filmler (%1$d)</string>
+    <string name="player_search_section_series">Diziler (%1$d)</string>
+    <string name="player_search_back_to_results">Sonuçlara dön</string>
+    <string name="player_search_episodes_loading">Bölümler yükleniyor…</string>
+    <string name="player_search_episodes_failed">Bölümler yüklenemedi.</string>
+    <string name="player_search_season">%1$d. Sezon</string>
+    <string name="player_search_episode_row">%1$d. Bölüm · %2$s</string>
 </resources>

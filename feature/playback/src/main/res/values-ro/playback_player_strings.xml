@@ -308,4 +308,18 @@
 <string name="player_trakt_sent">Trimis către Trakt</string>
     <string name="player_trakt_badge">TRAKT</string>
     <string name="player_schedule_by_time">ProgrameazÄƒ dupÄƒ orÄƒ</string>     <string name="player_schedule_by_time_title">ProgrameazÄƒ Ã®nregistrarea</string>     <string name="player_schedule_by_time_start">ÃŽnceput</string>     <string name="player_schedule_by_time_duration">DuratÄƒ</string>     <string name="player_schedule_by_time_repeat">Repetare</string>     <string name="player_schedule_by_time_once">O datÄƒ</string>     <string name="player_schedule_by_time_daily">Zilnic</string>     <string name="player_schedule_by_time_weekly">SÄƒptÄƒmÃ¢nal</string>     <string name="player_schedule_by_time_confirm">ProgrameazÄƒ</string>     <string name="player_schedule_by_time_cancel">AnuleazÄƒ</string>     <string name="player_schedule_by_time_duration_hm">%1$d h %2$d min</string>     <string name="player_schedule_by_time_duration_h">%1$d h</string>     <string name="player_schedule_by_time_duration_m">%1$d min</string>     <string name="player_recording_needs_live_channel">ÃŽnregistrarea necesitÄƒ un canal live.</string>     <string name="player_recording_started_notice">ÃŽnregistrarea a Ã®nceput pentru %1$s.</string>     <string name="player_recording_scheduled_notice">%1$s programat.</string>     <string name="player_recording_scheduled_daily_notice">%1$s programat zilnic.</string>     <string name="player_recording_scheduled_weekly_notice">%1$s programat sÄƒptÄƒmÃ¢nal.</string>     <string name="player_recording_failed_notice">ÃŽnregistrarea nu a putut fi programatÄƒ.</string>     <string name="player_recording_stopped_notice">ÃŽnregistrare opritÄƒ.</string>
+    <string name="player_search_action">Caută</string>
+    <string name="player_search_title">Caută în timpul vizionării</string>
+    <string name="player_search_placeholder">Canale, filme, seriale</string>
+    <string name="player_search_hint_min_chars">Tastează cel puțin 2 litere pentru a căuta.</string>
+    <string name="player_search_loading">Se caută…</string>
+    <string name="player_search_no_results">Nu s-a găsit nimic.</string>
+    <string name="player_search_section_live">TV live (%1$d)</string>
+    <string name="player_search_section_movies">Filme (%1$d)</string>
+    <string name="player_search_section_series">Seriale (%1$d)</string>
+    <string name="player_search_back_to_results">Înapoi la rezultate</string>
+    <string name="player_search_episodes_loading">Se încarcă episoadele…</string>
+    <string name="player_search_episodes_failed">Episoadele nu au putut fi încărcate.</string>
+    <string name="player_search_season">Sezonul %1$d</string>
+    <string name="player_search_episode_row">E%1$d · %2$s</string>
 </resources>

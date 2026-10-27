@@ -27,6 +27,17 @@ class PlayerModalStateTest {
     }
 
     @Test
+    fun `content search is an exclusive modal`() {
+        val state = PlayerModalState()
+            .open(PlayerModal.EpisodePicker)
+            .open(PlayerModal.ContentSearch)
+
+        assertThat(state.showContentSearch).isTrue()
+        assertThat(state.showEpisodePicker).isFalse()
+        assertThat(state.dismiss().showContentSearch).isFalse()
+    }
+
+    @Test
     fun `track selection retains its track type`() {
         val state = PlayerModalState().open(PlayerModal.TrackSelection(TrackType.AUDIO))
 

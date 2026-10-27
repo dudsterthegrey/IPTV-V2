@@ -14,7 +14,8 @@ item could still exist under a different name, so confirm on device before build
 - [x] **Clear watch history for one show** (done 2026-10-26: `PlaybackHistoryRepository.clearHistoryForSeries`): button on the series details page, with a
       confirmation that says other shows aren't touched. V2 can only clear history for a whole
       provider (`PlaybackHistoryRepository.clearHistoryForProvider`).
-- [ ] **In-player search panel**: search live/movies/series while the video keeps playing, then
+- [x] **In-player search panel** (done 2026-10-26: Search button in live and movie/episode
+      controls plus the remote's Search key; `player/search/PlayerContentSearchPanel.kt`): search live/movies/series while the video keeps playing, then
       switch to the result in place (series → episode list in the panel). V2's player has a
       guide/channel overlay but no catalog search.
 - [ ] **Voice search**: mic button next to the search field, plus the remote's mic button
@@ -65,6 +66,13 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - [ ] **Clear watch history**: play two episodes of a show about a minute each, press **Clear
       watch history** → confirmation names the show; after **Clear history** a "Watch history
       cleared" message appears and the episodes lose their progress. Another show's progress stays.
+
+- [ ] **In-player search**: while playing anything, open the controls and press **Search** (or
+      press the remote's Search key) → a panel opens on the right with the video still playing.
+      Type 2+ letters → Live TV / Movies / Series sections, each collapsible. Pick a channel → it
+      switches in place with live controls; pick a movie → movie controls; pick a series → its
+      episodes show in the panel, pick one → it plays. Back closes the episode list, then the panel.
+      Also check Back from the new content still returns to where the player was opened from.
 
 ## Release / Downloader
 

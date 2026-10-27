@@ -44,6 +44,7 @@ internal data class PlayerInputState(
     val showProgramHistory: Boolean = false,
     val showSplitDialog: Boolean = false,
     val showEpisodePicker: Boolean = false,
+    val showContentSearch: Boolean = false,
     val showControls: Boolean = false,
     val hasPendingNumericChannelInput: Boolean = false,
     val canOpenEpisodePicker: Boolean = false,
@@ -117,6 +118,7 @@ internal fun playerPreviewInputDecision(
         state.showProgramHistory ||
         state.showSplitDialog ||
         state.showEpisodePicker ||
+        state.showContentSearch ||
         state.showControls ||
         state.showClosePlaybackConfirmation ||
         (state.showChannelInfoOverlay && state.channelInfoSubPanelOpen)
