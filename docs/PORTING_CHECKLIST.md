@@ -41,8 +41,10 @@ item could still exist under a different name, so confirm on device before build
       starts where you were. Inside Multi-View, **Replace Slot** now has Live TV / Movies / Series
       tabs (Series goes show → episode list). Limits: presets skip movie/episode tiles, and
       Stremio or other remote-only titles can't join.
-- [ ] **Search results grouped in collapsible Live / Movies / Series sections**: V2 has global
-      search; check on device whether its layout already works for you before changing it.
+- [ ] **Search results grouped in collapsible Live / Movies / Series sections**: deferred, not
+      worth the time now. V2 search has All / Live TV / Movies / Series tabs; the All tab caps
+      each row at 18 with no counts. If revisited: add counts to the row titles and a "See all"
+      card that jumps to that tab.
 
 ## Already in V2: keep V2's version
 
