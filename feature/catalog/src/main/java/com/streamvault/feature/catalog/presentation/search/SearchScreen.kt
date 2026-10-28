@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.*
@@ -431,6 +432,23 @@ fun SearchScreen(
     val nowMs by CatalogChannelProgressTicker.nowMs.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     val searchFocusRequester = remember { FocusRequester() }
+    val selectedTabFocusRequester = remember { FocusRequester() }
+    val listState = rememberLazyListState()
+    var focusTabAfterJump by remember { mutableStateOf(false) }
+    // "See all" on an All-tab row: switch to that tab, scroll up and focus its chip,
+    // since the row (and its button) disappear when the tab changes.
+    val showAllOf: (SearchTab) -> Unit = { tab ->
+        viewModel.onTabSelected(tab)
+        focusTabAfterJump = true
+    }
+    LaunchedEffect(focusTabAfterJump) {
+        if (focusTabAfterJump) {
+            listState.scrollToItem(0)
+            withFrameNanos { }
+            selectedTabFocusRequester.requestFocusSafely(tag = "SearchScreen", target = "Selected tab")
+            focusTabAfterJump = false
+        }
+    }
     var showPinDialog by remember { mutableStateOf(false) }
     var pinError by remember { mutableStateOf<String?>(null) }
     var pendingChannel by remember { mutableStateOf<Channel?>(null) }
@@ -626,6 +644,7 @@ fun SearchScreen(
         false
     ) {
         LazyColumn(
+            state = listState,
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(18.dp),
             contentPadding = PaddingValues(bottom = 32.dp)
@@ -647,6 +666,7 @@ fun SearchScreen(
                     },
                     onClearRecentQueries = viewModel::clearRecentQueries,
                     focusRequester = searchFocusRequester,
+                    selectedTabFocusRequester = selectedTabFocusRequester,
                     selectedStateLabel = selectedTabDescription
                 )
             }
@@ -709,9 +729,16 @@ fun SearchScreen(
                         if (uiState.channels.isNotEmpty()) {
                             item {
                                 SearchResultRail(
-                                    title = stringResource(R.string.search_live_tv),
-                                    items = uiState.channels.subList(0, minOf(uiState.channels.size, 18)),
-                                    keySelector = { it.id }
+                                    title = stringResource(
+                                        R.string.search_results_count,
+                                        stringResource(R.string.search_live_tv),
+                                        uiState.channels.size
+                                    ),
+                                    items = uiState.channels.take(ALL_TAB_ROW_LIMIT),
+                                    keySelector = { it.id },
+                                    onSeeAll = if (uiState.channels.size > ALL_TAB_ROW_LIMIT) {
+                                        { showAllOf(SearchTab.LIVE) }
+                                    } else null
                                 ) { channel ->
                                     val channelLocked = isLocked(
                                         categoryId = channel.categoryId,
@@ -741,9 +768,16 @@ fun SearchScreen(
                         if (uiState.movies.isNotEmpty()) {
                             item {
                                 SearchResultRail(
-                                    title = stringResource(R.string.search_movies),
-                                    items = uiState.movies.subList(0, minOf(uiState.movies.size, 18)),
-                                    keySelector = { it.id }
+                                    title = stringResource(
+                                        R.string.search_results_count,
+                                        stringResource(R.string.search_movies),
+                                        uiState.movies.size
+                                    ),
+                                    items = uiState.movies.take(ALL_TAB_ROW_LIMIT),
+                                    keySelector = { it.id },
+                                    onSeeAll = if (uiState.movies.size > ALL_TAB_ROW_LIMIT) {
+                                        { showAllOf(SearchTab.MOVIES) }
+                                    } else null
                                 ) { movie ->
                                     val movieLocked = isLocked(
                                         categoryId = movie.categoryId,
@@ -770,9 +804,16 @@ fun SearchScreen(
                         if (uiState.series.isNotEmpty()) {
                             item {
                                 SearchResultRail(
-                                    title = stringResource(R.string.search_series),
-                                    items = uiState.series.subList(0, minOf(uiState.series.size, 18)),
-                                    keySelector = { it.id }
+                                    title = stringResource(
+                                        R.string.search_results_count,
+                                        stringResource(R.string.search_series),
+                                        uiState.series.size
+                                    ),
+                                    items = uiState.series.take(ALL_TAB_ROW_LIMIT),
+                                    keySelector = { it.id },
+                                    onSeeAll = if (uiState.series.size > ALL_TAB_ROW_LIMIT) {
+                                        { showAllOf(SearchTab.SERIES) }
+                                    } else null
                                 ) { seriesItem ->
                                     val seriesLocked = isLocked(
                                         categoryId = seriesItem.categoryId,
@@ -910,6 +951,7 @@ private fun SearchHeroPanel(
     onRecentQuerySelected: (String) -> Unit,
     onClearRecentQueries: () -> Unit,
     focusRequester: FocusRequester,
+    selectedTabFocusRequester: FocusRequester,
     selectedStateLabel: String
 ) {
     Surface(
@@ -988,7 +1030,12 @@ private fun SearchHeroPanel(
                         text = stringResource(tab.titleRes),
                         selected = tab == selectedTab,
                         onClick = { onTabSelected(tab) },
-                        modifier = Modifier.semantics {
+                        modifier = Modifier
+                            .then(
+                                if (tab == selectedTab) Modifier.focusRequester(selectedTabFocusRequester)
+                                else Modifier
+                            )
+                            .semantics {
                             selected = tab == selectedTab
                             if (tab == selectedTab) {
                                 stateDescription = selectedStateLabel
@@ -1119,16 +1166,21 @@ private fun SearchStatusCard(
     }
 }
 
+/** How many results each All-tab row shows before "See all" takes over. */
+private const val ALL_TAB_ROW_LIMIT = 18
+
 @Composable
 private fun <T : Any> SearchResultRail(
     title: String,
     items: List<T>,
     keySelector: (T) -> Any,
+    onSeeAll: (() -> Unit)? = null,
     itemContent: @Composable (T) -> Unit
 ) {
     CategoryRow(
         title = title,
         items = items,
+        onSeeAll = onSeeAll,
         keySelector = keySelector
     ) { item ->
         itemContent(item)

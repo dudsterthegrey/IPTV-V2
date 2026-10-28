@@ -41,10 +41,10 @@ item could still exist under a different name, so confirm on device before build
       starts where you were. Inside Multi-View, **Replace Slot** now has Live TV / Movies / Series
       tabs (Series goes show → episode list). Limits: presets skip movie/episode tiles, and
       Stremio or other remote-only titles can't join.
-- [ ] **Search results grouped in collapsible Live / Movies / Series sections**: deferred, not
-      worth the time now. V2 search has All / Live TV / Movies / Series tabs; the All tab caps
-      each row at 18 with no counts. If revisited: add counts to the row titles and a "See all"
-      card that jumps to that tab.
+- [x] **Search results by Live / Movies / Series** (done 2026-10-28, adapted instead of V1's
+      collapsible sections): V2's tabs stay. On the All tab each row title shows its count
+      ("Movies 42"), and a row with more than 18 results gets a **See all** button that switches
+      to that tab's full grid.
 
 ## Already in V2: keep V2's version
 
@@ -109,6 +109,11 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       "Not set". Paste your key from opensubtitles.com/consumers and press **Save** → row reads
       "Using your key". Play a movie, open subtitles and search online → results appear. Reopen the
       dialog → **Remove my key** returns the row to "Not set". A made-up key should be refused.
+
+- [ ] **Search counts and See all**: search a common word (e.g. "the") on the All tab → row
+      titles read "Live TV 120", "Movies 57"… Rows over 18 results have **See all** at the right
+      of the title; press it → the matching tab is selected, the full grid shows, and focus lands
+      on that tab chip (Down moves into the results). Rows with 18 or fewer have no button.
 
 ## Release / Downloader
 
