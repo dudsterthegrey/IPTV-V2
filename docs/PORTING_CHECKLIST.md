@@ -115,6 +115,15 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       of the title; press it → the matching tab is selected, the full grid shows, and focus lands
       on that tab chip (Down moves into the results). Rows with 18 or fewer have no button.
 
+## Bugs found while testing
+
+- [ ] **Xtream setup gives no feedback** (seen 2026-10-28, emulator, imaxiptv): after **Login** the
+      screen stayed on the form with no "Syncing data…" box and Login still pressable, while
+      the catalog downloaded in the background. Each extra press saved a new provider edit and
+      threw away the download in progress ("Provider edit N was superseded before catalog
+      commit"), so it never finished. Restarting the app opened Home with the provider working.
+      Not reproduced yet; next time, watch logcat for the setup screen's login result.
+
 ## Release / Downloader
 
 - [ ] Release signing with your own keystore (V1's is in `C:\Android Studio\IPTVPlayer\Keys`)
