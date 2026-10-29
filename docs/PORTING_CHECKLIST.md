@@ -142,12 +142,15 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - [x] **Guide never downloaded** (2026-10-28, imaxiptv): the full guide waited for Movies *and*
       Series indexing, and the server sends broken JSON for some series categories, so Series
       never finished and the guide was put off forever (only 24 of 2,553 linked channels had
-      listings). Now the guide waits for Live TV only.
+      listings). Now the guide waits for Live TV only. Confirmed 2026-10-29: after the overnight
+      download 1,777 channels have listings (of 2,642 with a guide ID, 9,815 total).
 - [x] **Series import retried a broken category non-stop** (every ~0.7 s, which also kept the
       provider busy). Now a category that fails the same way twice is skipped, and a pass that
       ends with skipped categories waits for the next scheduled refresh instead of retrying.
-- [ ] **Guide time header overlaps** at the left edge: "6:00 PM" and "6:30 PM" draw on top of each
-      other (seen on the emulator Guide, Compact layout).
+- [x] **Guide time header overlaps** at the left edge: "6:00 PM" and "6:30 PM" drew on top of each
+      other. A half-hour mark before the guide's start was clamped to the edge; now only marks
+      inside the window are drawn (row grid lines use the same marks). Checked on the emulator
+      2026-10-29.
 - [ ] **Old scheduler tests fail on Windows**: 4 tests in `ProviderSyncWorkSchedulerIntegrationTest`
       fail with "unable to open database file" on the original code too (test environment issue).
 

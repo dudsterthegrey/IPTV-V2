@@ -35,15 +35,15 @@ fun liveGuideTimelineMarkers(
     windowEnd: Long,
     markerStepMs: Long = LIVE_GUIDE_MARKER_STEP_MS
 ): List<Long> {
-    val firstMarker = windowStart - (windowStart % markerStepMs)
+    // Only aligned marks inside the window: a mark before the start (or the unaligned end)
+    // gets clamped to the edge and its label drew on top of its neighbour.
+    val remainder = windowStart % markerStepMs
+    val firstMarker = if (remainder == 0L) windowStart else windowStart - remainder + markerStepMs
     return buildList {
         var marker = firstMarker
         while (marker <= windowEnd) {
             add(marker)
             marker += markerStepMs
-        }
-        if (lastOrNull() != windowEnd) {
-            add(windowEnd)
         }
     }
 }

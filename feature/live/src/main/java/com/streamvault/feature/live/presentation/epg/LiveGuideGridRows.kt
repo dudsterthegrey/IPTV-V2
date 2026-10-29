@@ -249,14 +249,7 @@ fun LiveGuideGridRow(
                         .fillMaxHeight()
                 ) {
                     val markers = remember(windowStart, windowEnd, markerStepMs) {
-                        buildList {
-                            val firstMarker = windowStart - (windowStart % markerStepMs)
-                            var marker = firstMarker
-                            while (marker <= windowEnd) {
-                                add(marker)
-                                marker += markerStepMs
-                            }
-                        }
+                        liveGuideTimelineMarkers(windowStart, windowEnd, markerStepMs)
                     }
                     markers.forEach { marker ->
                         val markerRatio = ((marker - windowStart).toFloat() / totalDuration.toFloat()).coerceIn(0f, 1f)
