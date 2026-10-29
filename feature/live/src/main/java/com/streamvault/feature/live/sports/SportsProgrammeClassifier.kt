@@ -29,8 +29,15 @@ internal object SportsProgrammeClassifier {
         SportType.HOCKEY to listOf("ice hockey", "hockey", "nhl"),
         SportType.TENNIS to listOf("tennis", "tenis", "atp", "wta", "grand slam"),
         SportType.MOTORSPORT to listOf("motorsport", "formula 1", "formula one", "f1", "grand prix", "nascar", "motogp", "rally"),
-        SportType.MMA to listOf("mma", "ufc", "mixed martial arts", "one friday fights"),
-        SportType.BOXING to listOf("boxing", "boxeo", "boxe"),
+        SportType.MMA to listOf(
+            "mma", "ufc", "mixed martial arts", "one friday fights", "one championship",
+            "bellator", "pfl", "professional fighters league", "cage warriors", "invicta fc",
+            "bkfc", "bare knuckle", "kickboxing", "muay thai", "glory kickboxing",
+        ),
+        SportType.BOXING to listOf(
+            "boxing", "boxeo", "boxe", "boxen", "pugilato", "top rank", "matchroom",
+            "premier boxing champions", "pbc fight night",
+        ),
         SportType.CRICKET to listOf("cricket", "ipl"),
         SportType.RUGBY to listOf("rugby"),
         SportType.GOLF to listOf("golf", "pga tour", "lpga"),
@@ -46,6 +53,7 @@ internal object SportsProgrammeClassifier {
         "espn", "bein sports", "sky sports", "supersport", "sportsnet", "fox sports",
         "tnt sports", "dazn", "arena sport", "canal+ sport", "eurosport", "tennis channel",
         "golf channel", "nfl network", "nba tv", "mlb network", "nhl network",
+        "ufc fight pass", "fight network", "fite",
     )
     private val normalizedSportsTerms = sportsTerms.mapValues { (_, terms) ->
         terms.map { " " + normalizeText(it) + " " }

@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Ποδόσφαιρο</string>
     <string name="live_sports_filter_basketball">Μπάσκετ</string>
     <string name="live_sports_filter_motorsport">Μηχανοκίνητος αθλητισμός</string>
+    <string name="live_sports_filter_fight">Μάχες / MMA</string>
     <string name="live_sports_filter_other">Άλλα</string>
     <string name="live_sports_filter_all_leagues">Όλα τα πρωταθλήματα</string>
     <string name="live_sports_channel_choices">Διαθέσιμα κανάλια: %1$d</string>

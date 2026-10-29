@@ -56,6 +56,14 @@ class SportsProgrammeClassifierTest {
     }
 
     @Test
+    fun recognisesFightPromotionsBeyondUfc() {
+        assertThat(classify("Bellator 300: Main Event").sport).isEqualTo(SportType.MMA)
+        assertThat(classify("PFL World Championship").sport).isEqualTo(SportType.MMA)
+        assertThat(classify("BKFC 70 Bare Knuckle").sport).isEqualTo(SportType.MMA)
+        assertThat(classify("Top Rank Boxing: Main Card").sport).isEqualTo(SportType.BOXING)
+    }
+
+    @Test
     fun prefersTheLeagueNamedInTheProgrammeTitleOverAReferencedLeagueInDescription() {
         val classification = classify(
             title = "Burnley vs Wolverhampton Wanderers - EFL - English Football League SkyBet - Championship 2026/2027",

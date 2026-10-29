@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">كرة القدم</string>
     <string name="live_sports_filter_basketball">كرة السلة</string>
     <string name="live_sports_filter_motorsport">رياضة السيارات</string>
+    <string name="live_sports_filter_fight">قتال / فنون قتالية مختلطة</string>
     <string name="live_sports_filter_other">أخرى</string>
     <string name="live_sports_filter_all_leagues">كل الدوريات</string>
     <string name="live_sports_channel_choices">القنوات المتاحة: %1$d</string>

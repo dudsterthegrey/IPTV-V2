@@ -1,5 +1,6 @@
 package com.streamvault.data.sync
 
+import com.streamvault.data.local.dao.ProviderDao
 import com.streamvault.data.local.dao.XtreamIndexJobDao
 import com.streamvault.data.local.dao.ProviderWorkflowDao
 import com.streamvault.data.local.entity.ProviderWorkflowPhase
@@ -11,14 +12,24 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Singleton
 class ProviderSyncStateReaderImpl @Inject constructor(
     private val syncManager: ProviderSyncStateSource,
     private val xtreamIndexJobDao: XtreamIndexJobDao,
-    private val providerWorkflowDao: ProviderWorkflowDao
+    private val providerWorkflowDao: ProviderWorkflowDao,
+    private val providerDao: ProviderDao
 ) : ProviderSyncStateReader {
     override fun currentSyncState(providerId: Long): SyncState = syncManager.currentSyncState(providerId)
+
+    override fun observeFirstImportActive(): Flow<Boolean> =
+        combine(providerDao.getAll(), syncManager.allSyncStates()) { providers, states ->
+            providers.any { provider ->
+                (!provider.isActive || provider.lastSyncedAt == 0L) &&
+                    states[provider.id] is SyncState.Syncing
+            }
+        }.distinctUntilChanged()
 
     override fun observeBackgroundIndexingActive(providerId: Long): Flow<Boolean> =
         combine(

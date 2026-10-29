@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">足球</string>
     <string name="live_sports_filter_basketball">籃球</string>
     <string name="live_sports_filter_motorsport">賽車運動</string>
+    <string name="live_sports_filter_fight">格鬥 / MMA</string>
     <string name="live_sports_filter_other">其他</string>
     <string name="live_sports_filter_all_leagues">所有聯賽</string>
     <string name="live_sports_channel_choices">可用頻道：%1$d</string>

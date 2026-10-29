@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">축구</string>
     <string name="live_sports_filter_basketball">농구</string>
     <string name="live_sports_filter_motorsport">모터스포츠</string>
+    <string name="live_sports_filter_fight">격투기 / MMA</string>
     <string name="live_sports_filter_other">기타</string>
     <string name="live_sports_filter_all_leagues">모든 리그</string>
     <string name="live_sports_channel_choices">이용 가능한 채널: %1$d</string>

@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Labdarúgás</string>
     <string name="live_sports_filter_basketball">Kosárlabda</string>
     <string name="live_sports_filter_motorsport">Autósport</string>
+    <string name="live_sports_filter_fight">Küzdősport / MMA</string>
     <string name="live_sports_filter_other">Egyéb</string>
     <string name="live_sports_filter_all_leagues">Összes liga</string>
     <string name="live_sports_channel_choices">Elérhető csatornák: %1$d</string>

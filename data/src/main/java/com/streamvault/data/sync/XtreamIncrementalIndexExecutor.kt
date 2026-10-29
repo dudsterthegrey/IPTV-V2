@@ -183,7 +183,8 @@ internal class XtreamIncrementalIndexExecutor(
             )
 
             var completedCategories = if (restartIncompleteFailedSweep) 0 else resumeJob?.completedCategories ?: 0
-            var failedCategories = 0
+            // Carried across slices so a category skipped earlier in this sweep still leaves it PARTIAL.
+            var failedCategories = if (restartIncompleteFailedSweep) 0 else resumeJob?.failedCategories ?: 0
             var indexedRows = if (restartIncompleteFailedSweep) 0 else resumeJob?.indexedRows ?: 0
             var skippedMalformedRows = if (restartIncompleteFailedSweep) 0 else resumeJob?.skippedMalformedRows ?: 0
             var lastError: Throwable? = null
@@ -297,6 +298,17 @@ internal class XtreamIncrementalIndexExecutor(
                         }
                         failedCategories++
                         lastError = categoryOutcome.error
+                        // Retry a failed category once in place (a network blip). If it fails the same
+                        // way again it is broken on the server: skip it so it can't block the section
+                        // and get re-fetched back-to-back forever.
+                        val failedIndex = workItem.cursorAfterSuccess?.minus(1)
+                        val sameFailureAgain = workItem.advancesCursor &&
+                            failedIndex == resumeJob?.nextCategoryIndex &&
+                            resumeJob?.lastError != null &&
+                            resumeJob.lastError == operations.sanitize(categoryOutcome.error)
+                        if (sameFailureAgain) {
+                            nextCategoryIndex = requireNotNull(workItem.cursorAfterSuccess)
+                        }
                     }
                 }
                 upsertJob(

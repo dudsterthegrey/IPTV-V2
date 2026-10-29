@@ -127,6 +127,38 @@ class XtreamIncrementalIndexExecutorTest {
     }
 
     @Test
+    fun `category failing the same way twice is skipped so later categories still index`() = runTest {
+        // Second attempt at category 2 (cursor 1) after it already failed with this error.
+        val operations = FakeOperations(
+            categories = listOf(category(1L), category(2L), category(3L)),
+            job = XtreamIndexJobEntity(
+                providerId = 1L,
+                section = ContentType.MOVIE.name,
+                state = "QUEUED",
+                completedCategories = 1,
+                nextCategoryIndex = 1,
+                failedCategories = 1,
+                lastError = "category failed"
+            ),
+            streamMovieResult = Result.error("stream unavailable"),
+            failureCategoryId = 2L
+        )
+
+        XtreamIncrementalIndexExecutor(operations).processSummary(
+            provider = provider(),
+            api = mock(),
+            contentType = ContentType.MOVIE,
+            maxCategories = 3,
+            onProgress = null
+        )
+
+        assertThat(operations.fetchedCategoryIds).containsExactly(2L)
+        assertThat(operations.updates.last().nextCategoryIndex).isEqualTo(2)
+        assertThat(operations.updates.last().failedCategories).isAtLeast(1)
+        assertThat(operations.scheduled).containsExactly(ContentType.MOVIE)
+    }
+
+    @Test
     fun `cancellation after first category persists only completed cursor`() = runTest {
         val operations = FakeOperations(
             categories = listOf(category(1L), category(2L), category(3L)),

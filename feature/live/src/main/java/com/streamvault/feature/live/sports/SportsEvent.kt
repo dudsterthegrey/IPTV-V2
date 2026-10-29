@@ -39,6 +39,7 @@ internal enum class SportsSportFilter {
     FOOTBALL,
     BASKETBALL,
     MOTORSPORT,
+    FIGHT,
     OTHER,
 }
 
@@ -152,9 +153,12 @@ internal fun SportsEvent.matches(filter: SportsSportFilter): Boolean = when (fil
     SportsSportFilter.FOOTBALL -> sport == SportType.FOOTBALL
     SportsSportFilter.BASKETBALL -> sport == SportType.BASKETBALL
     SportsSportFilter.MOTORSPORT -> sport == SportType.MOTORSPORT
+    SportsSportFilter.FIGHT -> sport == SportType.MMA || sport == SportType.BOXING
     SportsSportFilter.OTHER -> sport !in setOf(
         SportType.FOOTBALL,
         SportType.BASKETBALL,
         SportType.MOTORSPORT,
+        SportType.MMA,
+        SportType.BOXING,
     )
 }

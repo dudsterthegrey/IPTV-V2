@@ -10,6 +10,7 @@ import com.streamvault.domain.manager.DriveAuthState
 import com.streamvault.domain.manager.DriveBackupSnapshot
 import com.streamvault.domain.manager.DriveBackupSyncManager
 import com.streamvault.domain.manager.ProviderCredentials
+import com.streamvault.domain.manager.ProviderSyncStateReader
 import com.streamvault.domain.model.Result as DomainResult
 import com.streamvault.domain.manager.BackupImportPlan
 import com.streamvault.domain.manager.BackupPreview
@@ -57,6 +58,7 @@ class ProviderSetupViewModel @Inject constructor(
     private val importBackup: ImportBackup,
     private val driveBackupSyncManager: DriveBackupSyncManager,
     private val providerQrPairingManager: ProviderQrPairingManager,
+    private val providerSyncStateReader: ProviderSyncStateReader? = null,
 ) : ViewModel() {
 
     enum class OnboardingCompletion {
@@ -82,6 +84,13 @@ class ProviderSetupViewModel @Inject constructor(
     private var pendingStalkerCommand: StalkerProviderSetupCommand? = null
 
     init {
+        providerSyncStateReader?.let { reader ->
+            viewModelScope.launch {
+                reader.observeFirstImportActive().collect { active ->
+                    _uiState.update { it.copy(firstImportActive = active) }
+                }
+            }
+        }
         viewModelScope.launch {
             providerRepository.getActiveProvider().collect { provider ->
                 if (provider != null) {
@@ -458,6 +467,7 @@ class ProviderSetupViewModel @Inject constructor(
         requestedProfileId: String = StalkerCompatibilityProfileIds.AUTO,
         repairConnection: Boolean = false
     ) {
+        if (_uiState.value.isBusy) return
         val current = _uiState.value
         submitStalker(
             StalkerProviderSetupCommand(
@@ -659,6 +669,7 @@ class ProviderSetupViewModel @Inject constructor(
         httpUserAgent: String,
         httpHeaders: String
     ) {
+        if (_uiState.value.isBusy) return
         _uiState.update {
             it.copy(
                 validationError = null,
@@ -748,6 +759,7 @@ class ProviderSetupViewModel @Inject constructor(
     }
 
     fun addM3u(url: String, name: String, httpUserAgent: String, httpHeaders: String) {
+        if (_uiState.value.isBusy) return
         _uiState.update {
             it.copy(
                 validationError = null,
@@ -874,6 +886,7 @@ class ProviderSetupViewModel @Inject constructor(
         password: String,
         name: String
     ) {
+        if (_uiState.value.isBusy) return
         _uiState.update {
             it.copy(
                 validationError = null,
@@ -959,6 +972,7 @@ class ProviderSetupViewModel @Inject constructor(
         serverUrl: String,
         name: String
     ) {
+        if (_uiState.value.isBusy) return
         _uiState.update {
             it.copy(
                 validationError = null,
@@ -1225,6 +1239,8 @@ class ProviderSetupViewModel @Inject constructor(
 
 data class ProviderSetupState(
     val isLoading: Boolean = false,
+    /** A new provider's first import is running (tracked by the sync layer, not this screen). */
+    val firstImportActive: Boolean = false,
     val loginSuccess: Boolean = false,
     val onboardingCompletion: ProviderSetupViewModel.OnboardingCompletion = ProviderSetupViewModel.OnboardingCompletion.NONE,
     val backupImportSuccess: Boolean = false,
@@ -1278,7 +1294,9 @@ data class ProviderSetupState(
     val channelLogoSourcePolicy: ChannelLogoSourcePolicy = ChannelLogoSourcePolicy.SUPPLIER_PREFERRED,
     val hasCustomizedEpgSyncMode: Boolean = false,
     val m3uVodClassificationEnabled: Boolean = false
-)
+) {
+    val isBusy: Boolean get() = isLoading || firstImportActive
+}
 
 private fun defaultEpgSyncModeFor(sourceType: ProviderSetupViewModel.SetupSourceType): ProviderEpgSyncMode = when (sourceType) {
     ProviderSetupViewModel.SetupSourceType.STALKER,

@@ -10,4 +10,7 @@ interface ProviderSyncStateReader {
     fun currentStalkerReadiness(providerId: Long): StalkerReadinessSnapshot? = null
     fun observeStalkerReadiness(providerId: Long): Flow<StalkerReadinessSnapshot?> = flowOf(null)
     fun observeBackgroundIndexingActive(providerId: Long): Flow<Boolean>
+
+    /** True while a provider that has never finished its first import is syncing. */
+    fun observeFirstImportActive(): Flow<Boolean> = flowOf(false)
 }

@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Футбол</string>
     <string name="live_sports_filter_basketball">Баскетбол</string>
     <string name="live_sports_filter_motorsport">Автоспорт</string>
+    <string name="live_sports_filter_fight">Единоборства / ММА</string>
     <string name="live_sports_filter_other">Другое</string>
     <string name="live_sports_filter_all_leagues">Все лиги</string>
     <string name="live_sports_channel_choices">Доступные каналы: %1$d</string>

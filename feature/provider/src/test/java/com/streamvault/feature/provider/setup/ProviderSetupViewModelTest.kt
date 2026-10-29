@@ -172,6 +172,28 @@ class ProviderSetupViewModelTest {
     }
 
     @Test
+    fun `login is ignored and shows busy while a first import is still running`() = runTest {
+        val reader: com.streamvault.domain.manager.ProviderSyncStateReader = mock()
+        whenever(reader.observeFirstImportActive()).thenReturn(flowOf(true))
+        val viewModel = ProviderSetupViewModel(
+            providerRepository = providerRepository,
+            combinedM3uRepository = combinedM3uRepository,
+            validateAndAddProvider = validateAndAddProvider,
+            importBackup = importBackup,
+            driveBackupSyncManager = driveBackupSyncManager,
+            providerQrPairingManager = providerQrPairingManager,
+            providerSyncStateReader = reader,
+        )
+        advanceUntilIdle()
+        assertThat(viewModel.uiState.value.isBusy).isTrue()
+
+        viewModel.loginXtream("https://example.com", "alice", "secret", "Premium", "", "")
+        advanceUntilIdle()
+
+        verify(validateAndAddProvider, never()).loginXtream(any(), any())
+    }
+
+    @Test
     fun `confirm backup import completes onboarding when providers are restored`() = runTest {
         val importedProvider = Provider(
             id = 9L,

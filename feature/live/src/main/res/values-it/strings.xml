@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Calcio</string>
     <string name="live_sports_filter_basketball">Pallacanestro</string>
     <string name="live_sports_filter_motorsport">Motori</string>
+    <string name="live_sports_filter_fight">Combattimento / MMA</string>
     <string name="live_sports_filter_other">Altro</string>
     <string name="live_sports_filter_all_leagues">Tutte le leghe</string>
     <string name="live_sports_channel_choices">Canali disponibili: %1$d</string>

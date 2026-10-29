@@ -64,11 +64,11 @@ internal fun XtreamProviderForm(
     FormErrors(uiState.validationError, uiState.error)
     ActionButton(
         text = when {
-            uiState.isLoading -> stringResource(R.string.setup_connecting)
+            uiState.isBusy -> stringResource(R.string.setup_connecting)
             uiState.isEditing -> stringResource(R.string.setup_save)
             else -> stringResource(R.string.setup_login)
         },
-        isLoading = uiState.isLoading,
+        isLoading = uiState.isBusy,
         onClick = onLogin
     )
 }
@@ -128,17 +128,17 @@ internal fun StalkerProviderForm(
     )
     ActionButton(
         text = when {
-            uiState.isLoading -> stringResource(R.string.setup_connecting)
+            uiState.isBusy -> stringResource(R.string.setup_connecting)
             uiState.isEditing -> stringResource(R.string.setup_save)
             else -> stringResource(R.string.setup_login)
         },
-        isLoading = uiState.isLoading,
+        isLoading = uiState.isBusy,
         onClick = onLogin
     )
     if (uiState.isEditing) {
         SmallActionButton(
             text = stringResource(R.string.stalker_repair_connection),
-            isLoading = uiState.isLoading,
+            isLoading = uiState.isBusy,
             onClick = onRepair
         )
     }
@@ -181,11 +181,11 @@ internal fun M3uProviderForm(
     FormErrors(uiState.validationError, uiState.error)
     ActionButton(
         text = when {
-            uiState.isLoading -> stringResource(R.string.setup_validating)
+            uiState.isBusy -> stringResource(R.string.setup_validating)
             uiState.isEditing -> stringResource(R.string.setup_save)
             else -> stringResource(R.string.setup_add)
         },
-        isLoading = uiState.isLoading,
+        isLoading = uiState.isBusy,
         onClick = onAdd
     )
 }
@@ -221,11 +221,11 @@ internal fun JellyfinProviderSetupForm(
     FormErrors(uiState.validationError, uiState.error)
     ActionButton(
         text = when {
-            uiState.isLoading -> stringResource(R.string.setup_validating)
+            uiState.isBusy -> stringResource(R.string.setup_validating)
             uiState.isEditing -> stringResource(R.string.setup_save)
             else -> stringResource(R.string.setup_add)
         },
-        isLoading = uiState.isLoading,
+        isLoading = uiState.isBusy,
         onClick = onLogin
     )
 }

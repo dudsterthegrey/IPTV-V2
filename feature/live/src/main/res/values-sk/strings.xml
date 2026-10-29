@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Futbal</string>
     <string name="live_sports_filter_basketball">Basketbal</string>
     <string name="live_sports_filter_motorsport">Motoristický šport</string>
+    <string name="live_sports_filter_fight">Bojové športy / MMA</string>
     <string name="live_sports_filter_other">Ostatné</string>
     <string name="live_sports_filter_all_leagues">Všetky ligy</string>
     <string name="live_sports_channel_choices">Dostupné kanály: %1$d</string>

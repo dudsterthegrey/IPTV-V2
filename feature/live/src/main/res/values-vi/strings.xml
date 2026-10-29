@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Bóng đá</string>
     <string name="live_sports_filter_basketball">Bóng rổ</string>
     <string name="live_sports_filter_motorsport">Thể thao tốc độ</string>
+    <string name="live_sports_filter_fight">Đối kháng / MMA</string>
     <string name="live_sports_filter_other">Khác</string>
     <string name="live_sports_filter_all_leagues">Tất cả giải đấu</string>
     <string name="live_sports_channel_choices">Kênh hiện có: %1$d</string>

@@ -206,6 +206,8 @@ interface ProviderSyncStateSource {
     fun currentSyncState(providerId: Long): SyncState
 
     fun syncStateForProvider(providerId: Long): Flow<SyncState>
+
+    fun allSyncStates(): Flow<Map<Long, SyncState>>
 }
 
 /** Cleanup hook used by deletion workers without exposing sync policy. */

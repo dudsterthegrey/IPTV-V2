@@ -849,6 +849,8 @@ class SyncManager @Inject constructor(
         )
     }
 
+    override fun allSyncStates(): Flow<Map<Long, SyncState>> = syncStatesByProvider
+
     override fun syncStateForProvider(providerId: Long): Flow<SyncState> =
         syncStatesByProvider.map { states -> states[providerId] ?: SyncState.Idle }
 
@@ -1778,7 +1780,13 @@ class SyncManager @Inject constructor(
                     )
                 }
                 failures += failure
-                sawRetryableFailure = sawRetryableFailure || state != "FAILED_PERMANENT"
+                // A sweep that reached the end with some categories skipped stays PARTIAL and is
+                // repaired by the next scheduled refresh. Retrying it straight away just re-fetched
+                // the same broken categories every minute and kept the provider busy (no guide).
+                val sweepEndedPartially = currentJob?.state == "PARTIAL" &&
+                    currentJob.nextCategoryIndex >= currentJob.totalCategories
+                sawRetryableFailure = sawRetryableFailure ||
+                    (state != "FAILED_PERMANENT" && !sweepEndedPartially)
                 warnings += "${contentType.name.lowercase().replaceFirstChar { it.titlecase() }} indexing failed: ${sanitizeThrowableMessage(failure)}"
             }
         }

@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Jalkapallo</string>
     <string name="live_sports_filter_basketball">Koripallo</string>
     <string name="live_sports_filter_motorsport">Moottoriurheilu</string>
+    <string name="live_sports_filter_fight">Kamppailu / MMA</string>
     <string name="live_sports_filter_other">Muut</string>
     <string name="live_sports_filter_all_leagues">Kaikki liigat</string>
     <string name="live_sports_channel_choices">Saatavilla olevat kanavat: %1$d</string>

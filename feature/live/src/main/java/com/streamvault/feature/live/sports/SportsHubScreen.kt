@@ -371,6 +371,11 @@ private fun SportsSportFilters(
             onClick = { onSelected(SportsSportFilter.MOTORSPORT) },
         )
         SportsFilterButton(
+            label = stringResource(R.string.live_sports_filter_fight),
+            selected = selected == SportsSportFilter.FIGHT,
+            onClick = { onSelected(SportsSportFilter.FIGHT) },
+        )
+        SportsFilterButton(
             label = stringResource(R.string.live_sports_filter_other),
             selected = selected == SportsSportFilter.OTHER,
             onClick = { onSelected(SportsSportFilter.OTHER) },

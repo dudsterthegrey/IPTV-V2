@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Fußball</string>
     <string name="live_sports_filter_basketball">Basketball</string>
     <string name="live_sports_filter_motorsport">Motorsport</string>
+    <string name="live_sports_filter_fight">Kampfsport / MMA</string>
     <string name="live_sports_filter_other">Andere</string>
     <string name="live_sports_filter_all_leagues">Alle Ligen</string>
     <string name="live_sports_channel_choices">Verfügbare Sender: %1$d</string>

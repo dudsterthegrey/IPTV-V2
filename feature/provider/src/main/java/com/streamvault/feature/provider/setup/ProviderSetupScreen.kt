@@ -575,12 +575,12 @@ fun ProviderSetupScreen(
     }
 
     val isPhonePairingSubmitting = pairingState.status == ProviderQrPairingStatus.RECEIVING
-    if (uiState.syncProgress != null || isPhonePairingSubmitting) {
+    if (uiState.syncProgress != null || uiState.firstImportActive || isPhonePairingSubmitting) {
         SyncProgressDialog(
             message = if (isPhonePairingSubmitting) {
                 pairingState.message ?: stringResource(R.string.setup_phone_pairing_receiving)
             } else {
-                uiState.syncProgress.orEmpty()
+                uiState.syncProgress ?: stringResource(R.string.settings_syncing_btn)
             },
             quickConnectCode = if (!isPhonePairingSubmitting && uiState.jellyfinQuickConnectCode.isNotBlank()) {
                 uiState.jellyfinQuickConnectCode

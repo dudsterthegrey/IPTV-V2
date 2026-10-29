@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">サッカー</string>
     <string name="live_sports_filter_basketball">バスケットボール</string>
     <string name="live_sports_filter_motorsport">モータースポーツ</string>
+    <string name="live_sports_filter_fight">格闘技 / MMA</string>
     <string name="live_sports_filter_other">その他</string>
     <string name="live_sports_filter_all_leagues">すべてのリーグ</string>
     <string name="live_sports_channel_choices">視聴可能なチャンネル: %1$d</string>

@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">Bola sepak</string>
     <string name="live_sports_filter_basketball">Bola keranjang</string>
     <string name="live_sports_filter_motorsport">Sukan permotoran</string>
+    <string name="live_sports_filter_fight">Pertarungan / MMA</string>
     <string name="live_sports_filter_other">Lain-lain</string>
     <string name="live_sports_filter_all_leagues">Semua liga</string>
     <string name="live_sports_channel_choices">Saluran tersedia: %1$d</string>

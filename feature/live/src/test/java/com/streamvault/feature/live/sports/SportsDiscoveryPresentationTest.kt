@@ -61,4 +61,13 @@ class SportsDiscoveryPresentationTest {
         assertThat(event.matchesDiscovery(SportsHubUiState(excludedSports = setOf("FOOTBALL"), searchQuery = "Atlanta"))).isTrue()
         assertThat(event.matchesDiscovery(SportsHubUiState(selectedSportFilter = SportsSportFilter.FOOTBALL))).isFalse()
     }
+
+    @Test fun `fight filter keeps MMA and boxing and leaves them out of other`() {
+        val mma = event.copy(sport = SportType.MMA)
+        val boxing = event.copy(sport = SportType.BOXING)
+        assertThat(mma.matches(SportsSportFilter.FIGHT)).isTrue()
+        assertThat(boxing.matches(SportsSportFilter.FIGHT)).isTrue()
+        assertThat(event.matches(SportsSportFilter.FIGHT)).isFalse()
+        assertThat(mma.matches(SportsSportFilter.OTHER)).isFalse()
+    }
 }

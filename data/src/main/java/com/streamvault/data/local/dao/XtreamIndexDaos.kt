@@ -278,12 +278,12 @@ interface XtreamIndexJobDao {
         SELECT EXISTS(
             SELECT 1 FROM xtream_index_jobs
             WHERE provider_id = :providerId
-              AND section IN ('LIVE', 'MOVIE', 'SERIES')
+              AND section = 'LIVE'
               AND state IN ('QUEUED', 'RUNNING')
         )
         """
     )
-    suspend fun hasPendingCatalogWork(providerId: Long): Boolean
+    suspend fun hasPendingLiveCatalogWork(providerId: Long): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(entity: XtreamIndexJobEntity)

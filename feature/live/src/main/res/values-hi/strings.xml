@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">फ़ुटबॉल</string>
     <string name="live_sports_filter_basketball">बास्केटबॉल</string>
     <string name="live_sports_filter_motorsport">मोटरस्पोर्ट</string>
+    <string name="live_sports_filter_fight">फ़ाइट / MMA</string>
     <string name="live_sports_filter_other">अन्य</string>
     <string name="live_sports_filter_all_leagues">सभी लीग</string>
     <string name="live_sports_channel_choices">उपलब्ध चैनल: %1$d</string>

@@ -61,10 +61,12 @@ class BackgroundEpgSyncWorker(
                 BackgroundEpgSyncWorkerEntryPoint::class.java
             )
             val provider = entryPoint.providerDao().getById(providerId)
+            // Only Live TV matters to the guide. Waiting on Movies/Series too meant a provider
+            // whose series list keeps failing to download never got a guide at all.
             if (!force && provider?.type == ProviderType.XTREAM_CODES &&
-                entryPoint.xtreamIndexJobDao().hasPendingCatalogWork(providerId)
+                entryPoint.xtreamIndexJobDao().hasPendingLiveCatalogWork(providerId)
             ) {
-                Log.i(TAG, "Deferring guide work for provider $providerId until queued catalog indexing completes")
+                Log.i(TAG, "Deferring guide work for provider $providerId until queued live indexing completes")
                 return Result.retry()
             }
             when (

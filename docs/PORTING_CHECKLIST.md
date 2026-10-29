@@ -115,14 +115,41 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       of the title; press it → the matching tab is selected, the full grid shows, and focus lands
       on that tab chip (Down moves into the results). Rows with 18 or fewer have no button.
 
+- [ ] **Sports › Fight / MMA**: open Sports → the filter chips read All / Football / Basketball /
+      Motorsport / **Fight / MMA** / Other. Fight / MMA shows only UFC, Bellator, PFL, ONE,
+      bare-knuckle, kickboxing and boxing events (e.g. Top Rank, Matchroom); those no longer
+      appear under Other.
+
+- [ ] **Guide fills in**: a few hours after setup (or after Settings › Providers › your provider ›
+      sync with EPG ticked), the Guide shows programmes on channels that read "No schedule"
+      before. Channels whose provider sends no guide ID (24/7, PPV, many "Shows" channels) stay
+      empty unless you add an XMLTV source in Settings › TV Guide; Guide › Options › **Hide
+      channels with no guide data** removes the empty rows.
+
+- [ ] **Setup shows it's busy**: add a provider → after **Login** the button shows a spinner and
+      the "Syncing data…" box stays up until the import finishes; pressing Login again does
+      nothing. Then Home opens on its own.
+
 ## Bugs found while testing
 
-- [ ] **Xtream setup gives no feedback** (seen 2026-10-28, emulator, imaxiptv): after **Login** the
+- [x] **Xtream setup gives no feedback** (seen 2026-10-28, emulator, imaxiptv): after **Login** the
       screen stayed on the form with no "Syncing data…" box and Login still pressable, while
       the catalog downloaded in the background. Each extra press saved a new provider edit and
       threw away the download in progress ("Provider edit N was superseded before catalog
-      commit"), so it never finished. Restarting the app opened Home with the provider working.
-      Not reproduced yet; next time, watch logcat for the setup screen's login result.
+      commit"), so it never finished. Fixed 2026-10-28 without finding the root cause: the busy
+      state now comes from the sync itself (a provider's first import), and repeat submits are
+      ignored while it runs.
+- [x] **Guide never downloaded** (2026-10-28, imaxiptv): the full guide waited for Movies *and*
+      Series indexing, and the server sends broken JSON for some series categories, so Series
+      never finished and the guide was put off forever (only 24 of 2,553 linked channels had
+      listings). Now the guide waits for Live TV only.
+- [x] **Series import retried a broken category non-stop** (every ~0.7 s, which also kept the
+      provider busy). Now a category that fails the same way twice is skipped, and a pass that
+      ends with skipped categories waits for the next scheduled refresh instead of retrying.
+- [ ] **Guide time header overlaps** at the left edge: "6:00 PM" and "6:30 PM" draw on top of each
+      other (seen on the emulator Guide, Compact layout).
+- [ ] **Old scheduler tests fail on Windows**: 4 tests in `ProviderSyncWorkSchedulerIntegrationTest`
+      fail with "unable to open database file" on the original code too (test environment issue).
 
 ## Release / Downloader
 

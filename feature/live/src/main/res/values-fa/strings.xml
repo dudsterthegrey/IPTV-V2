@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">فوتبال</string>
     <string name="live_sports_filter_basketball">بسکتبال</string>
     <string name="live_sports_filter_motorsport">ورزش‌های موتوری</string>
+    <string name="live_sports_filter_fight">مبارزه / MMA</string>
     <string name="live_sports_filter_other">موارد دیگر</string>
     <string name="live_sports_filter_all_leagues">همهٔ لیگ‌ها</string>
     <string name="live_sports_channel_choices">کانال‌های در دسترس: %1$d</string>

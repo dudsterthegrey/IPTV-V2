@@ -259,6 +259,7 @@
     <string name="live_sports_filter_football">כדורגל</string>
     <string name="live_sports_filter_basketball">כדורסל</string>
     <string name="live_sports_filter_motorsport">ספורט מוטורי</string>
+    <string name="live_sports_filter_fight">קרבות / MMA</string>
     <string name="live_sports_filter_other">אחר</string>
     <string name="live_sports_filter_all_leagues">כל הליגות</string>
     <string name="live_sports_channel_choices">ערוצים זמינים: %1$d</string>

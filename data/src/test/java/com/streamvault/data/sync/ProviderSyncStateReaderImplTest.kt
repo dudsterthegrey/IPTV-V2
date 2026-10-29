@@ -1,13 +1,17 @@
 package com.streamvault.data.sync
 
 import com.google.common.truth.Truth.assertThat
+import com.streamvault.data.local.dao.ProviderDao
 import com.streamvault.data.local.dao.ProviderWorkflowDao
 import com.streamvault.data.local.dao.XtreamIndexJobDao
+import com.streamvault.data.local.entity.ProviderEntity
 import com.streamvault.data.local.entity.ProviderWorkflowEntity
 import com.streamvault.data.local.entity.ProviderWorkflowPhase
 import com.streamvault.data.local.entity.ProviderWorkflowReason
 import com.streamvault.data.local.entity.ProviderWorkflowState
 import com.streamvault.data.local.entity.XtreamIndexJobEntity
+import com.streamvault.domain.model.ProviderType
+import com.streamvault.domain.model.SyncState
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -19,6 +23,22 @@ class ProviderSyncStateReaderImplTest {
     private val syncManager: SyncManager = mock()
     private val xtreamIndexJobDao: XtreamIndexJobDao = mock()
     private val workflowDao: ProviderWorkflowDao = mock()
+    private val providerDao: ProviderDao = mock()
+
+    @Test
+    fun `first import is active only while a not-yet-ready provider syncs`() = runTest {
+        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao, providerDao)
+        val newProvider = ProviderEntity(id = 1, name = "New", type = ProviderType.XTREAM_CODES, isActive = false)
+        val readyProvider = ProviderEntity(id = 2, name = "Ready", type = ProviderType.XTREAM_CODES, lastSyncedAt = 5L)
+
+        whenever(providerDao.getAll()).thenReturn(flowOf(listOf(newProvider, readyProvider)))
+        whenever(syncManager.allSyncStates()).thenReturn(flowOf(mapOf(1L to SyncState.Syncing("Live TV"))))
+        assertThat(reader.observeFirstImportActive().first()).isTrue()
+
+        // A routine refresh of a provider that is already set up must not block setup.
+        whenever(syncManager.allSyncStates()).thenReturn(flowOf(mapOf(2L to SyncState.Syncing("Live TV"))))
+        assertThat(reader.observeFirstImportActive().first()).isFalse()
+    }
 
     @Test
     fun `durable queued index phase is visible without legacy job state`() = runTest {
@@ -38,7 +58,7 @@ class ProviderSyncStateReaderImplTest {
         whenever(workflowDao.observeActivePhases(PROVIDER_ID)).thenReturn(
             flowOf(listOf(ProviderWorkflowPhase.MOVIE_INDEX))
         )
-        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao)
+        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao, providerDao)
 
         assertThat(reader.observeBackgroundIndexingActive(PROVIDER_ID).first()).isTrue()
     }
@@ -70,7 +90,7 @@ class ProviderSyncStateReaderImplTest {
             )
         )
         whenever(workflowDao.observeActivePhases(PROVIDER_ID)).thenReturn(flowOf(emptyList()))
-        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao)
+        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao, providerDao)
 
         assertThat(reader.observeBackgroundIndexingActive(PROVIDER_ID).first()).isFalse()
     }
@@ -90,7 +110,7 @@ class ProviderSyncStateReaderImplTest {
         )
         whenever(workflowDao.observeWorkflow(PROVIDER_ID)).thenReturn(flowOf(null))
         whenever(workflowDao.observeActivePhases(PROVIDER_ID)).thenReturn(flowOf(emptyList()))
-        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao)
+        val reader = ProviderSyncStateReaderImpl(syncManager, xtreamIndexJobDao, workflowDao, providerDao)
 
         assertThat(reader.observeBackgroundIndexingActive(PROVIDER_ID).first()).isTrue()
     }
