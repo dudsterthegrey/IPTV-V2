@@ -63,6 +63,7 @@ internal class AppStartupCoordinator internal constructor(
         programReminderManager: Provider<ProgramReminderManager>,
         providerSyncLifecycle: Provider<ProviderSyncLifecycle>,
         pendingBackupRestoreCoordinator: Provider<PendingBackupRestoreCoordinator>,
+        builtInEpgSourceSeeder: Provider<com.streamvault.data.epg.BuiltInEpgSourceSeeder>,
         watchNextManager: Provider<WatchNextManager>,
         launcherRecommendationsManager: Provider<LauncherRecommendationsManager>,
         tvInputChannelSyncManager: Provider<com.streamvault.app.tvinput.TvInputChannelSyncManager>
@@ -87,7 +88,9 @@ internal class AppStartupCoordinator internal constructor(
             },
             providerTask("pending-backup-restoration", pendingBackupRestoreCoordinator) {
                 it.applyAllAvailable()
-            }
+            },
+            // Keeps watching for new providers, so this task stays active for the process.
+            providerTask("built-in-guide-sources", builtInEpgSourceSeeder) { it.run() }
         ),
         tvTasks = listOf(
             providerTask("watch-next-refresh", watchNextManager) { it.refreshWatchNext() },

@@ -169,6 +169,77 @@ class EpgResolutionEngineTest {
     }
 
     @Test
+    fun `resolveForProvider_providerNativeBeatsExternalNameMatch`() = runTest {
+        // An added guide matching only by name must not replace the provider's own listings.
+        val channel = makeChannel(id = 1, name = "CNN International", epgChannelId = "cnn.provider")
+        whenever(channelDao.getByProviderSync(PROVIDER_ID)).thenReturn(listOf(channel))
+        whenever(providerEpgSourceDao.getEnabledForProviderSync(PROVIDER_ID)).thenReturn(
+            listOf(ProviderEpgSourceEntity(id = 1, providerId = PROVIDER_ID, epgSourceId = SOURCE_1, priority = 0))
+        )
+        whenever(epgChannelDao.getBySources(listOf(SOURCE_1))).thenReturn(
+            listOf(EpgChannelEntity(id = 1, epgSourceId = SOURCE_1, xmltvChannelId = "cnn.intl", displayName = "CNN International", normalizedName = EpgNameNormalizer.normalize("CNN International")))
+        )
+        whenever(channelEpgMappingDao.getForProvider(PROVIDER_ID)).thenReturn(emptyList())
+        whenever(programDao.getChannelIdsWithPrograms(PROVIDER_ID, listOf("cnn.provider"))).thenReturn(listOf("cnn.provider"))
+
+        engine.resolveForProvider(PROVIDER_ID)
+
+        val captor = argumentCaptor<List<ChannelEpgMappingEntity>>()
+        verify(channelEpgMappingDao).replaceForProvider(any(), captor.capture())
+        assertThat(captor.firstValue.single().matchType).isEqualTo(EpgMatchType.PROVIDER_NATIVE.name)
+    }
+
+    @Test
+    fun `resolveForProvider_looseNameMatch_fillsCountryPrefixedChannel_butSkipsAmbiguousKeys`() = runTest {
+        val news = makeChannel(id = 1, name = "USA News 12 Brooklyn", epgChannelId = null)
+        val hbo = makeChannel(id = 2, name = "USA HBO", epgChannelId = null)
+        whenever(channelDao.getByProviderSync(PROVIDER_ID)).thenReturn(listOf(news, hbo))
+        whenever(providerEpgSourceDao.getEnabledForProviderSync(PROVIDER_ID)).thenReturn(
+            listOf(ProviderEpgSourceEntity(id = 1, providerId = PROVIDER_ID, epgSourceId = SOURCE_1, priority = 0))
+        )
+        fun guide(id: Long, xmltvId: String, name: String) = EpgChannelEntity(
+            id = id, epgSourceId = SOURCE_1, xmltvChannelId = xmltvId, displayName = name,
+            normalizedName = EpgNameNormalizer.normalize(name)
+        )
+        whenever(epgChannelDao.getBySources(listOf(SOURCE_1))).thenReturn(listOf(
+            guide(1, "News.12.Brooklyn.us2", "News 12 Brooklyn"),
+            // Both reduce to "hbo": ambiguous, so neither is used.
+            guide(2, "HBO.East.us2", "HBO East"),
+            guide(3, "HBO.HD.us2", "HBO HD"),
+        ))
+        whenever(channelEpgMappingDao.getForProvider(PROVIDER_ID)).thenReturn(emptyList())
+
+        engine.resolveForProvider(PROVIDER_ID)
+
+        val captor = argumentCaptor<List<ChannelEpgMappingEntity>>()
+        verify(channelEpgMappingDao).replaceForProvider(any(), captor.capture())
+        val byChannel = captor.firstValue.associateBy { it.providerChannelId }
+        assertThat(byChannel.getValue(1L).xmltvChannelId).isEqualTo("News.12.Brooklyn.us2")
+        assertThat(byChannel.getValue(1L).source).isEqualTo("loose_name_match")
+        assertThat(byChannel.getValue(2L).sourceType).isEqualTo(EpgSourceType.NONE.name)
+    }
+
+    @Test
+    fun `resolveForProvider_looseNameMatch_keepsCountry`() = runTest {
+        val ukAmc = makeChannel(id = 1, name = "UK AMC", epgChannelId = null)
+        whenever(channelDao.getByProviderSync(PROVIDER_ID)).thenReturn(listOf(ukAmc))
+        whenever(providerEpgSourceDao.getEnabledForProviderSync(PROVIDER_ID)).thenReturn(
+            listOf(ProviderEpgSourceEntity(id = 1, providerId = PROVIDER_ID, epgSourceId = SOURCE_1, priority = 0))
+        )
+        whenever(epgChannelDao.getBySources(listOf(SOURCE_1))).thenReturn(listOf(
+            EpgChannelEntity(id = 1, epgSourceId = SOURCE_1, xmltvChannelId = "AMC.HD.us2", displayName = "AMC HD",
+                normalizedName = EpgNameNormalizer.normalize("AMC HD"))
+        ))
+        whenever(channelEpgMappingDao.getForProvider(PROVIDER_ID)).thenReturn(emptyList())
+
+        engine.resolveForProvider(PROVIDER_ID)
+
+        val captor = argumentCaptor<List<ChannelEpgMappingEntity>>()
+        verify(channelEpgMappingDao).replaceForProvider(any(), captor.capture())
+        assertThat(captor.firstValue.single().sourceType).isEqualTo(EpgSourceType.NONE.name)
+    }
+
+    @Test
     fun `resolveForProvider_unresolvedChannel_noEpg`() = runTest {
         val channel = makeChannel(id = 1, name = "Mystery Channel", epgChannelId = null)
         whenever(channelDao.getByProviderSync(PROVIDER_ID)).thenReturn(listOf(channel))

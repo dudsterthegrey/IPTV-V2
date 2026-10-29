@@ -126,6 +126,13 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       empty unless you add an XMLTV source in Settings › TV Guide; Guide › Options › **Hide
       channels with no guide data** removes the empty rows.
 
+- [ ] **Built-in guides (epgshare01 US + UK)**: on a fresh install, after adding a provider,
+      Settings › TV Guide lists "epgshare01 US" and "epgshare01 UK" already assigned to it. After
+      the next guide refresh, channels such as "USA News 12 Brooklyn", "USA Animal Planet West"
+      and "UK TNT Sports 7" show programmes (about 120 more channels on imaxiptv). Channels that
+      already had listings keep the provider's own. "UK AMC" stays empty rather than showing the
+      US schedule. Delete a built-in source → it doesn't come back on the next launch.
+
 - [ ] **Setup shows it's busy**: add a provider → after **Login** the button shows a spinner and
       the "Syncing data…" box stays up until the import finishes; pressing Login again does
       nothing. Then Home opens on its own.

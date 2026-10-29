@@ -27,8 +27,8 @@ import javax.inject.Singleton
  * Resolution order per channel:
  * 1. Manual override (future)
  * 2. External source with exact ID match (highest-priority source first)
- * 3. External source with normalized name match (highest-priority source first)
- * 4. Provider-native EPG if available
+ * 3. Provider-native EPG if available
+ * 4. External source with normalized name match (highest-priority source first)
  * 5. No EPG
  *
  * Results are persisted in `channel_epg_mappings` and used by the guide grid.
@@ -47,6 +47,7 @@ class EpgResolutionEngine @Inject constructor(
         private const val TAG = "EpgResolutionEngine"
         private const val LOW_CONFIDENCE_THRESHOLD = 0.7f
         private const val MAX_REMATCH_ATTEMPTS = 6
+        private const val MIN_LOOSE_KEY_LENGTH = 3
     }
 
     /**
@@ -92,6 +93,7 @@ class EpgResolutionEngine @Inject constructor(
         val exactIdIndex = mutableMapOf<Long, Set<String>>()
         // sourceId -> (normalizedName -> xmltvChannelId)
         val nameIndex = mutableMapOf<Long, Map<String, String>>()
+        val looseNameIndex = mutableMapOf<Long, Map<String, String>>()
 
         for ((sourceId, epgChannels) in epgChannelsBySource) {
             exactIdIndex[sourceId] = epgChannels.map { it.xmltvChannelId.trim() }.toHashSet()
@@ -104,6 +106,20 @@ class EpgResolutionEngine @Inject constructor(
                 }
             }
             nameIndex[sourceId] = nameMap
+            // Loose keys can collide ("HBO East" and "HBO HD" → "hbo"); a key that points at
+            // more than one guide channel is dropped rather than guessed.
+            val looseMap = mutableMapOf<String, String?>()
+            // Keys carry the guide's country when its id says it ("AMC.HD.us2" → "us:amc"), so a
+            // channel tagged "UK AMC" can't pick up the US schedule.
+            for (ch in epgChannels) {
+                val key = EpgNameNormalizer.looseKey(ch.displayName)
+                if (key.length < MIN_LOOSE_KEY_LENGTH) continue
+                val country = EpgNameNormalizer.countryOfXmltvId(ch.xmltvChannelId)
+                listOfNotNull(key, country?.let { "$it:$key" }).forEach { k ->
+                    looseMap[k] = if (k in looseMap && looseMap[k] != ch.xmltvChannelId) null else ch.xmltvChannelId
+                }
+            }
+            looseNameIndex[sourceId] = looseMap.filterValues { it != null }.mapValues { it.value!! }
         }
 
         // Check which channels have provider-native EPG data
@@ -173,7 +189,26 @@ class EpgResolutionEngine @Inject constructor(
                 }
             }
 
-            // 3. Try external sources — normalized name match
+            // 3. Provider-native EPG. It beats a fuzzy name match from an external source, so an
+            //    added guide only fills channels the provider's own guide doesn't cover.
+            if (allowProviderNativeMappings && channelEpgId != null && channelEpgId in providerNativeChannelIds) {
+                providerNativeMatches++
+                return@map ChannelEpgMappingEntity(
+                    providerChannelId = channel.id,
+                    providerId = providerId,
+                    sourceType = EpgSourceType.PROVIDER.name,
+                    epgSourceId = null,
+                    xmltvChannelId = channelEpgId,
+                    matchType = EpgMatchType.PROVIDER_NATIVE.name,
+                    confidence = 0.5f,
+                    matchedAt = now,
+                    failedAttempts = 0,
+                    source = "provider_native",
+                    updatedAt = now
+                )
+            }
+
+            // 4. Try external sources — normalized name match
             val channelNormalizedName = EpgNameNormalizer.normalize(channel.name)
             if (channelNormalizedName.isNotEmpty()) {
                 for (assignment in enabledAssignments) {
@@ -197,24 +232,30 @@ class EpgResolutionEngine @Inject constructor(
                         )
                     }
                 }
-            }
-
-            // 4. Fall back to provider-native EPG
-            if (allowProviderNativeMappings && channelEpgId != null && channelEpgId in providerNativeChannelIds) {
-                providerNativeMatches++
-                return@map ChannelEpgMappingEntity(
-                    providerChannelId = channel.id,
-                    providerId = providerId,
-                    sourceType = EpgSourceType.PROVIDER.name,
-                    epgSourceId = null,
-                    xmltvChannelId = channelEpgId,
-                    matchType = EpgMatchType.PROVIDER_NATIVE.name,
-                    confidence = 0.5f,
-                    matchedAt = now,
-                    failedAttempts = 0,
-                    source = "provider_native",
-                    updatedAt = now
-                )
+                // 4b. Looser name match (country tag, HD/East etc. dropped) for what is still empty.
+                val looseKey = EpgNameNormalizer.looseKey(channel.name)
+                val channelLooseKey = EpgNameNormalizer.countryOfChannelName(channel.name)
+                    ?.let { "$it:$looseKey" } ?: looseKey
+                if (looseKey.length >= MIN_LOOSE_KEY_LENGTH) {
+                    for (assignment in enabledAssignments) {
+                        val sid = assignment.epgSourceId
+                        val matchedXmltvId = looseNameIndex[sid]?.get(channelLooseKey) ?: continue
+                        normalizedNameMatches++
+                        return@map ChannelEpgMappingEntity(
+                            providerChannelId = channel.id,
+                            providerId = providerId,
+                            sourceType = EpgSourceType.EXTERNAL.name,
+                            epgSourceId = sid,
+                            xmltvChannelId = matchedXmltvId,
+                            matchType = EpgMatchType.NORMALIZED_NAME.name,
+                            confidence = 0.6f,
+                            matchedAt = now,
+                            failedAttempts = 0,
+                            source = "loose_name_match",
+                            updatedAt = now
+                        )
+                    }
+                }
             }
 
             // 5. No EPG
