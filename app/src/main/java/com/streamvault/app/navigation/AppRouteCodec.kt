@@ -144,6 +144,7 @@ internal object AppRouteCodec {
         when (destination) {
             AppDestination.Home,
             AppDestination.Plugins,
+            AppDestination.Downloads,
             is AppDestination.ProviderSetup,
             is AppDestination.MovieDetail,
             is AppDestination.SeriesDetail -> destination
