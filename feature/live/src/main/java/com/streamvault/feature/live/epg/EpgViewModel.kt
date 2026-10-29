@@ -1148,7 +1148,12 @@ class EpgViewModel @Inject constructor(
                     windowEnd = selection.anchorTime + LOOKAHEAD_MS,
                     guideSourcePolicy = provider.guideSourcePolicy
                 )
-            }.collectLatest { request ->
+            }
+                // Database writes (e.g. listings fetched while scrolling) re-emit the category
+                // flows with identical data; restarting the guide for those showed the refresh
+                // bar and rebuilt the list mid-scroll.
+                .distinctUntilChanged()
+                .collectLatest { request ->
                 val categories = request.categories
                 val hasVisibleGuide = _uiState.value.channels.isNotEmpty() || _uiState.value.programsByChannel.isNotEmpty()
                 val providerSourceLabel = buildProviderSourceLabel(provider)
@@ -1245,7 +1250,7 @@ class EpgViewModel @Inject constructor(
                 ),
                 providerIds = data.providerIds
             )
-        }.collectLatest { combinedRequest ->
+        }.distinctUntilChanged().collectLatest { combinedRequest ->
             val request = combinedRequest.request
             val providerIds = combinedRequest.providerIds
             val categories = request.categories

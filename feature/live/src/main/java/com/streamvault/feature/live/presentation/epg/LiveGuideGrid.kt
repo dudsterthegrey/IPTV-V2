@@ -70,7 +70,10 @@ fun LiveGuideGrid(
         liveGuideInitialFocusIndex(channels, resolvedInitialChannelId)
     }
 
-    LaunchedEffect(channels.size, resolvedInitialChannelId) {
+    // Keyed on the first channel, not the count: loading the next page while scrolling appends
+    // channels and must not jump back to the starting row; a new category or filter changes
+    // the first channel and does reset.
+    LaunchedEffect(channels.firstOrNull()?.id, resolvedInitialChannelId) {
         if (channels.isEmpty()) return@LaunchedEffect
         verticalListState.scrollToItem((initialFocusIndex - 2).coerceAtLeast(0))
         delay(140)

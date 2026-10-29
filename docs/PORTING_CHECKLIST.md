@@ -158,6 +158,13 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       other. A half-hour mark before the guide's start was clamped to the edge; now only marks
       inside the window are drawn (row grid lines use the same marks). Checked on the emulator
       2026-10-29.
+- [x] **Guide jumped back to the top while scrolling** (2026-10-29, Scheduled only on): a progress
+      bar kept appearing over the channels and focus reset to the first row. Two causes: the grid
+      re-scrolled to the start whenever the channel count changed (every page loaded while
+      scrolling), and database writes re-emitted identical guide requests that restarted the
+      whole guide. Now the grid only resets when the first channel changes (new category/filter)
+      and identical requests are ignored. Checked on the emulator: 60 rows down to channel 325
+      with no reset and no bar.
 - [ ] **Old scheduler tests fail on Windows**: 4 tests in `ProviderSyncWorkSchedulerIntegrationTest`
       fail with "unable to open database file" on the original code too (test environment issue).
 
