@@ -6,7 +6,7 @@ Code for Downloader App
 7935478
 
 Short URL
-aftv.news/7935478Copy URL
+aftv.news/7935478
 
 Usage:
 
