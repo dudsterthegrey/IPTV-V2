@@ -177,8 +177,13 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       `release/IPTVPlayer-V2-<version>.apk` (gitignored). Raise `versionCode` for each new upload.
       2.0.0 installed and opened on the emulator; provider login on the release build is not
       checked yet (minified builds can break JSON parsing, so try setup first on the Fire TV).
-- [ ] Host the APK (e.g. GitHub Release asset) and create a Downloader code at
-      aftvnews.com/downloader-codes (V1 README section 2 has the steps)
+- [x] Host the APK (2026-10-29): committed to `release/` in the public repo
+      github.com/dudsterthegrey/IPTV-V2. Direct link for Downloader:
+      `https://github.com/dudsterthegrey/IPTV-V2/raw/main/release/IPTVPlayer-V2-2.0.0.apk`
+      (checked: downloads without signing in, same SHA-256 as the local build).
+- [ ] Create a Downloader code for that link at aftvnews.com/downloader-codes. For later
+      versions, either keep the file name and replace the APK (the code keeps working) or edit
+      the code's link to the new file.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port
