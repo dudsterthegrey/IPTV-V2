@@ -22,11 +22,13 @@ import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 
 @Singleton
 class OpenSubtitlesRepositoryImpl @Inject constructor(
@@ -168,8 +170,8 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
         return try {
             val fileId = subtitle.downloadId.toLongOrNull()?.takeIf { it > 0L }
                 ?: return Result.error("This subtitle has no downloadable file.")
+            cachedSubtitleFile(subtitle.downloadId)?.let { return Result.success(it) }
             val destination = subtitleCacheFile(fileId)
-            if (destination.isFile && destination.length() > 0L) return Result.success(destination)
 
             requestWithOptionalSession { session ->
                 if (session?.remainingDownloads == 0) {
@@ -196,6 +198,22 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
             if (e is CancellationException) throw e
             Result.error("OpenSubtitles download failed: ${e.message}", e)
         }
+    }
+
+    override suspend fun cachedSubtitleFile(downloadId: String): File? = withContext(Dispatchers.IO) {
+        val fileId = downloadId.toLongOrNull()?.takeIf { it > 0L } ?: return@withContext null
+        val destination = subtitleCacheFile(fileId)
+        if (destination.isFile && destination.length() > 0L) return@withContext destination
+
+        val legacyCacheFile = File(
+            context.cacheDir,
+            "subtitles/opensubtitles/$fileId.srt"
+        )
+        if (!legacyCacheFile.isFile || legacyCacheFile.length() <= 0L) return@withContext null
+
+        runCatching { legacyCacheFile.copyTo(destination, overwrite = true) }
+            .getOrNull()
+            ?.takeIf { it.isFile && it.length() > 0L }
     }
 
     private suspend fun <T> requestWithOptionalSession(
@@ -279,7 +297,7 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
     }
 
     private fun subtitleCacheFile(fileId: Long): File {
-        val directory = File(context.cacheDir, "subtitles/opensubtitles").apply { mkdirs() }
+        val directory = File(context.filesDir, "subtitles/opensubtitles").apply { mkdirs() }
         return File(directory, "$fileId.srt")
     }
 
