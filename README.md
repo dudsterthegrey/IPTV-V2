@@ -2,6 +2,27 @@
 
 IPTV Player V2 is a personal, non-commercial Android TV IPTV app **based on [StreamVault](https://github.com/Davidona/StreamVault-IPTV)** by David Nashash (Davidona), started from upstream commit `b777a112` (2026-10-22). StreamVault's license (see [LICENSE](LICENSE)) still applies: keep the in-app credit and the GitHub and Ko-fi links, no commercial use, and publish the source under the same license if this app is ever distributed. Changes from upstream: renamed to IPTV Player, package `com.dgeo.iptvplayer.v2`, and in-app updates (which pulled upstream StreamVault releases) are switched off via `APP_UPDATES_ENABLED`.
 
+Code for Downloader App
+7935478Copy Code
+Short URL
+aftv.news/7935478Copy URL
+Destination URL
+https://github.com/dudsterthegrey/IPTV-V2/raw/main/release/IPTVPlayer-V2-2.0.0.apkCopy URL
+Usage:
+
+Enter the code 7935478 in the Downloader app to load the destination URL.
+
+Enter aftv.news/7935478 in any browser to load the destination URL.
+
+The permalink for this info page is aftv.news/7935478+
+
+
+
+
+
+
+
+
 The original StreamVault README follows.
 
 ---
