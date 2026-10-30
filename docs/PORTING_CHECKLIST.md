@@ -170,8 +170,15 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 
 ## Release / Downloader
 
-- [ ] Release signing with your own keystore (V1's is in `C:\Android Studio\IPTVPlayer\Keys`)
-- [ ] Host the APK and create a Downloader code (V1 README section 2 has the steps)
+- [x] Release signing (2026-10-29): V1's keystore passwords were lost, so V2 has its own key,
+      `keystore/iptv-v2-release.jks`, with `keystore.properties` (both gitignored). **Back up
+      both files together**: every future version must be signed with this key to install as
+      an update. Build with `gradlew :app:assembleRelease`; the APK is copied to
+      `release/IPTVPlayer-V2-<version>.apk` (gitignored). Raise `versionCode` for each new upload.
+      2.0.0 installed and opened on the emulator; provider login on the release build is not
+      checked yet (minified builds can break JSON parsing, so try setup first on the Fire TV).
+- [ ] Host the APK (e.g. GitHub Release asset) and create a Downloader code at
+      aftvnews.com/downloader-codes (V1 README section 2 has the steps)
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port
