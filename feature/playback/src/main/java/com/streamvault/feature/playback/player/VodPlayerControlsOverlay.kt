@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,6 +80,7 @@ internal fun VodPlayerControlsOverlay(
     onUserInteraction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val timelineFocusRequester = remember { FocusRequester() }
     val vodControlsLabel = stringResource(R.string.player_vod_controls)
     val settingsLabel = stringResource(R.string.player_playback_settings)
     val closeLabel = stringResource(R.string.player_close_controls)
@@ -162,9 +164,12 @@ internal fun VodPlayerControlsOverlay(
                     currentChapter = overlayState.currentChapter,
                     currentPositionMs = currentPositionMs,
                     durationMs = durationMs,
+                    timelineFocusRequester = timelineFocusRequester,
+                    playButtonFocusRequester = playButtonFocusRequester,
                     onSeekToPosition = onSeekToPosition,
                     onSetScrubbingMode = onSetScrubbingMode,
-                    onSeekPreviewPositionChanged = onSeekPreviewPositionChanged
+                    onSeekPreviewPositionChanged = onSeekPreviewPositionChanged,
+                    onUserInteraction = onUserInteraction
                 )
 
                 FlowRow(
@@ -175,6 +180,7 @@ internal fun VodPlayerControlsOverlay(
                     VodTransportControls(
                         isPlaying = isPlaying,
                         playButtonFocusRequester = playButtonFocusRequester,
+                        timelineFocusRequester = timelineFocusRequester,
                         canSeekPreviousChapter = overlayState.previousChapterTargetMs != null,
                         canSeekNextChapter = overlayState.nextChapterTargetMs != null,
                         onSeekPreviousChapter = onSeekPreviousChapter,
