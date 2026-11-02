@@ -142,9 +142,10 @@ fun DashboardScreen(
             val orderedSections = rememberDashboardSections(uiState)
             val onContinueWatchingItemClick: (PlaybackHistory) -> Unit = { history ->
                 val rawSeriesId = history.seriesId ?: history.contentId
+                // An episode card resumes that episode directly; only a whole-series entry opens the
+                // series page.
                 val presentedSeries = if (
-                    history.contentType == com.streamvault.domain.model.ContentType.SERIES ||
-                    history.contentType == com.streamvault.domain.model.ContentType.SERIES_EPISODE
+                    history.contentType == com.streamvault.domain.model.ContentType.SERIES
                 ) {
                     uiState.continueWatchingSeries.firstOrNull { series ->
                         series.rawSeriesIdsForNavigation().contains(rawSeriesId)

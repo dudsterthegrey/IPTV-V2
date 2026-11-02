@@ -45,6 +45,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -737,8 +739,14 @@ private fun SeriesDetailActions(
     onCast: () -> Unit,
     onToggleFavorite: () -> Unit
 ) {
+    // Start on Resume/Play: otherwise focus falls on "Back to library" and pressing OK leaves the page.
+    val primaryActionFocusRequester = remember { FocusRequester() }
+    LaunchedEffect(primaryActionFocusRequester) {
+        runCatching { primaryActionFocusRequester.requestFocus() }
+    }
     LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
         item { DetailActionButton(
+            modifier = Modifier.focusRequester(primaryActionFocusRequester),
             label = if (hasProgress) {
                 stringResource(
                     R.string.series_detail_resume,

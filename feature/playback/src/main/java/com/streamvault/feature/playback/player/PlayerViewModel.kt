@@ -1694,8 +1694,14 @@ class PlayerViewModel @Inject constructor(
                 var playbackContentId = internalChannelId
                 if (currentContentType == ContentType.SERIES_EPISODE && providerId > 0 && currentSeriesId != null) {
                     val providerType = playerProviderCoordinator.getProvider(providerId)?.type
+                    // Next/previous episode come from the series already loaded here, so an Xtream
+                    // internal URL is current: don't hold playback for a details refresh (it can hit
+                    // the network once the 6-hour cache expires). Stalker links expire, so keep waiting.
+                    val episodeFromLoadedSeries = _currentSeries.value?.seasons?.any { season ->
+                        season.episodes.any { it.id == internalChannelId && it.streamUrl == streamUrl }
+                    } == true
                     val shouldAwaitRefreshedEpisode = providerType == ProviderType.STALKER_PORTAL ||
-                        playerContentResolver.isInternalStreamUrl(streamUrl)
+                        (playerContentResolver.isInternalStreamUrl(streamUrl) && !episodeFromLoadedSeries)
                     if (shouldAwaitRefreshedEpisode) {
                         val resolvedEpisode = loadSeriesEpisodeContext(
                             requestVersion = requestVersion,

@@ -165,6 +165,16 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       whole guide. Now the grid only resets when the first channel changes (new category/filter)
       and identical requests are ignored. Checked on the emulator: 60 rows down to channel 325
       with no reset and no bar.
+- [x] **Continue Watching episode "reloaded Home"** (2026-11-02, Fire TV, 2.0.0): the card opened
+      the show's page with focus on **Back to library**, so pressing OK to resume went straight
+      back to Home. Now an episode card plays that episode (with the Resume / Start Over prompt),
+      and the show's page starts with focus on Resume/Play. Checked on the emulator.
+- [x] **Next episode was slow** (2026-11-02): for Xtream shows the player waited to reload the
+      whole show's details before starting the next episode, which goes to the server once the
+      6-hour cache is stale (Naruto: 488 episodes). It now uses the episode it already has and
+      refreshes in the background (Stalker still waits, its links expire). On the emulator the
+      new stream started 0.45 s after the press; the rest is the provider's server (~3 s to
+      answer) and buffering.
 - [ ] **Old scheduler tests fail on Windows**: 4 tests in `ProviderSyncWorkSchedulerIntegrationTest`
       fail with "unable to open database file" on the original code too (test environment issue).
 
@@ -184,8 +194,14 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - [x] Downloader code **7935478** (short URL aftv.news/7935478, info page aftv.news/7935478+),
       created 2026-10-30 and checked to point at the link above. For later versions, either keep
       the file name and replace the APK (the code keeps working) or edit the code's link.
-- [ ] Install with the code on the Fire TV and log in to the provider (first real test of the
-      minified release build)
+- [x] Install with the code on the Fire TV and log in to the provider (done by the user,
+      2026-11-02, on 2.0.0).
+- To reproduce a release-only bug on the emulator, build `:app:assembleMinifiedQa`: R8-shrunk
+  like release but with the debug app's ID and key, so it installs over the debug build and
+  keeps its provider and history. Reinstall the normal debug build afterwards.
+- Updates: raise `versionCode`, build the release, and copy it over
+  `release/IPTVPlayer-V2-2.0.0.apk` (the Downloader code points at that file name; the name
+  stays 2.0.0, Settings › About shows the real version).
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port

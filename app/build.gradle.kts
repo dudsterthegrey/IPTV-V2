@@ -81,8 +81,8 @@ android {
         applicationId = "com.dgeo.iptvplayer.v2"
         minSdk = 25
         targetSdk = 36
-        versionCode = 1
-        versionName = "2.0.0"
+        versionCode = 2
+        versionName = "2.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TRAKT_CLIENT_ID", buildStringLiteral(traktClientId))
         buildConfigField("String", "TRAKT_REDIRECT_URI", buildStringLiteral(traktRedirectUri))
@@ -184,6 +184,20 @@ android {
             if (keystorePropertiesFile.exists()) {
                 signingConfig = signingConfigs.getByName("release")
             }
+            matchingFallbacks += listOf("release")
+        }
+        create("minifiedQa") {
+            initWith(getByName("release"))
+            // Local only: R8-shrunk exactly like release, but with the debug app's ID and debug key so
+            // it installs over an emulator's debug build and keeps its provider, history and data.
+            // Used to reproduce release-only bugs; install the normal debug build again afterwards.
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-qa"
+            // initWith runs before the release block below, so repeat its R8 settings here.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("debug")
             matchingFallbacks += listOf("release")
         }
         release {
