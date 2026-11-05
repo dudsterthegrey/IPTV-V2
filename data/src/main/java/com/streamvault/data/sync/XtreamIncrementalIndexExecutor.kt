@@ -198,6 +198,7 @@ internal class XtreamIncrementalIndexExecutor(
             var skippedMalformedRows = if (restartIncompleteFailedSweep) 0 else resumeJob?.skippedMalformedRows ?: 0
             var lastError: Throwable? = null
             var priorityHandled = false
+            var skippedKnownBrokenCategory = false
 
             data class CategoryIndexWork(
                 val category: CategoryEntity,
@@ -317,6 +318,7 @@ internal class XtreamIncrementalIndexExecutor(
                             resumeJob.lastError == operations.sanitize(categoryOutcome.error)
                         if (sameFailureAgain) {
                             nextCategoryIndex = requireNotNull(workItem.cursorAfterSuccess)
+                            skippedKnownBrokenCategory = true
                         }
                     }
                 }
@@ -374,7 +376,9 @@ internal class XtreamIncrementalIndexExecutor(
                 lastError = lastError?.let(operations::sanitize)
             )
             operations.updateSummaryMetadata(provider.id, contentType, indexedRows, finalState, finishedAt)
-            if (hasMoreCategories && failedCategories == 0) {
+            // A fresh failure waits for the next scheduled refresh (no retry loop), but once a
+            // known-broken category was skipped the cursor moved on, so keep indexing the rest now.
+            if (hasMoreCategories && (failedCategories == 0 || skippedKnownBrokenCategory)) {
                 operations.scheduleIndex(provider.id, contentType)
             }
             if (!hasMoreCategories && failedCategories > 0) {

@@ -34,8 +34,9 @@ class StreamVaultDatabaseMigrationTest {
             (StreamVaultDatabaseMigrationRegistry.CURRENT_VERSION - 1 downTo 3).toList() + 1
 
         exportedHistoricalVersions.forEach { startVersion ->
-            // Schema v88 was exported with remove_diacritics=2, which only exists in SQLite
-            // 3.27+ (API 30+). A v88 database could never be created on older platforms.
+            // Upstream's schema v88 used remove_diacritics=2 (SQLite 3.27+, API 30+). IPTV Player's
+            // v88 is its own tracked_series schema, but keep the guard in case an upstream export
+            // ends up here.
             if (startVersion == 88 && Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
                 return@forEach
             }
@@ -58,9 +59,9 @@ class StreamVaultDatabaseMigrationTest {
     }
 
     @Test
-    fun migrate89To90_preservesCatalogRowsAndAddsCatchUpMetadataColumns() {
-        val databaseName = "streamvault-migrate-89-90-catchup"
-        val database = migrationTestHelper.createDatabase(databaseName, 89)
+    fun migrate90To91_preservesCatalogRowsAndAddsCatchUpMetadataColumns() {
+        val databaseName = "streamvault-migrate-90-91-catchup"
+        val database = migrationTestHelper.createDatabase(databaseName, 90)
         database.execSQL(
             """
                 INSERT INTO providers (id, name, type, is_active, status, last_synced_at, created_at)
@@ -89,9 +90,9 @@ class StreamVaultDatabaseMigrationTest {
 
         val migrated = migrationTestHelper.runMigrationsAndValidate(
             databaseName,
-            90,
+            91,
             true,
-            StreamVaultDatabase.MIGRATION_89_90
+            StreamVaultDatabase.MIGRATION_90_91
         )
 
         migrated.query("SELECT name FROM providers WHERE id = 901").use { cursor ->

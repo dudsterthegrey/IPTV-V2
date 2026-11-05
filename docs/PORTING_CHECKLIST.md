@@ -178,6 +178,31 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - [ ] **Old scheduler tests fail on Windows**: 4 tests in `ProviderSyncWorkSchedulerIntegrationTest`
       fail with "unable to open database file" on the original code too (test environment issue).
 
+## Upstream StreamVault updates
+
+- [x] **1.2.3 + 1.2.4 fixes and TV features** (2026-11-05, 38 commits cherry-picked with `-x`
+      from `upstream/master`, base was `b777a112`): text size setting, D-pad VOD scrubbing,
+      dropped-VOD retry, live HLS/MPEG-TS stability, guide refresh retries and 2 GiB XMLTV
+      limit, accent-insensitive search, Xtream refresh recovery, Downloads remote fixes and
+      launcher route, backup section selection, EPG sources from a phone (QR), M3U catch-up,
+      subtitle restore after retries, Brazilian sports, hardware-decoder recovery.
+      **Skipped:** Stremio (`3e8c6518`, which also holds upstream's Up Next / Watch Next /
+      episode calendar / notifications), Trakt device sign-in (`d5f1eaaf`), torrent natives
+      (`a3e48562`).
+- Database: V2 already used 88 (tracked shows) and 89 (saved streams), so upstream's FTS
+  rebuild became **89→90** and its M3U catch-up columns **90→91**. Upgrade checked on the
+  emulator with a real v89 database (10,072 channels and history kept).
+- Xtream indexing: upstream stops scheduling more categories after any failure; V2 keeps
+  going once a known-broken category was skipped (imaxiptv has several), otherwise the rest of
+  the catalog would only advance one batch per refresh.
+- To take later upstream releases: `git fetch upstream`, cherry-pick new commits since
+  `bacaae79`, renumber any new upstream migration after V2's current version.
+- [ ] On device: Settings › text size; D-pad left/right scrubs a movie in 10 s steps.
+- Seen once on the emulator: the first launch right after installing the update showed the
+  "Setup Provider" welcome card; a relaunch went to Home with everything intact and a clean
+  replay of the upgrade did not show it. If it appears, press Back or relaunch, don't add the
+  provider again.
+
 ## Release / Downloader
 
 - [x] Release signing (2026-10-29): V1's keystore passwords were lost, so V2 has its own key,
