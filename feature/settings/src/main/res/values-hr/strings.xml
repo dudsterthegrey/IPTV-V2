@@ -977,4 +977,6 @@
     <string name="settings_text_size_default">Zadano (100%)</string>
     <string name="settings_text_size_system">Prema uređaju</string>
     <string name="settings_text_size_custom">Prilagođeno</string>
+    <string name="dashboard_up_next">Sljedeće</string>
+    <string name="dashboard_recent_episodes">Nedavno dodane epizode</string>
 </resources>

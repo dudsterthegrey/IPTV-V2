@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Oletus (100%)</string>
     <string name="settings_text_size_system">Laitteen asetuksen mukaan</string>
     <string name="settings_text_size_custom">Mukautettu</string>
+    <string name="dashboard_up_next">Seuraavaksi</string>
+    <string name="dashboard_recent_episodes">Äskettäin lisätyt jaksot</string>
 </resources>

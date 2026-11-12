@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Lưu</string>
     <string name="saved_streams_delete_title">Xóa luồng?</string>
     <string name="saved_streams_delete_body">“%1$s” sẽ bị xóa khỏi Luồng đã lưu.</string>
+    <string name="dashboard_up_next">Tiếp theo</string>
+    <string name="dashboard_recent_episodes">Tập mới thêm gần đây</string>
+    <string name="dashboard_episode_added_on">%1$s · Đã thêm %2$s</string>
 </resources>

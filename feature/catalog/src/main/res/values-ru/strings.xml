@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Сохранить</string>
     <string name="saved_streams_delete_title">Удалить поток?</string>
     <string name="saved_streams_delete_body">«%1$s» будет удалён из сохранённых потоков.</string>
+    <string name="dashboard_up_next">Далее</string>
+    <string name="dashboard_recent_episodes">Недавно добавленные серии</string>
+    <string name="dashboard_episode_added_on">%1$s · Добавлено %2$s</string>
 </resources>

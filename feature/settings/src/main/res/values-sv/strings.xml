@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Standard (100%)</string>
     <string name="settings_text_size_system">Följ enheten</string>
     <string name="settings_text_size_custom">Anpassad</string>
+    <string name="dashboard_up_next">Härnäst</string>
+    <string name="dashboard_recent_episodes">Nyligen tillagda avsnitt</string>
 </resources>

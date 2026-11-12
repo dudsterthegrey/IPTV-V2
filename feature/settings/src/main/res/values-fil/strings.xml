@@ -974,4 +974,6 @@
     <string name="settings_text_size_default">Karaniwan (100%)</string>
     <string name="settings_text_size_system">Sundin ang mga setting ng aparato</string>
     <string name="settings_text_size_custom">Pasadya</string>
+    <string name="dashboard_up_next">Susunod</string>
+    <string name="dashboard_recent_episodes">Mga bagong idinagdag na episode</string>
 </resources>

@@ -977,4 +977,6 @@
     <string name="settings_text_size_default">Подразумевано (100%)</string>
     <string name="settings_text_size_system">Према уређају</string>
     <string name="settings_text_size_custom">Прилагођено</string>
+    <string name="dashboard_up_next">Следеће</string>
+    <string name="dashboard_recent_episodes">Недавно додате епизоде</string>
 </resources>

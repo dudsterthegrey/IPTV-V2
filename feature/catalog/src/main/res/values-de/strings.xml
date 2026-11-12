@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Speichern</string>
     <string name="saved_streams_delete_title">Stream löschen?</string>
     <string name="saved_streams_delete_body">„%1$s“ wird aus den gespeicherten Streams entfernt.</string>
+    <string name="dashboard_up_next">Als Nächstes</string>
+    <string name="dashboard_recent_episodes">Neu hinzugefügte Folgen</string>
+    <string name="dashboard_episode_added_on">%1$s · Hinzugefügt am %2$s</string>
 </resources>

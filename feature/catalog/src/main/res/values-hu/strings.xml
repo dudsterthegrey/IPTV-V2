@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Mentés</string>
     <string name="saved_streams_delete_title">Törlöd a streamet?</string>
     <string name="saved_streams_delete_body">A(z) „%1$s” törlődik a mentett streamek közül.</string>
+    <string name="dashboard_up_next">Következik</string>
+    <string name="dashboard_recent_episodes">Nemrég hozzáadott epizódok</string>
+    <string name="dashboard_episode_added_on">%1$s · Hozzáadva: %2$s</string>
 </resources>

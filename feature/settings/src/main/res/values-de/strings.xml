@@ -972,4 +972,6 @@
     <string name="settings_text_size_default">Standard (100%)</string>
     <string name="settings_text_size_system">Geräteeinstellung verwenden</string>
     <string name="settings_text_size_custom">Benutzerdefiniert</string>
+    <string name="dashboard_up_next">Als Nächstes</string>
+    <string name="dashboard_recent_episodes">Neu hinzugefügte Folgen</string>
 </resources>

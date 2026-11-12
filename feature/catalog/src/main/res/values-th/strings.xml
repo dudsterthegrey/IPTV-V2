@@ -388,4 +388,7 @@
     <string name="saved_streams_save">บันทึก</string>
     <string name="saved_streams_delete_title">ลบสตรีมไหม</string>
     <string name="saved_streams_delete_body">“%1$s” จะถูกนำออกจากสตรีมที่บันทึกไว้</string>
+    <string name="dashboard_up_next">ถัดไป</string>
+    <string name="dashboard_recent_episodes">ตอนที่เพิ่มล่าสุด</string>
+    <string name="dashboard_episode_added_on">%1$s · เพิ่มเมื่อ %2$s</string>
 </resources>

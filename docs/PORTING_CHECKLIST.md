@@ -198,6 +198,17 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - To take later upstream releases: `git fetch upstream`, cherry-pick new commits since
   `bacaae79`, renumber any new upstream migration after V2's current version.
 - [ ] On device: Settings › text size; D-pad left/right scrubs a movie in 10 s steps.
+- [x] **Up Next and Recently Added Episodes** (2026-11-12, built natively instead of upstream's
+      Stremio-based versions): two Home rows, both on by default and listed in Settings › Home
+      rows. **Up Next**: for each show whose last-watched episode was finished, the next
+      episode (shows still mid-episode stay in Continue Watching). **Recently Added Episodes**:
+      episodes of Tracked Shows, newest first, "S1 E5 · Added Nov 11, 2026". The date is
+      Xtream's `added` field (new `episodes.added_at`, migration 91→92); without it, an episode
+      that appears after the show was first loaded is dated when the app first saw it, and the
+      back catalogue stays undated so it doesn't flood the row. Checked on the emulator with
+      test data (imaxiptv was resetting `get_series_info`, so real `added` dates are unverified).
+- [ ] On device: finish an episode → Up Next shows the next one; track a show and wait for a new
+      episode → it appears in Recently Added Episodes with today's (or the provider's) date.
 - Seen once on the emulator: the first launch right after installing the update showed the
   "Setup Provider" welcome card; a relaunch went to Home with everything intact and a clean
   replay of the upgrade did not show it. If it appears, press Back or relaunch, don't add the

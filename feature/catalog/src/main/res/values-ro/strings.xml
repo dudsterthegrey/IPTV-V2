@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Salvează</string>
     <string name="saved_streams_delete_title">Ștergi fluxul?</string>
     <string name="saved_streams_delete_body">„%1$s” va fi eliminat din fluxurile salvate.</string>
+    <string name="dashboard_up_next">Urmează</string>
+    <string name="dashboard_recent_episodes">Episoade adăugate recent</string>
+    <string name="dashboard_episode_added_on">%1$s · Adăugat %2$s</string>
 </resources>

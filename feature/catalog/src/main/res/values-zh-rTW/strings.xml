@@ -388,4 +388,7 @@
     <string name="saved_streams_save">儲存</string>
     <string name="saved_streams_delete_title">要刪除串流嗎？</string>
     <string name="saved_streams_delete_body">「%1$s」將從已儲存的串流中移除。</string>
+    <string name="dashboard_up_next">接下來</string>
+    <string name="dashboard_recent_episodes">最近新增的集數</string>
+    <string name="dashboard_episode_added_on">%1$s · 新增於 %2$s</string>
 </resources>

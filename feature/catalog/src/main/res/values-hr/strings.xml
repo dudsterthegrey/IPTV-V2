@@ -388,4 +388,7 @@
     <string name="saved_streams_save">Spremi</string>
     <string name="saved_streams_delete_title">Izbrisati stream?</string>
     <string name="saved_streams_delete_body">„%1$s” bit će uklonjen iz spremljenih streamova.</string>
+    <string name="dashboard_up_next">Sljedeće</string>
+    <string name="dashboard_recent_episodes">Nedavno dodane epizode</string>
+    <string name="dashboard_episode_added_on">%1$s · Dodano %2$s</string>
 </resources>

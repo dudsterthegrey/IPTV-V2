@@ -979,4 +979,6 @@
     <string name="settings_text_size_default">Implicită (100%)</string>
     <string name="settings_text_size_system">Conform dispozitivului</string>
     <string name="settings_text_size_custom">Personalizată</string>
+    <string name="dashboard_up_next">Urmează</string>
+    <string name="dashboard_recent_episodes">Episoade adăugate recent</string>
 </resources>

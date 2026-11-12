@@ -15,6 +15,27 @@ data class SeriesRemoteIdMapping(
     @ColumnInfo(name = "remote_id") val remoteId: String
 )
 
+data class EpisodeAddedMapping(
+    @ColumnInfo(name = "id") val id: Long,
+    @ColumnInfo(name = "remote_id") val remoteId: Long,
+    @ColumnInfo(name = "added_at") val addedAt: Long
+)
+
+/** An episode with its show's name and poster, for Home's episode rows. */
+data class EpisodeWithSeriesRow(
+    @Embedded val episode: EpisodeEntity,
+    @ColumnInfo(name = "series_name") val seriesName: String,
+    @ColumnInfo(name = "series_poster_url") val seriesPosterUrl: String?
+)
+
+/** The latest finished episode of a show, from watch history (Up Next's starting point). */
+data class LastFinishedEpisodeRow(
+    @ColumnInfo(name = "series_id") val seriesId: Long,
+    @ColumnInfo(name = "season_number") val seasonNumber: Int,
+    @ColumnInfo(name = "episode_number") val episodeNumber: Int,
+    @ColumnInfo(name = "last_watched_at") val lastWatchedAt: Long
+)
+
 data class TmdbIdMapping(
     @ColumnInfo(name = "tmdb_id") val tmdbId: Long
 )
@@ -2979,6 +3000,61 @@ interface EpisodeDao {
     @Query("SELECT id, episode_id AS remote_id FROM episodes WHERE provider_id = :providerId AND series_id = :seriesId")
     suspend fun getIdMappings(providerId: Long, seriesId: Long): List<RemoteIdMapping>
 
+    @Query("SELECT id, episode_id AS remote_id, added_at FROM episodes WHERE provider_id = :providerId AND series_id = :seriesId")
+    suspend fun getAddedMappings(providerId: Long, seriesId: Long): List<EpisodeAddedMapping>
+
+    /** Newest-added episodes of the provider's tracked shows; episodes with no known date are left out. */
+    @Query(
+        """
+        SELECT e.*, s.name AS series_name, s.poster_url AS series_poster_url
+        FROM episodes e
+        INNER JOIN tracked_series t ON t.provider_id = e.provider_id AND t.series_id = e.series_id
+        INNER JOIN series s ON s.id = e.series_id
+        WHERE e.provider_id = :providerId AND e.added_at > 0
+        ORDER BY e.added_at DESC, e.season_number DESC, e.episode_number DESC
+        LIMIT :limit
+        """
+    )
+    fun observeRecentlyAddedForTrackedSeries(providerId: Long, limit: Int): Flow<List<EpisodeWithSeriesRow>>
+
+    /**
+     * Per show, the most recently watched episode, but only when it was finished; a show whose
+     * latest episode is still in progress belongs in Continue Watching instead.
+     */
+    @Query(
+        """
+        SELECT h.series_id, h.season_number, h.episode_number, h.last_watched_at
+        FROM playback_history h
+        WHERE h.provider_id = :providerId
+          AND h.content_type = 'SERIES_EPISODE'
+          AND h.series_id IS NOT NULL AND h.season_number IS NOT NULL AND h.episode_number IS NOT NULL
+          AND h.watched_status IN ('COMPLETED_AUTO', 'COMPLETED_MANUAL')
+          AND h.last_watched_at = (
+              SELECT MAX(h2.last_watched_at) FROM playback_history h2
+              WHERE h2.provider_id = h.provider_id
+                AND h2.content_type = 'SERIES_EPISODE'
+                AND h2.series_id = h.series_id
+          )
+        ORDER BY h.last_watched_at DESC
+        LIMIT :limit
+        """
+    )
+    fun observeLastFinishedEpisodes(providerId: Long, limit: Int): Flow<List<LastFinishedEpisodeRow>>
+
+    /** The first episode after season [seasonNumber] episode [episodeNumber], in watch order. */
+    @Query(
+        """
+        SELECT e.*, s.name AS series_name, s.poster_url AS series_poster_url
+        FROM episodes e
+        INNER JOIN series s ON s.id = e.series_id
+        WHERE e.series_id = :seriesId
+          AND (e.season_number > :seasonNumber OR (e.season_number = :seasonNumber AND e.episode_number > :episodeNumber))
+        ORDER BY e.season_number ASC, e.episode_number ASC
+        LIMIT 1
+        """
+    )
+    suspend fun getNextEpisode(seriesId: Long, seasonNumber: Int, episodeNumber: Int): EpisodeWithSeriesRow?
+
     @Query(
         """
         UPDATE episodes
@@ -3069,10 +3145,21 @@ interface EpisodeDao {
 
     @Transaction
     suspend fun replaceAll(seriesId: Long, providerId: Long, episodes: List<EpisodeEntity>) {
-        val existingByRemoteId = getIdMappings(providerId, seriesId).associate { it.remoteId to it.id }
+        val existingByRemoteId = getAddedMappings(providerId, seriesId).associateBy { it.remoteId }
+        // Episodes appearing after a show's first load are new; with no provider date, date them now.
+        // On the first load every episode is old, so undated ones stay 0 instead of all looking new.
+        val firstSeenAt = if (existingByRemoteId.isEmpty()) 0L else System.currentTimeMillis()
         val remapped = episodes
             .distinctBy { it.episodeId }
-            .map { entity -> entity.copy(id = existingByRemoteId[entity.episodeId] ?: 0L) }
+            .map { entity ->
+                val existing = existingByRemoteId[entity.episodeId]
+                entity.copy(
+                    id = existing?.id ?: 0L,
+                    addedAt = entity.addedAt.takeIf { it > 0L }
+                        ?: existing?.addedAt
+                        ?: firstSeenAt
+                )
+            }
         deleteBySeries(seriesId)
         insertAll(remapped)
         restoreWatchProgress(seriesId)

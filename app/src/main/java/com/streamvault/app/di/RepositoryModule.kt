@@ -97,6 +97,9 @@ abstract class RepositoryModule {
     abstract fun bindTrackedSeriesRepository(impl: TrackedSeriesRepositoryImpl): TrackedSeriesRepository
 
     @Binds @Singleton
+    abstract fun bindEpisodeShelfRepository(impl: EpisodeShelfRepositoryImpl): EpisodeShelfRepository
+
+    @Binds @Singleton
     abstract fun bindSavedStreamRepository(impl: SavedStreamRepositoryImpl): SavedStreamRepository
 
     @Binds @Singleton

@@ -980,4 +980,6 @@
     <string name="settings_text_size_default">Predvolená (100%)</string>
     <string name="settings_text_size_system">Podľa zariadenia</string>
     <string name="settings_text_size_custom">Vlastná</string>
+    <string name="dashboard_up_next">Ďalej</string>
+    <string name="dashboard_recent_episodes">Nedávno pridané diely</string>
 </resources>

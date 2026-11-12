@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Salvar</string>
     <string name="saved_streams_delete_title">Excluir stream?</string>
     <string name="saved_streams_delete_body">“%1$s” será removido dos streams salvos.</string>
+    <string name="dashboard_up_next">A seguir</string>
+    <string name="dashboard_recent_episodes">Episódios adicionados recentemente</string>
+    <string name="dashboard_episode_added_on">%1$s · Adicionado em %2$s</string>
 </resources>

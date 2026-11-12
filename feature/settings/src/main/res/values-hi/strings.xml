@@ -974,4 +974,6 @@
     <string name="settings_text_size_default">डिफ़ॉल्ट (100%)</string>
     <string name="settings_text_size_system">डिवाइस की सेटिंग के अनुसार</string>
     <string name="settings_text_size_custom">कस्टम</string>
+    <string name="dashboard_up_next">आगे</string>
+    <string name="dashboard_recent_episodes">हाल में जोड़े गए एपिसोड</string>
 </resources>

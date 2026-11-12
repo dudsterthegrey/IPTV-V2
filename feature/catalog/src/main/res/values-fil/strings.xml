@@ -388,4 +388,7 @@
     <string name="saved_streams_save">I-save</string>
     <string name="saved_streams_delete_title">I-delete ang stream?</string>
     <string name="saved_streams_delete_body">Aalisin ang “%1$s” sa Mga Naka-save na Stream.</string>
+    <string name="dashboard_up_next">Susunod</string>
+    <string name="dashboard_recent_episodes">Mga bagong idinagdag na episode</string>
+    <string name="dashboard_episode_added_on">%1$s · Idinagdag %2$s</string>
 </resources>

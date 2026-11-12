@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Varsayılan (100%)</string>
     <string name="settings_text_size_system">Cihaz ayarını kullan</string>
     <string name="settings_text_size_custom">Özel</string>
+    <string name="dashboard_up_next">Sıradaki</string>
+    <string name="dashboard_recent_episodes">Yeni eklenen bölümler</string>
 </resources>

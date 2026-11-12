@@ -340,7 +340,8 @@ fun EpisodeEntity.toDomain() = Episode(
     lastWatchedAt = lastWatchedAt,
     isAdult = isAdult,
     isUserProtected = isUserProtected,
-    episodeId = episodeId
+    episodeId = episodeId,
+    addedAt = addedAt
 )
 
 fun EpisodeBrowseEntity.toDomain() = Episode(
@@ -384,7 +385,8 @@ fun Episode.toEntity() = EpisodeEntity(
     watchProgress = watchProgress,
     lastWatchedAt = lastWatchedAt,
     isAdult = isAdult,
-    isUserProtected = isUserProtected
+    isUserProtected = isUserProtected,
+    addedAt = addedAt
 )
 
 // ── Category ───────────────────────────────────────────────────────

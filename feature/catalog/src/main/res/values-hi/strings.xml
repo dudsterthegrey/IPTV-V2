@@ -388,4 +388,7 @@
     <string name="saved_streams_save">सहेजें</string>
     <string name="saved_streams_delete_title">स्ट्रीम हटाएँ?</string>
     <string name="saved_streams_delete_body">“%1$s” को सहेजी गई स्ट्रीम से हटा दिया जाएगा।</string>
+    <string name="dashboard_up_next">आगे</string>
+    <string name="dashboard_recent_episodes">हाल में जोड़े गए एपिसोड</string>
+    <string name="dashboard_episode_added_on">%1$s · %2$s को जोड़ा गया</string>
 </resources>

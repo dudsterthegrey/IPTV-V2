@@ -479,7 +479,8 @@ class XtreamProvider(
                         ),
                         isAdult = isAdult,
                         isUserProtected = false,
-                        episodeId = episodeId
+                        episodeId = episodeId,
+                        addedAt = parseXtreamAddedMillis(ep.added)
                     )
                 }
                 val seasonMetadata = seasonMetadataByNumber[resolvedSeasonNumber]
@@ -1390,3 +1391,9 @@ private val XTREAM_BASE64_REGEX = Regex("^[A-Za-z0-9+/]+={0,2}$")
 private const val XTREAM_DECODED_TEXT_MIN_READABLE_RATIO = 0.85
 private const val XTREAM_DECODED_TEXT_MIN_ALNUM_COUNT = 3
 private val XTREAM_READABLE_TEXT_PUNCTUATION = setOf('\'', '"', '-', '_', '.', '?', '!', '&', ':', '’', ',', ';', '(', ')', '[', ']', '/', '\\')
+
+/** Xtream `added` is epoch seconds as a string; some panels send milliseconds. 0 when absent or invalid. */
+internal fun parseXtreamAddedMillis(added: String?): Long {
+    val value = added?.trim()?.toLongOrNull()?.takeIf { it > 0L } ?: return 0L
+    return if (value < 100_000_000_000L) value * 1000L else value
+}

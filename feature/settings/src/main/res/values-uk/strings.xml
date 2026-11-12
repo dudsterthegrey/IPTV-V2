@@ -982,4 +982,6 @@
     <string name="settings_text_size_default">Типовий (100%)</string>
     <string name="settings_text_size_system">Як на пристрої</string>
     <string name="settings_text_size_custom">Власний розмір</string>
+    <string name="dashboard_up_next">Далі</string>
+    <string name="dashboard_recent_episodes">Нещодавно додані серії</string>
 </resources>

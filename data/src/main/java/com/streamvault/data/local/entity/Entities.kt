@@ -576,7 +576,9 @@ data class EpisodeEntity(
     @ColumnInfo(name = "watch_progress") val watchProgress: Long = 0L,
     @ColumnInfo(name = "last_watched_at") val lastWatchedAt: Long = 0L,
     @ColumnInfo(name = "is_adult") val isAdult: Boolean = false,
-    @ColumnInfo(name = "is_user_protected") val isUserProtected: Boolean = false
+    @ColumnInfo(name = "is_user_protected") val isUserProtected: Boolean = false,
+    /** When the provider added the episode (Xtream `added`), or when IPTV Player first saw it; 0 = unknown. */
+    @ColumnInfo(name = "added_at", defaultValue = "0") val addedAt: Long = 0L
 )
 
 data class EpisodeBrowseEntity(

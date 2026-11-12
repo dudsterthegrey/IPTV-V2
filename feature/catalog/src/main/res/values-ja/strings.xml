@@ -402,4 +402,7 @@
     <string name="saved_streams_save">保存</string>
     <string name="saved_streams_delete_title">ストリームを削除しますか？</string>
     <string name="saved_streams_delete_body">「%1$s」を保存したストリームから削除します。</string>
+    <string name="dashboard_up_next">次に再生</string>
+    <string name="dashboard_recent_episodes">最近追加されたエピソード</string>
+    <string name="dashboard_episode_added_on">%1$s · %2$sに追加</string>
 </resources>

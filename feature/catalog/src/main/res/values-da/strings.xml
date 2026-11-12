@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Gem</string>
     <string name="saved_streams_delete_title">Slet stream?</string>
     <string name="saved_streams_delete_body">“%1$s” fjernes fra Gemte streams.</string>
+    <string name="dashboard_up_next">Næste</string>
+    <string name="dashboard_recent_episodes">Nyligt tilføjede afsnit</string>
+    <string name="dashboard_episode_added_on">%1$s · Tilføjet %2$s</string>
 </resources>

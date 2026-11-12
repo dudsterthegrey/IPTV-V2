@@ -974,4 +974,6 @@
     <string name="settings_text_size_default">پیش‌فرض (100%)</string>
     <string name="settings_text_size_system">پیروی از تنظیمات دستگاه</string>
     <string name="settings_text_size_custom">سفارشی</string>
+    <string name="dashboard_up_next">بعدی</string>
+    <string name="dashboard_recent_episodes">قسمت‌های تازه اضافه‌شده</string>
 </resources>

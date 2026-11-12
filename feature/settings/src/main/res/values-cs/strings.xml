@@ -982,4 +982,6 @@
     <string name="settings_text_size_default">Výchozí (100%)</string>
     <string name="settings_text_size_system">Podle zařízení</string>
     <string name="settings_text_size_custom">Vlastní</string>
+    <string name="dashboard_up_next">Další na řadě</string>
+    <string name="dashboard_recent_episodes">Nedávno přidané díly</string>
 </resources>

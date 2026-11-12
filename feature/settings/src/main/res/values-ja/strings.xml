@@ -974,4 +974,6 @@
     <string name="settings_text_size_default">標準（100%）</string>
     <string name="settings_text_size_system">端末の設定に従う</string>
     <string name="settings_text_size_custom">カスタム</string>
+    <string name="dashboard_up_next">次に再生</string>
+    <string name="dashboard_recent_episodes">最近追加されたエピソード</string>
 </resources>

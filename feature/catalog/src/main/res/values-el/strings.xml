@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Αποθήκευση</string>
     <string name="saved_streams_delete_title">Διαγραφή ροής;</string>
     <string name="saved_streams_delete_body">Το «%1$s» θα αφαιρεθεί από τις αποθηκευμένες ροές.</string>
+    <string name="dashboard_up_next">Επόμενο</string>
+    <string name="dashboard_recent_episodes">Πρόσφατα επεισόδια</string>
+    <string name="dashboard_episode_added_on">%1$s · Προστέθηκε %2$s</string>
 </resources>

@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Enregistrer</string>
     <string name="saved_streams_delete_title">Supprimer le flux ?</string>
     <string name="saved_streams_delete_body">« %1$s » sera retiré des flux enregistrés.</string>
+    <string name="dashboard_up_next">À suivre</string>
+    <string name="dashboard_recent_episodes">Épisodes récemment ajoutés</string>
+    <string name="dashboard_episode_added_on">%1$s · Ajouté le %2$s</string>
 </resources>

@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Lagre</string>
     <string name="saved_streams_delete_title">Slette strømmen?</string>
     <string name="saved_streams_delete_body">«%1$s» fjernes fra Lagrede strømmer.</string>
+    <string name="dashboard_up_next">Neste</string>
+    <string name="dashboard_recent_episodes">Nylig lagt til episoder</string>
+    <string name="dashboard_episode_added_on">%1$s · Lagt til %2$s</string>
 </resources>

@@ -77,7 +77,9 @@ data class Episode(
     val lastWatchedAt: Long = 0L,
     val isAdult: Boolean = false,
     val isUserProtected: Boolean = false,
-    val episodeId: Long = 0L
+    val episodeId: Long = 0L,
+    /** Epoch millis the episode was added (provider date or first seen); 0 when unknown. */
+    val addedAt: Long = 0L
 ) {
     init {
         require(episodeNumber >= 0) { "episodeNumber must be non-negative" }

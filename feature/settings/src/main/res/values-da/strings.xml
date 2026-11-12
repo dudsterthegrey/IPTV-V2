@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Standard (100%)</string>
     <string name="settings_text_size_system">Følg enheden</string>
     <string name="settings_text_size_custom">Brugerdefineret</string>
+    <string name="dashboard_up_next">Næste</string>
+    <string name="dashboard_recent_episodes">Nyligt tilføjede afsnit</string>
 </resources>

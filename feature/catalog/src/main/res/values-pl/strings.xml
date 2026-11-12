@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Zapisz</string>
     <string name="saved_streams_delete_title">Usunąć strumień?</string>
     <string name="saved_streams_delete_body">„%1$s” zostanie usunięty z zapisanych strumieni.</string>
+    <string name="dashboard_up_next">Następny</string>
+    <string name="dashboard_recent_episodes">Ostatnio dodane odcinki</string>
+    <string name="dashboard_episode_added_on">%1$s · Dodano %2$s</string>
 </resources>

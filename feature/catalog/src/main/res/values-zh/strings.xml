@@ -402,4 +402,7 @@
     <string name="saved_streams_save">保存</string>
     <string name="saved_streams_delete_title">删除直播流？</string>
     <string name="saved_streams_delete_body">“%1$s”将从已保存的直播流中移除。</string>
+    <string name="dashboard_up_next">接下来</string>
+    <string name="dashboard_recent_episodes">最近添加的剧集</string>
+    <string name="dashboard_episode_added_on">%1$s · 添加于 %2$s</string>
 </resources>

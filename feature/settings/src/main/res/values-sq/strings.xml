@@ -974,4 +974,6 @@
     <string name="settings_text_size_default">Parazgjedhja (100%)</string>
     <string name="settings_text_size_system">Sipas pajisjes</string>
     <string name="settings_text_size_custom">E personalizuar</string>
+    <string name="dashboard_up_next">Në vijim</string>
+    <string name="dashboard_recent_episodes">Episode të shtuara së fundi</string>
 </resources>

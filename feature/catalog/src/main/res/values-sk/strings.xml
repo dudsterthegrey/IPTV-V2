@@ -388,4 +388,7 @@
     <string name="saved_streams_save">Uložiť</string>
     <string name="saved_streams_delete_title">Odstrániť stream?</string>
     <string name="saved_streams_delete_body">„%1$s“ sa odstráni z uložených streamov.</string>
+    <string name="dashboard_up_next">Ďalej</string>
+    <string name="dashboard_recent_episodes">Nedávno pridané diely</string>
+    <string name="dashboard_episode_added_on">%1$s · Pridané %2$s</string>
 </resources>

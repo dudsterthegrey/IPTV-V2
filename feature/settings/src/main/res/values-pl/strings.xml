@@ -982,4 +982,6 @@
     <string name="settings_text_size_default">Domyślny (100%)</string>
     <string name="settings_text_size_system">Zgodnie z urządzeniem</string>
     <string name="settings_text_size_custom">Niestandardowy</string>
+    <string name="dashboard_up_next">Następny</string>
+    <string name="dashboard_recent_episodes">Ostatnio dodane odcinki</string>
 </resources>

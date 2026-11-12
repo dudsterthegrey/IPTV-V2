@@ -26,6 +26,8 @@ import com.streamvault.domain.repository.ChannelRepository
 import com.streamvault.domain.repository.CombinedM3uRepository
 import com.streamvault.domain.repository.FavoriteRepository
 import com.streamvault.domain.repository.TrackedSeriesRepository
+import com.streamvault.domain.repository.EpisodeShelfRepository
+import com.streamvault.domain.model.EpisodeShelfItem
 import com.streamvault.domain.repository.MovieRepository
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
@@ -82,7 +84,8 @@ class DashboardViewModel @Inject constructor(
     private val recordingManager: RecordingManager,
     private val traktAccount: TraktAccount,
     private val traktWatchlist: TraktWatchlist,
-    private val trackedSeriesRepository: TrackedSeriesRepository
+    private val trackedSeriesRepository: TrackedSeriesRepository,
+    private val episodeShelfRepository: EpisodeShelfRepository
 ) : ViewModel() {
     private companion object {
         const val FAVORITE_CHANNEL_LIMIT = 12
@@ -90,6 +93,7 @@ class DashboardViewModel @Inject constructor(
         const val CONTINUE_WATCHING_LIMIT = 12
         const val MOVIE_SHELF_LIMIT = 12
         const val SERIES_SHELF_LIMIT = 12
+        const val EPISODE_SHELF_LIMIT = 12
         const val HOME_SHORTCUT_LIMIT = 4
     }
 
@@ -377,6 +381,12 @@ class DashboardViewModel @Inject constructor(
             .combine(observeTrackedSeries(provider.id).onStart { emit(emptyList()) }) { shelves, trackedSeries ->
                 shelves.copy(trackedSeries = trackedSeries)
             }
+            .combine(observeUpNext(provider.id).onStart { emit(emptyList()) }) { shelves, upNext ->
+                shelves.copy(upNext = upNext)
+            }
+            .combine(observeRecentEpisodes(provider.id).onStart { emit(emptyList()) }) { shelves, recentEpisodes ->
+                shelves.copy(recentEpisodes = recentEpisodes)
+            }
             .combine(topRatedMovieShelf.onStart { emit(emptyList()) }) { shelves, topRatedMovies ->
                 shelves.copy(topRatedMovies = topRatedMovies)
             }
@@ -447,6 +457,8 @@ class DashboardViewModel @Inject constructor(
                 favoriteMovies = snapshot.shelves.favoriteMovies,
                 favoriteSeries = snapshot.shelves.favoriteSeries,
                 trackedSeries = snapshot.shelves.trackedSeries,
+                upNext = snapshot.shelves.upNext,
+                recentEpisodes = snapshot.shelves.recentEpisodes,
                 traktWatchlistMovies = snapshot.shelves.traktWatchlistMovies,
                 traktWatchlistSeries = snapshot.shelves.traktWatchlistSeries,
                 recentMovies = snapshot.shelves.recentMovies,
@@ -530,6 +542,18 @@ class DashboardViewModel @Inject constructor(
             .flatMapLatest(::loadSeriesByOrderedIds)
             .combine(preferencesRepository.parentalControlLevel) { series, level ->
                 series.filter { !shouldHideVodFromHome(it, level) }
+            }
+
+    private fun observeUpNext(providerId: Long): Flow<List<EpisodeShelfItem>> =
+        episodeShelfRepository.observeUpNext(providerId, EPISODE_SHELF_LIMIT)
+            .combine(preferencesRepository.parentalControlLevel) { items, level ->
+                items.filterNot { shouldHideEpisodeFromHome(it, level) }
+            }
+
+    private fun observeRecentEpisodes(providerId: Long): Flow<List<EpisodeShelfItem>> =
+        episodeShelfRepository.observeRecentlyAddedForTrackedSeries(providerId, EPISODE_SHELF_LIMIT)
+            .combine(preferencesRepository.parentalControlLevel) { items, level ->
+                items.filterNot { shouldHideEpisodeFromHome(it, level) }
             }
 
     private fun observeFavoriteSeries(providerIds: List<Long>): Flow<List<Series>> =
@@ -891,6 +915,12 @@ class DashboardViewModel @Inject constructor(
         return titleLooksExplicit(series.name)
     }
 
+    private fun shouldHideEpisodeFromHome(item: EpisodeShelfItem, level: Int): Boolean {
+        if (AdultContentVisibilityPolicy.showInAggregatedSurfaces(level)) return false
+        if (item.episode.isAdult || item.episode.isUserProtected) return true
+        return titleLooksExplicit(item.seriesName)
+    }
+
     private fun shouldHideVodCategoryFromHome(category: Category, level: Int): Boolean =
         !AdultContentVisibilityPolicy.showInAggregatedSurfaces(level) &&
             (category.isAdult || category.isUserProtected)
@@ -970,6 +1000,8 @@ private data class DashboardContentShelves(
     val favoriteMovies: List<Movie> = emptyList(),
     val favoriteSeries: List<Series> = emptyList(),
     val trackedSeries: List<Series> = emptyList(),
+    val upNext: List<EpisodeShelfItem> = emptyList(),
+    val recentEpisodes: List<EpisodeShelfItem> = emptyList(),
     val traktWatchlistMovies: List<Movie> = emptyList(),
     val traktWatchlistSeries: List<Series> = emptyList(),
     val recentMovies: List<Movie>,
@@ -1005,6 +1037,8 @@ data class DashboardUiState(
     val favoriteMovies: List<Movie> = emptyList(),
     val favoriteSeries: List<Series> = emptyList(),
     val trackedSeries: List<Series> = emptyList(),
+    val upNext: List<EpisodeShelfItem> = emptyList(),
+    val recentEpisodes: List<EpisodeShelfItem> = emptyList(),
     val traktWatchlistMovies: List<Movie> = emptyList(),
     val traktWatchlistSeries: List<Series> = emptyList(),
     val recentMovies: List<Movie> = emptyList(),

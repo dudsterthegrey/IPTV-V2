@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Par défaut (100%)</string>
     <string name="settings_text_size_system">Suivre les réglages de l’appareil</string>
     <string name="settings_text_size_custom">Personnalisée</string>
+    <string name="dashboard_up_next">À suivre</string>
+    <string name="dashboard_recent_episodes">Épisodes récemment ajoutés</string>
 </resources>

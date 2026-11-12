@@ -388,4 +388,7 @@
     <string name="saved_streams_save">Simpan</string>
     <string name="saved_streams_delete_title">Padam strim?</string>
     <string name="saved_streams_delete_body">“%1$s” akan dialih keluar daripada Strim Disimpan.</string>
+    <string name="dashboard_up_next">Seterusnya</string>
+    <string name="dashboard_recent_episodes">Episod yang baru ditambah</string>
+    <string name="dashboard_episode_added_on">%1$s · Ditambah %2$s</string>
 </resources>

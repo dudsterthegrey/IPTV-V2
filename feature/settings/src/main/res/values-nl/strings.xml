@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Standaard (100%)</string>
     <string name="settings_text_size_system">Apparaatinstelling volgen</string>
     <string name="settings_text_size_custom">Aangepast</string>
+    <string name="dashboard_up_next">Volgende</string>
+    <string name="dashboard_recent_episodes">Recent toegevoegde afleveringen</string>
 </resources>

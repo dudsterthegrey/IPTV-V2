@@ -971,4 +971,6 @@
     <string name="settings_text_size_default">Lalai (100%)</string>
     <string name="settings_text_size_system">Ikut peranti</string>
     <string name="settings_text_size_custom">Tersuai</string>
+    <string name="dashboard_up_next">Seterusnya</string>
+    <string name="dashboard_recent_episodes">Episod yang baru ditambah</string>
 </resources>

@@ -437,4 +437,7 @@
     <string name="saved_streams_save">Save</string>
     <string name="saved_streams_delete_title">Delete stream?</string>
     <string name="saved_streams_delete_body">“%1$s” will be removed from Saved Streams.</string>
+    <string name="dashboard_up_next">Up Next</string>
+    <string name="dashboard_recent_episodes">Recently Added Episodes</string>
+    <string name="dashboard_episode_added_on">%1$s · Added %2$s</string>
 </resources>

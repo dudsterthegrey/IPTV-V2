@@ -402,4 +402,7 @@
     <string name="saved_streams_save">حفظ</string>
     <string name="saved_streams_delete_title">حذف البث؟</string>
     <string name="saved_streams_delete_body">ستتم إزالة «%1$s» من البث المحفوظ.</string>
+    <string name="dashboard_up_next">التالي</string>
+    <string name="dashboard_recent_episodes">حلقات أضيفت مؤخرًا</string>
+    <string name="dashboard_episode_added_on">%1$s · أضيفت %2$s</string>
 </resources>

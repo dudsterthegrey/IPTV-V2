@@ -12,7 +12,9 @@ class AppHomeDashboardShelfTest {
             AppHomeDashboardShelf.RECENT_CHANNELS,
             AppHomeDashboardShelf.LIVE_SHORTCUTS,
             AppHomeDashboardShelf.CONTINUE_WATCHING,
+            AppHomeDashboardShelf.UP_NEXT,
             AppHomeDashboardShelf.TRACKED_SERIES,
+            AppHomeDashboardShelf.RECENT_EPISODES,
             AppHomeDashboardShelf.PINNED_CATEGORIES,
             AppHomeDashboardShelf.RECENT_MOVIES,
             AppHomeDashboardShelf.RECENT_SERIES

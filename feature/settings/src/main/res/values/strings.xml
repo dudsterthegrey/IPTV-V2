@@ -1051,4 +1051,6 @@
     <string name="settings_text_size_default">Default (100%)</string>
     <string name="settings_text_size_system">Follow device</string>
     <string name="settings_text_size_custom">Custom</string>
+    <string name="dashboard_up_next">Up Next</string>
+    <string name="dashboard_recent_episodes">Recently Added Episodes</string>
 </resources>

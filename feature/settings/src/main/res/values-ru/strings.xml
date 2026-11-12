@@ -982,4 +982,6 @@
     <string name="settings_text_size_default">По умолчанию (100%)</string>
     <string name="settings_text_size_system">Как на устройстве</string>
     <string name="settings_text_size_custom">Свой размер</string>
+    <string name="dashboard_up_next">Далее</string>
+    <string name="dashboard_recent_episodes">Недавно добавленные серии</string>
 </resources>

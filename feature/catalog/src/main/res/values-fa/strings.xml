@@ -388,4 +388,7 @@
     <string name="saved_streams_save">ذخیره</string>
     <string name="saved_streams_delete_title">استریم حذف شود؟</string>
     <string name="saved_streams_delete_body">«%1$s» از استریم‌های ذخیره‌شده حذف می‌شود.</string>
+    <string name="dashboard_up_next">بعدی</string>
+    <string name="dashboard_recent_episodes">قسمت‌های تازه اضافه‌شده</string>
+    <string name="dashboard_episode_added_on">%1$s · اضافه‌شده در %2$s</string>
 </resources>

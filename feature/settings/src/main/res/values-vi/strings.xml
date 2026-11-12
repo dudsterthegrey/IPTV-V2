@@ -973,4 +973,6 @@
     <string name="settings_text_size_default">Mặc định (100%)</string>
     <string name="settings_text_size_system">Theo thiết bị</string>
     <string name="settings_text_size_custom">Tùy chỉnh</string>
+    <string name="dashboard_up_next">Tiếp theo</string>
+    <string name="dashboard_recent_episodes">Tập mới thêm gần đây</string>
 </resources>

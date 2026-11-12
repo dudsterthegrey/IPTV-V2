@@ -59,6 +59,8 @@ import com.streamvault.feature.catalog.presentation.components.CatalogChannelPro
 import com.streamvault.feature.catalog.presentation.components.CategoryRow
 import com.streamvault.feature.catalog.presentation.components.ChannelCard
 import com.streamvault.feature.catalog.presentation.components.ContinueWatchingRow
+import com.streamvault.feature.catalog.presentation.components.EpisodeShelfRow
+import com.streamvault.feature.catalog.presentation.components.toPlaybackHistory
 import com.streamvault.feature.catalog.presentation.components.MovieCard
 import com.streamvault.core.ui.image.rememberCrossfadeImageModel
 import com.streamvault.feature.catalog.presentation.components.SeriesCard
@@ -237,6 +239,20 @@ fun DashboardScreen(
                     AppHomeDashboardShelf.CONTINUE_WATCHING -> ContinueWatchingRow(
                         items = uiState.continueWatching,
                         onItemClick = onContinueWatchingItemClick
+                    )
+
+                    AppHomeDashboardShelf.UP_NEXT -> EpisodeShelfRow(
+                        title = stringResource(R.string.dashboard_up_next),
+                        items = uiState.upNext,
+                        showAddedDate = false,
+                        onItemClick = { item -> onPlaybackHistoryClick(item.toPlaybackHistory()) }
+                    )
+
+                    AppHomeDashboardShelf.RECENT_EPISODES -> EpisodeShelfRow(
+                        title = stringResource(R.string.dashboard_recent_episodes),
+                        items = uiState.recentEpisodes,
+                        showAddedDate = true,
+                        onItemClick = { item -> onPlaybackHistoryClick(item.toPlaybackHistory()) }
                     )
 
                     AppHomeDashboardShelf.PINNED_CATEGORIES -> PinnedCategoriesSection(
@@ -977,6 +993,9 @@ private fun rememberDashboardSections(
         uiState.continueWatching,
         uiState.continueWatchingMovies,
         uiState.continueWatchingSeriesItems,
+        uiState.upNext,
+        uiState.trackedSeries,
+        uiState.recentEpisodes,
         uiState.favoriteMovies,
         uiState.favoriteSeries,
         uiState.traktWatchlistMovies,

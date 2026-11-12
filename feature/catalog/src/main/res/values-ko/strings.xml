@@ -402,4 +402,7 @@
     <string name="saved_streams_save">저장</string>
     <string name="saved_streams_delete_title">스트림을 삭제할까요?</string>
     <string name="saved_streams_delete_body">“%1$s”이(가) 저장된 스트림에서 삭제됩니다.</string>
+    <string name="dashboard_up_next">다음 화</string>
+    <string name="dashboard_recent_episodes">최근 추가된 에피소드</string>
+    <string name="dashboard_episode_added_on">%1$s · %2$s 추가됨</string>
 </resources>

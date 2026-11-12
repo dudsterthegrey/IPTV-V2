@@ -402,4 +402,7 @@
     <string name="saved_streams_save">Spara</string>
     <string name="saved_streams_delete_title">Ta bort strömmen?</string>
     <string name="saved_streams_delete_body">”%1$s” tas bort från Sparade strömmar.</string>
+    <string name="dashboard_up_next">Härnäst</string>
+    <string name="dashboard_recent_episodes">Nyligen tillagda avsnitt</string>
+    <string name="dashboard_episode_added_on">%1$s · Tillagt %2$s</string>
 </resources>

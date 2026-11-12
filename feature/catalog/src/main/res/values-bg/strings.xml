@@ -388,4 +388,7 @@
     <string name="saved_streams_save">Запазване</string>
     <string name="saved_streams_delete_title">Да се изтрие ли потокът?</string>
     <string name="saved_streams_delete_body">„%1$s“ ще бъде премахнат от запазените потоци.</string>
+    <string name="dashboard_up_next">Следва</string>
+    <string name="dashboard_recent_episodes">Наскоро добавени епизоди</string>
+    <string name="dashboard_episode_added_on">%1$s · Добавен %2$s</string>
 </resources>

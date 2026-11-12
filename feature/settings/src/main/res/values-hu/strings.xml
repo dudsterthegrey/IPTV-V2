@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Alapértelmezett (100%)</string>
     <string name="settings_text_size_system">Eszközbeállítás követése</string>
     <string name="settings_text_size_custom">Egyéni</string>
+    <string name="dashboard_up_next">Következik</string>
+    <string name="dashboard_recent_episodes">Nemrég hozzáadott epizódok</string>
 </resources>

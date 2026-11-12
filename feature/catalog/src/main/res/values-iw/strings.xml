@@ -402,4 +402,7 @@
     <string name="saved_streams_save">שמירה</string>
     <string name="saved_streams_delete_title">למחוק את השידור?</string>
     <string name="saved_streams_delete_body">„%1$s” יוסר מהשידורים השמורים.</string>
+    <string name="dashboard_up_next">הבא בתור</string>
+    <string name="dashboard_recent_episodes">פרקים שנוספו לאחרונה</string>
+    <string name="dashboard_episode_added_on">%1$s · נוסף ב-%2$s</string>
 </resources>

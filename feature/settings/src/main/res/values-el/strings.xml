@@ -976,4 +976,6 @@
     <string name="settings_text_size_default">Προεπιλογή (100%)</string>
     <string name="settings_text_size_system">Σύμφωνα με τη συσκευή</string>
     <string name="settings_text_size_custom">Προσαρμοσμένο</string>
+    <string name="dashboard_up_next">Επόμενο</string>
+    <string name="dashboard_recent_episodes">Πρόσφατα επεισόδια</string>
 </resources>

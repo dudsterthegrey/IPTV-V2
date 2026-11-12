@@ -974,4 +974,6 @@
     <string name="settings_text_size_default">Стандардно (100%)</string>
     <string name="settings_text_size_system">Според уредот</string>
     <string name="settings_text_size_custom">Приспособено</string>
+    <string name="dashboard_up_next">Следно</string>
+    <string name="dashboard_recent_episodes">Неодамна додадени епизоди</string>
 </resources>
