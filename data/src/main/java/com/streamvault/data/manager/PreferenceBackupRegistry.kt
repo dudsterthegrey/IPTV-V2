@@ -60,6 +60,8 @@ internal object PreferenceBackupRegistry {
     )
     private val deviceBoundStorageKeys = setOf(
         "download_tree_uri",
+        // Depends on this TV's speakers.
+        "player_volume_boost_db",
     )
     private val runtimeStorageKeys = setOf(
         "parental_v2_migrated", "parental_pin", "live_variant_observations", "vod_variant_observations",
@@ -87,7 +89,9 @@ internal object PreferenceBackupRegistry {
     private val runtimeStoragePrefixes = setOf(
         "xtream_text_import_applied_generation_", "last_live_category_id_",
         "last_split_catalog_type_", "aspect_ratio_", "guide_empty_keys_v1_", "automatic_sync_status_",
-        "sports_event_channel_pick_", "catalog_sync_engine_", "catalog_sync_upgrade_started_"
+        "sports_event_channel_pick_", "catalog_sync_engine_", "catalog_sync_upgrade_started_",
+        // Keyed by local series ids, which differ after a restore.
+        "series_intro_end_ms_"
     )
 
     private val providerKeys = setOf(

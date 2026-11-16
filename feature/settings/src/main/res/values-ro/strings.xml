@@ -986,4 +986,27 @@
     <string name="settings_volume_boost">Amplificare volum</string>
     <string name="settings_volume_boost_off">Dezactivat</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Genuri</string>
+    <string name="dashboard_top_ten">Top 10 azi</string>
+    <string name="settings_cloud_sync_title">Sincronizare între dispozitive</string>
+    <string name="settings_cloud_sync_not_configured">Neconfigurat în această versiune</string>
+    <string name="settings_cloud_sync_off">Dezactivat</string>
+    <string name="settings_cloud_sync_on">Activat</string>
+    <string name="settings_cloud_sync_on_since">Activat · ultima dată %1$s</string>
+    <string name="settings_cloud_sync_create">Creează un cod</string>
+    <string name="settings_cloud_sync_create_value">Pornește sincronizarea pe acest dispozitiv</string>
+    <string name="settings_cloud_sync_join">Introdu codul</string>
+    <string name="settings_cloud_sync_join_value">Folosește un cod de pe alt dispozitiv</string>
+    <string name="settings_cloud_sync_join_hint">Tastează codul afișat pe celălalt dispozitiv în Setări › Backup.</string>
+    <string name="settings_cloud_sync_join_confirm">Alătură-te</string>
+    <string name="settings_cloud_sync_cancel">Anulează</string>
+    <string name="settings_cloud_sync_code">Cod de sincronizare</string>
+    <string name="settings_cloud_sync_now">Sincronizează acum</string>
+    <string name="settings_cloud_sync_now_value">Trimite și preia progresul</string>
+    <string name="settings_cloud_sync_syncing">Se sincronizează…</string>
+    <string name="settings_cloud_sync_leave">Oprește sincronizarea pe acest dispozitiv</string>
+    <string name="settings_cloud_sync_leave_value">Celelalte dispozitive își păstrează progresul</string>
+    <string name="settings_cloud_sync_last_error">Ultima problemă de sincronizare</string>
+    <string name="settings_cloud_sync_failed">Sincronizarea a eșuat. Verifică conexiunea la internet.</string>
+    <string name="settings_cloud_sync_done">Sincronizat</string>
 </resources>

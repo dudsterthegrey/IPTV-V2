@@ -292,4 +292,5 @@
     <string name="nav_extensions">Estensioni</string>
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Stream salvati</string>
+    <string name="nav_genres">Generi</string>
 </resources>

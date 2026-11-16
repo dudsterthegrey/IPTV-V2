@@ -292,4 +292,5 @@
     <string name="nav_extensions">扩展功能</string>
     <string name="nav_sports">体育</string>
     <string name="nav_saved_streams">已保存的直播流</string>
+    <string name="nav_genres">类型</string>
 </resources>

@@ -986,4 +986,27 @@
     <string name="settings_volume_boost">הגברת עוצמה</string>
     <string name="settings_volume_boost_off">כבוי</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">ז׳אנרים</string>
+    <string name="dashboard_top_ten">10 המובילים היום</string>
+    <string name="settings_cloud_sync_title">סנכרון בין מכשירים</string>
+    <string name="settings_cloud_sync_not_configured">לא הוגדר בגרסה זו</string>
+    <string name="settings_cloud_sync_off">כבוי</string>
+    <string name="settings_cloud_sync_on">פעיל</string>
+    <string name="settings_cloud_sync_on_since">פעיל · סונכרן לאחרונה %1$s</string>
+    <string name="settings_cloud_sync_create">יצירת קוד סנכרון</string>
+    <string name="settings_cloud_sync_create_value">התחלת סנכרון במכשיר זה</string>
+    <string name="settings_cloud_sync_join">הזנת קוד סנכרון</string>
+    <string name="settings_cloud_sync_join_value">שימוש בקוד ממכשיר אחר</string>
+    <string name="settings_cloud_sync_join_hint">הקלידו את הקוד שמוצג במכשיר השני בהגדרות › גיבוי.</string>
+    <string name="settings_cloud_sync_join_confirm">הצטרפות</string>
+    <string name="settings_cloud_sync_cancel">ביטול</string>
+    <string name="settings_cloud_sync_code">קוד סנכרון</string>
+    <string name="settings_cloud_sync_now">סנכרון עכשיו</string>
+    <string name="settings_cloud_sync_now_value">שליחה וקבלה של התקדמות הצפייה</string>
+    <string name="settings_cloud_sync_syncing">מסנכרן…</string>
+    <string name="settings_cloud_sync_leave">הפסקת הסנכרון במכשיר זה</string>
+    <string name="settings_cloud_sync_leave_value">המכשירים האחרים שומרים על ההתקדמות שלהם</string>
+    <string name="settings_cloud_sync_last_error">בעיית הסנכרון האחרונה</string>
+    <string name="settings_cloud_sync_failed">הסנכרון נכשל. בדקו את החיבור לאינטרנט.</string>
+    <string name="settings_cloud_sync_done">סונכרן</string>
 </resources>

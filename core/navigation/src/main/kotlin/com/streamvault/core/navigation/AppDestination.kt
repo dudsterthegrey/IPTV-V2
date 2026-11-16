@@ -12,6 +12,7 @@ sealed interface AppDestination : Serializable {
     data object Vod : AppDestination
     data object Downloads : AppDestination
     data object SavedStreams : AppDestination
+    data object Genres : AppDestination
     data class Guide(
         val categoryId: Long? = null,
         val anchorTimeMs: Long? = null,

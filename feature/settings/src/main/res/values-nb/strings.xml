@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Volumforsterkning</string>
     <string name="settings_volume_boost_off">Av</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Sjangre</string>
+    <string name="dashboard_top_ten">Topp 10 i dag</string>
+    <string name="settings_cloud_sync_title">Synkroniser mellom enheter</string>
+    <string name="settings_cloud_sync_not_configured">Ikke satt opp i denne versjonen</string>
+    <string name="settings_cloud_sync_off">Av</string>
+    <string name="settings_cloud_sync_on">På</string>
+    <string name="settings_cloud_sync_on_since">På · sist synkronisert %1$s</string>
+    <string name="settings_cloud_sync_create">Opprett synkroniseringskode</string>
+    <string name="settings_cloud_sync_create_value">Start synkronisering på denne enheten</string>
+    <string name="settings_cloud_sync_join">Skriv inn synkroniseringskode</string>
+    <string name="settings_cloud_sync_join_value">Bruk en kode fra en annen enhet</string>
+    <string name="settings_cloud_sync_join_hint">Skriv inn koden som vises på den andre enheten under Innstillinger › Sikkerhetskopi.</string>
+    <string name="settings_cloud_sync_join_confirm">Bli med</string>
+    <string name="settings_cloud_sync_cancel">Avbryt</string>
+    <string name="settings_cloud_sync_code">Synkroniseringskode</string>
+    <string name="settings_cloud_sync_now">Synkroniser nå</string>
+    <string name="settings_cloud_sync_now_value">Send og hent fremdrift</string>
+    <string name="settings_cloud_sync_syncing">Synkroniserer…</string>
+    <string name="settings_cloud_sync_leave">Stopp synkronisering på denne enheten</string>
+    <string name="settings_cloud_sync_leave_value">De andre enhetene beholder fremdriften</string>
+    <string name="settings_cloud_sync_last_error">Siste synkroniseringsproblem</string>
+    <string name="settings_cloud_sync_failed">Synkroniseringen mislyktes. Sjekk internettforbindelsen.</string>
+    <string name="settings_cloud_sync_done">Synkronisert</string>
 </resources>

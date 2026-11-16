@@ -13,6 +13,7 @@ class AppHomeDashboardShelfTest {
             AppHomeDashboardShelf.LIVE_SHORTCUTS,
             AppHomeDashboardShelf.CONTINUE_WATCHING,
             AppHomeDashboardShelf.UP_NEXT,
+            AppHomeDashboardShelf.TOP_TEN,
             AppHomeDashboardShelf.TRACKED_SERIES,
             AppHomeDashboardShelf.RECENT_EPISODES,
             AppHomeDashboardShelf.PINNED_CATEGORIES,

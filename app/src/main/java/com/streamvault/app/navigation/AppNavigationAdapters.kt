@@ -22,6 +22,7 @@ internal fun AppTopLevelDestination.toAppRoute(): String = when (this) {
     AppTopLevelDestination.HOME -> Routes.HOME
     AppTopLevelDestination.LIVE_TV -> Routes.LIVE_TV
     AppTopLevelDestination.SAVED_STREAMS -> Routes.SAVED_STREAMS
+    AppTopLevelDestination.GENRES -> Routes.GENRES
     AppTopLevelDestination.SPORTS -> Routes.SPORTS
     AppTopLevelDestination.MOVIES -> Routes.MOVIES
     AppTopLevelDestination.SERIES -> Routes.SERIES

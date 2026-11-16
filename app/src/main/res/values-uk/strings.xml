@@ -292,4 +292,5 @@
     <string name="nav_extensions">Розширення</string>
     <string name="nav_sports">Спорт</string>
     <string name="nav_saved_streams">Збережені потоки</string>
+    <string name="nav_genres">Жанри</string>
 </resources>

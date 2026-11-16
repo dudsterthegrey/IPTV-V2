@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Hangerő-erősítés</string>
     <string name="settings_volume_boost_off">Ki</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Műfajok</string>
+    <string name="dashboard_top_ten">Mai top 10</string>
+    <string name="settings_cloud_sync_title">Szinkronizálás eszközök között</string>
+    <string name="settings_cloud_sync_not_configured">Ebben a verzióban nincs beállítva</string>
+    <string name="settings_cloud_sync_off">Ki</string>
+    <string name="settings_cloud_sync_on">Be</string>
+    <string name="settings_cloud_sync_on_since">Be · utoljára %1$s</string>
+    <string name="settings_cloud_sync_create">Szinkronkód létrehozása</string>
+    <string name="settings_cloud_sync_create_value">Szinkronizálás indítása ezen az eszközön</string>
+    <string name="settings_cloud_sync_join">Szinkronkód megadása</string>
+    <string name="settings_cloud_sync_join_value">Másik eszköz kódjának használata</string>
+    <string name="settings_cloud_sync_join_hint">Írd be a másik eszközön a Beállítások › Biztonsági mentés alatt látható kódot.</string>
+    <string name="settings_cloud_sync_join_confirm">Csatlakozás</string>
+    <string name="settings_cloud_sync_cancel">Mégse</string>
+    <string name="settings_cloud_sync_code">Szinkronkód</string>
+    <string name="settings_cloud_sync_now">Szinkronizálás most</string>
+    <string name="settings_cloud_sync_now_value">Megtekintési állapot küldése és lekérése</string>
+    <string name="settings_cloud_sync_syncing">Szinkronizálás…</string>
+    <string name="settings_cloud_sync_leave">Szinkronizálás leállítása ezen az eszközön</string>
+    <string name="settings_cloud_sync_leave_value">A többi eszköz megtartja az állapotát</string>
+    <string name="settings_cloud_sync_last_error">Utolsó szinkronizálási hiba</string>
+    <string name="settings_cloud_sync_failed">A szinkronizálás sikertelen. Ellenőrizd az internetkapcsolatot.</string>
+    <string name="settings_cloud_sync_done">Szinkronizálva</string>
 </resources>

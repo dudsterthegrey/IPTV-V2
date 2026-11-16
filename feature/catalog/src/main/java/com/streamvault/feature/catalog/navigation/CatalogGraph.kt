@@ -21,6 +21,7 @@ import com.streamvault.feature.catalog.presentation.dashboard.DashboardScreen
 import com.streamvault.feature.catalog.presentation.movies.MovieDetailScreen
 import com.streamvault.feature.catalog.presentation.movies.MoviesScreen
 import com.streamvault.feature.catalog.presentation.savedstreams.SavedStreamsScreen
+import com.streamvault.feature.catalog.presentation.genres.GenresScreen
 import com.streamvault.feature.catalog.presentation.search.SearchScreen
 import com.streamvault.feature.catalog.presentation.series.SeriesDetailScreen
 import com.streamvault.feature.catalog.presentation.series.SeriesScreen
@@ -86,6 +87,14 @@ fun NavGraphBuilder.registerCatalogGraph(
         SavedStreamsScreen(
             scaffold = scaffold,
             onOpenPlayer = actions::openPlayer
+        )
+    }
+
+    composable(CatalogRoutePatterns.GENRES) {
+        GenresScreen(
+            scaffold = scaffold,
+            onMovieClick = { movie -> onOpenMovieDetail(movie, AppDestination.Genres) },
+            onSeriesClick = { series -> onOpenSeriesDetail(series, AppDestination.Genres) }
         )
     }
 

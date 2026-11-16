@@ -294,4 +294,5 @@
     <string name="nav_extensions">التمديدات</string>
     <string name="nav_sports">الرياضة</string>
     <string name="nav_saved_streams">البث المحفوظ</string>
+    <string name="nav_genres">الأنواع</string>
 </resources>

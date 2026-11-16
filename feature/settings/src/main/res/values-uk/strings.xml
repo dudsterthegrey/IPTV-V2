@@ -989,4 +989,27 @@
     <string name="settings_volume_boost">Підсилення гучності</string>
     <string name="settings_volume_boost_off">Вимк.</string>
     <string name="settings_volume_boost_value">+%1$d дБ</string>
+    <string name="nav_genres">Жанри</string>
+    <string name="dashboard_top_ten">Топ-10 сьогодні</string>
+    <string name="settings_cloud_sync_title">Синхронізація між пристроями</string>
+    <string name="settings_cloud_sync_not_configured">Не налаштовано в цій збірці</string>
+    <string name="settings_cloud_sync_off">Вимк.</string>
+    <string name="settings_cloud_sync_on">Увімк.</string>
+    <string name="settings_cloud_sync_on_since">Увімк. · остання синхронізація %1$s</string>
+    <string name="settings_cloud_sync_create">Створити код синхронізації</string>
+    <string name="settings_cloud_sync_create_value">Почати синхронізацію на цьому пристрої</string>
+    <string name="settings_cloud_sync_join">Ввести код синхронізації</string>
+    <string name="settings_cloud_sync_join_value">Використати код з іншого пристрою</string>
+    <string name="settings_cloud_sync_join_hint">Введіть код з іншого пристрою з «Налаштування › Резервна копія».</string>
+    <string name="settings_cloud_sync_join_confirm">Приєднатися</string>
+    <string name="settings_cloud_sync_cancel">Скасувати</string>
+    <string name="settings_cloud_sync_code">Код синхронізації</string>
+    <string name="settings_cloud_sync_now">Синхронізувати зараз</string>
+    <string name="settings_cloud_sync_now_value">Надіслати й отримати прогрес</string>
+    <string name="settings_cloud_sync_syncing">Синхронізація…</string>
+    <string name="settings_cloud_sync_leave">Вимкнути синхронізацію на цьому пристрої</string>
+    <string name="settings_cloud_sync_leave_value">Інші пристрої зберігають свій прогрес</string>
+    <string name="settings_cloud_sync_last_error">Остання помилка синхронізації</string>
+    <string name="settings_cloud_sync_failed">Не вдалося синхронізувати. Перевірте з’єднання.</string>
+    <string name="settings_cloud_sync_done">Синхронізовано</string>
 </resources>

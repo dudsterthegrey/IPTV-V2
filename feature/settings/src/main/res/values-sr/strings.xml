@@ -984,4 +984,27 @@
     <string name="settings_volume_boost">Појачање звука</string>
     <string name="settings_volume_boost_off">Искључено</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Жанрови</string>
+    <string name="dashboard_top_ten">Топ 10 данас</string>
+    <string name="settings_cloud_sync_title">Синхронизација између уређаја</string>
+    <string name="settings_cloud_sync_not_configured">Није подешено у овој верзији</string>
+    <string name="settings_cloud_sync_off">Искључено</string>
+    <string name="settings_cloud_sync_on">Укључено</string>
+    <string name="settings_cloud_sync_on_since">Укључено · последња синхронизација %1$s</string>
+    <string name="settings_cloud_sync_create">Направи код</string>
+    <string name="settings_cloud_sync_create_value">Покрени синхронизацију на овом уређају</string>
+    <string name="settings_cloud_sync_join">Унеси код</string>
+    <string name="settings_cloud_sync_join_value">Користи код са другог уређаја</string>
+    <string name="settings_cloud_sync_join_hint">Унесите код са другог уређаја из Подешавања › Резервна копија.</string>
+    <string name="settings_cloud_sync_join_confirm">Придружи се</string>
+    <string name="settings_cloud_sync_cancel">Откажи</string>
+    <string name="settings_cloud_sync_code">Код за синхронизацију</string>
+    <string name="settings_cloud_sync_now">Синхронизуј сада</string>
+    <string name="settings_cloud_sync_now_value">Пошаљи и преузми напредак</string>
+    <string name="settings_cloud_sync_syncing">Синхронизација…</string>
+    <string name="settings_cloud_sync_leave">Заустави синхронизацију на овом уређају</string>
+    <string name="settings_cloud_sync_leave_value">Остали уређаји задржавају напредак</string>
+    <string name="settings_cloud_sync_last_error">Последњи проблем синхронизације</string>
+    <string name="settings_cloud_sync_failed">Синхронизација није успела. Проверите интернет везу.</string>
+    <string name="settings_cloud_sync_done">Синхронизовано</string>
 </resources>

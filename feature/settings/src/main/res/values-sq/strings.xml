@@ -981,4 +981,27 @@
     <string name="settings_volume_boost">Përforcim zëri</string>
     <string name="settings_volume_boost_off">Joaktiv</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Zhanret</string>
+    <string name="dashboard_top_ten">Top 10 sot</string>
+    <string name="settings_cloud_sync_title">Sinkronizo mes pajisjeve</string>
+    <string name="settings_cloud_sync_not_configured">Nuk është konfiguruar në këtë version</string>
+    <string name="settings_cloud_sync_off">Joaktiv</string>
+    <string name="settings_cloud_sync_on">Aktiv</string>
+    <string name="settings_cloud_sync_on_since">Aktiv · sinkronizuar %1$s</string>
+    <string name="settings_cloud_sync_create">Krijo kod sinkronizimi</string>
+    <string name="settings_cloud_sync_create_value">Nis sinkronizimin në këtë pajisje</string>
+    <string name="settings_cloud_sync_join">Fut kodin</string>
+    <string name="settings_cloud_sync_join_value">Përdor kodin nga pajisje tjetër</string>
+    <string name="settings_cloud_sync_join_hint">Shkruaj kodin që shfaqet në pajisjen tjetër te Cilësimet › Kopje rezervë.</string>
+    <string name="settings_cloud_sync_join_confirm">Bashkohu</string>
+    <string name="settings_cloud_sync_cancel">Anulo</string>
+    <string name="settings_cloud_sync_code">Kodi i sinkronizimit</string>
+    <string name="settings_cloud_sync_now">Sinkronizo tani</string>
+    <string name="settings_cloud_sync_now_value">Dërgo dhe merr ecurinë</string>
+    <string name="settings_cloud_sync_syncing">Po sinkronizohet…</string>
+    <string name="settings_cloud_sync_leave">Ndalo sinkronizimin në këtë pajisje</string>
+    <string name="settings_cloud_sync_leave_value">Pajisjet e tjera e ruajnë ecurinë</string>
+    <string name="settings_cloud_sync_last_error">Problemi i fundit i sinkronizimit</string>
+    <string name="settings_cloud_sync_failed">Sinkronizimi dështoi. Kontrollo lidhjen me internetin.</string>
+    <string name="settings_cloud_sync_done">U sinkronizua</string>
 </resources>

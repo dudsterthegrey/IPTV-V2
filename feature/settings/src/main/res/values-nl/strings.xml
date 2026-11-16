@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Volumeversterking</string>
     <string name="settings_volume_boost_off">Uit</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Genres</string>
+    <string name="dashboard_top_ten">Top 10 vandaag</string>
+    <string name="settings_cloud_sync_title">Synchroniseren tussen apparaten</string>
+    <string name="settings_cloud_sync_not_configured">Niet ingesteld in deze versie</string>
+    <string name="settings_cloud_sync_off">Uit</string>
+    <string name="settings_cloud_sync_on">Aan</string>
+    <string name="settings_cloud_sync_on_since">Aan · laatst %1$s</string>
+    <string name="settings_cloud_sync_create">Synchronisatiecode maken</string>
+    <string name="settings_cloud_sync_create_value">Synchroniseren op dit apparaat starten</string>
+    <string name="settings_cloud_sync_join">Synchronisatiecode invoeren</string>
+    <string name="settings_cloud_sync_join_value">Code van een ander apparaat gebruiken</string>
+    <string name="settings_cloud_sync_join_hint">Typ de code die op je andere apparaat staat bij Instellingen › Back-up.</string>
+    <string name="settings_cloud_sync_join_confirm">Deelnemen</string>
+    <string name="settings_cloud_sync_cancel">Annuleren</string>
+    <string name="settings_cloud_sync_code">Synchronisatiecode</string>
+    <string name="settings_cloud_sync_now">Nu synchroniseren</string>
+    <string name="settings_cloud_sync_now_value">Kijkvoortgang verzenden en ophalen</string>
+    <string name="settings_cloud_sync_syncing">Synchroniseren…</string>
+    <string name="settings_cloud_sync_leave">Stoppen met synchroniseren op dit apparaat</string>
+    <string name="settings_cloud_sync_leave_value">Je andere apparaten houden hun voortgang</string>
+    <string name="settings_cloud_sync_last_error">Laatste synchronisatieprobleem</string>
+    <string name="settings_cloud_sync_failed">Synchroniseren mislukt. Controleer de internetverbinding.</string>
+    <string name="settings_cloud_sync_done">Gesynchroniseerd</string>
 </resources>

@@ -978,4 +978,27 @@
     <string name="settings_volume_boost">音量增強</string>
     <string name="settings_volume_boost_off">關閉</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">類型</string>
+    <string name="dashboard_top_ten">今日十大</string>
+    <string name="settings_cloud_sync_title">跨裝置同步</string>
+    <string name="settings_cloud_sync_not_configured">此版本未設定</string>
+    <string name="settings_cloud_sync_off">關閉</string>
+    <string name="settings_cloud_sync_on">開啟</string>
+    <string name="settings_cloud_sync_on_since">開啟 · 上次同步 %1$s</string>
+    <string name="settings_cloud_sync_create">建立同步碼</string>
+    <string name="settings_cloud_sync_create_value">在此裝置上開始同步</string>
+    <string name="settings_cloud_sync_join">輸入同步碼</string>
+    <string name="settings_cloud_sync_join_value">使用其他裝置的同步碼</string>
+    <string name="settings_cloud_sync_join_hint">輸入另一台裝置「設定 › 備份」中顯示的同步碼。</string>
+    <string name="settings_cloud_sync_join_confirm">加入</string>
+    <string name="settings_cloud_sync_cancel">取消</string>
+    <string name="settings_cloud_sync_code">同步碼</string>
+    <string name="settings_cloud_sync_now">立即同步</string>
+    <string name="settings_cloud_sync_now_value">傳送並取得觀看進度</string>
+    <string name="settings_cloud_sync_syncing">正在同步…</string>
+    <string name="settings_cloud_sync_leave">在此裝置上停止同步</string>
+    <string name="settings_cloud_sync_leave_value">其他裝置會保留各自的進度</string>
+    <string name="settings_cloud_sync_last_error">最近的同步問題</string>
+    <string name="settings_cloud_sync_failed">同步失敗。請檢查網路連線。</string>
+    <string name="settings_cloud_sync_done">已同步</string>
 </resources>

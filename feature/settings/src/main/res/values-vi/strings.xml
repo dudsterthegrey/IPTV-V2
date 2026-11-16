@@ -980,4 +980,27 @@
     <string name="settings_volume_boost">Tăng âm lượng</string>
     <string name="settings_volume_boost_off">Tắt</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Thể loại</string>
+    <string name="dashboard_top_ten">Top 10 hôm nay</string>
+    <string name="settings_cloud_sync_title">Đồng bộ giữa các thiết bị</string>
+    <string name="settings_cloud_sync_not_configured">Chưa thiết lập trong bản dựng này</string>
+    <string name="settings_cloud_sync_off">Tắt</string>
+    <string name="settings_cloud_sync_on">Bật</string>
+    <string name="settings_cloud_sync_on_since">Bật · đồng bộ lần cuối %1$s</string>
+    <string name="settings_cloud_sync_create">Tạo mã đồng bộ</string>
+    <string name="settings_cloud_sync_create_value">Bắt đầu đồng bộ trên thiết bị này</string>
+    <string name="settings_cloud_sync_join">Nhập mã đồng bộ</string>
+    <string name="settings_cloud_sync_join_value">Dùng mã từ thiết bị khác</string>
+    <string name="settings_cloud_sync_join_hint">Nhập mã hiển thị trên thiết bị kia trong Cài đặt › Sao lưu.</string>
+    <string name="settings_cloud_sync_join_confirm">Tham gia</string>
+    <string name="settings_cloud_sync_cancel">Hủy</string>
+    <string name="settings_cloud_sync_code">Mã đồng bộ</string>
+    <string name="settings_cloud_sync_now">Đồng bộ ngay</string>
+    <string name="settings_cloud_sync_now_value">Gửi và lấy tiến độ xem</string>
+    <string name="settings_cloud_sync_syncing">Đang đồng bộ…</string>
+    <string name="settings_cloud_sync_leave">Ngừng đồng bộ trên thiết bị này</string>
+    <string name="settings_cloud_sync_leave_value">Các thiết bị khác vẫn giữ tiến độ</string>
+    <string name="settings_cloud_sync_last_error">Sự cố đồng bộ gần nhất</string>
+    <string name="settings_cloud_sync_failed">Đồng bộ thất bại. Hãy kiểm tra kết nối Internet.</string>
+    <string name="settings_cloud_sync_done">Đã đồng bộ</string>
 </resources>

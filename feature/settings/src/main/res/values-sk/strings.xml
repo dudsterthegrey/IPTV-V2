@@ -987,4 +987,27 @@
     <string name="settings_volume_boost">Zosilnenie hlasitosti</string>
     <string name="settings_volume_boost_off">Vypnuté</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Žánre</string>
+    <string name="dashboard_top_ten">Top 10 dnes</string>
+    <string name="settings_cloud_sync_title">Synchronizácia medzi zariadeniami</string>
+    <string name="settings_cloud_sync_not_configured">V tejto verzii nie je nastavené</string>
+    <string name="settings_cloud_sync_off">Vypnuté</string>
+    <string name="settings_cloud_sync_on">Zapnuté</string>
+    <string name="settings_cloud_sync_on_since">Zapnuté · naposledy %1$s</string>
+    <string name="settings_cloud_sync_create">Vytvoriť kód</string>
+    <string name="settings_cloud_sync_create_value">Spustiť synchronizáciu na tomto zariadení</string>
+    <string name="settings_cloud_sync_join">Zadať kód</string>
+    <string name="settings_cloud_sync_join_value">Použiť kód z iného zariadenia</string>
+    <string name="settings_cloud_sync_join_hint">Zadajte kód z druhého zariadenia v Nastavenia › Záloha.</string>
+    <string name="settings_cloud_sync_join_confirm">Pripojiť</string>
+    <string name="settings_cloud_sync_cancel">Zrušiť</string>
+    <string name="settings_cloud_sync_code">Kód synchronizácie</string>
+    <string name="settings_cloud_sync_now">Synchronizovať teraz</string>
+    <string name="settings_cloud_sync_now_value">Odoslať a načítať priebeh</string>
+    <string name="settings_cloud_sync_syncing">Synchronizácia…</string>
+    <string name="settings_cloud_sync_leave">Ukončiť synchronizáciu na tomto zariadení</string>
+    <string name="settings_cloud_sync_leave_value">Ostatné zariadenia si priebeh ponechajú</string>
+    <string name="settings_cloud_sync_last_error">Posledný problém so synchronizáciou</string>
+    <string name="settings_cloud_sync_failed">Synchronizácia zlyhala. Skontrolujte pripojenie.</string>
+    <string name="settings_cloud_sync_done">Synchronizované</string>
 </resources>

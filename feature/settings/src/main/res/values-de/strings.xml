@@ -979,4 +979,27 @@
     <string name="settings_volume_boost">Lautstärke-Boost</string>
     <string name="settings_volume_boost_off">Aus</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Genres</string>
+    <string name="dashboard_top_ten">Top 10 heute</string>
+    <string name="settings_cloud_sync_title">Geräteübergreifend synchronisieren</string>
+    <string name="settings_cloud_sync_not_configured">In dieser Version nicht eingerichtet</string>
+    <string name="settings_cloud_sync_off">Aus</string>
+    <string name="settings_cloud_sync_on">An</string>
+    <string name="settings_cloud_sync_on_since">An · zuletzt %1$s</string>
+    <string name="settings_cloud_sync_create">Sync-Code erstellen</string>
+    <string name="settings_cloud_sync_create_value">Synchronisierung auf diesem Gerät starten</string>
+    <string name="settings_cloud_sync_join">Sync-Code eingeben</string>
+    <string name="settings_cloud_sync_join_value">Code von einem anderen Gerät verwenden</string>
+    <string name="settings_cloud_sync_join_hint">Gib den Code ein, der auf dem anderen Gerät unter Einstellungen › Backup steht.</string>
+    <string name="settings_cloud_sync_join_confirm">Beitreten</string>
+    <string name="settings_cloud_sync_cancel">Abbrechen</string>
+    <string name="settings_cloud_sync_code">Sync-Code</string>
+    <string name="settings_cloud_sync_now">Jetzt synchronisieren</string>
+    <string name="settings_cloud_sync_now_value">Fortschritt senden und abrufen</string>
+    <string name="settings_cloud_sync_syncing">Wird synchronisiert…</string>
+    <string name="settings_cloud_sync_leave">Synchronisierung auf diesem Gerät beenden</string>
+    <string name="settings_cloud_sync_leave_value">Andere Geräte behalten ihren Fortschritt</string>
+    <string name="settings_cloud_sync_last_error">Letztes Synchronisierungsproblem</string>
+    <string name="settings_cloud_sync_failed">Synchronisierung fehlgeschlagen. Prüfe die Internetverbindung.</string>
+    <string name="settings_cloud_sync_done">Synchronisiert</string>
 </resources>

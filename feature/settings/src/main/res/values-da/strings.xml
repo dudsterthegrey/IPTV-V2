@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Lydforstærkning</string>
     <string name="settings_volume_boost_off">Fra</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Genrer</string>
+    <string name="dashboard_top_ten">Top 10 i dag</string>
+    <string name="settings_cloud_sync_title">Synkronisering mellem enheder</string>
+    <string name="settings_cloud_sync_not_configured">Ikke sat op i denne version</string>
+    <string name="settings_cloud_sync_off">Fra</string>
+    <string name="settings_cloud_sync_on">Til</string>
+    <string name="settings_cloud_sync_on_since">Til · sidst synkroniseret %1$s</string>
+    <string name="settings_cloud_sync_create">Opret synkroniseringskode</string>
+    <string name="settings_cloud_sync_create_value">Start synkronisering på denne enhed</string>
+    <string name="settings_cloud_sync_join">Indtast synkroniseringskode</string>
+    <string name="settings_cloud_sync_join_value">Brug en kode fra en anden enhed</string>
+    <string name="settings_cloud_sync_join_hint">Skriv koden, der vises på den anden enhed under Indstillinger › Backup.</string>
+    <string name="settings_cloud_sync_join_confirm">Tilslut</string>
+    <string name="settings_cloud_sync_cancel">Annuller</string>
+    <string name="settings_cloud_sync_code">Synkroniseringskode</string>
+    <string name="settings_cloud_sync_now">Synkroniser nu</string>
+    <string name="settings_cloud_sync_now_value">Send og hent afspilningsstatus</string>
+    <string name="settings_cloud_sync_syncing">Synkroniserer…</string>
+    <string name="settings_cloud_sync_leave">Stop synkronisering på denne enhed</string>
+    <string name="settings_cloud_sync_leave_value">Dine andre enheder beholder deres status</string>
+    <string name="settings_cloud_sync_last_error">Seneste synkroniseringsproblem</string>
+    <string name="settings_cloud_sync_failed">Synkronisering mislykkedes. Tjek internetforbindelsen.</string>
+    <string name="settings_cloud_sync_done">Synkroniseret</string>
 </resources>

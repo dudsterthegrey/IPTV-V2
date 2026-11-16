@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Ses yükseltme</string>
     <string name="settings_volume_boost_off">Kapalı</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Türler</string>
+    <string name="dashboard_top_ten">Bugünün ilk 10’u</string>
+    <string name="settings_cloud_sync_title">Cihazlar arası eşitleme</string>
+    <string name="settings_cloud_sync_not_configured">Bu sürümde ayarlanmamış</string>
+    <string name="settings_cloud_sync_off">Kapalı</string>
+    <string name="settings_cloud_sync_on">Açık</string>
+    <string name="settings_cloud_sync_on_since">Açık · son eşitleme %1$s</string>
+    <string name="settings_cloud_sync_create">Eşitleme kodu oluştur</string>
+    <string name="settings_cloud_sync_create_value">Bu cihazda eşitlemeyi başlat</string>
+    <string name="settings_cloud_sync_join">Eşitleme kodunu gir</string>
+    <string name="settings_cloud_sync_join_value">Başka cihazdaki kodu kullan</string>
+    <string name="settings_cloud_sync_join_hint">Diğer cihazda Ayarlar › Yedekleme altında görünen kodu yazın.</string>
+    <string name="settings_cloud_sync_join_confirm">Katıl</string>
+    <string name="settings_cloud_sync_cancel">İptal</string>
+    <string name="settings_cloud_sync_code">Eşitleme kodu</string>
+    <string name="settings_cloud_sync_now">Şimdi eşitle</string>
+    <string name="settings_cloud_sync_now_value">İzleme ilerlemesini gönder ve al</string>
+    <string name="settings_cloud_sync_syncing">Eşitleniyor…</string>
+    <string name="settings_cloud_sync_leave">Bu cihazda eşitlemeyi durdur</string>
+    <string name="settings_cloud_sync_leave_value">Diğer cihazlar ilerlemelerini korur</string>
+    <string name="settings_cloud_sync_last_error">Son eşitleme sorunu</string>
+    <string name="settings_cloud_sync_failed">Eşitleme başarısız. İnternet bağlantısını kontrol edin.</string>
+    <string name="settings_cloud_sync_done">Eşitlendi</string>
 </resources>

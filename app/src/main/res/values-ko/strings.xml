@@ -292,4 +292,5 @@
     <string name="nav_extensions">확장 기능</string>
     <string name="nav_sports">스포츠</string>
     <string name="nav_saved_streams">저장된 스트림</string>
+    <string name="nav_genres">장르</string>
 </resources>

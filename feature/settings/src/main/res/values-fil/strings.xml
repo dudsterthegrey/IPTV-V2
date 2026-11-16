@@ -981,4 +981,27 @@
     <string name="settings_volume_boost">Volume boost</string>
     <string name="settings_volume_boost_off">Naka-off</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Mga genre</string>
+    <string name="dashboard_top_ten">Top 10 ngayon</string>
+    <string name="settings_cloud_sync_title">I-sync sa mga device</string>
+    <string name="settings_cloud_sync_not_configured">Hindi naka-set up sa build na ito</string>
+    <string name="settings_cloud_sync_off">Naka-off</string>
+    <string name="settings_cloud_sync_on">Naka-on</string>
+    <string name="settings_cloud_sync_on_since">Naka-on · huling na-sync %1$s</string>
+    <string name="settings_cloud_sync_create">Gumawa ng sync code</string>
+    <string name="settings_cloud_sync_create_value">Simulan ang pag-sync sa device na ito</string>
+    <string name="settings_cloud_sync_join">Ilagay ang sync code</string>
+    <string name="settings_cloud_sync_join_value">Gamitin ang code mula sa ibang device</string>
+    <string name="settings_cloud_sync_join_hint">I-type ang code na nasa ibang device mo sa Settings › Backup.</string>
+    <string name="settings_cloud_sync_join_confirm">Sumali</string>
+    <string name="settings_cloud_sync_cancel">Kanselahin</string>
+    <string name="settings_cloud_sync_code">Sync code</string>
+    <string name="settings_cloud_sync_now">I-sync ngayon</string>
+    <string name="settings_cloud_sync_now_value">Ipadala at kunin ang progreso</string>
+    <string name="settings_cloud_sync_syncing">Nagsi-sync…</string>
+    <string name="settings_cloud_sync_leave">Itigil ang pag-sync sa device na ito</string>
+    <string name="settings_cloud_sync_leave_value">Mananatili ang progreso sa iba mong device</string>
+    <string name="settings_cloud_sync_last_error">Huling problema sa pag-sync</string>
+    <string name="settings_cloud_sync_failed">Nabigo ang pag-sync. Tingnan ang internet connection.</string>
+    <string name="settings_cloud_sync_done">Na-sync</string>
 </resources>

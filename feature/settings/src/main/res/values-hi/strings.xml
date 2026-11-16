@@ -981,4 +981,27 @@
     <string name="settings_volume_boost">वॉल्यूम बूस्ट</string>
     <string name="settings_volume_boost_off">बंद</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">शैलियाँ</string>
+    <string name="dashboard_top_ten">आज के टॉप 10</string>
+    <string name="settings_cloud_sync_title">डिवाइसों के बीच सिंक</string>
+    <string name="settings_cloud_sync_not_configured">इस बिल्ड में सेट नहीं है</string>
+    <string name="settings_cloud_sync_off">बंद</string>
+    <string name="settings_cloud_sync_on">चालू</string>
+    <string name="settings_cloud_sync_on_since">चालू · पिछला सिंक %1$s</string>
+    <string name="settings_cloud_sync_create">सिंक कोड बनाएँ</string>
+    <string name="settings_cloud_sync_create_value">इस डिवाइस पर सिंक शुरू करें</string>
+    <string name="settings_cloud_sync_join">सिंक कोड डालें</string>
+    <string name="settings_cloud_sync_join_value">दूसरे डिवाइस का कोड इस्तेमाल करें</string>
+    <string name="settings_cloud_sync_join_hint">अपने दूसरे डिवाइस पर सेटिंग › बैकअप में दिखा कोड टाइप करें।</string>
+    <string name="settings_cloud_sync_join_confirm">जुड़ें</string>
+    <string name="settings_cloud_sync_cancel">रद्द करें</string>
+    <string name="settings_cloud_sync_code">सिंक कोड</string>
+    <string name="settings_cloud_sync_now">अभी सिंक करें</string>
+    <string name="settings_cloud_sync_now_value">देखने की प्रगति भेजें और लाएँ</string>
+    <string name="settings_cloud_sync_syncing">सिंक हो रहा है…</string>
+    <string name="settings_cloud_sync_leave">इस डिवाइस पर सिंक बंद करें</string>
+    <string name="settings_cloud_sync_leave_value">आपके अन्य डिवाइस अपनी प्रगति रखेंगे</string>
+    <string name="settings_cloud_sync_last_error">पिछली सिंक समस्या</string>
+    <string name="settings_cloud_sync_failed">सिंक विफल। इंटरनेट कनेक्शन जाँचें।</string>
+    <string name="settings_cloud_sync_done">सिंक हो गया</string>
 </resources>

@@ -995,4 +995,27 @@
     <string name="settings_volume_boost">تعزيز الصوت</string>
     <string name="settings_volume_boost_off">إيقاف</string>
     <string name="settings_volume_boost_value">+%1$d ديسيبل</string>
+    <string name="nav_genres">الأنواع</string>
+    <string name="dashboard_top_ten">أفضل 10 اليوم</string>
+    <string name="settings_cloud_sync_title">المزامنة بين الأجهزة</string>
+    <string name="settings_cloud_sync_not_configured">غير مُعدّ في هذا الإصدار</string>
+    <string name="settings_cloud_sync_off">متوقف</string>
+    <string name="settings_cloud_sync_on">مفعّل</string>
+    <string name="settings_cloud_sync_on_since">مفعّل · آخر مزامنة %1$s</string>
+    <string name="settings_cloud_sync_create">إنشاء رمز مزامنة</string>
+    <string name="settings_cloud_sync_create_value">بدء المزامنة على هذا الجهاز</string>
+    <string name="settings_cloud_sync_join">إدخال رمز المزامنة</string>
+    <string name="settings_cloud_sync_join_value">استخدم رمزًا من جهاز آخر</string>
+    <string name="settings_cloud_sync_join_hint">اكتب الرمز الظاهر على جهازك الآخر في الإعدادات › النسخ الاحتياطي.</string>
+    <string name="settings_cloud_sync_join_confirm">انضمام</string>
+    <string name="settings_cloud_sync_cancel">إلغاء</string>
+    <string name="settings_cloud_sync_code">رمز المزامنة</string>
+    <string name="settings_cloud_sync_now">مزامنة الآن</string>
+    <string name="settings_cloud_sync_now_value">إرسال تقدم المشاهدة وجلبه</string>
+    <string name="settings_cloud_sync_syncing">جارٍ المزامنة…</string>
+    <string name="settings_cloud_sync_leave">إيقاف المزامنة على هذا الجهاز</string>
+    <string name="settings_cloud_sync_leave_value">تحتفظ أجهزتك الأخرى بتقدمها</string>
+    <string name="settings_cloud_sync_last_error">آخر مشكلة في المزامنة</string>
+    <string name="settings_cloud_sync_failed">فشلت المزامنة. تحقق من الاتصال بالإنترنت وحاول مجددًا.</string>
+    <string name="settings_cloud_sync_done">تمت المزامنة</string>
 </resources>

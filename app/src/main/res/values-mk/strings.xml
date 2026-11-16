@@ -344,4 +344,5 @@
     <string name="nav_extensions">Проширувања</string>
     <string name="nav_sports">Спорт</string>
     <string name="nav_saved_streams">Зачувани стримови</string>
+    <string name="nav_genres">Жанрови</string>
 </resources>

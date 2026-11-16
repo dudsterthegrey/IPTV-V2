@@ -979,4 +979,27 @@
     <string name="settings_volume_boost">Amplificazione volume</string>
     <string name="settings_volume_boost_off">Disattivato</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Generi</string>
+    <string name="dashboard_top_ten">Top 10 di oggi</string>
+    <string name="settings_cloud_sync_title">Sincronizza tra dispositivi</string>
+    <string name="settings_cloud_sync_not_configured">Non configurato in questa versione</string>
+    <string name="settings_cloud_sync_off">Disattivato</string>
+    <string name="settings_cloud_sync_on">Attivo</string>
+    <string name="settings_cloud_sync_on_since">Attivo · ultima sincronizzazione %1$s</string>
+    <string name="settings_cloud_sync_create">Crea codice di sincronizzazione</string>
+    <string name="settings_cloud_sync_create_value">Avvia la sincronizzazione su questo dispositivo</string>
+    <string name="settings_cloud_sync_join">Inserisci codice</string>
+    <string name="settings_cloud_sync_join_value">Usa un codice da un altro dispositivo</string>
+    <string name="settings_cloud_sync_join_hint">Digita il codice mostrato sull’altro dispositivo in Impostazioni › Backup.</string>
+    <string name="settings_cloud_sync_join_confirm">Unisciti</string>
+    <string name="settings_cloud_sync_cancel">Annulla</string>
+    <string name="settings_cloud_sync_code">Codice di sincronizzazione</string>
+    <string name="settings_cloud_sync_now">Sincronizza ora</string>
+    <string name="settings_cloud_sync_now_value">Invia e scarica i progressi</string>
+    <string name="settings_cloud_sync_syncing">Sincronizzazione…</string>
+    <string name="settings_cloud_sync_leave">Interrompi la sincronizzazione qui</string>
+    <string name="settings_cloud_sync_leave_value">Gli altri dispositivi mantengono i progressi</string>
+    <string name="settings_cloud_sync_last_error">Ultimo problema di sincronizzazione</string>
+    <string name="settings_cloud_sync_failed">Sincronizzazione non riuscita. Controlla la connessione.</string>
+    <string name="settings_cloud_sync_done">Sincronizzato</string>
 </resources>

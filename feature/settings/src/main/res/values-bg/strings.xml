@@ -981,4 +981,27 @@
     <string name="settings_volume_boost">Усилване на звука</string>
     <string name="settings_volume_boost_off">Изключено</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Жанрове</string>
+    <string name="dashboard_top_ten">Топ 10 днес</string>
+    <string name="settings_cloud_sync_title">Синхронизиране между устройства</string>
+    <string name="settings_cloud_sync_not_configured">Не е настроено в тази версия</string>
+    <string name="settings_cloud_sync_off">Изключено</string>
+    <string name="settings_cloud_sync_on">Включено</string>
+    <string name="settings_cloud_sync_on_since">Включено · последно %1$s</string>
+    <string name="settings_cloud_sync_create">Създаване на код</string>
+    <string name="settings_cloud_sync_create_value">Започнете синхронизиране на това устройство</string>
+    <string name="settings_cloud_sync_join">Въведете код</string>
+    <string name="settings_cloud_sync_join_value">Използвайте код от друго устройство</string>
+    <string name="settings_cloud_sync_join_hint">Въведете кода от другото устройство в Настройки › Архивиране.</string>
+    <string name="settings_cloud_sync_join_confirm">Свързване</string>
+    <string name="settings_cloud_sync_cancel">Отказ</string>
+    <string name="settings_cloud_sync_code">Код за синхронизиране</string>
+    <string name="settings_cloud_sync_now">Синхронизирай сега</string>
+    <string name="settings_cloud_sync_now_value">Изпращане и получаване на напредъка</string>
+    <string name="settings_cloud_sync_syncing">Синхронизиране…</string>
+    <string name="settings_cloud_sync_leave">Спиране на синхронизирането тук</string>
+    <string name="settings_cloud_sync_leave_value">Другите устройства запазват напредъка си</string>
+    <string name="settings_cloud_sync_last_error">Последен проблем със синхронизирането</string>
+    <string name="settings_cloud_sync_failed">Синхронизирането не успя. Проверете интернет връзката.</string>
+    <string name="settings_cloud_sync_done">Синхронизирано</string>
 </resources>

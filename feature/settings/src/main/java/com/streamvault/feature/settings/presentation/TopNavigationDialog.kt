@@ -239,6 +239,7 @@ private fun AppTopLevelDestination.labelResId(): Int = when (this) {
     AppTopLevelDestination.HOME -> R.string.nav_home
     AppTopLevelDestination.LIVE_TV -> R.string.nav_live_tv
     AppTopLevelDestination.SAVED_STREAMS -> R.string.nav_saved_streams
+    AppTopLevelDestination.GENRES -> R.string.nav_genres
     AppTopLevelDestination.SPORTS -> R.string.nav_sports
     AppTopLevelDestination.MOVIES -> R.string.nav_movies
     AppTopLevelDestination.SERIES -> R.string.nav_series

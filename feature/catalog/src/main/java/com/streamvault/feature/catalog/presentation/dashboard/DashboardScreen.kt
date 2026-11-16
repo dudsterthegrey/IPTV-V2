@@ -60,6 +60,7 @@ import com.streamvault.feature.catalog.presentation.components.CategoryRow
 import com.streamvault.feature.catalog.presentation.components.ChannelCard
 import com.streamvault.feature.catalog.presentation.components.ContinueWatchingRow
 import com.streamvault.feature.catalog.presentation.components.EpisodeShelfRow
+import com.streamvault.feature.catalog.presentation.components.TopTenRow
 import com.streamvault.feature.catalog.presentation.components.toPlaybackHistory
 import com.streamvault.feature.catalog.presentation.components.MovieCard
 import com.streamvault.core.ui.image.rememberCrossfadeImageModel
@@ -246,6 +247,14 @@ fun DashboardScreen(
                         items = uiState.upNext,
                         showAddedDate = false,
                         onItemClick = { item -> onPlaybackHistoryClick(item.toPlaybackHistory()) }
+                    )
+
+                    AppHomeDashboardShelf.TOP_TEN -> TopTenRow(
+                        entries = uiState.topTen,
+                        countryCode = uiState.topTenCountry,
+                        onCycleCountry = viewModel::cycleTopTenCountry,
+                        onMovieClick = onMovieClick,
+                        onSeriesClick = onSeriesClick
                     )
 
                     AppHomeDashboardShelf.RECENT_EPISODES -> EpisodeShelfRow(
@@ -994,6 +1003,7 @@ private fun rememberDashboardSections(
         uiState.continueWatchingMovies,
         uiState.continueWatchingSeriesItems,
         uiState.upNext,
+        uiState.topTen,
         uiState.trackedSeries,
         uiState.recentEpisodes,
         uiState.favoriteMovies,

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
@@ -156,6 +157,7 @@ private fun AppTopLevelDestination.toDestinationItem(): AppDestinationItem = whe
     AppTopLevelDestination.SPORTS -> AppDestinationItem(Routes.SPORTS, R.string.nav_sports, Icons.Default.SportsSoccer)
     AppTopLevelDestination.MOVIES -> AppDestinationItem(Routes.MOVIES, R.string.nav_movies, Icons.Default.Star)
     AppTopLevelDestination.SERIES -> AppDestinationItem(Routes.SERIES, R.string.nav_series, Icons.Default.Menu)
+    AppTopLevelDestination.GENRES -> AppDestinationItem(Routes.GENRES, R.string.nav_genres, Icons.Default.Category)
     AppTopLevelDestination.DOWNLOADS -> AppDestinationItem(Routes.DOWNLOADS, R.string.nav_downloads, Icons.Default.Download)
     AppTopLevelDestination.GUIDE -> AppDestinationItem(Routes.EPG, R.string.nav_epg, Icons.Default.Info)
     AppTopLevelDestination.SEARCH -> AppDestinationItem(Routes.SEARCH, R.string.search_title, Icons.Default.Search)

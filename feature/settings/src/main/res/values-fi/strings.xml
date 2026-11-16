@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Äänenvoimakkuuden vahvistus</string>
     <string name="settings_volume_boost_off">Pois</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Lajityypit</string>
+    <string name="dashboard_top_ten">Top 10 tänään</string>
+    <string name="settings_cloud_sync_title">Synkronointi laitteiden välillä</string>
+    <string name="settings_cloud_sync_not_configured">Ei määritetty tässä versiossa</string>
+    <string name="settings_cloud_sync_off">Pois</string>
+    <string name="settings_cloud_sync_on">Päällä</string>
+    <string name="settings_cloud_sync_on_since">Päällä · viimeksi %1$s</string>
+    <string name="settings_cloud_sync_create">Luo synkronointikoodi</string>
+    <string name="settings_cloud_sync_create_value">Aloita synkronointi tällä laitteella</string>
+    <string name="settings_cloud_sync_join">Syötä synkronointikoodi</string>
+    <string name="settings_cloud_sync_join_value">Käytä toisen laitteen koodia</string>
+    <string name="settings_cloud_sync_join_hint">Kirjoita toisen laitteen koodi kohdasta Asetukset › Varmuuskopio.</string>
+    <string name="settings_cloud_sync_join_confirm">Liity</string>
+    <string name="settings_cloud_sync_cancel">Peruuta</string>
+    <string name="settings_cloud_sync_code">Synkronointikoodi</string>
+    <string name="settings_cloud_sync_now">Synkronoi nyt</string>
+    <string name="settings_cloud_sync_now_value">Lähetä ja hae katselutilanne</string>
+    <string name="settings_cloud_sync_syncing">Synkronoidaan…</string>
+    <string name="settings_cloud_sync_leave">Lopeta synkronointi tällä laitteella</string>
+    <string name="settings_cloud_sync_leave_value">Muut laitteet säilyttävät tilanteensa</string>
+    <string name="settings_cloud_sync_last_error">Viimeisin synkronointiongelma</string>
+    <string name="settings_cloud_sync_failed">Synkronointi epäonnistui. Tarkista verkkoyhteys.</string>
+    <string name="settings_cloud_sync_done">Synkronoitu</string>
 </resources>

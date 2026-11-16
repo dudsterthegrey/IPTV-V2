@@ -979,4 +979,27 @@
     <string name="settings_volume_boost">볼륨 증폭</string>
     <string name="settings_volume_boost_off">끄기</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">장르</string>
+    <string name="dashboard_top_ten">오늘의 톱 10</string>
+    <string name="settings_cloud_sync_title">기기 간 동기화</string>
+    <string name="settings_cloud_sync_not_configured">이 빌드에서 설정되지 않음</string>
+    <string name="settings_cloud_sync_off">꺼짐</string>
+    <string name="settings_cloud_sync_on">켜짐</string>
+    <string name="settings_cloud_sync_on_since">켜짐 · 마지막 동기화 %1$s</string>
+    <string name="settings_cloud_sync_create">동기화 코드 만들기</string>
+    <string name="settings_cloud_sync_create_value">이 기기에서 동기화 시작</string>
+    <string name="settings_cloud_sync_join">동기화 코드 입력</string>
+    <string name="settings_cloud_sync_join_value">다른 기기의 코드 사용</string>
+    <string name="settings_cloud_sync_join_hint">다른 기기의 설정 › 백업에 표시된 코드를 입력하세요.</string>
+    <string name="settings_cloud_sync_join_confirm">참여</string>
+    <string name="settings_cloud_sync_cancel">취소</string>
+    <string name="settings_cloud_sync_code">동기화 코드</string>
+    <string name="settings_cloud_sync_now">지금 동기화</string>
+    <string name="settings_cloud_sync_now_value">시청 진행 상황 주고받기</string>
+    <string name="settings_cloud_sync_syncing">동기화 중…</string>
+    <string name="settings_cloud_sync_leave">이 기기에서 동기화 중지</string>
+    <string name="settings_cloud_sync_leave_value">다른 기기의 진행 상황은 유지됩니다</string>
+    <string name="settings_cloud_sync_last_error">최근 동기화 문제</string>
+    <string name="settings_cloud_sync_failed">동기화하지 못했습니다. 인터넷 연결을 확인하세요.</string>
+    <string name="settings_cloud_sync_done">동기화됨</string>
 </resources>

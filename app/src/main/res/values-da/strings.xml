@@ -292,4 +292,5 @@
     <string name="nav_extensions">Udvidelser</string>
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Gemte streams</string>
+    <string name="nav_genres">Genrer</string>
 </resources>

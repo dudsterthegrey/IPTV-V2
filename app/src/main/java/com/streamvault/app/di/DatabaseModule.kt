@@ -43,6 +43,11 @@ object DatabaseModule {
                 }
             )
             .addMigrations(*StreamVaultDatabaseMigrationRegistry.all.toTypedArray())
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onOpen(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    com.streamvault.data.local.dao.TitleMetadataTriggers.create(db)
+                }
+            })
             // NOTE: fallbackToDestructiveMigration() intentionally removed.
             // All future schema changes MUST add a corresponding Migration in StreamVaultDatabase.
             .build()
@@ -104,4 +109,5 @@ object DatabaseModule {
     @Provides fun provideStremioPlaybackHistoryDao(db: StreamVaultDatabase): StremioPlaybackHistoryDao = db.stremioPlaybackHistoryDao()
     @Provides fun provideTrackedSeriesDao(db: StreamVaultDatabase): TrackedSeriesDao = db.trackedSeriesDao()
     @Provides fun provideSavedStreamDao(db: StreamVaultDatabase): SavedStreamDao = db.savedStreamDao()
+    @Provides fun provideTitleMetadataDao(db: StreamVaultDatabase): com.streamvault.data.local.dao.TitleMetadataDao = db.titleMetadataDao()
 }

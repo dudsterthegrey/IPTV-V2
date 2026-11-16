@@ -214,6 +214,37 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
   replay of the upgrade did not show it. If it appears, press Back or relaunch, don't add the
   provider again.
 
+## 2.1.0 features (2026-11-15)
+
+- [x] **Updates from the V2 repo**: the checker reads `release/update.json` (versionName,
+      versionCode, downloadUrl, sha256, releaseNotes) from dudsterthegrey/IPTV-V2; updates are on.
+      Settings › Updates also shows the Downloader code. Publish a new `update.json` with every APK.
+- [x] **Built-in keys**: OpenSubtitles and TMDB keys are build defaults in `app/build.gradle.kts`
+      (an env var or `local.properties` overrides; a key entered in Settings still wins).
+- [x] **Volume boost**: Settings › Audio › Volume boost cycles Off/+3/+6/+10 dB (LoudnessEnhancer
+      on the player's audio session; passthrough audio is decoded by the receiver, so not boosted).
+- [x] **Typo-tolerant search**: when the exact search finds fewer than 8 per section, a second pass
+      matches words within 1–2 typos, prefixes, and joined words ("spiderman").
+- [x] **Skip intro**: episode controls › "Intro ends here" saves the point per show; every episode
+      then shows Skip intro (intro chapters in the file still work too).
+- [x] **IMDb ratings, genres, anime, Top 10** (TMDB + IMDb's ratings file): `TitleMetadataWorker`
+      matches titles on TMDB in the background (series first, animation first; ~1 h for series,
+      a few hours for 54k movies; pauses during playback), then downloads IMDb's
+      `title.ratings.tsv.gz` weekly. IMDb ratings replace provider ratings in the catalog (SQLite
+      triggers keep them after refreshes; under 1,000 votes counts as unrated), so "Top rated",
+      rating sorts and cards use IMDb. Ratings always show "/10" now.
+- [x] **Genres tab**: fixed genres (Action, Comedy, Anime…) for movies and series, best rated first.
+      Anime = Animation in Japanese, or a provider "anime" category.
+- [x] **Top 10 Today** Home row: TMDB trending (worldwide) or popular on streaming in a country;
+      "Change country" cycles countries. Only titles the provider has are shown, so it fills in as
+      matching progresses.
+- [ ] **Sync across devices** (Settings › Backup): built on Firebase REST (anonymous Auth +
+      Firestore), off until `firebase.project.id` / `firebase.api.key` (local.properties or the
+      build defaults) are set. Firestore rules: allow read, write on
+      `syncGroups/{group}/{document=**}` if `request.auth != null`.
+- [ ] On device: volume boost on TV speakers; Skip intro across episodes; Genres › Anime after the
+      lookup finishes; IMDb ratings in Top rated; Top 10 country switch; two-device sync.
+
 ## Release / Downloader
 
 - [x] Release signing (2026-10-29): V1's keystore passwords were lost, so V2 has its own key,

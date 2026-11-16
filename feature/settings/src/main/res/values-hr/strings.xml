@@ -984,4 +984,27 @@
     <string name="settings_volume_boost">Pojačanje glasnoće</string>
     <string name="settings_volume_boost_off">Isključeno</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Žanrovi</string>
+    <string name="dashboard_top_ten">Top 10 danas</string>
+    <string name="settings_cloud_sync_title">Sinkronizacija među uređajima</string>
+    <string name="settings_cloud_sync_not_configured">Nije postavljeno u ovoj verziji</string>
+    <string name="settings_cloud_sync_off">Isključeno</string>
+    <string name="settings_cloud_sync_on">Uključeno</string>
+    <string name="settings_cloud_sync_on_since">Uključeno · zadnja sinkronizacija %1$s</string>
+    <string name="settings_cloud_sync_create">Izradi kôd za sinkronizaciju</string>
+    <string name="settings_cloud_sync_create_value">Pokreni sinkronizaciju na ovom uređaju</string>
+    <string name="settings_cloud_sync_join">Unesi kôd za sinkronizaciju</string>
+    <string name="settings_cloud_sync_join_value">Koristi kôd s drugog uređaja</string>
+    <string name="settings_cloud_sync_join_hint">Upiši kôd s drugog uređaja iz Postavke › Sigurnosna kopija.</string>
+    <string name="settings_cloud_sync_join_confirm">Pridruži se</string>
+    <string name="settings_cloud_sync_cancel">Odustani</string>
+    <string name="settings_cloud_sync_code">Kôd za sinkronizaciju</string>
+    <string name="settings_cloud_sync_now">Sinkroniziraj sada</string>
+    <string name="settings_cloud_sync_now_value">Pošalji i preuzmi napredak</string>
+    <string name="settings_cloud_sync_syncing">Sinkronizacija…</string>
+    <string name="settings_cloud_sync_leave">Zaustavi sinkronizaciju na ovom uređaju</string>
+    <string name="settings_cloud_sync_leave_value">Ostali uređaji zadržavaju svoj napredak</string>
+    <string name="settings_cloud_sync_last_error">Zadnji problem sinkronizacije</string>
+    <string name="settings_cloud_sync_failed">Sinkronizacija nije uspjela. Provjeri internetsku vezu.</string>
+    <string name="settings_cloud_sync_done">Sinkronizirano</string>
 </resources>

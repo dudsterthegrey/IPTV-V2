@@ -14,6 +14,7 @@ internal fun DashboardUiState.hasContentFor(shelf: AppHomeDashboardShelf): Boole
     AppHomeDashboardShelf.LIVE_SHORTCUTS -> liveShortcuts.isNotEmpty()
     AppHomeDashboardShelf.CONTINUE_WATCHING -> continueWatching.isNotEmpty()
     AppHomeDashboardShelf.UP_NEXT -> upNext.isNotEmpty()
+    AppHomeDashboardShelf.TOP_TEN -> topTen.isNotEmpty()
     AppHomeDashboardShelf.TRACKED_SERIES -> trackedSeries.isNotEmpty()
     AppHomeDashboardShelf.RECENT_EPISODES -> recentEpisodes.isNotEmpty()
     AppHomeDashboardShelf.PINNED_CATEGORIES -> pinnedMovieCategories.isNotEmpty() || pinnedSeriesCategories.isNotEmpty()

@@ -55,6 +55,13 @@ val builtInTmdbApiKey = "e16549a24d9b3f6aa0515a3ac53d17f5"
 val tmdbApiKey = providers.environmentVariable("TMDB_API_KEY").orNull
     ?: localProp("tmdb.api.key").takeIf { it.isNotBlank() }
     ?: builtInTmdbApiKey
+// Firebase project for cross-device watch progress (Settings > Sync across devices). Empty = off.
+val firebaseProjectId = providers.environmentVariable("FIREBASE_PROJECT_ID").orNull
+    ?: localProp("firebase.project.id").takeIf { it.isNotBlank() }
+    ?: ""
+val firebaseApiKey = providers.environmentVariable("FIREBASE_API_KEY").orNull
+    ?: localProp("firebase.api.key").takeIf { it.isNotBlank() }
+    ?: ""
 val opensubtitlesApiKey = providers.environmentVariable("OPENSUBTITLES_API_KEY").orNull
     ?: localProp("opensubtitles.api.key").takeIf { it.isNotBlank() }
     ?: builtInOpenSubtitlesApiKey
@@ -91,8 +98,8 @@ android {
         applicationId = "com.dgeo.iptvplayer.v2"
         minSdk = 25
         targetSdk = 36
-        versionCode = 4
-        versionName = "2.0.3"
+        versionCode = 5
+        versionName = "2.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TRAKT_CLIENT_ID", buildStringLiteral(traktClientId))
         buildConfigField("String", "TRAKT_REDIRECT_URI", buildStringLiteral(traktRedirectUri))
@@ -105,6 +112,8 @@ android {
         buildConfigField("String", "OFFICIAL_SIGNING_CERT_SHA256", "\"$officialSigningCertSha256\"")
         buildConfigField("String", "OPENSUBTITLES_API_KEY", buildStringLiteral(opensubtitlesApiKey))
         buildConfigField("String", "TMDB_API_KEY", buildStringLiteral(tmdbApiKey))
+        buildConfigField("String", "FIREBASE_PROJECT_ID", buildStringLiteral(firebaseProjectId))
+        buildConfigField("String", "FIREBASE_API_KEY", buildStringLiteral(firebaseApiKey))
         buildConfigField("String", "APP_UPDATE_CHANNEL", "\"stable\"")
         // In-app updates pulled from the upstream StreamVault GitHub releases; off until IPTV Player has its own release feed.
         buildConfigField("boolean", "APP_UPDATES_ENABLED", "true")

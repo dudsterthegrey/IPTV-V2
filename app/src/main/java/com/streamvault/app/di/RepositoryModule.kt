@@ -100,6 +100,12 @@ abstract class RepositoryModule {
     abstract fun bindEpisodeShelfRepository(impl: EpisodeShelfRepositoryImpl): EpisodeShelfRepository
 
     @Binds @Singleton
+    abstract fun bindCatalogInsightsRepository(impl: CatalogInsightsRepositoryImpl): CatalogInsightsRepository
+
+    @Binds @Singleton
+    abstract fun bindCloudSyncRepository(impl: com.streamvault.data.cloud.CloudSyncRepositoryImpl): CloudSyncRepository
+
+    @Binds @Singleton
     abstract fun bindSavedStreamRepository(impl: SavedStreamRepositoryImpl): SavedStreamRepository
 
     @Binds @Singleton

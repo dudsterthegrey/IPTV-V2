@@ -345,4 +345,5 @@
     <string name="nav_extensions">एक्सटेंशन</string>
     <string name="nav_sports">खेल</string>
     <string name="nav_saved_streams">सहेजी गई स्ट्रीम</string>
+    <string name="nav_genres">शैलियाँ</string>
 </resources>

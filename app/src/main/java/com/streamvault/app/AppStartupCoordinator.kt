@@ -64,6 +64,7 @@ internal class AppStartupCoordinator internal constructor(
         providerSyncLifecycle: Provider<ProviderSyncLifecycle>,
         pendingBackupRestoreCoordinator: Provider<PendingBackupRestoreCoordinator>,
         builtInEpgSourceSeeder: Provider<com.streamvault.data.epg.BuiltInEpgSourceSeeder>,
+        cloudSyncRunner: Provider<com.streamvault.data.cloud.CloudSyncRunner>,
         watchNextManager: Provider<WatchNextManager>,
         launcherRecommendationsManager: Provider<LauncherRecommendationsManager>,
         tvInputChannelSyncManager: Provider<com.streamvault.app.tvinput.TvInputChannelSyncManager>
@@ -90,7 +91,9 @@ internal class AppStartupCoordinator internal constructor(
                 it.applyAllAvailable()
             },
             // Keeps watching for new providers, so this task stays active for the process.
-            providerTask("built-in-guide-sources", builtInEpgSourceSeeder) { it.run() }
+            providerTask("built-in-guide-sources", builtInEpgSourceSeeder) { it.run() },
+            // Cross-device watch progress; idle until a sync code is set in Settings.
+            providerTask("cloud-sync", cloudSyncRunner) { it.run() }
         ),
         tvTasks = listOf(
             providerTask("watch-next-refresh", watchNextManager) { it.refreshWatchNext() },

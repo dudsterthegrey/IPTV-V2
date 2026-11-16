@@ -292,4 +292,5 @@
     <string name="nav_extensions">Kiterjesztések</string>
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Mentett streamek</string>
+    <string name="nav_genres">Műfajok</string>
 </resources>

@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Ενίσχυση έντασης</string>
     <string name="settings_volume_boost_off">Ανενεργό</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Είδη</string>
+    <string name="dashboard_top_ten">Top 10 σήμερα</string>
+    <string name="settings_cloud_sync_title">Συγχρονισμός μεταξύ συσκευών</string>
+    <string name="settings_cloud_sync_not_configured">Δεν έχει ρυθμιστεί σε αυτήν την έκδοση</string>
+    <string name="settings_cloud_sync_off">Ανενεργό</string>
+    <string name="settings_cloud_sync_on">Ενεργό</string>
+    <string name="settings_cloud_sync_on_since">Ενεργό · τελευταίος συγχρονισμός %1$s</string>
+    <string name="settings_cloud_sync_create">Δημιουργία κωδικού</string>
+    <string name="settings_cloud_sync_create_value">Έναρξη συγχρονισμού σε αυτήν τη συσκευή</string>
+    <string name="settings_cloud_sync_join">Εισαγωγή κωδικού</string>
+    <string name="settings_cloud_sync_join_value">Χρήση κωδικού από άλλη συσκευή</string>
+    <string name="settings_cloud_sync_join_hint">Πληκτρολογήστε τον κωδικό από την άλλη συσκευή (Ρυθμίσεις › Αντίγραφο ασφαλείας).</string>
+    <string name="settings_cloud_sync_join_confirm">Σύνδεση</string>
+    <string name="settings_cloud_sync_cancel">Ακύρωση</string>
+    <string name="settings_cloud_sync_code">Κωδικός συγχρονισμού</string>
+    <string name="settings_cloud_sync_now">Συγχρονισμός τώρα</string>
+    <string name="settings_cloud_sync_now_value">Αποστολή και λήψη προόδου</string>
+    <string name="settings_cloud_sync_syncing">Συγχρονισμός…</string>
+    <string name="settings_cloud_sync_leave">Διακοπή συγχρονισμού σε αυτήν τη συσκευή</string>
+    <string name="settings_cloud_sync_leave_value">Οι άλλες συσκευές κρατούν την πρόοδό τους</string>
+    <string name="settings_cloud_sync_last_error">Τελευταίο πρόβλημα συγχρονισμού</string>
+    <string name="settings_cloud_sync_failed">Ο συγχρονισμός απέτυχε. Ελέγξτε τη σύνδεση στο διαδίκτυο.</string>
+    <string name="settings_cloud_sync_done">Συγχρονίστηκε</string>
 </resources>

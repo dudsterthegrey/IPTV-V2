@@ -27,6 +27,8 @@ import com.streamvault.domain.repository.CombinedM3uRepository
 import com.streamvault.domain.repository.FavoriteRepository
 import com.streamvault.domain.repository.TrackedSeriesRepository
 import com.streamvault.domain.repository.EpisodeShelfRepository
+import com.streamvault.domain.repository.CatalogInsightsRepository
+import com.streamvault.domain.repository.TopTenEntry
 import com.streamvault.domain.model.EpisodeShelfItem
 import com.streamvault.domain.repository.MovieRepository
 import com.streamvault.domain.repository.PlaybackHistoryRepository
@@ -85,7 +87,8 @@ class DashboardViewModel @Inject constructor(
     private val traktAccount: TraktAccount,
     private val traktWatchlist: TraktWatchlist,
     private val trackedSeriesRepository: TrackedSeriesRepository,
-    private val episodeShelfRepository: EpisodeShelfRepository
+    private val episodeShelfRepository: EpisodeShelfRepository,
+    private val catalogInsightsRepository: CatalogInsightsRepository
 ) : ViewModel() {
     private companion object {
         const val FAVORITE_CHANNEL_LIMIT = 12
@@ -94,6 +97,10 @@ class DashboardViewModel @Inject constructor(
         const val MOVIE_SHELF_LIMIT = 12
         const val SERIES_SHELF_LIMIT = 12
         const val EPISODE_SHELF_LIMIT = 12
+        val TOP_TEN_COUNTRIES: List<String?> = listOf(
+            null, "US", "GB", "CA", "AU", "IE", "NZ", "DE", "FR", "ES", "IT", "NL", "SE", "NO", "DK",
+            "FI", "PL", "PT", "BR", "MX", "AR", "IN", "JP", "KR", "TR", "AE", "SA", "EG", "ZA"
+        )
         const val HOME_SHORTCUT_LIMIT = 4
     }
 
@@ -387,6 +394,9 @@ class DashboardViewModel @Inject constructor(
             .combine(observeRecentEpisodes(provider.id).onStart { emit(emptyList()) }) { shelves, recentEpisodes ->
                 shelves.copy(recentEpisodes = recentEpisodes)
             }
+            .combine(observeTopTen(provider.id).onStart { emit(null to emptyList()) }) { shelves, topTen ->
+                shelves.copy(topTenCountry = topTen.first, topTen = topTen.second)
+            }
             .combine(topRatedMovieShelf.onStart { emit(emptyList()) }) { shelves, topRatedMovies ->
                 shelves.copy(topRatedMovies = topRatedMovies)
             }
@@ -458,6 +468,8 @@ class DashboardViewModel @Inject constructor(
                 favoriteSeries = snapshot.shelves.favoriteSeries,
                 trackedSeries = snapshot.shelves.trackedSeries,
                 upNext = snapshot.shelves.upNext,
+                topTen = snapshot.shelves.topTen,
+                topTenCountry = snapshot.shelves.topTenCountry,
                 recentEpisodes = snapshot.shelves.recentEpisodes,
                 traktWatchlistMovies = snapshot.shelves.traktWatchlistMovies,
                 traktWatchlistSeries = snapshot.shelves.traktWatchlistSeries,
@@ -543,6 +555,23 @@ class DashboardViewModel @Inject constructor(
             .combine(preferencesRepository.parentalControlLevel) { series, level ->
                 series.filter { !shouldHideVodFromHome(it, level) }
             }
+
+    /** Today's Top 10 for the chosen country (null = worldwide), refetched when the country changes. */
+    private fun observeTopTen(providerId: Long): Flow<Pair<String?, List<TopTenEntry>>> =
+        catalogInsightsRepository.topTenCountry.flatMapLatest { country ->
+            flow {
+                emit(country to emptyList())
+                emit(country to catalogInsightsRepository.topTenToday(providerId, country))
+            }
+        }
+
+    /** Worldwide → US → UK → … → back to worldwide. */
+    fun cycleTopTenCountry() {
+        val current = _uiState.value.topTenCountry
+        val index = TOP_TEN_COUNTRIES.indexOf(current)
+        val next = TOP_TEN_COUNTRIES[(index + 1) % TOP_TEN_COUNTRIES.size]
+        viewModelScope.launch { catalogInsightsRepository.setTopTenCountry(next) }
+    }
 
     private fun observeUpNext(providerId: Long): Flow<List<EpisodeShelfItem>> =
         episodeShelfRepository.observeUpNext(providerId, EPISODE_SHELF_LIMIT)
@@ -1002,6 +1031,8 @@ private data class DashboardContentShelves(
     val trackedSeries: List<Series> = emptyList(),
     val upNext: List<EpisodeShelfItem> = emptyList(),
     val recentEpisodes: List<EpisodeShelfItem> = emptyList(),
+    val topTen: List<TopTenEntry> = emptyList(),
+    val topTenCountry: String? = null,
     val traktWatchlistMovies: List<Movie> = emptyList(),
     val traktWatchlistSeries: List<Series> = emptyList(),
     val recentMovies: List<Movie>,
@@ -1039,6 +1070,8 @@ data class DashboardUiState(
     val trackedSeries: List<Series> = emptyList(),
     val upNext: List<EpisodeShelfItem> = emptyList(),
     val recentEpisodes: List<EpisodeShelfItem> = emptyList(),
+    val topTen: List<TopTenEntry> = emptyList(),
+    val topTenCountry: String? = null,
     val traktWatchlistMovies: List<Movie> = emptyList(),
     val traktWatchlistSeries: List<Series> = emptyList(),
     val recentMovies: List<Movie> = emptyList(),

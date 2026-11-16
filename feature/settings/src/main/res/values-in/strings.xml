@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Penguat volume</string>
     <string name="settings_volume_boost_off">Mati</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Genre</string>
+    <string name="dashboard_top_ten">Top 10 hari ini</string>
+    <string name="settings_cloud_sync_title">Sinkronkan antarperangkat</string>
+    <string name="settings_cloud_sync_not_configured">Belum disiapkan di versi ini</string>
+    <string name="settings_cloud_sync_off">Mati</string>
+    <string name="settings_cloud_sync_on">Aktif</string>
+    <string name="settings_cloud_sync_on_since">Aktif · terakhir %1$s</string>
+    <string name="settings_cloud_sync_create">Buat kode sinkron</string>
+    <string name="settings_cloud_sync_create_value">Mulai sinkron di perangkat ini</string>
+    <string name="settings_cloud_sync_join">Masukkan kode sinkron</string>
+    <string name="settings_cloud_sync_join_value">Gunakan kode dari perangkat lain</string>
+    <string name="settings_cloud_sync_join_hint">Ketik kode yang tampil di perangkat lain pada Setelan › Cadangan.</string>
+    <string name="settings_cloud_sync_join_confirm">Gabung</string>
+    <string name="settings_cloud_sync_cancel">Batal</string>
+    <string name="settings_cloud_sync_code">Kode sinkron</string>
+    <string name="settings_cloud_sync_now">Sinkronkan sekarang</string>
+    <string name="settings_cloud_sync_now_value">Kirim dan ambil progres tontonan</string>
+    <string name="settings_cloud_sync_syncing">Menyinkronkan…</string>
+    <string name="settings_cloud_sync_leave">Hentikan sinkron di perangkat ini</string>
+    <string name="settings_cloud_sync_leave_value">Perangkat lain tetap menyimpan progresnya</string>
+    <string name="settings_cloud_sync_last_error">Masalah sinkron terakhir</string>
+    <string name="settings_cloud_sync_failed">Sinkron gagal. Periksa koneksi internet.</string>
+    <string name="settings_cloud_sync_done">Tersinkron</string>
 </resources>

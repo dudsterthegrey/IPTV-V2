@@ -292,4 +292,5 @@
     <string name="nav_extensions">Rozszerzenia</string>
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Zapisane strumienie</string>
+    <string name="nav_genres">Gatunki</string>
 </resources>

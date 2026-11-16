@@ -46,6 +46,7 @@ class StartupWorkRegistry @Inject constructor(
         RecordingReconcileWorker.enqueuePeriodic(context)
         RecordingReconcileWorker.enqueueOneShot(context)
         ProviderDeletionCleanupWorker.enqueue(context)
+        com.streamvault.data.metadata.TitleMetadataWorker.enqueue(context)
     }
 
     private companion object {

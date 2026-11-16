@@ -989,4 +989,27 @@
     <string name="settings_volume_boost">Zesílení hlasitosti</string>
     <string name="settings_volume_boost_off">Vypnuto</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Žánry</string>
+    <string name="dashboard_top_ten">Top 10 dnes</string>
+    <string name="settings_cloud_sync_title">Synchronizace mezi zařízeními</string>
+    <string name="settings_cloud_sync_not_configured">V této verzi není nastaveno</string>
+    <string name="settings_cloud_sync_off">Vypnuto</string>
+    <string name="settings_cloud_sync_on">Zapnuto</string>
+    <string name="settings_cloud_sync_on_since">Zapnuto · naposledy %1$s</string>
+    <string name="settings_cloud_sync_create">Vytvořit kód synchronizace</string>
+    <string name="settings_cloud_sync_create_value">Spustit synchronizaci na tomto zařízení</string>
+    <string name="settings_cloud_sync_join">Zadat kód synchronizace</string>
+    <string name="settings_cloud_sync_join_value">Použít kód z jiného zařízení</string>
+    <string name="settings_cloud_sync_join_hint">Zadejte kód zobrazený na druhém zařízení v Nastavení › Záloha.</string>
+    <string name="settings_cloud_sync_join_confirm">Připojit</string>
+    <string name="settings_cloud_sync_cancel">Zrušit</string>
+    <string name="settings_cloud_sync_code">Kód synchronizace</string>
+    <string name="settings_cloud_sync_now">Synchronizovat nyní</string>
+    <string name="settings_cloud_sync_now_value">Odeslat a načíst průběh sledování</string>
+    <string name="settings_cloud_sync_syncing">Synchronizace…</string>
+    <string name="settings_cloud_sync_leave">Ukončit synchronizaci na tomto zařízení</string>
+    <string name="settings_cloud_sync_leave_value">Ostatní zařízení si průběh ponechají</string>
+    <string name="settings_cloud_sync_last_error">Poslední problém se synchronizací</string>
+    <string name="settings_cloud_sync_failed">Synchronizace selhala. Zkontrolujte připojení k internetu.</string>
+    <string name="settings_cloud_sync_done">Synchronizováno</string>
 </resources>

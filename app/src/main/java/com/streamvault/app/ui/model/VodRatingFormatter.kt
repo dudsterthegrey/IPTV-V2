@@ -3,10 +3,10 @@ package com.streamvault.app.ui.model
 import java.util.Locale
 
 fun formatVodRatingLabel(rating: Float): String {
-    val normalizedRating = rating.coerceAtLeast(0f)
-    val scale = if (normalizedRating <= 5f) 5 else 10
+    // Ratings are out of 10 (IMDb once matched); guessing a 5-point scale turned a 3/10 into "3/5".
+    val normalizedRating = rating.coerceIn(0f, 10f)
     val valueText = formatVodRatingValue(normalizedRating)
-    return "\u2605 $valueText/$scale"
+    return "\u2605 $valueText/10"
 }
 
 private fun formatVodRatingValue(rating: Float): String {

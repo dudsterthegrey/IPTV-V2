@@ -981,4 +981,27 @@
     <string name="settings_volume_boost">音量ブースト</string>
     <string name="settings_volume_boost_off">オフ</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">ジャンル</string>
+    <string name="dashboard_top_ten">今日のトップ10</string>
+    <string name="settings_cloud_sync_title">デバイス間で同期</string>
+    <string name="settings_cloud_sync_not_configured">このビルドでは未設定</string>
+    <string name="settings_cloud_sync_off">オフ</string>
+    <string name="settings_cloud_sync_on">オン</string>
+    <string name="settings_cloud_sync_on_since">オン · 最終同期 %1$s</string>
+    <string name="settings_cloud_sync_create">同期コードを作成</string>
+    <string name="settings_cloud_sync_create_value">このデバイスで同期を開始</string>
+    <string name="settings_cloud_sync_join">同期コードを入力</string>
+    <string name="settings_cloud_sync_join_value">別のデバイスのコードを使う</string>
+    <string name="settings_cloud_sync_join_hint">もう一方のデバイスの「設定 › バックアップ」に表示されたコードを入力してください。</string>
+    <string name="settings_cloud_sync_join_confirm">参加</string>
+    <string name="settings_cloud_sync_cancel">キャンセル</string>
+    <string name="settings_cloud_sync_code">同期コード</string>
+    <string name="settings_cloud_sync_now">今すぐ同期</string>
+    <string name="settings_cloud_sync_now_value">視聴状況を送受信</string>
+    <string name="settings_cloud_sync_syncing">同期中…</string>
+    <string name="settings_cloud_sync_leave">このデバイスの同期を停止</string>
+    <string name="settings_cloud_sync_leave_value">他のデバイスの視聴状況はそのまま残ります</string>
+    <string name="settings_cloud_sync_last_error">直近の同期の問題</string>
+    <string name="settings_cloud_sync_failed">同期できませんでした。インターネット接続を確認してください。</string>
+    <string name="settings_cloud_sync_done">同期しました</string>
 </resources>

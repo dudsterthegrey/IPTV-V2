@@ -47,6 +47,9 @@ public fun LazyListScope.settingsBackupSection(
     targetItemId: String? = null,
     targetFocusModifier: Modifier = Modifier,
 ) {
+    item(key = "cloud_sync") {
+        CloudSyncSettingsSection()
+    }
     item {
         Column(
             verticalArrangement = Arrangement.spacedBy(SettingsDesignTokens.space8),

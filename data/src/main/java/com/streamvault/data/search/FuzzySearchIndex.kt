@@ -69,6 +69,31 @@ class FuzzySearchIndex @Inject constructor(
         }
     }
 
+    /**
+     * The catalog id of a title whose words equal [title]'s (ignoring a year and quality tags),
+     * preferring one whose year is within a year of [year]. Null when none matches exactly.
+     */
+    suspend fun exactTitleMatch(providerId: Long, isSeries: Boolean, title: String, year: Int?): Long? =
+        withContext(Dispatchers.Default) {
+            val wanted = comparableKey(FuzzyTitleMatcher.tokenize(title))
+            if (wanted.isEmpty()) return@withContext null
+            val titles = titlesFor(providerId)
+            val candidates = (if (isSeries) titles.series else titles.movies)
+                .filter { comparableKey(it.tokens) == wanted }
+            candidates.firstOrNull { entry ->
+                val entryYear = entry.tokens.lastOrNull()?.takeIf { it.length == 4 }?.toIntOrNull()
+                year != null && entryYear != null && kotlin.math.abs(entryYear - year) <= 1
+            }?.id ?: candidates.firstOrNull()?.id
+        }
+
+    /** Words without quality tags or a trailing year ("1883 (2021)" → "1883"). */
+    private fun comparableKey(tokens: List<String>): String {
+        val words = tokens.filterNot { it in QUALITY_TOKENS }
+        val last = words.lastOrNull()
+        val trailingYear = words.size > 1 && last != null && last.length == 4 && last.toIntOrNull() in 1900..2099
+        return (if (trailingYear) words.dropLast(1) else words).joinToString(" ")
+    }
+
     private suspend fun titlesFor(providerId: Long): ProviderTitles = mutex.withLock {
         val current = cached
         if (current != null && cachedProviderId == providerId &&
@@ -95,5 +120,6 @@ class FuzzySearchIndex @Inject constructor(
         const val MIN_EXACT_HITS = 8
         // Exact hits use match ranks 0..2; typo matches always come after them.
         const val FUZZY_RANK_BASE = 100
+        val QUALITY_TOKENS = setOf("4k", "uhd", "fhd", "hd", "sd", "hdr", "1080p", "720p", "2160p")
     }
 }

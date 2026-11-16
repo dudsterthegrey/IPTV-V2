@@ -345,4 +345,5 @@
     <string name="nav_extensions">Mga extension</string>
     <string name="nav_sports">Palakasan</string>
     <string name="nav_saved_streams">Mga Naka-save na Stream</string>
+    <string name="nav_genres">Mga genre</string>
 </resources>

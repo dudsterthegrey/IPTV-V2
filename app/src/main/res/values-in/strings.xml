@@ -292,4 +292,5 @@
     <string name="nav_extensions">Ekstensi</string>
     <string name="nav_sports">Olahraga</string>
     <string name="nav_saved_streams">Streaming Tersimpan</string>
+    <string name="nav_genres">Genre</string>
 </resources>

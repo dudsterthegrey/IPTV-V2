@@ -989,4 +989,27 @@
     <string name="settings_volume_boost">Усиление громкости</string>
     <string name="settings_volume_boost_off">Выкл.</string>
     <string name="settings_volume_boost_value">+%1$d дБ</string>
+    <string name="nav_genres">Жанры</string>
+    <string name="dashboard_top_ten">Топ-10 сегодня</string>
+    <string name="settings_cloud_sync_title">Синхронизация между устройствами</string>
+    <string name="settings_cloud_sync_not_configured">Не настроено в этой сборке</string>
+    <string name="settings_cloud_sync_off">Выкл.</string>
+    <string name="settings_cloud_sync_on">Вкл.</string>
+    <string name="settings_cloud_sync_on_since">Вкл. · последняя синхронизация %1$s</string>
+    <string name="settings_cloud_sync_create">Создать код синхронизации</string>
+    <string name="settings_cloud_sync_create_value">Начать синхронизацию на этом устройстве</string>
+    <string name="settings_cloud_sync_join">Ввести код синхронизации</string>
+    <string name="settings_cloud_sync_join_value">Использовать код с другого устройства</string>
+    <string name="settings_cloud_sync_join_hint">Введите код с другого устройства из «Настройки › Резервная копия».</string>
+    <string name="settings_cloud_sync_join_confirm">Подключиться</string>
+    <string name="settings_cloud_sync_cancel">Отмена</string>
+    <string name="settings_cloud_sync_code">Код синхронизации</string>
+    <string name="settings_cloud_sync_now">Синхронизировать</string>
+    <string name="settings_cloud_sync_now_value">Отправить и получить прогресс</string>
+    <string name="settings_cloud_sync_syncing">Синхронизация…</string>
+    <string name="settings_cloud_sync_leave">Отключить синхронизацию на этом устройстве</string>
+    <string name="settings_cloud_sync_leave_value">На других устройствах прогресс сохранится</string>
+    <string name="settings_cloud_sync_last_error">Последняя ошибка синхронизации</string>
+    <string name="settings_cloud_sync_failed">Не удалось синхронизировать. Проверьте подключение к интернету.</string>
+    <string name="settings_cloud_sync_done">Синхронизировано</string>
 </resources>

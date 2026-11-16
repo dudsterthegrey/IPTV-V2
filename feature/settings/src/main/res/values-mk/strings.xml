@@ -981,4 +981,27 @@
     <string name="settings_volume_boost">Засилување на звукот</string>
     <string name="settings_volume_boost_off">Исклучено</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Жанрови</string>
+    <string name="dashboard_top_ten">Топ 10 денес</string>
+    <string name="settings_cloud_sync_title">Синхронизација меѓу уреди</string>
+    <string name="settings_cloud_sync_not_configured">Не е поставено во оваа верзија</string>
+    <string name="settings_cloud_sync_off">Исклучено</string>
+    <string name="settings_cloud_sync_on">Вклучено</string>
+    <string name="settings_cloud_sync_on_since">Вклучено · последно %1$s</string>
+    <string name="settings_cloud_sync_create">Создај код</string>
+    <string name="settings_cloud_sync_create_value">Започни синхронизација на овој уред</string>
+    <string name="settings_cloud_sync_join">Внеси код</string>
+    <string name="settings_cloud_sync_join_value">Користи код од друг уред</string>
+    <string name="settings_cloud_sync_join_hint">Внесете го кодот од другиот уред во Поставки › Резервна копија.</string>
+    <string name="settings_cloud_sync_join_confirm">Приклучи се</string>
+    <string name="settings_cloud_sync_cancel">Откажи</string>
+    <string name="settings_cloud_sync_code">Код за синхронизација</string>
+    <string name="settings_cloud_sync_now">Синхронизирај сега</string>
+    <string name="settings_cloud_sync_now_value">Испрати и преземи напредок</string>
+    <string name="settings_cloud_sync_syncing">Синхронизирање…</string>
+    <string name="settings_cloud_sync_leave">Запри синхронизација на овој уред</string>
+    <string name="settings_cloud_sync_leave_value">Другите уреди го задржуваат напредокот</string>
+    <string name="settings_cloud_sync_last_error">Последен проблем со синхронизација</string>
+    <string name="settings_cloud_sync_failed">Синхронизацијата не успеа. Проверете ја врската.</string>
+    <string name="settings_cloud_sync_done">Синхронизирано</string>
 </resources>

@@ -983,4 +983,27 @@
     <string name="settings_volume_boost">Volymförstärkning</string>
     <string name="settings_volume_boost_off">Av</string>
     <string name="settings_volume_boost_value">+%1$d dB</string>
+    <string name="nav_genres">Genrer</string>
+    <string name="dashboard_top_ten">Topp 10 i dag</string>
+    <string name="settings_cloud_sync_title">Synka mellan enheter</string>
+    <string name="settings_cloud_sync_not_configured">Inte konfigurerat i den här versionen</string>
+    <string name="settings_cloud_sync_off">Av</string>
+    <string name="settings_cloud_sync_on">På</string>
+    <string name="settings_cloud_sync_on_since">På · senast %1$s</string>
+    <string name="settings_cloud_sync_create">Skapa synkkod</string>
+    <string name="settings_cloud_sync_create_value">Börja synka på den här enheten</string>
+    <string name="settings_cloud_sync_join">Ange synkkod</string>
+    <string name="settings_cloud_sync_join_value">Använd en kod från en annan enhet</string>
+    <string name="settings_cloud_sync_join_hint">Skriv koden som visas på den andra enheten under Inställningar › Säkerhetskopia.</string>
+    <string name="settings_cloud_sync_join_confirm">Gå med</string>
+    <string name="settings_cloud_sync_cancel">Avbryt</string>
+    <string name="settings_cloud_sync_code">Synkkod</string>
+    <string name="settings_cloud_sync_now">Synka nu</string>
+    <string name="settings_cloud_sync_now_value">Skicka och hämta tittarprogress</string>
+    <string name="settings_cloud_sync_syncing">Synkar…</string>
+    <string name="settings_cloud_sync_leave">Sluta synka på den här enheten</string>
+    <string name="settings_cloud_sync_leave_value">Dina andra enheter behåller sin progress</string>
+    <string name="settings_cloud_sync_last_error">Senaste synkproblem</string>
+    <string name="settings_cloud_sync_failed">Synkningen misslyckades. Kontrollera internetanslutningen.</string>
+    <string name="settings_cloud_sync_done">Synkat</string>
 </resources>
