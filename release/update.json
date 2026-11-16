@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.0",
-  "versionCode": 5,
+  "versionName": "2.1.1",
+  "versionCode": 6,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "29f074cc430fe5b17f6f3785d49e766611665c0d99a950cc048a0814638e4b75",
-  "releaseNotes": "IMDb ratings, Genres tab with anime, Top 10 Today, typo-tolerant search, Skip intro, volume boost, updates from the V2 repo.",
-  "publishedAt": "2026-11-15",
+  "sha256": "0d0b7b208e5e1ec7c8721238ddaf67def37960c26408539f530a84ccac130ca0",
+  "releaseNotes": "Sign in to sync from your phone: scan a QR code and type your email and password, or sign in with Google.",
+  "publishedAt": "2026-11-16",
   "downloaderCode": "7935478"
 }
