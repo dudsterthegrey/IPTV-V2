@@ -293,4 +293,9 @@
     <string name="nav_sports">스포츠</string>
     <string name="nav_saved_streams">저장된 스트림</string>
     <string name="nav_genres">장르</string>
+    <string name="nav_sync_now">동기화</string>
+    <string name="nav_sync_syncing">동기화 중…</string>
+    <string name="nav_sync_done">동기화됨</string>
+    <string name="nav_sync_failed">동기화 실패</string>
+    <string name="nav_sync_description">시청 진행 상황을 지금 다른 기기와 동기화</string>
 </resources>

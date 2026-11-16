@@ -293,4 +293,9 @@
     <string name="nav_sports">Thể thao</string>
     <string name="nav_saved_streams">Luồng đã lưu</string>
     <string name="nav_genres">Thể loại</string>
+    <string name="nav_sync_now">Đồng bộ</string>
+    <string name="nav_sync_syncing">Đang đồng bộ…</string>
+    <string name="nav_sync_done">Đã đồng bộ</string>
+    <string name="nav_sync_failed">Đồng bộ thất bại</string>
+    <string name="nav_sync_description">Đồng bộ tiến độ xem với các thiết bị khác ngay</string>
 </resources>

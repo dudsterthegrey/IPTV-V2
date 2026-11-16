@@ -346,4 +346,9 @@
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Spremljeni streamovi</string>
     <string name="nav_genres">Žanrovi</string>
+    <string name="nav_sync_now">Sinkroniziraj</string>
+    <string name="nav_sync_syncing">Sinkronizacija…</string>
+    <string name="nav_sync_done">Sinkronizirano</string>
+    <string name="nav_sync_failed">Sinkronizacija nije uspjela</string>
+    <string name="nav_sync_description">Sinkroniziraj napredak gledanja s drugim uređajima sada</string>
 </resources>

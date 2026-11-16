@@ -293,4 +293,9 @@
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Mentett streamek</string>
     <string name="nav_genres">Műfajok</string>
+    <string name="nav_sync_now">Szinkron</string>
+    <string name="nav_sync_syncing">Szinkronizálás…</string>
+    <string name="nav_sync_done">Szinkronizálva</string>
+    <string name="nav_sync_failed">Sikertelen szinkron</string>
+    <string name="nav_sync_description">Megtekintési előrehaladás szinkronizálása a többi eszközzel most</string>
 </resources>

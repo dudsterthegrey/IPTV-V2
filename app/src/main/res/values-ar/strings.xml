@@ -295,4 +295,9 @@
     <string name="nav_sports">الرياضة</string>
     <string name="nav_saved_streams">البث المحفوظ</string>
     <string name="nav_genres">الأنواع</string>
+    <string name="nav_sync_now">مزامنة</string>
+    <string name="nav_sync_syncing">جارٍ المزامنة…</string>
+    <string name="nav_sync_done">تمت المزامنة</string>
+    <string name="nav_sync_failed">فشلت المزامنة</string>
+    <string name="nav_sync_description">مزامنة تقدم المشاهدة مع أجهزتك الأخرى الآن</string>
 </resources>

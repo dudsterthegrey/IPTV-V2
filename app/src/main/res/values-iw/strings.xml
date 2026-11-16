@@ -293,4 +293,9 @@
     <string name="nav_sports">ספורט</string>
     <string name="nav_saved_streams">שידורים שמורים</string>
     <string name="nav_genres">ז׳אנרים</string>
+    <string name="nav_sync_now">סנכרון</string>
+    <string name="nav_sync_syncing">מסנכרן…</string>
+    <string name="nav_sync_done">סונכרן</string>
+    <string name="nav_sync_failed">הסנכרון נכשל</string>
+    <string name="nav_sync_description">סנכרון התקדמות הצפייה עם המכשירים האחרים שלך עכשיו</string>
 </resources>

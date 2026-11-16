@@ -293,4 +293,9 @@
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Uložené streamy</string>
     <string name="nav_genres">Žánry</string>
+    <string name="nav_sync_now">Synchronizovat</string>
+    <string name="nav_sync_syncing">Synchronizace…</string>
+    <string name="nav_sync_done">Synchronizováno</string>
+    <string name="nav_sync_failed">Synchronizace selhala</string>
+    <string name="nav_sync_description">Synchronizovat průběh sledování s ostatními zařízeními</string>
 </resources>

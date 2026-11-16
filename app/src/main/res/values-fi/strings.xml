@@ -293,4 +293,9 @@
     <string name="nav_sports">Urheilu</string>
     <string name="nav_saved_streams">Tallennetut striimit</string>
     <string name="nav_genres">Lajityypit</string>
+    <string name="nav_sync_now">Synkronoi</string>
+    <string name="nav_sync_syncing">Synkronoidaan…</string>
+    <string name="nav_sync_done">Synkronoitu</string>
+    <string name="nav_sync_failed">Synkronointi epäonnistui</string>
+    <string name="nav_sync_description">Synkronoi katselukohta muihin laitteisiisi nyt</string>
 </resources>

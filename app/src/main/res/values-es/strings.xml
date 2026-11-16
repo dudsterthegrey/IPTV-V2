@@ -293,4 +293,9 @@
     <string name="nav_sports">Deportes</string>
     <string name="nav_saved_streams">Streams guardados</string>
     <string name="nav_genres">Géneros</string>
+    <string name="nav_sync_now">Sincronizar</string>
+    <string name="nav_sync_syncing">Sincronizando…</string>
+    <string name="nav_sync_done">Sincronizado</string>
+    <string name="nav_sync_failed">Error al sincronizar</string>
+    <string name="nav_sync_description">Sincronizar ahora el progreso con tus otros dispositivos</string>
 </resources>

@@ -293,4 +293,9 @@
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Fluxuri salvate</string>
     <string name="nav_genres">Genuri</string>
+    <string name="nav_sync_now">Sincronizare</string>
+    <string name="nav_sync_syncing">Se sincronizează…</string>
+    <string name="nav_sync_done">Sincronizat</string>
+    <string name="nav_sync_failed">Sincronizare eșuată</string>
+    <string name="nav_sync_description">Sincronizează acum progresul cu celelalte dispozitive</string>
 </resources>

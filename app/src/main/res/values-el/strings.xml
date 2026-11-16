@@ -293,4 +293,9 @@
     <string name="nav_sports">Αθλητικά</string>
     <string name="nav_saved_streams">Αποθηκευμένες ροές</string>
     <string name="nav_genres">Είδη</string>
+    <string name="nav_sync_now">Συγχρ.</string>
+    <string name="nav_sync_syncing">Συγχρονισμός…</string>
+    <string name="nav_sync_done">Συγχρονίστηκε</string>
+    <string name="nav_sync_failed">Αποτυχία συγχρ.</string>
+    <string name="nav_sync_description">Συγχρονισμός προόδου προβολής με τις άλλες συσκευές σας τώρα</string>
 </resources>

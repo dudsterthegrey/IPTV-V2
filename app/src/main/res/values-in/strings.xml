@@ -293,4 +293,9 @@
     <string name="nav_sports">Olahraga</string>
     <string name="nav_saved_streams">Streaming Tersimpan</string>
     <string name="nav_genres">Genre</string>
+    <string name="nav_sync_now">Sinkronkan</string>
+    <string name="nav_sync_syncing">Menyinkronkan…</string>
+    <string name="nav_sync_done">Tersinkron</string>
+    <string name="nav_sync_failed">Gagal sinkron</string>
+    <string name="nav_sync_description">Sinkronkan progres tontonan dengan perangkat lain sekarang</string>
 </resources>

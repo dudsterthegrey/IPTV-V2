@@ -293,4 +293,9 @@
     <string name="nav_sports">Spor</string>
     <string name="nav_saved_streams">Kayıtlı Yayınlar</string>
     <string name="nav_genres">Türler</string>
+    <string name="nav_sync_now">Eşitle</string>
+    <string name="nav_sync_syncing">Eşitleniyor…</string>
+    <string name="nav_sync_done">Eşitlendi</string>
+    <string name="nav_sync_failed">Eşitleme başarısız</string>
+    <string name="nav_sync_description">İzleme ilerlemesini diğer cihazlarınızla şimdi eşitleyin</string>
 </resources>

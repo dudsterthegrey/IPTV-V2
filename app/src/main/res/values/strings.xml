@@ -346,4 +346,9 @@
     <string name="nav_sports">Sports</string>
     <string name="nav_saved_streams">Saved Streams</string>
     <string name="nav_genres">Genres</string>
+    <string name="nav_sync_now">Sync</string>
+    <string name="nav_sync_syncing">Syncing…</string>
+    <string name="nav_sync_done">Synced</string>
+    <string name="nav_sync_failed">Sync failed</string>
+    <string name="nav_sync_description">Sync watch progress with your other devices now</string>
 </resources>

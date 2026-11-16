@@ -294,4 +294,9 @@
     <string name="nav_sports">スポーツ</string>
     <string name="nav_saved_streams">保存したストリーム</string>
     <string name="nav_genres">ジャンル</string>
+    <string name="nav_sync_now">同期</string>
+    <string name="nav_sync_syncing">同期中…</string>
+    <string name="nav_sync_done">同期完了</string>
+    <string name="nav_sync_failed">同期に失敗</string>
+    <string name="nav_sync_description">視聴の進行状況を他のデバイスと今すぐ同期</string>
 </resources>

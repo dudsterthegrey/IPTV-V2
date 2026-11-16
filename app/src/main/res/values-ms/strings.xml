@@ -347,4 +347,9 @@
     <string name="nav_sports">Sukan</string>
     <string name="nav_saved_streams">Strim Disimpan</string>
     <string name="nav_genres">Genre</string>
+    <string name="nav_sync_now">Segerak</string>
+    <string name="nav_sync_syncing">Menyegerak…</string>
+    <string name="nav_sync_done">Disegerakkan</string>
+    <string name="nav_sync_failed">Segerak gagal</string>
+    <string name="nav_sync_description">Segerakkan kemajuan tontonan dengan peranti lain sekarang</string>
 </resources>

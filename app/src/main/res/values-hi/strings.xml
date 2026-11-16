@@ -346,4 +346,9 @@
     <string name="nav_sports">खेल</string>
     <string name="nav_saved_streams">सहेजी गई स्ट्रीम</string>
     <string name="nav_genres">शैलियाँ</string>
+    <string name="nav_sync_now">सिंक करें</string>
+    <string name="nav_sync_syncing">सिंक हो रहा है…</string>
+    <string name="nav_sync_done">सिंक हो गया</string>
+    <string name="nav_sync_failed">सिंक विफल</string>
+    <string name="nav_sync_description">देखने की प्रगति अभी अपने दूसरे डिवाइस के साथ सिंक करें</string>
 </resources>

@@ -251,6 +251,10 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       Google and leaves its Google token at `pairings/{code}`; the TV polls that document every 2 s
       for 5 minutes, signs in with `accounts:signInWithIdp`, then deletes it. The phone page is in
       English only.
+- [ ] **Sync button in the top bar** (2.1.2): while signed in to sync, every page with the top
+      bar (Home, Live TV, Movies, Series, Genres, Search…) shows a small "Sync" button next to the
+      close-app icon (`AppSyncTopBarAction.kt`, fed from `MainActivity` through
+      `LocalAppSyncShortcut`). It spins while syncing, then shows "Synced" or "Sync failed" for 4 s.
 - [ ] On device: volume boost on TV speakers; Skip intro across episodes; Genres › Anime after the
       lookup finishes; IMDb ratings in Top rated; Top 10 country switch; two-device sync.
 

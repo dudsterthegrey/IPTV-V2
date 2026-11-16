@@ -346,4 +346,9 @@
     <string name="nav_sports">กีฬา</string>
     <string name="nav_saved_streams">สตรีมที่บันทึกไว้</string>
     <string name="nav_genres">ประเภท</string>
+    <string name="nav_sync_now">ซิงค์</string>
+    <string name="nav_sync_syncing">กำลังซิงค์…</string>
+    <string name="nav_sync_done">ซิงค์แล้ว</string>
+    <string name="nav_sync_failed">ซิงค์ไม่สำเร็จ</string>
+    <string name="nav_sync_description">ซิงค์ความคืบหน้าการดูกับอุปกรณ์อื่นของคุณตอนนี้</string>
 </resources>

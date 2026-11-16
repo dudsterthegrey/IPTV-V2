@@ -293,4 +293,9 @@
     <string name="nav_sports">体育</string>
     <string name="nav_saved_streams">已保存的直播流</string>
     <string name="nav_genres">类型</string>
+    <string name="nav_sync_now">同步</string>
+    <string name="nav_sync_syncing">正在同步…</string>
+    <string name="nav_sync_done">已同步</string>
+    <string name="nav_sync_failed">同步失败</string>
+    <string name="nav_sync_description">立即与其他设备同步观看进度</string>
 </resources>

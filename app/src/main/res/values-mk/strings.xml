@@ -345,4 +345,9 @@
     <string name="nav_sports">Спорт</string>
     <string name="nav_saved_streams">Зачувани стримови</string>
     <string name="nav_genres">Жанрови</string>
+    <string name="nav_sync_now">Синхронизирај</string>
+    <string name="nav_sync_syncing">Се синхронизира…</string>
+    <string name="nav_sync_done">Синхронизирано</string>
+    <string name="nav_sync_failed">Неуспешна синхронизација</string>
+    <string name="nav_sync_description">Синхронизирај го напредокот со другите уреди сега</string>
 </resources>

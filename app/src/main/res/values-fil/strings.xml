@@ -346,4 +346,9 @@
     <string name="nav_sports">Palakasan</string>
     <string name="nav_saved_streams">Mga Naka-save na Stream</string>
     <string name="nav_genres">Mga genre</string>
+    <string name="nav_sync_now">I-sync</string>
+    <string name="nav_sync_syncing">Nagsi-sync…</string>
+    <string name="nav_sync_done">Na-sync na</string>
+    <string name="nav_sync_failed">Nabigo ang sync</string>
+    <string name="nav_sync_description">I-sync ngayon ang progreso ng panonood sa iba mong device</string>
 </resources>

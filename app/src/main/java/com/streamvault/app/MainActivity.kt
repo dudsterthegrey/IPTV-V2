@@ -130,6 +130,9 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
     private val pendingExternalNavigationRequests = ArrayDeque<ExternalNavigationRequest>()
 
     @Inject
+    lateinit var cloudSyncRepository: dagger.Lazy<com.streamvault.domain.repository.CloudSyncRepository>
+
+    @Inject
     lateinit var externalNavigationRequestParser: ExternalNavigationRequestParser
 
     @Inject
@@ -281,12 +284,24 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
                             onShareReport = ::shareLatestFailureReport
                         )
                         DatabaseStartupState.Ready -> {
-                            AppNavigation(
-                                coordinator = appNavigationCoordinator,
-                                settingsPlatformHost = settingsPlatformHost,
-                                catalogPlatformHost = this@MainActivity,
-                                onCloseApp = ::closeApp
+                            val cloudSync = remember { cloudSyncRepository.get() }
+                            val cloudSyncState by cloudSync.state.collectAsState(
+                                initial = com.streamvault.domain.repository.CloudSyncState()
                             )
+                            CompositionLocalProvider(
+                                com.streamvault.app.ui.components.shell.LocalAppSyncShortcut provides
+                                    com.streamvault.app.ui.components.shell.AppSyncShortcut(
+                                        state = cloudSyncState,
+                                        onSyncNow = { lifecycleScope.launch { cloudSync.syncNow() } }
+                                    )
+                            ) {
+                                AppNavigation(
+                                    coordinator = appNavigationCoordinator,
+                                    settingsPlatformHost = settingsPlatformHost,
+                                    catalogPlatformHost = this@MainActivity,
+                                    onCloseApp = ::closeApp
+                                )
+                            }
                             LaunchedEffect(Unit) {
                                 dispatchPendingExternalNavigationRequests()
                                 window.decorView.doOnPreDraw {

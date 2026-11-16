@@ -305,4 +305,9 @@
     <string name="nav_sports">Sports</string>
     <string name="nav_saved_streams">Flux enregistrés</string>
     <string name="nav_genres">Genres</string>
+    <string name="nav_sync_now">Synchroniser</string>
+    <string name="nav_sync_syncing">Synchronisation…</string>
+    <string name="nav_sync_done">Synchronisé</string>
+    <string name="nav_sync_failed">Échec de la synchro</string>
+    <string name="nav_sync_description">Synchroniser maintenant la progression avec vos autres appareils</string>
 </resources>

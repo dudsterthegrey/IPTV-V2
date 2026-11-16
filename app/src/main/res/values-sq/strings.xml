@@ -346,4 +346,9 @@
     <string name="nav_sports">Sport</string>
     <string name="nav_saved_streams">Transmetimet e ruajtura</string>
     <string name="nav_genres">Zhanret</string>
+    <string name="nav_sync_now">Sinkronizo</string>
+    <string name="nav_sync_syncing">Po sinkronizohet…</string>
+    <string name="nav_sync_done">U sinkronizua</string>
+    <string name="nav_sync_failed">Sinkronizimi dështoi</string>
+    <string name="nav_sync_description">Sinkronizo tani progresin me pajisjet e tjera</string>
 </resources>

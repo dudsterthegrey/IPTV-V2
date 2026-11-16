@@ -346,4 +346,9 @@
     <string name="nav_sports">Šport</string>
     <string name="nav_saved_streams">Uložené streamy</string>
     <string name="nav_genres">Žánre</string>
+    <string name="nav_sync_now">Synchronizovať</string>
+    <string name="nav_sync_syncing">Synchronizuje sa…</string>
+    <string name="nav_sync_done">Synchronizované</string>
+    <string name="nav_sync_failed">Synchronizácia zlyhala</string>
+    <string name="nav_sync_description">Synchronizovať priebeh sledovania s ostatnými zariadeniami</string>
 </resources>

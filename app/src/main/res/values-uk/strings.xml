@@ -293,4 +293,9 @@
     <string name="nav_sports">Спорт</string>
     <string name="nav_saved_streams">Збережені потоки</string>
     <string name="nav_genres">Жанри</string>
+    <string name="nav_sync_now">Синхр.</string>
+    <string name="nav_sync_syncing">Синхронізація…</string>
+    <string name="nav_sync_done">Синхронізовано</string>
+    <string name="nav_sync_failed">Помилка синхронізації</string>
+    <string name="nav_sync_description">Синхронізувати прогрес перегляду з іншими пристроями</string>
 </resources>

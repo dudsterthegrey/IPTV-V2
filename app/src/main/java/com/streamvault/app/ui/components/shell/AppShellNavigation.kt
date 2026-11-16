@@ -63,6 +63,7 @@ fun AppScreenScaffold(
             catalogLayout = CatalogLayout.SPLIT
         )
     val closeAppAction = LocalAppCloseAction.current
+    val syncShortcut = LocalAppSyncShortcut.current
     val closeAppLabel = stringResource(R.string.nav_close_app)
 
     CoreAppScreenScaffold(
@@ -82,6 +83,9 @@ fun AppScreenScaffold(
         header = header,
         topBarActions = {
             topBarActions?.invoke(this)
+            if (syncShortcut != null) {
+                AppSyncTopBarAction(syncShortcut)
+            }
             if (closeAppAction != null) {
                 AppTopBarCloseAction(
                     onClick = closeAppAction,

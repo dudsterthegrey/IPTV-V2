@@ -349,4 +349,9 @@
     <string name="nav_sports">Спорт</string>
     <string name="nav_saved_streams">Запазени потоци</string>
     <string name="nav_genres">Жанрове</string>
+    <string name="nav_sync_now">Синхр.</string>
+    <string name="nav_sync_syncing">Синхронизиране…</string>
+    <string name="nav_sync_done">Синхронизирано</string>
+    <string name="nav_sync_failed">Неуспешна синхр.</string>
+    <string name="nav_sync_description">Синхронизиране на напредъка с другите ви устройства сега</string>
 </resources>
