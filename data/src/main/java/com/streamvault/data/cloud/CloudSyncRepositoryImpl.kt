@@ -11,6 +11,7 @@ import com.streamvault.domain.model.ContentType
 import com.streamvault.domain.model.PlaybackHistory
 import com.streamvault.domain.model.PlaybackWatchedStatus
 import com.streamvault.domain.model.Result
+import com.streamvault.domain.repository.CloudSyncErrors
 import com.streamvault.domain.repository.CloudSyncRepository
 import com.streamvault.domain.repository.CloudSyncState
 import com.streamvault.domain.repository.PlaybackHistoryRepository
@@ -26,14 +27,12 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.json.JSONObject
 import java.security.MessageDigest
-import java.security.SecureRandom
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Cross-device watch progress over Firestore. Devices that share a sync code share a group whose
- * id is a hash of the code. Items are matched by the provider's own ids (movie stream id; series
+ * Cross-device watch progress over Firestore, stored under the signed-in account. Items are matched by the provider's own ids (movie stream id; series
  * id + episode id) under a hash of the provider's server and username, because local database ids
  * differ per device. The newest watch wins; downloaded progress keeps its original watch time so
  * devices never keep re-sending the same item.
@@ -56,7 +55,7 @@ class CloudSyncRepositoryImpl @Inject constructor(
         MutableStateFlow(
             CloudSyncState(
                 isConfigured = firebase.isConfigured,
-                syncCode = prefs.getString(KEY_CODE, null),
+                signedInEmail = firebase.signedInEmail,
                 lastSyncedAt = prefs.getLong(KEY_LAST_SYNCED_AT, 0L)
             )
         )
@@ -64,39 +63,58 @@ class CloudSyncRepositoryImpl @Inject constructor(
 
     override val state: Flow<CloudSyncState> get() = mutableState.asStateFlow()
 
-    override suspend fun createSyncCode(): Result<String> {
-        if (!firebase.isConfigured) return Result.error("Cloud sync is not set up in this build")
-        val code = generateCode()
-        saveCode(code)
-        return when (val synced = syncNow()) {
-            is Result.Error -> Result.error(synced.message, synced.exception)
-            else -> Result.success(code)
-        }
-    }
+    override suspend fun signIn(email: String, password: String): Result<Unit> =
+        authenticate { firebase.signIn(email, password) }
 
-    override suspend fun joinSyncCode(code: String): Result<Unit> {
-        if (!firebase.isConfigured) return Result.error("Cloud sync is not set up in this build")
-        val normalized = normalizeCode(code) ?: return Result.error("That sync code doesn't look right")
-        saveCode(normalized)
-        // Pull everything the group has, not only what changed recently.
-        prefs.edit().putLong(KEY_LAST_PULLED_AT, 0L).putLong(KEY_LAST_PUSHED_AT, 0L).apply()
-        return syncNow()
-    }
+    override suspend fun createAccount(email: String, password: String): Result<Unit> =
+        authenticate { firebase.createAccount(email, password) }
 
-    override suspend fun leave() {
+    override suspend fun sendPasswordReset(email: String): Result<Unit> = accountCall { firebase.sendPasswordReset(email) }
+
+    override suspend fun signOut() {
+        firebase.signOut()
         prefs.edit().clear().apply()
         mutableState.value = CloudSyncState(isConfigured = firebase.isConfigured)
     }
 
+    private suspend fun authenticate(block: suspend () -> Unit): Result<Unit> {
+        val result = accountCall(block)
+        if (result is Result.Error) return result
+        // A new sign-in fetches everything the account has, not only what changed recently.
+        prefs.edit().putLong(KEY_LAST_PULLED_AT, 0L).putLong(KEY_LAST_PUSHED_AT, 0L).apply()
+        mutableState.value = mutableState.value.copy(signedInEmail = firebase.signedInEmail, lastError = null)
+        return syncNow()
+    }
+
+    private suspend fun accountCall(block: suspend () -> Unit): Result<Unit> {
+        if (!firebase.isConfigured) return Result.error(CloudSyncErrors.NOT_CONFIGURED)
+        return try {
+            block()
+            Result.success(Unit)
+        } catch (cancelled: CancellationException) {
+            throw cancelled
+        } catch (error: FirebaseAuthException) {
+            Result.error(authErrorCode(error.code), error)
+        } catch (error: Exception) {
+            Result.error(CloudSyncErrors.NETWORK, error)
+        }
+    }
+
+    private fun authErrorCode(firebaseCode: String): String = when (firebaseCode) {
+        "EMAIL_EXISTS" -> CloudSyncErrors.EMAIL_IN_USE
+        "WEAK_PASSWORD" -> CloudSyncErrors.WEAK_PASSWORD
+        "INVALID_EMAIL", "MISSING_EMAIL" -> CloudSyncErrors.INVALID_EMAIL
+        "TOO_MANY_ATTEMPTS_TRY_LATER" -> CloudSyncErrors.TOO_MANY_ATTEMPTS
+        else -> CloudSyncErrors.WRONG_EMAIL_OR_PASSWORD
+    }
+
     override suspend fun syncNow(): Result<Unit> = syncMutex.withLock {
-        val code = prefs.getString(KEY_CODE, null) ?: return@withLock Result.success(Unit)
-        if (!firebase.isConfigured) return@withLock Result.success(Unit)
+        if (!firebase.isConfigured || firebase.signedInEmail == null) return@withLock Result.success(Unit)
         mutableState.value = mutableState.value.copy(isSyncing = true)
-        val group = groupId(code)
         try {
             playbackHistoryRepository.flushPendingProgress()
-            push(group)
-            pull(group)
+            push()
+            pull()
             val now = System.currentTimeMillis()
             prefs.edit().putLong(KEY_LAST_SYNCED_AT, now).apply()
             mutableState.value = mutableState.value.copy(isSyncing = false, lastSyncedAt = now, lastError = null)
@@ -107,11 +125,11 @@ class CloudSyncRepositoryImpl @Inject constructor(
         } catch (error: Exception) {
             Log.w(TAG, "Cloud sync failed: ${error.javaClass.simpleName}: ${error.message}")
             mutableState.value = mutableState.value.copy(isSyncing = false, lastError = error.message ?: error.javaClass.simpleName)
-            Result.error("Cloud sync failed", error)
+            Result.error(CloudSyncErrors.NETWORK, error)
         }
     }
 
-    private suspend fun push(group: String) {
+    private suspend fun push() {
         val lastPushed = prefs.getLong(KEY_LAST_PUSHED_AT, 0L)
         val changed = playbackHistoryRepository.getRecentlyWatched(PUSH_SCAN_LIMIT).first()
             .filter { it.lastWatchedAt > lastPushed }
@@ -136,17 +154,17 @@ class CloudSyncRepositoryImpl @Inject constructor(
                 .put("lastWatchedAt", integer(history.lastWatchedAt))
                 .put("updatedAt", integer(System.currentTimeMillis()))
             val documentId = sha256("$providerKey|${history.contentType.name}|${identity.second.orEmpty()}|${identity.first}").take(40)
-            firebase.putHistoryDocument(group, documentId, fields)
+            firebase.putHistoryDocument(documentId, fields)
             newestPushed = maxOf(newestPushed, history.lastWatchedAt)
         }
         prefs.edit().putLong(KEY_LAST_PUSHED_AT, newestPushed).apply()
     }
 
-    private suspend fun pull(group: String) {
+    private suspend fun pull() {
         val lastPulled = prefs.getLong(KEY_LAST_PULLED_AT, 0L)
         // Device clocks differ, so look back a little and rely on lastWatchedAt to skip repeats.
         val since = (lastPulled - PULL_OVERLAP_MS).coerceAtLeast(0L)
-        val documents = firebase.historyUpdatedSince(group, since)
+        val documents = firebase.historyUpdatedSince(since)
         val localProviders = providerRepository.getProviders().first().associateBy { providerKeyOf(it.serverUrl, it.username) }
         var newestSeen = lastPulled
         documents.forEach { fields ->
@@ -227,26 +245,6 @@ class CloudSyncRepositoryImpl @Inject constructor(
     private fun providerKeyOf(serverUrl: String, username: String): String =
         sha256(serverUrl.trim().trimEnd('/').lowercase(Locale.ROOT) + "|" + username.trim().lowercase(Locale.ROOT)).take(24)
 
-    private fun saveCode(code: String) {
-        prefs.edit().putString(KEY_CODE, code).apply()
-        mutableState.value = mutableState.value.copy(syncCode = code, lastError = null)
-    }
-
-    private fun groupId(code: String) = sha256("iptv-player-sync|$code").take(40)
-
-    private fun generateCode(): String {
-        val random = SecureRandom()
-        val raw = (1..CODE_LENGTH).map { CODE_ALPHABET[random.nextInt(CODE_ALPHABET.length)] }.joinToString("")
-        return raw.chunked(4).joinToString("-")
-    }
-
-    /** "k7qf 9m2p-xw4d" → "K7QF-9M2P-XW4D"; null when it isn't 12 code characters. */
-    internal fun normalizeCode(input: String): String? {
-        val compact = input.uppercase(Locale.ROOT).filter { it.isLetterOrDigit() }
-        if (compact.length != CODE_LENGTH || compact.any { it !in CODE_ALPHABET }) return null
-        return compact.chunked(4).joinToString("-")
-    }
-
     private fun sha256(text: String): String =
         MessageDigest.getInstance("SHA-256").digest(text.toByteArray()).joinToString("") { "%02x".format(it) }
 
@@ -258,14 +256,10 @@ class CloudSyncRepositoryImpl @Inject constructor(
     private companion object {
         const val TAG = "CloudSync"
         const val PREFS_NAME = "cloud_sync"
-        const val KEY_CODE = "sync_code"
         const val KEY_LAST_PUSHED_AT = "last_pushed_at"
         const val KEY_LAST_PULLED_AT = "last_pulled_at"
         const val KEY_LAST_SYNCED_AT = "last_synced_at"
         const val PUSH_SCAN_LIMIT = 200
         const val PULL_OVERLAP_MS = 3L * 24 * 60 * 60 * 1000
-        const val CODE_LENGTH = 12
-        // No 0/O, 1/I/L: easy to read off one TV and type on another.
-        const val CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
     }
 }

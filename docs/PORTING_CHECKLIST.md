@@ -238,10 +238,11 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - [x] **Top 10 Today** Home row: TMDB trending (worldwide) or popular on streaming in a country;
       "Change country" cycles countries. Only titles the provider has are shown, so it fills in as
       matching progresses.
-- [ ] **Sync across devices** (Settings › Backup): built on Firebase REST (anonymous Auth +
-      Firestore), off until `firebase.project.id` / `firebase.api.key` (local.properties or the
-      build defaults) are set. Firestore rules: allow read, write on
-      `syncGroups/{group}/{document=**}` if `request.auth != null`.
+- [ ] **Sync across devices** (Settings › Backup): sign in with an email/password account on each
+      TV; watch progress (movies, episodes) syncs through Firebase REST (Auth + Firestore under
+      `users/{uid}/history`). Off until `firebase.project.id` / `firebase.api.key` are set.
+      Firebase: enable Email/Password sign-in; Firestore rules allow read, write on
+      `users/{userId}/{document=**}` only if `request.auth.uid == userId`.
 - [ ] On device: volume boost on TV speakers; Skip intro across episodes; Genres › Anime after the
       lookup finishes; IMDb ratings in Top rated; Top 10 country switch; two-device sync.
 

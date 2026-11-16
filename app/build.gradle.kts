@@ -58,7 +58,7 @@ val tmdbApiKey = providers.environmentVariable("TMDB_API_KEY").orNull
 // Firebase project for cross-device watch progress (Settings > Sync across devices). Empty = off.
 val firebaseProjectId = providers.environmentVariable("FIREBASE_PROJECT_ID").orNull
     ?: localProp("firebase.project.id").takeIf { it.isNotBlank() }
-    ?: ""
+    ?: "iptv-v2-b0b85"
 val firebaseApiKey = providers.environmentVariable("FIREBASE_API_KEY").orNull
     ?: localProp("firebase.api.key").takeIf { it.isNotBlank() }
     ?: ""

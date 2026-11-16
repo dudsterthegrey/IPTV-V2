@@ -41,6 +41,8 @@ fun TvOutlinedTextField(
     maxLines: Int = Int.MAX_VALUE,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    visualTransformation: androidx.compose.ui.text.input.VisualTransformation =
+        androidx.compose.ui.text.input.VisualTransformation.None,
     colors: @Composable (containerFocused: Boolean) -> TextFieldColors,
 ) {
     val isTelevisionDevice = rememberIsTelevisionDevice()
@@ -98,6 +100,7 @@ fun TvOutlinedTextField(
             readOnly = isTelevisionDevice && !acceptsInput,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
+            visualTransformation = visualTransformation,
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(inputFocusRequester)
