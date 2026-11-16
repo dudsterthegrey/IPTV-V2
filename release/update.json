@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.1",
-  "versionCode": 6,
+  "versionName": "2.1.2",
+  "versionCode": 7,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "0d0b7b208e5e1ec7c8721238ddaf67def37960c26408539f530a84ccac130ca0",
-  "releaseNotes": "Sign in to sync from your phone: scan a QR code and type your email and password, or sign in with Google.",
+  "sha256": "89f0599c666d46ed2a83cf614a531075aa7daa68fdfe58bc870d8381de7ea020",
+  "releaseNotes": "A Sync button in the top bar of every page (while signed in) sends and fetches watch progress right away.",
   "publishedAt": "2026-11-16",
   "downloaderCode": "7935478"
 }
