@@ -439,4 +439,5 @@
     <string name="genre_war">Háborús</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Karácsony</string>
+    <string name="dashboard_top_ten_none">Az ország top 10-es listájából egyik cím sincs meg a szolgáltatónál. Próbáljon másik országot.</string>
 </resources>

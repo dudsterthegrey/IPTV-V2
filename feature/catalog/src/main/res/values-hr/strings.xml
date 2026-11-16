@@ -425,4 +425,5 @@
     <string name="genre_war">Ratni</string>
     <string name="genre_western">Vestern</string>
     <string name="genre_christmas">Božić</string>
+    <string name="dashboard_top_ten_none">Nijedan naslov iz top 10 ove zemlje nije u katalogu pružatelja. Pokušajte drugu zemlju.</string>
 </resources>

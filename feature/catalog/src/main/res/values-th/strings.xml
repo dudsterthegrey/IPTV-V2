@@ -425,4 +425,5 @@
     <string name="genre_war">สงคราม</string>
     <string name="genre_western">คาวบอย</string>
     <string name="genre_christmas">คริสต์มาส</string>
+    <string name="dashboard_top_ten_none">ไม่มีรายการท็อป 10 ของประเทศนี้ในผู้ให้บริการของคุณ ลองเลือกประเทศอื่น</string>
 </resources>

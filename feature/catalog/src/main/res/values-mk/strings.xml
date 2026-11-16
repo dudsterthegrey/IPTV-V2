@@ -425,4 +425,5 @@
     <string name="genre_war">Воен</string>
     <string name="genre_western">Вестерн</string>
     <string name="genre_christmas">Божиќ</string>
+    <string name="dashboard_top_ten_none">Ниту еден наслов од топ 10 на оваа земја не е кај вашиот провајдер. Обидете се со друга земја.</string>
 </resources>

@@ -439,4 +439,5 @@
     <string name="genre_war">Perang</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Natal</string>
+    <string name="dashboard_top_ten_none">Tidak ada judul Top 10 negara ini di katalog penyedia Anda. Coba negara lain.</string>
 </resources>

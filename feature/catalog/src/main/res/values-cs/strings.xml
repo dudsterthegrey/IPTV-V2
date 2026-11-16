@@ -439,4 +439,5 @@
     <string name="genre_war">Válečné</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Vánoční</string>
+    <string name="dashboard_top_ten_none">Žádný titul z top 10 této země není v katalogu poskytovatele. Zkuste jinou zemi.</string>
 </resources>

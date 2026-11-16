@@ -252,7 +252,8 @@ fun DashboardScreen(
                     AppHomeDashboardShelf.TOP_TEN -> TopTenRow(
                         entries = uiState.topTen,
                         countryCode = uiState.topTenCountry,
-                        onCycleCountry = viewModel::cycleTopTenCountry,
+                        countries = DashboardViewModel.TOP_TEN_COUNTRIES,
+                        onSelectCountry = viewModel::selectTopTenCountry,
                         onMovieClick = onMovieClick,
                         onSeriesClick = onSeriesClick
                     )

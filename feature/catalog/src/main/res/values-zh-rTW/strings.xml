@@ -425,4 +425,5 @@
     <string name="genre_war">戰爭</string>
     <string name="genre_western">西部</string>
     <string name="genre_christmas">聖誕</string>
+    <string name="dashboard_top_ten_none">您的供應商沒有該國家/地區前 10 名的任何內容。請換一個國家/地區。</string>
 </resources>

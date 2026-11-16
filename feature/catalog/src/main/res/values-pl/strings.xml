@@ -439,4 +439,5 @@
     <string name="genre_war">Wojenny</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Boże Narodzenie</string>
+    <string name="dashboard_top_ten_none">Żaden tytuł z top 10 tego kraju nie jest dostępny u dostawcy. Wybierz inny kraj.</string>
 </resources>

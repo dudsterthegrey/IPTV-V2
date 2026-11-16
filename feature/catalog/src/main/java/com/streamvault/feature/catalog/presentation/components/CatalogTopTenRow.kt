@@ -12,6 +12,19 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.focus.focusRequester
+import com.streamvault.core.ui.components.dialogs.PremiumDialog
+import com.streamvault.core.ui.components.dialogs.PremiumDialogActionButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -32,22 +45,38 @@ import java.util.Locale
 
 /**
  * "Top 10 Today": today's most popular titles that the provider has, each card marked with its
- * rank. The header button cycles the country the list is for.
+ * rank. The header button opens a list of countries to pick from. The row stays visible when the
+ * chosen country has none of the provider's titles, so another country can still be picked.
  */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TopTenRow(
     entries: List<TopTenEntry>,
     countryCode: String?,
-    onCycleCountry: () -> Unit,
+    countries: List<String?>,
+    onSelectCountry: (String?) -> Unit,
     onMovieClick: (Movie) -> Unit,
     onSeriesClick: (Series) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if (entries.isEmpty()) return
-    val countryLabel = countryCode
-        ?.let { Locale("", it).displayCountry.takeIf { name -> name.isNotBlank() } ?: it }
-        ?: stringResource(R.string.dashboard_top_ten_worldwide)
+    if (entries.isEmpty() && countryCode == null) return
+    val worldwide = stringResource(R.string.dashboard_top_ten_worldwide)
+    val countryLabel = topTenCountryName(countryCode, worldwide)
+    var showCountries by remember { mutableStateOf(false) }
+    val countryButtonFocus = remember { FocusRequester() }
+
+    if (showCountries) {
+        TopTenCountryDialog(
+            countries = countries,
+            selected = countryCode,
+            worldwide = worldwide,
+            onSelect = { country ->
+                showCountries = false
+                if (country != countryCode) onSelectCountry(country)
+            },
+            onDismiss = { showCountries = false }
+        )
+    }
 
     Column(modifier = modifier.fillMaxWidth().suppressParentVerticalScroll()) {
         Row(
@@ -62,13 +91,34 @@ fun TopTenRow(
                 style = MaterialTheme.typography.titleMedium,
                 color = TextPrimary
             )
-            TvButton(onClick = onCycleCountry) {
+            TvButton(onClick = { showCountries = true }, modifier = Modifier.focusRequester(countryButtonFocus)) {
                 Text(stringResource(R.string.dashboard_top_ten_change_country))
             }
         }
 
+        if (entries.isEmpty()) {
+            Text(
+                text = stringResource(R.string.dashboard_top_ten_none),
+                style = MaterialTheme.typography.bodyMedium,
+                color = TextPrimary.copy(alpha = 0.7f),
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
+            )
+            return@Column
+        }
+
         LazyRow(
-            modifier = Modifier.focusRestorer(),
+            // The button sits at the far right of the header, so Up from a poster would otherwise
+            // skip it and land on the row above; send Up to the button instead.
+            modifier = Modifier
+                .focusRestorer()
+                .onPreviewKeyEvent { event ->
+                    if (event.key == Key.DirectionUp && event.type == KeyEventType.KeyDown) {
+                        countryButtonFocus.requestFocus()
+                        true
+                    } else {
+                        false
+                    }
+                },
             contentPadding = PaddingValues(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -91,4 +141,37 @@ fun TopTenRow(
             }
         }
     }
+}
+
+private fun topTenCountryName(countryCode: String?, worldwide: String): String =
+    countryCode
+        ?.let { Locale("", it).displayCountry.takeIf { name -> name.isNotBlank() } ?: it }
+        ?: worldwide
+
+@Composable
+private fun TopTenCountryDialog(
+    countries: List<String?>,
+    selected: String?,
+    worldwide: String,
+    onSelect: (String?) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val selectedFocus = remember { FocusRequester() }
+    PremiumDialog(
+        title = stringResource(R.string.dashboard_top_ten_change_country),
+        onDismissRequest = onDismiss,
+        initialBodyFocusRequester = selectedFocus,
+        content = {
+            countries.forEach { country ->
+                val name = topTenCountryName(country, worldwide)
+                val isSelected = country == selected
+                PremiumDialogActionButton(
+                    label = if (isSelected) "✓  $name" else name,
+                    emphasized = isSelected,
+                    onClick = { onSelect(country) },
+                    modifier = if (isSelected) Modifier.focusRequester(selectedFocus) else Modifier
+                )
+            }
+        }
+    )
 }

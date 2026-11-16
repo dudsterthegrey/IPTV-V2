@@ -439,4 +439,5 @@
     <string name="genre_war">Guerra</string>
     <string name="genre_western">Faroeste</string>
     <string name="genre_christmas">Natal</string>
+    <string name="dashboard_top_ten_none">Nenhum título do Top 10 deste país está no seu provedor. Tente outro país.</string>
 </resources>

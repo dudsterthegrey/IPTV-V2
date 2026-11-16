@@ -439,4 +439,5 @@
     <string name="genre_war">Chiến tranh</string>
     <string name="genre_western">Miền Tây</string>
     <string name="genre_christmas">Giáng sinh</string>
+    <string name="dashboard_top_ten_none">Không có nội dung nào trong Top 10 của quốc gia này ở nhà cung cấp. Hãy thử quốc gia khác.</string>
 </resources>

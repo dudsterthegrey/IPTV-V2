@@ -425,4 +425,5 @@
     <string name="genre_war">Vojnové</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Vianoce</string>
+    <string name="dashboard_top_ten_none">Žiadny titul z top 10 tejto krajiny nie je v katalógu poskytovateľa. Skúste inú krajinu.</string>
 </resources>

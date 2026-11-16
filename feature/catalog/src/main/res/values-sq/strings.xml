@@ -425,4 +425,5 @@
     <string name="genre_war">Luftë</string>
     <string name="genre_western">Uestern</string>
     <string name="genre_christmas">Krishtlindje</string>
+    <string name="dashboard_top_ten_none">Asnjë titull nga top 10 i këtij vendi nuk është te ofruesi juaj. Provoni një vend tjetër.</string>
 </resources>

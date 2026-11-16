@@ -236,8 +236,9 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - [x] **Genres tab**: fixed genres (Action, Comedy, Anime…) for movies and series, best rated first.
       Anime = Animation in Japanese, or a provider "anime" category.
 - [x] **Top 10 Today** Home row: TMDB trending (worldwide) or popular on streaming in a country;
-      "Change country" cycles countries. Only titles the provider has are shown, so it fills in as
-      matching progresses.
+      "Change country" opens a list of countries (2.1.3; it used to cycle, which hid the row while
+      loading). Up from a poster goes to that button. Only titles the provider has are shown; if a
+      country has none, the row stays with a message so another country can be picked.
 - [ ] **Sync across devices** (Settings › Backup): sign in with an email/password account on each
       TV; watch progress (movies, episodes) syncs through Firebase REST (Auth + Firestore under
       `users/{uid}/history`). The project id and Web API key are built in (2.1.1).

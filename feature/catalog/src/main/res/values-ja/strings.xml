@@ -439,4 +439,5 @@
     <string name="genre_war">戦争</string>
     <string name="genre_western">西部劇</string>
     <string name="genre_christmas">クリスマス</string>
+    <string name="dashboard_top_ten_none">この国のトップ10はプロバイダーのカタログにありません。別の国を選んでください。</string>
 </resources>

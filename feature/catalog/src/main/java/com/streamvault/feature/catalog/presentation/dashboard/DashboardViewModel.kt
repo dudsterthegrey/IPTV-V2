@@ -90,7 +90,7 @@ class DashboardViewModel @Inject constructor(
     private val episodeShelfRepository: EpisodeShelfRepository,
     private val catalogInsightsRepository: CatalogInsightsRepository
 ) : ViewModel() {
-    private companion object {
+    internal companion object {
         const val FAVORITE_CHANNEL_LIMIT = 12
         const val RECENT_CHANNEL_LIMIT = 12
         const val CONTINUE_WATCHING_LIMIT = 12
@@ -559,18 +559,14 @@ class DashboardViewModel @Inject constructor(
     /** Today's Top 10 for the chosen country (null = worldwide), refetched when the country changes. */
     private fun observeTopTen(providerId: Long): Flow<Pair<String?, List<TopTenEntry>>> =
         catalogInsightsRepository.topTenCountry.flatMapLatest { country ->
-            flow {
-                emit(country to emptyList())
-                emit(country to catalogInsightsRepository.topTenToday(providerId, country))
-            }
+            // Keep showing the previous list until the new country's list arrives, so the row (and
+            // its country button) never disappears while loading.
+            flow { emit(country to catalogInsightsRepository.topTenToday(providerId, country)) }
         }
 
-    /** Worldwide → US → UK → … → back to worldwide. */
-    fun cycleTopTenCountry() {
-        val current = _uiState.value.topTenCountry
-        val index = TOP_TEN_COUNTRIES.indexOf(current)
-        val next = TOP_TEN_COUNTRIES[(index + 1) % TOP_TEN_COUNTRIES.size]
-        viewModelScope.launch { catalogInsightsRepository.setTopTenCountry(next) }
+    /** Picks the Top 10 country; null = worldwide. */
+    fun selectTopTenCountry(countryCode: String?) {
+        viewModelScope.launch { catalogInsightsRepository.setTopTenCountry(countryCode) }
     }
 
     private fun observeUpNext(providerId: Long): Flow<List<EpisodeShelfItem>> =

@@ -439,4 +439,5 @@
     <string name="genre_war">전쟁</string>
     <string name="genre_western">서부극</string>
     <string name="genre_christmas">크리스마스</string>
+    <string name="dashboard_top_ten_none">이 국가의 Top 10 중 제공업체에 있는 작품이 없습니다. 다른 국가를 선택해 보세요.</string>
 </resources>

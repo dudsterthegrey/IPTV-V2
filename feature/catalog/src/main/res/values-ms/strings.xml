@@ -425,4 +425,5 @@
     <string name="genre_war">Perang</string>
     <string name="genre_western">Barat</string>
     <string name="genre_christmas">Krismas</string>
+    <string name="dashboard_top_ten_none">Tiada tajuk Top 10 negara ini dalam katalog penyedia anda. Cuba negara lain.</string>
 </resources>

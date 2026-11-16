@@ -439,4 +439,5 @@
     <string name="genre_war">Sota</string>
     <string name="genre_western">Lännenelokuva</string>
     <string name="genre_christmas">Joulu</string>
+    <string name="dashboard_top_ten_none">Tämän maan Top 10 -listan nimikkeitä ei löydy palveluntarjoajaltasi. Kokeile toista maata.</string>
 </resources>

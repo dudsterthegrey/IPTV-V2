@@ -425,4 +425,5 @@
     <string name="genre_war">Ратни</string>
     <string name="genre_western">Вестерн</string>
     <string name="genre_christmas">Божић</string>
+    <string name="dashboard_top_ten_none">Ниједан наслов из топ 10 ове земље није код вашег провајдера. Пробајте другу земљу.</string>
 </resources>

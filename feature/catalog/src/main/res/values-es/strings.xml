@@ -439,4 +439,5 @@
     <string name="genre_war">Bélica</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Navidad</string>
+    <string name="dashboard_top_ten_none">Ningún título del Top 10 de este país está en tu proveedor. Prueba otro país.</string>
 </resources>

@@ -425,4 +425,5 @@
     <string name="genre_war">جنگی</string>
     <string name="genre_western">وسترن</string>
     <string name="genre_christmas">کریسمس</string>
+    <string name="dashboard_top_ten_none">هیچ‌کدام از ۱۰ عنوان برتر این کشور در فهرست ارائه‌دهنده شما نیست. کشور دیگری را امتحان کنید.</string>
 </resources>

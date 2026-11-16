@@ -439,4 +439,5 @@
     <string name="genre_war">حرب</string>
     <string name="genre_western">غرب أمريكي</string>
     <string name="genre_christmas">عيد الميلاد</string>
+    <string name="dashboard_top_ten_none">لا يتوفر أي من أفضل 10 في هذا البلد لدى مزوّدك. جرّب بلدًا آخر.</string>
 </resources>

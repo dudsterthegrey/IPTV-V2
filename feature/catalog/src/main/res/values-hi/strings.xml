@@ -425,4 +425,5 @@
     <string name="genre_war">युद्ध</string>
     <string name="genre_western">वेस्टर्न</string>
     <string name="genre_christmas">क्रिसमस</string>
+    <string name="dashboard_top_ten_none">इस देश के टॉप 10 में से कोई भी आपके प्रदाता के पास नहीं है। कोई और देश चुनें।</string>
 </resources>

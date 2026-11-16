@@ -439,4 +439,5 @@
     <string name="genre_war">Guerra</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Natale</string>
+    <string name="dashboard_top_ten_none">Nessun titolo della Top 10 di questo paese è nel catalogo del tuo provider. Prova un altro paese.</string>
 </resources>

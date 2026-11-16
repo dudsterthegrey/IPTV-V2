@@ -425,4 +425,5 @@
     <string name="genre_war">Военен</string>
     <string name="genre_western">Уестърн</string>
     <string name="genre_christmas">Коледа</string>
+    <string name="dashboard_top_ten_none">Нито едно от топ 10 за тази държава не е в каталога на доставчика. Опитайте друга държава.</string>
 </resources>

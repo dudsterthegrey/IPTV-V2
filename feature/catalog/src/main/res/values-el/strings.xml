@@ -439,4 +439,5 @@
     <string name="genre_war">Πολεμική</string>
     <string name="genre_western">Γουέστερν</string>
     <string name="genre_christmas">Χριστουγεννιάτικα</string>
+    <string name="dashboard_top_ten_none">Κανένας τίτλος από το Top 10 αυτής της χώρας δεν υπάρχει στον πάροχό σας. Δοκιμάστε άλλη χώρα.</string>
 </resources>

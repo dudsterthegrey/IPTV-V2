@@ -439,4 +439,5 @@
     <string name="genre_war">Oorlog</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Kerst</string>
+    <string name="dashboard_top_ten_none">Geen van de top 10 van dit land staat in de catalogus van je provider. Probeer een ander land.</string>
 </resources>

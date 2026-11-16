@@ -439,4 +439,5 @@
     <string name="genre_war">מלחמה</string>
     <string name="genre_western">מערבון</string>
     <string name="genre_christmas">חג המולד</string>
+    <string name="dashboard_top_ten_none">אף אחד מעשרת המובילים במדינה הזו לא נמצא אצל הספק שלך. נסו מדינה אחרת.</string>
 </resources>

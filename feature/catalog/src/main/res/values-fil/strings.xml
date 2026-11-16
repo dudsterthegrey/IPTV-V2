@@ -425,4 +425,5 @@
     <string name="genre_war">Digmaan</string>
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Pasko</string>
+    <string name="dashboard_top_ten_none">Wala sa catalog ng provider mo ang alinman sa Top 10 ng bansang ito. Sumubok ng ibang bansa.</string>
 </resources>
