@@ -61,7 +61,7 @@ val firebaseProjectId = providers.environmentVariable("FIREBASE_PROJECT_ID").orN
     ?: "iptv-v2-b0b85"
 val firebaseApiKey = providers.environmentVariable("FIREBASE_API_KEY").orNull
     ?: localProp("firebase.api.key").takeIf { it.isNotBlank() }
-    ?: ""
+    ?: "AIzaSyA5KfzoiH9BXXyyNYPIlC5EcmPEqH1LTd8"
 val opensubtitlesApiKey = providers.environmentVariable("OPENSUBTITLES_API_KEY").orNull
     ?: localProp("opensubtitles.api.key").takeIf { it.isNotBlank() }
     ?: builtInOpenSubtitlesApiKey
