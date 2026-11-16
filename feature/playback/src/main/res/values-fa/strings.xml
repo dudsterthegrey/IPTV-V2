@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">در تنظیمات Android، زنگ‌ها و یادآورها را برای StreamVault مجاز کنید و دوباره ضبط را امتحان کنید.</string>
+    <string name="player_mark_intro_end">پایان تیتراژ اینجاست</string>
+    <string name="player_intro_end_saved">ذخیره شد. همه قسمت‌های این سریال گزینه رد کردن تیتراژ را نشان می‌دهند.</string>
 </resources>

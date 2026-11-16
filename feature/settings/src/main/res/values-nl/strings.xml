@@ -978,4 +978,9 @@
     <string name="settings_text_size_custom">Aangepast</string>
     <string name="dashboard_up_next">Volgende</string>
     <string name="dashboard_recent_episodes">Recent toegevoegde afleveringen</string>
+    <string name="settings_update_downloader">Op een ander apparaat installeren</string>
+    <string name="settings_update_downloader_value">Downloader-code %1$s · %2$s</string>
+    <string name="settings_volume_boost">Volumeversterking</string>
+    <string name="settings_volume_boost_off">Uit</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

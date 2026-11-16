@@ -10,4 +10,6 @@
     <string name="player_trakt_failed">Trakt tracking failed</string>
     <string name="player_trakt_sent">Sent to Trakt</string>
     <string name="player_recording_exact_alarm_required">Allow alarms and reminders for StreamVault in Android settings, then try recording again.</string>
+    <string name="player_mark_intro_end">Intro ends here</string>
+    <string name="player_intro_end_saved">Saved. Every episode of this show will offer Skip intro.</string>
 </resources>

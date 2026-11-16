@@ -978,4 +978,9 @@
     <string name="settings_text_size_custom">Mukautettu</string>
     <string name="dashboard_up_next">Seuraavaksi</string>
     <string name="dashboard_recent_episodes">Äskettäin lisätyt jaksot</string>
+    <string name="settings_update_downloader">Asenna toiseen laitteeseen</string>
+    <string name="settings_update_downloader_value">Downloader-koodi %1$s · %2$s</string>
+    <string name="settings_volume_boost">Äänenvoimakkuuden vahvistus</string>
+    <string name="settings_volume_boost_off">Pois</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

@@ -976,4 +976,9 @@
     <string name="settings_text_size_custom">カスタム</string>
     <string name="dashboard_up_next">次に再生</string>
     <string name="dashboard_recent_episodes">最近追加されたエピソード</string>
+    <string name="settings_update_downloader">別のデバイスにインストール</string>
+    <string name="settings_update_downloader_value">Downloaderコード %1$s · %2$s</string>
+    <string name="settings_volume_boost">音量ブースト</string>
+    <string name="settings_volume_boost_off">オフ</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

@@ -17,6 +17,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
@@ -36,7 +37,15 @@ class SearchRepositoryImplTest {
         providerDao = mock(),
         stalkerIndexJobDao = mock(),
         providerSnapshotDao = mock(),
-        vodRepository = mock()
+        vodRepository = mock(),
+        // No titles: these tests cover the exact search; the typo pass has its own tests.
+        fuzzySearchIndex = com.streamvault.data.search.FuzzySearchIndex(
+            mock<SearchDao> {
+                onBlocking { channelTitles(any()) } doReturn emptyList()
+                onBlocking { movieTitles(any()) } doReturn emptyList()
+                onBlocking { seriesTitles(any()) } doReturn emptyList()
+            }
+        )
     )
 
     @Test

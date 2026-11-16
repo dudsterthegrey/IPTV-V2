@@ -976,4 +976,9 @@
     <string name="settings_text_size_custom">По избор</string>
     <string name="dashboard_up_next">Следва</string>
     <string name="dashboard_recent_episodes">Наскоро добавени епизоди</string>
+    <string name="settings_update_downloader">Инсталиране на друго устройство</string>
+    <string name="settings_update_downloader_value">Код за Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Усилване на звука</string>
+    <string name="settings_volume_boost_off">Изключено</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">Tillåt alarm och påminnelser för StreamVault i Android-inställningarna och försök sedan spela in igen.</string>
+    <string name="player_mark_intro_end">Introt slutar här</string>
+    <string name="player_intro_end_saved">Sparat. Alla avsnitt i serien erbjuder nu Hoppa över intro.</string>
 </resources>

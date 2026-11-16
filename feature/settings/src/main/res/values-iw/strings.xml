@@ -981,4 +981,9 @@
     <string name="settings_text_size_custom">מותאם אישית</string>
     <string name="dashboard_up_next">הבא בתור</string>
     <string name="dashboard_recent_episodes">פרקים שנוספו לאחרונה</string>
+    <string name="settings_update_downloader">התקנה במכשיר אחר</string>
+    <string name="settings_update_downloader_value">קוד Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">הגברת עוצמה</string>
+    <string name="settings_volume_boost_off">כבוי</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

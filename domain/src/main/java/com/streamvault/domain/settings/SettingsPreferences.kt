@@ -72,6 +72,8 @@ interface SettingsPreferences {
     val playerVodHttpProtocolMode: Flow<VodHttpProtocolMode>
 
     val playerAudioOutputPreference: Flow<AudioOutputPreference>
+    /** Loudness boost above 100% player volume, in dB; 0 = off. */
+    val playerVolumeBoostDb: Flow<Int>
 
     val playerCompatibilityMemoryEnabled: Flow<Boolean>
 
@@ -269,6 +271,7 @@ interface SettingsPreferences {
     suspend fun setPlayerPlaybackBufferMode(mode: PlaybackBufferMode)
 
     suspend fun setPlayerAudioOutputPreference(preference: AudioOutputPreference)
+    suspend fun setPlayerVolumeBoostDb(db: Int)
 
     suspend fun setPlayerCompatibilityMemoryEnabled(enabled: Boolean)
 

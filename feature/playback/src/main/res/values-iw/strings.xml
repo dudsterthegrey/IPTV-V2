@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">יש לאפשר שעונים מעוררים ותזכורות ל־StreamVault בהגדרות Android ולנסות להקליט שוב.</string>
+    <string name="player_mark_intro_end">הפתיח מסתיים כאן</string>
+    <string name="player_intro_end_saved">נשמר. כל פרק בסדרה יציע דילוג על הפתיח.</string>
 </resources>

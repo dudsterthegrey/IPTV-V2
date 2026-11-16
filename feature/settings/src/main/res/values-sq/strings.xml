@@ -976,4 +976,9 @@
     <string name="settings_text_size_custom">E personalizuar</string>
     <string name="dashboard_up_next">Në vijim</string>
     <string name="dashboard_recent_episodes">Episode të shtuara së fundi</string>
+    <string name="settings_update_downloader">Instalo në një pajisje tjetër</string>
+    <string name="settings_update_downloader_value">Kodi i Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Përforcim zëri</string>
+    <string name="settings_volume_boost_off">Joaktiv</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

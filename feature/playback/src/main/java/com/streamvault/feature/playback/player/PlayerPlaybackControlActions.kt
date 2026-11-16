@@ -42,6 +42,16 @@ fun PlayerViewModel.playEpisode(episode: Episode, showResumePrompt: Boolean = tr
     )
 }
 
+/** Remembers the current position as where this show's intro ends; every episode then offers "Skip intro". */
+fun PlayerViewModel.markIntroEnd(): Boolean {
+    val series = currentSeries.value ?: return false
+    val positionMs = playerEngine.currentPosition.value.takeIf { it > 0L } ?: return false
+    viewModelScope.launch {
+        playerPreferencesCoordinator.setSeriesIntroEndMs(series.providerId, series.id, positionMs)
+    }
+    return true
+}
+
 fun PlayerViewModel.playEpisodeFromNavigation(episode: Episode) {
     cancelAutoPlay()
     playEpisode(episode)

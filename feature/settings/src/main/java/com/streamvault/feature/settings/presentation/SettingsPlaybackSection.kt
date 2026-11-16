@@ -698,6 +698,17 @@ public fun LazyListScope.settingsPlaybackSection(
                     onClick = { onShowAudioOutputPreferenceDialogChange(true) }
                 ,
                     modifier = if (targetItemId == "playback.audio_output") targetFocusModifier else Modifier,)
+                val volumeBoostDb by viewModel.playerVolumeBoostDb.collectAsStateWithLifecycle()
+                ClickableSettingsRow(
+                    label = stringResource(R.string.settings_volume_boost),
+                    value = if (volumeBoostDb == 0) {
+                        stringResource(R.string.settings_volume_boost_off)
+                    } else {
+                        stringResource(R.string.settings_volume_boost_value, volumeBoostDb)
+                    },
+                    onClick = viewModel::cyclePlayerVolumeBoost
+                ,
+                    modifier = if (targetItemId == "playback.volume_boost") targetFocusModifier else Modifier,)
                 SwitchSettingsRow(
                     label = stringResource(R.string.settings_audio_video_sync_enabled),
                     value = stringResource(R.string.settings_audio_video_sync_enabled_subtitle),

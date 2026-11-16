@@ -982,4 +982,9 @@
     <string name="settings_text_size_custom">Vlastná</string>
     <string name="dashboard_up_next">Ďalej</string>
     <string name="dashboard_recent_episodes">Nedávno pridané diely</string>
+    <string name="settings_update_downloader">Inštalácia na iné zariadenie</string>
+    <string name="settings_update_downloader_value">Kód pre Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Zosilnenie hlasitosti</string>
+    <string name="settings_volume_boost_off">Vypnuté</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

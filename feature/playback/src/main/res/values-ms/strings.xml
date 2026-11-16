@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">Benarkan penggera dan peringatan untuk StreamVault dalam tetapan Android, kemudian cuba merakam semula.</string>
+    <string name="player_mark_intro_end">Intro tamat di sini</string>
+    <string name="player_intro_end_saved">Disimpan. Setiap episod rancangan ini akan menawarkan Langkau intro.</string>
 </resources>

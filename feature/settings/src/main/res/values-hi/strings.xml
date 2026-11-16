@@ -976,4 +976,9 @@
     <string name="settings_text_size_custom">कस्टम</string>
     <string name="dashboard_up_next">आगे</string>
     <string name="dashboard_recent_episodes">हाल में जोड़े गए एपिसोड</string>
+    <string name="settings_update_downloader">दूसरे डिवाइस पर इंस्टॉल करें</string>
+    <string name="settings_update_downloader_value">Downloader कोड %1$s · %2$s</string>
+    <string name="settings_volume_boost">वॉल्यूम बूस्ट</string>
+    <string name="settings_volume_boost_off">बंद</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

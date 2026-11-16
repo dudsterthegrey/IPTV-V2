@@ -31,6 +31,10 @@ import com.streamvault.domain.manager.DriveAuthState
 private const val OPEN_SOURCE_LICENSES_URL =
     "https://github.com/Davidona/StreamVault-IPTV/blob/master/docs/THIRD-PARTY-LICENSES.md"
 
+/** Downloader (Fire TV app) code for the latest IPTV Player APK; it points at the APK in the V2 repo. */
+private const val DOWNLOADER_CODE = "7935478"
+private const val DOWNLOADER_SHORT_URL = "aftv.news/7935478"
+
 public fun LazyListScope.settingsBackupSection(
     uiState: SettingsUiState,
     viewModel: SettingsViewModel,
@@ -509,6 +513,10 @@ public fun LazyListScope.settingsAboutSection(
                 ,
                     modifier = if (targetItemId == "about.release") targetFocusModifier else Modifier,)
             }
+            SettingsRow(
+                label = stringResource(R.string.settings_update_downloader),
+                value = stringResource(R.string.settings_update_downloader_value, DOWNLOADER_CODE, DOWNLOADER_SHORT_URL)
+            )
             if (!uiState.appUpdate.errorMessage.isNullOrBlank()) {
                 SettingsRow(
                     label = stringResource(R.string.settings_update_error),

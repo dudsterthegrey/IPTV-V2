@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">Permite las alarmas y recordatorios para StreamVault en los ajustes de Android y vuelve a intentar la grabación.</string>
+    <string name="player_mark_intro_end">La intro termina aquí</string>
+    <string name="player_intro_end_saved">Guardado. Cada episodio de esta serie ofrecerá Saltar intro.</string>
 </resources>

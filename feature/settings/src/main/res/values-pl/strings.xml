@@ -984,4 +984,9 @@
     <string name="settings_text_size_custom">Niestandardowy</string>
     <string name="dashboard_up_next">Następny</string>
     <string name="dashboard_recent_episodes">Ostatnio dodane odcinki</string>
+    <string name="settings_update_downloader">Zainstaluj na innym urządzeniu</string>
+    <string name="settings_update_downloader_value">Kod Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Wzmocnienie głośności</string>
+    <string name="settings_volume_boost_off">Wyłączone</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

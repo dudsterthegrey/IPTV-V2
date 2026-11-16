@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">اسمح بالمنبهات والتذكيرات لتطبيق StreamVault في إعدادات Android، ثم حاول التسجيل مجددًا.</string>
+    <string name="player_mark_intro_end">نهاية المقدمة هنا</string>
+    <string name="player_intro_end_saved">تم الحفظ. ستعرض كل حلقات هذا المسلسل خيار تخطي المقدمة.</string>
 </resources>

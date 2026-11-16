@@ -984,4 +984,9 @@
     <string name="settings_text_size_custom">Свой размер</string>
     <string name="dashboard_up_next">Далее</string>
     <string name="dashboard_recent_episodes">Недавно добавленные серии</string>
+    <string name="settings_update_downloader">Установка на другом устройстве</string>
+    <string name="settings_update_downloader_value">Код Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Усиление громкости</string>
+    <string name="settings_volume_boost_off">Выкл.</string>
+    <string name="settings_volume_boost_value">+%1$d дБ</string>
 </resources>

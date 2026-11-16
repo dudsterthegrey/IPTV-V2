@@ -95,6 +95,8 @@ internal fun PlayerControlsOverlayHost(
     val currentSeries by viewModel.currentSeries.collectAsControlsState(observeControls)
     val currentEpisode by viewModel.currentEpisode.collectAsControlsState(observeControls)
     val nextEpisode by viewModel.nextEpisode.collectAsControlsState(observeControls)
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val introEndSavedMessage = androidx.compose.ui.res.stringResource(R.string.player_intro_end_saved)
     val availableAudioTracks by viewModel.availableAudioTracks.collectAsControlsState(observeControls)
     val availableSubtitleTracks by viewModel.availableSubtitleTracks.collectAsControlsState(observeControls)
     val stremioSubtitlePickerState by viewModel.stremioSubtitlePickerState.collectAsControlsState(observeControls)
@@ -169,6 +171,11 @@ internal fun PlayerControlsOverlayHost(
             },
             onPlayNextEpisode = {
                 nextEpisode?.let(viewModel::playEpisodeFromNavigation)
+            },
+            onMarkIntroEnd = {
+                if (viewModel.markIntroEnd()) {
+                    android.widget.Toast.makeText(context, introEndSavedMessage, android.widget.Toast.LENGTH_SHORT).show()
+                }
             },
             onOpenSubtitleTracks = onOpenSubtitleTracks,
             onOpenAudioTracks = onOpenAudioTracks,

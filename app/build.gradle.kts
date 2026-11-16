@@ -47,7 +47,17 @@ fun localProp(key: String): String =
 // Public app configuration; OAuth user credentials are never build inputs.
 val traktClientId = providers.environmentVariable("TRAKT_CLIENT_ID").orNull ?: localProp("trakt.client.id")
 val traktRedirectUri = providers.environmentVariable("TRAKT_REDIRECT_URI").orNull ?: localProp("trakt.redirect.uri")
+// IPTV Player ships its own OpenSubtitles app key; an environment variable or local.properties
+// value still overrides it, and a key entered in Settings wins over all of these at runtime.
+val builtInOpenSubtitlesApiKey = "0Wdlgq5cTOsO90DNOtfERVyolQWDUMkd"
+// TMDB key for IMDb-rating lookups, genres/anime detection and the Top 10 row; same override order.
+val builtInTmdbApiKey = "e16549a24d9b3f6aa0515a3ac53d17f5"
+val tmdbApiKey = providers.environmentVariable("TMDB_API_KEY").orNull
+    ?: localProp("tmdb.api.key").takeIf { it.isNotBlank() }
+    ?: builtInTmdbApiKey
 val opensubtitlesApiKey = providers.environmentVariable("OPENSUBTITLES_API_KEY").orNull
+    ?: localProp("opensubtitles.api.key").takeIf { it.isNotBlank() }
+    ?: builtInOpenSubtitlesApiKey
 val traktCallback = runCatching { URI(traktRedirectUri) }.getOrNull()
 fun buildStringLiteral(value: String): String = "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
@@ -93,10 +103,11 @@ android {
         }
         buildConfigField("String", "OFFICIAL_APPLICATION_ID", "\"com.streamvault.app\"")
         buildConfigField("String", "OFFICIAL_SIGNING_CERT_SHA256", "\"$officialSigningCertSha256\"")
-        buildConfigField("String", "OPENSUBTITLES_API_KEY", buildStringLiteral(opensubtitlesApiKey.orEmpty()))
+        buildConfigField("String", "OPENSUBTITLES_API_KEY", buildStringLiteral(opensubtitlesApiKey))
+        buildConfigField("String", "TMDB_API_KEY", buildStringLiteral(tmdbApiKey))
         buildConfigField("String", "APP_UPDATE_CHANNEL", "\"stable\"")
         // In-app updates pulled from the upstream StreamVault GitHub releases; off until IPTV Player has its own release feed.
-        buildConfigField("boolean", "APP_UPDATES_ENABLED", "false")
+        buildConfigField("boolean", "APP_UPDATES_ENABLED", "true")
         buildConfigField("long", "BUILD_TIMESTAMP_UTC", "0L")
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a")
@@ -140,7 +151,7 @@ android {
             buildConfigField(
                 "String",
                 "OPENSUBTITLES_API_KEY",
-                buildStringLiteral(opensubtitlesApiKey ?: localProp("opensubtitles.api.key"))
+                buildStringLiteral(opensubtitlesApiKey)
             )
         }
         create("beta") {

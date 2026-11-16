@@ -978,4 +978,9 @@
     <string name="settings_text_size_custom">Brugerdefineret</string>
     <string name="dashboard_up_next">Næste</string>
     <string name="dashboard_recent_episodes">Nyligt tilføjede afsnit</string>
+    <string name="settings_update_downloader">Installer på en anden enhed</string>
+    <string name="settings_update_downloader_value">Downloader-kode %1$s · %2$s</string>
+    <string name="settings_volume_boost">Lydforstærkning</string>
+    <string name="settings_volume_boost_off">Fra</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

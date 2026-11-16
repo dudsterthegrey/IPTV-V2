@@ -973,4 +973,9 @@
     <string name="settings_text_size_custom">自訂</string>
     <string name="dashboard_up_next">接下來</string>
     <string name="dashboard_recent_episodes">最近新增的集數</string>
+    <string name="settings_update_downloader">在其他裝置上安裝</string>
+    <string name="settings_update_downloader_value">Downloader 代碼 %1$s · %2$s</string>
+    <string name="settings_volume_boost">音量增強</string>
+    <string name="settings_volume_boost_off">關閉</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

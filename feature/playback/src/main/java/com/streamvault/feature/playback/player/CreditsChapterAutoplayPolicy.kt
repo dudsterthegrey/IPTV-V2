@@ -105,6 +105,23 @@ internal fun findSkippableChapterAction(
         }
     }
 
+/**
+ * "Skip intro" from the end point the user marked for the show, shown from the start of the
+ * episode until shortly before that point. Ignored when it lies beyond the episode's end.
+ */
+internal fun learnedIntroAction(
+    introEndMs: Long?,
+    positionMs: Long,
+    durationMs: Long
+): SkippableChapterAction? {
+    if (introEndMs == null || introEndMs <= 0L) return null
+    if (durationMs > 0L && introEndMs >= durationMs) return null
+    if (positionMs < 0L || positionMs >= introEndMs - LEARNED_INTRO_HIDE_BEFORE_END_MS) return null
+    return SkippableChapterAction(type = SkippableChapterType.INTRO, targetPositionMs = introEndMs)
+}
+
+private const val LEARNED_INTRO_HIDE_BEFORE_END_MS = 2_000L
+
 internal fun shouldStartCreditsAutoPlay(
     currentChapter: PlayerChapter?,
     lastTriggeredChapterStartMs: Long?,

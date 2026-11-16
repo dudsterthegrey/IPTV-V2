@@ -973,4 +973,9 @@
     <string name="settings_text_size_custom">Tersuai</string>
     <string name="dashboard_up_next">Seterusnya</string>
     <string name="dashboard_recent_episodes">Episod yang baru ditambah</string>
+    <string name="settings_update_downloader">Pasang pada peranti lain</string>
+    <string name="settings_update_downloader_value">Kod Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Penguat kelantangan</string>
+    <string name="settings_volume_boost_off">Mati</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

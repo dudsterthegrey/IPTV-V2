@@ -148,6 +148,18 @@ class PlayerViewModel @Inject constructor(
     val autoPlayCountdown: StateFlow<AutoPlayCountdownUiState?> = _autoPlayCountdown.asStateFlow()
 
     internal val _skipChapter = MutableStateFlow<SkipChapterUiState?>(null)
+    /** Where the current show's intro ends, as marked by the user ("Intro ends here"). */
+    internal val learnedIntroEndMs: StateFlow<Long?> by lazy {
+        currentSeries
+            .map { series -> series?.let { it.providerId to it.id } }
+            .distinctUntilChanged()
+            .flatMapLatest { key ->
+                key?.let { (providerId, seriesId) ->
+                    playerPreferencesCoordinator.observeSeriesIntroEndMs(providerId, seriesId)
+                } ?: flowOf(null)
+            }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+    }
     val skipChapter: StateFlow<SkipChapterUiState?> = _skipChapter.asStateFlow()
 
     internal val playbackTitleFlow = MutableStateFlow("")
@@ -682,10 +694,14 @@ class PlayerViewModel @Inject constructor(
                     readySideEffectsRequestVersion == prepareRequestVersion &&
                     currentContentType.isSkippableChapterContent()
                 ) {
-                    findSkippableChapterAction(
+                    (findSkippableChapterAction(
                         chapters = observation.chapters,
                         positionMs = observation.positionMs
-                    )?.let { action ->
+                    ) ?: learnedIntroAction(
+                        introEndMs = learnedIntroEndMs.value.takeIf { currentContentType == ContentType.SERIES_EPISODE },
+                        positionMs = observation.positionMs,
+                        durationMs = observation.durationMs
+                    ))?.let { action ->
                         SkipChapterUiState(
                             type = action.type,
                             targetPositionMs = action.targetPositionMs
@@ -927,6 +943,13 @@ class PlayerViewModel @Inject constructor(
                 .combine(activePlayerEngineFlow) { preference, engine -> engine to preference }
                 .collect { (engine, preference) ->
                     engine.setAudioOutputPreference(preference)
+                }
+        }
+        viewModelScope.launch {
+            playerPreferencesCoordinator.playerVolumeBoostDb
+                .combine(activePlayerEngineFlow) { boostDb, engine -> engine to boostDb }
+                .collect { (engine, boostDb) ->
+                    engine.setVolumeBoostDb(boostDb)
                 }
         }
         viewModelScope.launch {

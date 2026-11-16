@@ -515,6 +515,7 @@ class PreferencesRepository @Inject constructor(
         val PLAYER_VOD_HTTP_PROTOCOL_MODE = stringPreferencesKey("player_vod_http_protocol_mode")
         val LEGACY_PLAYER_MOVIE_HTTP_PROTOCOL_MODE = stringPreferencesKey("player_movie_http_protocol_mode")
         val PLAYER_AUDIO_OUTPUT_PREFERENCE = stringPreferencesKey("player_audio_output_preference")
+        val PLAYER_VOLUME_BOOST_DB = intPreferencesKey("player_volume_boost_db")
         val PLAYER_COMPATIBILITY_MEMORY_ENABLED = booleanPreferencesKey("player_compatibility_memory_enabled")
         val PLAYER_SURFACE_MODE = stringPreferencesKey("player_surface_mode")
         val PLAYER_PLAYBACK_SPEED = stringPreferencesKey("player_playback_speed")
@@ -792,6 +793,31 @@ class PreferencesRepository @Inject constructor(
             )
             ?.let { saved -> VodHttpProtocolMode.entries.firstOrNull { it.name == saved } }
             ?: VodHttpProtocolMode.COMPATIBILITY_HTTP1
+    }
+
+    override fun observeSeriesIntroEndMs(providerId: Long, seriesId: Long): Flow<Long?> =
+        context.dataStore.data.map { preferences ->
+            preferences[seriesIntroEndKey(providerId, seriesId)]?.takeIf { it > 0L }
+        }.distinctUntilChanged()
+
+    override suspend fun setSeriesIntroEndMs(providerId: Long, seriesId: Long, introEndMs: Long?) {
+        context.dataStore.edit { preferences ->
+            val key = seriesIntroEndKey(providerId, seriesId)
+            if (introEndMs != null && introEndMs > 0L) preferences[key] = introEndMs else preferences.remove(key)
+        }
+    }
+
+    private fun seriesIntroEndKey(providerId: Long, seriesId: Long) =
+        longPreferencesKey("series_intro_end_ms_${providerId}_$seriesId")
+
+    override val playerVolumeBoostDb: Flow<Int> = context.dataStore.data.map { preferences ->
+        (preferences[PreferencesKeys.PLAYER_VOLUME_BOOST_DB] ?: 0).coerceIn(0, 15)
+    }
+
+    override suspend fun setPlayerVolumeBoostDb(db: Int) {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.PLAYER_VOLUME_BOOST_DB] = db.coerceIn(0, 15)
+        }
     }
 
     override val playerAudioOutputPreference: Flow<AudioOutputPreference> = context.dataStore.data.map { preferences ->

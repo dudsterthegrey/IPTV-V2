@@ -33,6 +33,11 @@ class PlayerPreferencesCoordinator @Inject constructor(
     internal val parentalControlLevel get() = preferencesRepository.parentalControlLevel
     internal val playerAudioDecoderMode get() = preferencesRepository.playerAudioDecoderMode
     internal val playerAudioOutputPreference get() = preferencesRepository.playerAudioOutputPreference
+    internal val playerVolumeBoostDb get() = preferencesRepository.playerVolumeBoostDb
+    internal fun observeSeriesIntroEndMs(providerId: Long, seriesId: Long) =
+        preferencesRepository.observeSeriesIntroEndMs(providerId, seriesId)
+    internal suspend fun setSeriesIntroEndMs(providerId: Long, seriesId: Long, introEndMs: Long?) =
+        preferencesRepository.setSeriesIntroEndMs(providerId, seriesId, introEndMs)
     internal val playerAudioVideoOffsetMs get() = preferencesRepository.playerAudioVideoOffsetMs
     internal val playerBackButtonVisibility get() = preferencesRepository.playerBackButtonVisibility
     internal val playerConfirmClosePlayback get() = preferencesRepository.playerConfirmClosePlayback

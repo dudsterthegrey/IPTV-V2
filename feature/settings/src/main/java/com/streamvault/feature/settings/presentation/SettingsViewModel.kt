@@ -99,6 +99,7 @@ import kotlin.math.max
 import javax.inject.Inject
 
 private const val PROVIDER_AVAILABILITY_STALE_AFTER_MILLIS = 5 * 60 * 1000L
+private val VOLUME_BOOST_STEPS_DB = listOf(3, 6, 10)
 
 @HiltViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -1111,6 +1112,15 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             preferencesRepository.setPlayerPlaybackBufferMode(mode)
         }
+    }
+
+    val playerVolumeBoostDb: StateFlow<Int> = preferencesRepository.playerVolumeBoostDb
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0)
+
+    /** Off → +3 → +6 → +10 dB → Off. */
+    fun cyclePlayerVolumeBoost() {
+        val next = VOLUME_BOOST_STEPS_DB.firstOrNull { it > playerVolumeBoostDb.value } ?: 0
+        viewModelScope.launch { preferencesRepository.setPlayerVolumeBoostDb(next) }
     }
 
     fun setPlayerAudioOutputPreference(preference: AudioOutputPreference) {

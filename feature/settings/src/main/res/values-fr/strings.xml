@@ -978,4 +978,9 @@
     <string name="settings_text_size_custom">Personnalisée</string>
     <string name="dashboard_up_next">À suivre</string>
     <string name="dashboard_recent_episodes">Épisodes récemment ajoutés</string>
+    <string name="settings_update_downloader">Installer sur un autre appareil</string>
+    <string name="settings_update_downloader_value">Code Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Amplification du volume</string>
+    <string name="settings_volume_boost_off">Désactivé</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

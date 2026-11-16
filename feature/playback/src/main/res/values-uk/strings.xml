@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">Дозвольте будильники й нагадування для StreamVault у налаштуваннях Android, а потім спробуйте записати знову.</string>
+    <string name="player_mark_intro_end">Тут закінчується заставка</string>
+    <string name="player_intro_end_saved">Збережено. У кожній серії буде «Пропустити заставку».</string>
 </resources>

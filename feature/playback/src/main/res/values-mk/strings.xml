@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">Дозволете аларми и потсетници за StreamVault во поставките на Android, па обидете се повторно да снимате.</string>
+    <string name="player_mark_intro_end">Воведот завршува тука</string>
+    <string name="player_intro_end_saved">Зачувано. Секоја епизода ќе нуди Прескокни вовед.</string>
 </resources>

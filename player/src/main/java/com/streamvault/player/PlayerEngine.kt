@@ -118,6 +118,8 @@ interface PlayerEngine {
     fun setAudioVideoOffsetMs(offsetMs: Int)
     fun setSubtitleOffsetMs(offsetMs: Int)
     fun setAudioOutputPreference(preference: AudioOutputPreference)
+    /** Loudness boost above 100% volume, in dB (0 = off). */
+    fun setVolumeBoostDb(db: Int) {}
     fun setCompatibilityMemoryEnabled(enabled: Boolean)
     fun clearLearnedPlaybackCompatibility()
     fun startLiveTimeshift(streamInfo: StreamInfo, channelKey: String, config: TimeshiftConfig)

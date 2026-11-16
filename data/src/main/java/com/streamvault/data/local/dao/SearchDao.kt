@@ -13,8 +13,23 @@ data class SearchHitEntity(
     @ColumnInfo(name = "match_rank") val matchRank: Int
 )
 
+/** A title for the typo-tolerant search pass. */
+data class SearchTitleRow(
+    @ColumnInfo(name = "id") val id: Long,
+    @ColumnInfo(name = "name") val name: String
+)
+
 @Dao
 abstract class SearchDao {
+    @Query("SELECT id, name FROM channels WHERE provider_id = :providerId")
+    abstract suspend fun channelTitles(providerId: Long): List<SearchTitleRow>
+
+    @Query("SELECT id, name FROM movies WHERE provider_id = :providerId")
+    abstract suspend fun movieTitles(providerId: Long): List<SearchTitleRow>
+
+    @Query("SELECT id, name FROM series WHERE provider_id = :providerId")
+    abstract suspend fun seriesTitles(providerId: Long): List<SearchTitleRow>
+
     @Query(
         """
         SELECT * FROM (

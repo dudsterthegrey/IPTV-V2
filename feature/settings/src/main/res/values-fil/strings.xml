@@ -976,4 +976,9 @@
     <string name="settings_text_size_custom">Pasadya</string>
     <string name="dashboard_up_next">Susunod</string>
     <string name="dashboard_recent_episodes">Mga bagong idinagdag na episode</string>
+    <string name="settings_update_downloader">I-install sa ibang device</string>
+    <string name="settings_update_downloader_value">Downloader code %1$s · %2$s</string>
+    <string name="settings_volume_boost">Volume boost</string>
+    <string name="settings_volume_boost_off">Naka-off</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

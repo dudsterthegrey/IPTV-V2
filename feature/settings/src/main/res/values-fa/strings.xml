@@ -976,4 +976,9 @@
     <string name="settings_text_size_custom">سفارشی</string>
     <string name="dashboard_up_next">بعدی</string>
     <string name="dashboard_recent_episodes">قسمت‌های تازه اضافه‌شده</string>
+    <string name="settings_update_downloader">نصب روی دستگاه دیگر</string>
+    <string name="settings_update_downloader_value">کد Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">تقویت صدا</string>
+    <string name="settings_volume_boost_off">خاموش</string>
+    <string name="settings_volume_boost_value">+%1$d دسی‌بل</string>
 </resources>

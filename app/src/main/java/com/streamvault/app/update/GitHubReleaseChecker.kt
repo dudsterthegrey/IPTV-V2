@@ -14,8 +14,12 @@ import java.net.URI
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val GITHUB_RELEASES_LATEST_URL = "https://api.github.com/repos/Davidona/StreamVault-IPTV/releases/latest"
-private const val GITHUB_RELEASES_LIST_URL = "https://api.github.com/repos/Davidona/StreamVault-IPTV/releases?per_page=20"
+/**
+ * IPTV Player publishes its APK in the repo (not as a GitHub Release), with a small manifest next
+ * to it: {"versionName","versionCode","downloadUrl","sha256","releaseNotes"}.
+ */
+internal const val UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/update.json"
+internal const val UPDATE_RELEASE_PAGE_URL = "https://github.com/dudsterthegrey/IPTV-V2/tree/main/release"
 
 data class GitHubReleaseInfo(
     val versionName: String,
@@ -36,7 +40,6 @@ class GitHubReleaseChecker internal constructor(
 
     private companion object {
         private const val MAX_RESPONSE_BYTES = 512 * 1024L
-        private val STRUCTURED_TAG_REGEX = Regex("""^v?(.+?)\+(\d+)$""", RegexOption.IGNORE_CASE)
     }
 
     suspend fun fetchLatestRelease(): Result<GitHubReleaseInfo> = withContext(Dispatchers.IO) {
@@ -47,8 +50,8 @@ class GitHubReleaseChecker internal constructor(
             val updateChannel = AppUpdateChannel.fromCurrentBuild()
             val request = Request.Builder()
                 .url(updateChannel.releaseApiUrl)
-                .header("Accept", "application/vnd.github+json")
-                .header("User-Agent", "StreamVault-Update-Checker")
+                .header("Accept", "application/json")
+                .header("User-Agent", "IPTV-Player-Update-Checker")
                 .build()
 
             okHttpClient.newCall(request).execute().use { response ->
@@ -63,41 +66,12 @@ class GitHubReleaseChecker internal constructor(
                     Result.Loading -> ""
                 }
                 if (body.isBlank()) {
-                    return@withContext Result.error("Update check failed: empty GitHub release response")
+                    return@withContext Result.error("Update check failed: empty update manifest")
                 }
 
-                val json = selectReleaseJson(body, updateChannel)
-                    ?: return@withContext Result.error(
-                        if (updateChannel == AppUpdateChannel.Beta) {
-                            "Update check failed: no beta release found"
-                        } else {
-                            "Update check failed: latest release response was invalid"
-                        }
-                    )
-                val parsedTag = parseTagVersionInfo(json.optString("tag_name"))
-                if (parsedTag.versionName.isBlank()) {
-                    return@withContext Result.error("Update check failed: latest release tag is missing")
-                }
-
-                val notes = json.optString("body").trim()
-                val assets = json.optJSONArray("assets")
-                val releaseUrl = json.optString("html_url").takeIf(::isHttpsUrl).orEmpty()
-                if (releaseUrl.isBlank()) {
-                    return@withContext Result.error("Update check failed: latest release URL is not HTTPS")
-                }
-                val downloadAsset = findApkAsset(assets, updateChannel)
-
-                return@withContext Result.success(
-                    GitHubReleaseInfo(
-                        versionName = parsedTag.versionName,
-                        versionCode = parsedTag.versionCode,
-                        releaseUrl = releaseUrl,
-                        downloadUrl = downloadAsset?.downloadUrl,
-                        downloadSha256 = downloadAsset?.sha256,
-                        releaseNotes = notes,
-                        publishedAt = json.optString("published_at").takeIf { it.isNotBlank() }
-                    )
-                )
+                val json = runCatching { JSONObject(body) }.getOrNull()
+                    ?: return@withContext Result.error("Update check failed: update manifest was invalid")
+                return@withContext parseUpdateManifest(json)
             }
         } catch (error: IOException) {
             Result.error("Update check failed: network error", error)
@@ -106,31 +80,10 @@ class GitHubReleaseChecker internal constructor(
         }
     }
 
-    private fun selectReleaseJson(body: String, updateChannel: AppUpdateChannel): JSONObject? {
-        return when (updateChannel) {
-            AppUpdateChannel.Stable -> JSONObject(body)
-            AppUpdateChannel.Beta -> {
-                val releases = org.json.JSONArray(body)
-                for (index in 0 until releases.length()) {
-                    val release = releases.optJSONObject(index) ?: continue
-                    if (release.optBoolean("draft")) continue
-                    if (!release.optBoolean("prerelease")) continue
-                    val tagName = release.optString("tag_name")
-                    if (!tagName.contains("-beta", ignoreCase = true)) continue
-                    val downloadAsset = findApkAsset(release.optJSONArray("assets"), updateChannel)
-                    if (downloadAsset != null) {
-                        return release
-                    }
-                }
-                null
-            }
-        }
-    }
-
     private fun readResponseBodyCapped(body: ResponseBody): Result<String> {
         val contentLength = body.contentLength()
         if (contentLength > MAX_RESPONSE_BYTES) {
-            return Result.error("Update check failed: GitHub release response exceeded 512 KB")
+            return Result.error("Update check failed: update manifest exceeded 512 KB")
         }
 
         val charset = body.contentType()?.charset(Charsets.UTF_8) ?: Charsets.UTF_8
@@ -145,7 +98,7 @@ class GitHubReleaseChecker internal constructor(
 
                 totalBytesRead += bytesRead
                 if (totalBytesRead > MAX_RESPONSE_BYTES) {
-                    return Result.error("Update check failed: GitHub release response exceeded 512 KB")
+                    return Result.error("Update check failed: update manifest exceeded 512 KB")
                 }
 
                 output.write(buffer, 0, bytesRead)
@@ -155,60 +108,22 @@ class GitHubReleaseChecker internal constructor(
         return Result.success(output.toString(charset.name()))
     }
 
-    private fun findApkAsset(assets: org.json.JSONArray?, updateChannel: AppUpdateChannel): ReleaseApkAsset? {
-        if (assets == null) return null
-        var fallback: ReleaseApkAsset? = null
-        for (index in 0 until assets.length()) {
-            val asset = assets.optJSONObject(index) ?: continue
-            val name = asset.optString("name")
-            val url = asset.optString("browser_download_url").takeIf { it.isNotBlank() } ?: continue
-            if (!isHttpsUrl(url)) continue
-            val releaseAsset = ReleaseApkAsset(
-                downloadUrl = url,
-                sha256 = parseReleaseAssetSha256Digest(asset.optString("digest"))
-            )
-            when (updateChannel) {
-                AppUpdateChannel.Stable -> {
-                    if (name.equals("StreamVault.apk", ignoreCase = true)) {
-                        return releaseAsset
-                    }
-                    if (fallback == null &&
-                        name.endsWith(".apk", ignoreCase = true) &&
-                        !name.contains("beta", ignoreCase = true)
-                    ) {
-                        fallback = releaseAsset
-                    }
-                }
-                AppUpdateChannel.Beta -> {
-                    if (name.equals("StreamVault-beta.apk", ignoreCase = true)) {
-                        return releaseAsset
-                    }
-                    if (fallback == null &&
-                        name.endsWith(".apk", ignoreCase = true) &&
-                        name.contains("beta", ignoreCase = true)
-                    ) {
-                        fallback = releaseAsset
-                    }
-                }
-            }
+    private fun parseUpdateManifest(json: JSONObject): Result<GitHubReleaseInfo> {
+        val versionName = json.optString("versionName").trim()
+        if (versionName.isBlank()) {
+            return Result.error("Update check failed: update manifest has no version")
         }
-        return fallback
-    }
-
-
-    private fun parseTagVersionInfo(rawTagName: String): ParsedTagVersion {
-        val normalizedTag = rawTagName.trim()
-        val structuredMatch = STRUCTURED_TAG_REGEX.matchEntire(normalizedTag)
-        if (structuredMatch != null) {
-            return ParsedTagVersion(
-                versionName = structuredMatch.groupValues[1].trim(),
-                versionCode = structuredMatch.groupValues[2].toIntOrNull()
+        val downloadUrl = json.optString("downloadUrl").trim().takeIf(::isHttpsUrl)
+        return Result.success(
+            GitHubReleaseInfo(
+                versionName = versionName,
+                versionCode = json.optInt("versionCode", 0).takeIf { it > 0 },
+                releaseUrl = UPDATE_RELEASE_PAGE_URL,
+                downloadUrl = downloadUrl,
+                downloadSha256 = json.optString("sha256").trim().takeIf { SHA256_HEX_REGEX.matches(it) }?.lowercase(),
+                releaseNotes = json.optString("releaseNotes").trim(),
+                publishedAt = json.optString("publishedAt").takeIf { it.isNotBlank() }
             )
-        }
-
-        return ParsedTagVersion(
-            versionName = normalizedTag.removePrefix("v").trim(),
-            versionCode = null
         )
     }
 
@@ -231,14 +146,10 @@ internal fun parseReleaseAssetSha256Digest(rawDigest: String): String? {
 
 private val SHA256_HEX_REGEX = Regex("""^[a-fA-F0-9]{64}$""")
 
-private data class ReleaseApkAsset(
-    val downloadUrl: String,
-    val sha256: String?
-)
-
 enum class AppUpdateChannel(val id: String, val releaseApiUrl: String) {
-    Stable(id = "stable", releaseApiUrl = GITHUB_RELEASES_LATEST_URL),
-    Beta(id = "beta", releaseApiUrl = GITHUB_RELEASES_LIST_URL);
+    // IPTV Player publishes one manifest; beta builds read it too.
+    Stable(id = "stable", releaseApiUrl = UPDATE_MANIFEST_URL),
+    Beta(id = "beta", releaseApiUrl = UPDATE_MANIFEST_URL);
 
     companion object {
         fun fromCurrentBuild(): AppUpdateChannel {
@@ -254,8 +165,3 @@ enum class AppUpdateChannel(val id: String, val releaseApiUrl: String) {
         }
     }
 }
-
-private data class ParsedTagVersion(
-    val versionName: String,
-    val versionCode: Int?
-)

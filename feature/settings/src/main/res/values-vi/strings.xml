@@ -975,4 +975,9 @@
     <string name="settings_text_size_custom">Tùy chỉnh</string>
     <string name="dashboard_up_next">Tiếp theo</string>
     <string name="dashboard_recent_episodes">Tập mới thêm gần đây</string>
+    <string name="settings_update_downloader">Cài trên thiết bị khác</string>
+    <string name="settings_update_downloader_value">Mã Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">Tăng âm lượng</string>
+    <string name="settings_volume_boost_off">Tắt</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

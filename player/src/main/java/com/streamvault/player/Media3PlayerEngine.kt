@@ -375,6 +375,7 @@ class Media3PlayerEngine @Inject constructor(
     private val _audioFocusDenied = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
     override val audioFocusDenied: Flow<Unit> = _audioFocusDenied.asSharedFlow()
 
+    private val volumeBoost = com.streamvault.player.audio.VolumeBoostController()
     private val audioFocusController = PlayerAudioFocusController(
         context = context,
         applyVolume = { volume -> exoPlayer?.volume = volume },
@@ -972,6 +973,10 @@ class Media3PlayerEngine @Inject constructor(
         exoPlayer?.let { player -> player.seekTo(player.currentPosition) }
     }
 
+    override fun setVolumeBoostDb(db: Int) {
+        volumeBoost.setGainDb(db)
+    }
+
     override fun setAudioOutputPreference(preference: AudioOutputPreference) {
         if (audioOutputPreference == preference) return
         audioOutputPreference = preference
@@ -1408,6 +1413,7 @@ class Media3PlayerEngine @Inject constructor(
         mediaSession?.release()
         mediaSession = null
         viewBinder.clear()
+        volumeBoost.release()
         exoPlayer?.release()
         exoPlayer = null
         preloadWindowManager?.release()
@@ -1712,6 +1718,7 @@ class Media3PlayerEngine @Inject constructor(
         val existing = exoPlayer ?: return
         mediaSession?.release()
         mediaSession = null
+        volumeBoost.release()
         existing.release()
         exoPlayer = null
         playbackLoadControl = null
@@ -1731,6 +1738,7 @@ class Media3PlayerEngine @Inject constructor(
             exoPlayer = player
             statsCollector.bind { exoPlayer }
             audioFocusController.reapplyVolume()
+            volumeBoost.attach(player.audioSessionId)
             pendingPreloadWindow?.let { preloadWindowManager?.updateWindow(it) }
             if (enableMediaSession) {
                 mediaSession = MediaSession.Builder(context, player)
@@ -1895,6 +1903,7 @@ class Media3PlayerEngine @Inject constructor(
                  }
                 addAnalyticsListener(createAnalyticsListener())
                 addListener(createPlayerListener())
+                addListener(volumeBoost.listener)
             }
     }
 

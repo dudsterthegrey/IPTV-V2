@@ -974,4 +974,9 @@
     <string name="settings_text_size_custom">사용자 지정</string>
     <string name="dashboard_up_next">다음 화</string>
     <string name="dashboard_recent_episodes">최근 추가된 에피소드</string>
+    <string name="settings_update_downloader">다른 기기에 설치</string>
+    <string name="settings_update_downloader_value">Downloader 코드 %1$s · %2$s</string>
+    <string name="settings_volume_boost">볼륨 증폭</string>
+    <string name="settings_volume_boost_off">끄기</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

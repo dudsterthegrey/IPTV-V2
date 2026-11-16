@@ -7,6 +7,7 @@ import com.streamvault.data.local.dao.ProviderDao
 import com.streamvault.data.local.dao.ProviderSnapshotDao
 import com.streamvault.data.local.dao.StalkerIndexJobDao
 import com.streamvault.data.local.dao.SearchHitEntity
+import com.streamvault.data.search.FuzzySearchIndex
 import com.streamvault.data.util.toFtsPrefixQuery
 import com.streamvault.domain.model.Channel
 import com.streamvault.domain.model.CatalogLayout
@@ -48,7 +49,8 @@ class SearchRepositoryImpl @Inject constructor(
     private val providerDao: ProviderDao,
     private val stalkerIndexJobDao: StalkerIndexJobDao,
     private val providerSnapshotDao: ProviderSnapshotDao,
-    private val vodRepository: VodRepository
+    private val vodRepository: VodRepository,
+    private val fuzzySearchIndex: FuzzySearchIndex
 ) : SearchRepository {
     override fun searchContent(
         providerId: Long,
@@ -84,7 +86,9 @@ class SearchRepositoryImpl @Inject constructor(
                     startedAtNanos = startedAtNanos,
                     hits = hits
                 )
-                SearchLookupState.FtsResult(hits) as SearchLookupState
+                SearchLookupState.FtsResult(
+                    hits + typoTolerantHits(providerId, normalizedQuery, hits, includeLive, includeMovies, includeSeries, maxResultsPerSection)
+                ) as SearchLookupState
             }
             .catch { error ->
                 if (error is SQLiteException) {
@@ -320,6 +324,32 @@ class SearchRepositoryImpl @Inject constructor(
                     }
             else -> flowOf(emptyList())
         }
+
+    /** Typo-tolerant matches for sections the exact search left nearly empty; never fails the search. */
+    private suspend fun typoTolerantHits(
+        providerId: Long,
+        query: String,
+        exactHits: List<SearchHitEntity>,
+        includeLive: Boolean,
+        includeMovies: Boolean,
+        includeSeries: Boolean,
+        maxResultsPerSection: Int
+    ): List<SearchHitEntity> = try {
+        fuzzySearchIndex.extraHits(
+            providerId = providerId,
+            query = query,
+            exactHits = exactHits,
+            includeLive = includeLive,
+            includeMovies = includeMovies,
+            includeSeries = includeSeries,
+            maxPerSection = maxResultsPerSection
+        )
+    } catch (cancelled: kotlinx.coroutines.CancellationException) {
+        throw cancelled
+    } catch (error: Exception) {
+        Log.w(TAG, "Typo-tolerant search failed: provider=$providerId", error)
+        emptyList()
+    }
 
     private fun hydrateHits(
         hits: List<SearchHitEntity>,

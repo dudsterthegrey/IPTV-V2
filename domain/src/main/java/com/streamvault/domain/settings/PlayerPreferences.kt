@@ -22,6 +22,11 @@ interface PlayerPreferences : SettingsPreferences {
 
     fun getAspectRatioForChannel(channelId: Long): Flow<String?>
 
+    /** Where a show's intro ends (marked by the user in the player), in ms; null if not marked. */
+    fun observeSeriesIntroEndMs(providerId: Long, seriesId: Long): Flow<Long?>
+
+    suspend fun setSeriesIntroEndMs(providerId: Long, seriesId: Long, introEndMs: Long?)
+
     fun observeAudioVideoOffsetForChannel(channelId: Long): Flow<Int?>
 
     fun getMultiViewPreset(presetIndex: Int): Flow<List<Long>>

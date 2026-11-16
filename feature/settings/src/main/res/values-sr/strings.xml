@@ -979,4 +979,9 @@
     <string name="settings_text_size_custom">Прилагођено</string>
     <string name="dashboard_up_next">Следеће</string>
     <string name="dashboard_recent_episodes">Недавно додате епизоде</string>
+    <string name="settings_update_downloader">Инсталирај на други уређај</string>
+    <string name="settings_update_downloader_value">Downloader код %1$s · %2$s</string>
+    <string name="settings_volume_boost">Појачање звука</string>
+    <string name="settings_volume_boost_off">Искључено</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

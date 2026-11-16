@@ -973,4 +973,9 @@
     <string name="settings_text_size_custom">กำหนดเอง</string>
     <string name="dashboard_up_next">ถัดไป</string>
     <string name="dashboard_recent_episodes">ตอนที่เพิ่มล่าสุด</string>
+    <string name="settings_update_downloader">ติดตั้งบนอุปกรณ์อื่น</string>
+    <string name="settings_update_downloader_value">รหัส Downloader %1$s · %2$s</string>
+    <string name="settings_volume_boost">เพิ่มระดับเสียง</string>
+    <string name="settings_volume_boost_off">ปิด</string>
+    <string name="settings_volume_boost_value">+%1$d dB</string>
 </resources>

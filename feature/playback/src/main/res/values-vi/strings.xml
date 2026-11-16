@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="player_recording_exact_alarm_required">Cho phép báo thức và lời nhắc cho StreamVault trong phần cài đặt Android, rồi thử ghi lại.</string>
+    <string name="player_mark_intro_end">Phần mở đầu kết thúc ở đây</string>
+    <string name="player_intro_end_saved">Đã lưu. Mọi tập của chương trình này sẽ có Bỏ qua phần mở đầu.</string>
 </resources>
