@@ -1020,4 +1020,14 @@
     <string name="settings_cloud_sync_error_weak_password">Пароль має містити щонайменше 6 символів.</string>
     <string name="settings_cloud_sync_error_invalid_email">Схоже, e-mail указано неправильно.</string>
     <string name="settings_cloud_sync_error_too_many">Забагато спроб. Спробуйте за кілька хвилин.</string>
+    <string name="settings_cloud_sync_phone_title">Увійти з телефона</string>
+    <string name="settings_cloud_sync_phone_description">Відскануйте код телефоном у тій самій мережі Wi-Fi і введіть на ньому пошту та пароль.</string>
+    <string name="settings_cloud_sync_google_title">Увійти через Google</string>
+    <string name="settings_cloud_sync_google_description">Відскануйте код телефоном і увійдіть там через обліковий запис Google. Працює в будь-якій мережі.</string>
+    <string name="settings_cloud_sync_qr_start">Показати QR-код</string>
+    <string name="settings_cloud_sync_qr_stop">Сховати QR-код</string>
+    <string name="settings_cloud_sync_qr_waiting">Очікування телефона…</string>
+    <string name="settings_cloud_sync_qr_error">Не вдалося запустити. Підключіть телевізор до Wi-Fi або Ethernet і спробуйте ще раз.</string>
+    <string name="settings_cloud_sync_google_expired">Термін дії коду минув. Покажіть новий, щоб спробувати ще раз.</string>
+    <string name="settings_cloud_sync_error_google_off">Вхід через Google для цього застосунку ще не ввімкнено.</string>
 </resources>

@@ -14,11 +14,13 @@ import com.streamvault.domain.model.Result
 import com.streamvault.domain.repository.CloudSyncErrors
 import com.streamvault.domain.repository.CloudSyncRepository
 import com.streamvault.domain.repository.CloudSyncState
+import com.streamvault.domain.repository.GooglePhonePairing
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.repository.SeriesRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,6 +29,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.json.JSONObject
 import java.security.MessageDigest
+import java.security.SecureRandom
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -69,6 +72,33 @@ class CloudSyncRepositoryImpl @Inject constructor(
     override suspend fun createAccount(email: String, password: String): Result<Unit> =
         authenticate { firebase.createAccount(email, password) }
 
+    override fun newGooglePhonePairing(): GooglePhonePairing? {
+        if (!firebase.isConfigured) return null
+        val code = ByteArray(16).also(SecureRandom()::nextBytes).joinToString("") { "%02x".format(it) }
+        return GooglePhonePairing(code = code, url = "${firebase.hostingUrl}/?c=$code")
+    }
+
+    override suspend fun completeGooglePhonePairing(pairing: GooglePhonePairing, timeoutMs: Long): Result<Unit> {
+        if (!firebase.isConfigured) return Result.error(CloudSyncErrors.NOT_CONFIGURED)
+        val deadline = System.currentTimeMillis() + timeoutMs
+        while (System.currentTimeMillis() < deadline) {
+            val signedIn = try {
+                firebase.signInFromPairing(pairing.code)
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (error: FirebaseAuthException) {
+                return Result.error(authErrorCode(error.code), error)
+            } catch (error: Exception) {
+                Log.w(TAG, "Pairing check failed; retrying", error)
+                false
+            }
+            // Already signed in by the pairing; this resets the sync position and fetches everything.
+            if (signedIn) return authenticate { }
+            delay(PAIRING_POLL_MS)
+        }
+        return Result.error(CloudSyncErrors.PAIRING_EXPIRED)
+    }
+
     override suspend fun sendPasswordReset(email: String): Result<Unit> = accountCall { firebase.sendPasswordReset(email) }
 
     override suspend fun signOut() {
@@ -83,7 +113,9 @@ class CloudSyncRepositoryImpl @Inject constructor(
         // A new sign-in fetches everything the account has, not only what changed recently.
         prefs.edit().putLong(KEY_LAST_PULLED_AT, 0L).putLong(KEY_LAST_PUSHED_AT, 0L).apply()
         mutableState.value = mutableState.value.copy(signedInEmail = firebase.signedInEmail, lastError = null)
-        return syncNow()
+        // Signed in either way; a failed first sync shows in the state and is retried by the runner.
+        syncNow()
+        return Result.success(Unit)
     }
 
     private suspend fun accountCall(block: suspend () -> Unit): Result<Unit> {
@@ -105,6 +137,7 @@ class CloudSyncRepositoryImpl @Inject constructor(
         "WEAK_PASSWORD" -> CloudSyncErrors.WEAK_PASSWORD
         "INVALID_EMAIL", "MISSING_EMAIL" -> CloudSyncErrors.INVALID_EMAIL
         "TOO_MANY_ATTEMPTS_TRY_LATER" -> CloudSyncErrors.TOO_MANY_ATTEMPTS
+        "OPERATION_NOT_ALLOWED" -> CloudSyncErrors.GOOGLE_NOT_ENABLED
         else -> CloudSyncErrors.WRONG_EMAIL_OR_PASSWORD
     }
 
@@ -255,6 +288,7 @@ class CloudSyncRepositoryImpl @Inject constructor(
 
     private companion object {
         const val TAG = "CloudSync"
+        const val PAIRING_POLL_MS = 2_000L
         const val PREFS_NAME = "cloud_sync"
         const val KEY_LAST_PUSHED_AT = "last_pushed_at"
         const val KEY_LAST_PULLED_AT = "last_pulled_at"

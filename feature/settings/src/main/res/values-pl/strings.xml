@@ -1020,4 +1020,14 @@
     <string name="settings_cloud_sync_error_weak_password">Użyj hasła o długości co najmniej 6 znaków.</string>
     <string name="settings_cloud_sync_error_invalid_email">Ten adres e-mail wygląda na nieprawidłowy.</string>
     <string name="settings_cloud_sync_error_too_many">Zbyt wiele prób. Spróbuj za kilka minut.</string>
+    <string name="settings_cloud_sync_phone_title">Zaloguj się telefonem</string>
+    <string name="settings_cloud_sync_phone_description">Zeskanuj kod telefonem w tej samej sieci Wi-Fi i wpisz na nim e-mail oraz hasło.</string>
+    <string name="settings_cloud_sync_google_title">Zaloguj się przez Google</string>
+    <string name="settings_cloud_sync_google_description">Zeskanuj kod telefonem i zaloguj się na nim kontem Google. Działa w każdej sieci.</string>
+    <string name="settings_cloud_sync_qr_start">Pokaż kod QR</string>
+    <string name="settings_cloud_sync_qr_stop">Ukryj kod QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Oczekiwanie na telefon…</string>
+    <string name="settings_cloud_sync_qr_error">Nie udało się uruchomić. Podłącz telewizor do Wi-Fi lub Ethernetu i spróbuj ponownie.</string>
+    <string name="settings_cloud_sync_google_expired">Kod wygasł. Pokaż nowy, aby spróbować ponownie.</string>
+    <string name="settings_cloud_sync_error_google_off">Logowanie przez Google nie jest jeszcze włączone w tej aplikacji.</string>
 </resources>

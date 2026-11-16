@@ -1012,4 +1012,14 @@
     <string name="settings_cloud_sync_error_weak_password">رمزی با حداقل ۶ نویسه انتخاب کنید.</string>
     <string name="settings_cloud_sync_error_invalid_email">این ایمیل درست به نظر نمی‌رسد.</string>
     <string name="settings_cloud_sync_error_too_many">تلاش‌های زیاد. چند دقیقه بعد دوباره امتحان کنید.</string>
+    <string name="settings_cloud_sync_phone_title">ورود با تلفن</string>
+    <string name="settings_cloud_sync_phone_description">کد را با تلفنی در همان Wi-Fi اسکن کنید و ایمیل و رمز عبور را روی تلفن وارد کنید.</string>
+    <string name="settings_cloud_sync_google_title">ورود با Google</string>
+    <string name="settings_cloud_sync_google_description">کد را با تلفن اسکن کنید و آنجا با حساب Google وارد شوید. در هر شبکه‌ای کار می‌کند.</string>
+    <string name="settings_cloud_sync_qr_start">نمایش کد QR</string>
+    <string name="settings_cloud_sync_qr_stop">پنهان کردن کد QR</string>
+    <string name="settings_cloud_sync_qr_waiting">در انتظار تلفن شما…</string>
+    <string name="settings_cloud_sync_qr_error">شروع نشد. تلویزیون را به Wi-Fi یا Ethernet وصل کنید و دوباره امتحان کنید.</string>
+    <string name="settings_cloud_sync_google_expired">کد منقضی شد. برای تلاش دوباره کد جدیدی نمایش دهید.</string>
+    <string name="settings_cloud_sync_error_google_off">ورود با Google هنوز برای این برنامه فعال نشده است.</string>
 </resources>

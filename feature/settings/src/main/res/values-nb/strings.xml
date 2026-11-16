@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">Bruk et passord på minst 6 tegn.</string>
     <string name="settings_cloud_sync_error_invalid_email">Den e-postadressen ser feil ut.</string>
     <string name="settings_cloud_sync_error_too_many">For mange forsøk. Prøv igjen om noen minutter.</string>
+    <string name="settings_cloud_sync_phone_title">Logg inn med telefonen</string>
+    <string name="settings_cloud_sync_phone_description">Skann koden med en telefon på samme Wi-Fi, og skriv inn e-post og passord på telefonen.</string>
+    <string name="settings_cloud_sync_google_title">Logg inn med Google</string>
+    <string name="settings_cloud_sync_google_description">Skann koden med telefonen og logg inn med Google-kontoen der. Fungerer på alle nettverk.</string>
+    <string name="settings_cloud_sync_qr_start">Vis QR-kode</string>
+    <string name="settings_cloud_sync_qr_stop">Skjul QR-kode</string>
+    <string name="settings_cloud_sync_qr_waiting">Venter på telefonen…</string>
+    <string name="settings_cloud_sync_qr_error">Kunne ikke starte. Koble TV-en til Wi-Fi eller Ethernet og prøv igjen.</string>
+    <string name="settings_cloud_sync_google_expired">Koden er utløpt. Vis en ny for å prøve igjen.</string>
+    <string name="settings_cloud_sync_error_google_off">Google-pålogging er ikke slått på for denne appen ennå.</string>
 </resources>

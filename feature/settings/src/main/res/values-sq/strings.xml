@@ -1012,4 +1012,14 @@
     <string name="settings_cloud_sync_error_weak_password">Përdor fjalëkalim me të paktën 6 shenja.</string>
     <string name="settings_cloud_sync_error_invalid_email">Ky email nuk duket i saktë.</string>
     <string name="settings_cloud_sync_error_too_many">Shumë përpjekje. Provo pas pak minutash.</string>
+    <string name="settings_cloud_sync_phone_title">Hyr me telefonin</string>
+    <string name="settings_cloud_sync_phone_description">Skanoni kodin me një telefon në të njëjtin Wi-Fi, pastaj shkruani email-in dhe fjalëkalimin në telefon.</string>
+    <string name="settings_cloud_sync_google_title">Hyr me Google</string>
+    <string name="settings_cloud_sync_google_description">Skanoni kodin me telefon dhe hyni atje me llogarinë Google. Funksionon në çdo rrjet.</string>
+    <string name="settings_cloud_sync_qr_start">Shfaq kodin QR</string>
+    <string name="settings_cloud_sync_qr_stop">Fshih kodin QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Në pritje të telefonit…</string>
+    <string name="settings_cloud_sync_qr_error">Nuk u nis dot. Lidheni televizorin me Wi-Fi ose Ethernet dhe provoni përsëri.</string>
+    <string name="settings_cloud_sync_google_expired">Kodi skadoi. Shfaqni një të ri për të provuar përsëri.</string>
+    <string name="settings_cloud_sync_error_google_off">Hyrja me Google nuk është aktivizuar ende për këtë aplikacion.</string>
 </resources>

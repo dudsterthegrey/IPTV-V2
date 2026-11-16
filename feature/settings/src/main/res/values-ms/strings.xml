@@ -1009,4 +1009,14 @@
     <string name="settings_cloud_sync_error_weak_password">Gunakan kata laluan sekurang-kurangnya 6 aksara.</string>
     <string name="settings_cloud_sync_error_invalid_email">Alamat e-mel itu tidak kelihatan betul.</string>
     <string name="settings_cloud_sync_error_too_many">Terlalu banyak cubaan. Cuba lagi dalam beberapa minit.</string>
+    <string name="settings_cloud_sync_phone_title">Log masuk dengan telefon</string>
+    <string name="settings_cloud_sync_phone_description">Imbas kod dengan telefon pada Wi-Fi yang sama, kemudian taip e-mel dan kata laluan pada telefon.</string>
+    <string name="settings_cloud_sync_google_title">Log masuk dengan Google</string>
+    <string name="settings_cloud_sync_google_description">Imbas kod dengan telefon dan log masuk dengan akaun Google di sana. Berfungsi pada sebarang rangkaian.</string>
+    <string name="settings_cloud_sync_qr_start">Tunjukkan kod QR</string>
+    <string name="settings_cloud_sync_qr_stop">Sembunyikan kod QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Menunggu telefon anda…</string>
+    <string name="settings_cloud_sync_qr_error">Tidak dapat bermula. Sambungkan TV ke Wi-Fi atau Ethernet dan cuba lagi.</string>
+    <string name="settings_cloud_sync_google_expired">Kod telah tamat tempoh. Tunjukkan yang baharu untuk mencuba lagi.</string>
+    <string name="settings_cloud_sync_error_google_off">Log masuk Google belum dihidupkan untuk apl ini.</string>
 </resources>

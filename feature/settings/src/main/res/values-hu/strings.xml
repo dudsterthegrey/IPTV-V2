@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">Legalább 6 karakteres jelszót adj meg.</string>
     <string name="settings_cloud_sync_error_invalid_email">Ez az e-mail-cím nem tűnik helyesnek.</string>
     <string name="settings_cloud_sync_error_too_many">Túl sok próbálkozás. Próbáld újra pár perc múlva.</string>
+    <string name="settings_cloud_sync_phone_title">Bejelentkezés telefonnal</string>
+    <string name="settings_cloud_sync_phone_description">Olvassa be a kódot egy azonos Wi-Fi-n lévő telefonnal, majd írja be ott az e-mail-címét és jelszavát.</string>
+    <string name="settings_cloud_sync_google_title">Bejelentkezés Google-fiókkal</string>
+    <string name="settings_cloud_sync_google_description">Olvassa be a kódot a telefonjával, és ott jelentkezzen be Google-fiókjával. Bármilyen hálózaton működik.</string>
+    <string name="settings_cloud_sync_qr_start">QR-kód megjelenítése</string>
+    <string name="settings_cloud_sync_qr_stop">QR-kód elrejtése</string>
+    <string name="settings_cloud_sync_qr_waiting">Várakozás a telefonra…</string>
+    <string name="settings_cloud_sync_qr_error">Nem sikerült elindítani. Csatlakoztassa a tévét Wi-Fi-hez vagy Ethernethez, és próbálja újra.</string>
+    <string name="settings_cloud_sync_google_expired">A kód lejárt. Jelenítsen meg újat az újrapróbálkozáshoz.</string>
+    <string name="settings_cloud_sync_error_google_off">A Google-bejelentkezés még nincs bekapcsolva ehhez az alkalmazáshoz.</string>
 </resources>

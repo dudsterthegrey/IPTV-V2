@@ -240,9 +240,17 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       matching progresses.
 - [ ] **Sync across devices** (Settings › Backup): sign in with an email/password account on each
       TV; watch progress (movies, episodes) syncs through Firebase REST (Auth + Firestore under
-      `users/{uid}/history`). Off until `firebase.project.id` / `firebase.api.key` are set.
-      Firebase: enable Email/Password sign-in; Firestore rules allow read, write on
-      `users/{userId}/{document=**}` only if `request.auth.uid == userId`.
+      `users/{uid}/history`). The project id and Web API key are built in (2.1.1).
+      Firebase: enable Email/Password and Google sign-in. Rules live in `firebase/firestore.rules`;
+      deploy them and the phone page with `firebase deploy --only firestore:rules,hosting` from
+      `firebase/`.
+- [ ] **Sign in from a phone** (2.1.1), two QR codes in Settings › Backup while signed out:
+      A) "Sign in with your phone": the TV's local server (same Wi-Fi) shows an email/password
+      form, with Sign in and Create account; B) "Sign in with Google": the phone opens
+      `https://iptv-v2-b0b85.firebaseapp.com/?c=<code>` (firebase/public/index.html), signs in with
+      Google and leaves its Google token at `pairings/{code}`; the TV polls that document every 2 s
+      for 5 minutes, signs in with `accounts:signInWithIdp`, then deletes it. The phone page is in
+      English only.
 - [ ] On device: volume boost on TV speakers; Skip intro across episodes; Genres › Anime after the
       lookup finishes; IMDb ratings in Top rated; Top 10 country switch; two-device sync.
 

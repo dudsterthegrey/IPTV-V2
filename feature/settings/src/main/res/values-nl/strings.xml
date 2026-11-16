@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">Gebruik een wachtwoord van minstens 6 tekens.</string>
     <string name="settings_cloud_sync_error_invalid_email">Dat e-mailadres lijkt niet te kloppen.</string>
     <string name="settings_cloud_sync_error_too_many">Te veel pogingen. Probeer het over een paar minuten opnieuw.</string>
+    <string name="settings_cloud_sync_phone_title">Inloggen met je telefoon</string>
+    <string name="settings_cloud_sync_phone_description">Scan de code met een telefoon op hetzelfde wifi-netwerk en typ daar je e-mail en wachtwoord.</string>
+    <string name="settings_cloud_sync_google_title">Inloggen met Google</string>
+    <string name="settings_cloud_sync_google_description">Scan de code met je telefoon en log daar in met je Google-account. Werkt op elk netwerk.</string>
+    <string name="settings_cloud_sync_qr_start">QR-code tonen</string>
+    <string name="settings_cloud_sync_qr_stop">QR-code verbergen</string>
+    <string name="settings_cloud_sync_qr_waiting">Wachten op je telefoon…</string>
+    <string name="settings_cloud_sync_qr_error">Starten mislukt. Verbind de tv met wifi of ethernet en probeer het opnieuw.</string>
+    <string name="settings_cloud_sync_google_expired">De code is verlopen. Toon een nieuwe om het opnieuw te proberen.</string>
+    <string name="settings_cloud_sync_error_google_off">Inloggen met Google staat nog niet aan voor deze app.</string>
 </resources>

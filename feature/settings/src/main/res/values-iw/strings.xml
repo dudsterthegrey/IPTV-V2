@@ -1017,4 +1017,14 @@
     <string name="settings_cloud_sync_error_weak_password">השתמשו בסיסמה של 6 תווים לפחות.</string>
     <string name="settings_cloud_sync_error_invalid_email">כתובת האימייל לא נראית תקינה.</string>
     <string name="settings_cloud_sync_error_too_many">יותר מדי ניסיונות. נסו שוב בעוד כמה דקות.</string>
+    <string name="settings_cloud_sync_phone_title">התחברות עם הטלפון</string>
+    <string name="settings_cloud_sync_phone_description">סרקו את הקוד בטלפון באותה רשת Wi-Fi והקלידו בו את האימייל והסיסמה.</string>
+    <string name="settings_cloud_sync_google_title">התחברות עם Google</string>
+    <string name="settings_cloud_sync_google_description">סרקו את הקוד בטלפון והתחברו בו עם חשבון Google. עובד בכל רשת.</string>
+    <string name="settings_cloud_sync_qr_start">הצגת קוד QR</string>
+    <string name="settings_cloud_sync_qr_stop">הסתרת קוד QR</string>
+    <string name="settings_cloud_sync_qr_waiting">ממתין לטלפון…</string>
+    <string name="settings_cloud_sync_qr_error">לא ניתן להתחיל. חברו את הטלוויזיה ל-Wi-Fi או ל-Ethernet ונסו שוב.</string>
+    <string name="settings_cloud_sync_google_expired">פג תוקף הקוד. הציגו קוד חדש כדי לנסות שוב.</string>
+    <string name="settings_cloud_sync_error_google_off">התחברות עם Google עדיין לא הופעלה לאפליקציה הזו.</string>
 </resources>

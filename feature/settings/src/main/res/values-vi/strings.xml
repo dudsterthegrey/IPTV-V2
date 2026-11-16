@@ -1011,4 +1011,14 @@
     <string name="settings_cloud_sync_error_weak_password">Dùng mật khẩu ít nhất 6 ký tự.</string>
     <string name="settings_cloud_sync_error_invalid_email">Địa chỉ email có vẻ không đúng.</string>
     <string name="settings_cloud_sync_error_too_many">Thử quá nhiều lần. Hãy thử lại sau vài phút.</string>
+    <string name="settings_cloud_sync_phone_title">Đăng nhập bằng điện thoại</string>
+    <string name="settings_cloud_sync_phone_description">Quét mã bằng điện thoại cùng Wi-Fi, rồi nhập email và mật khẩu trên điện thoại.</string>
+    <string name="settings_cloud_sync_google_title">Đăng nhập bằng Google</string>
+    <string name="settings_cloud_sync_google_description">Quét mã bằng điện thoại và đăng nhập bằng tài khoản Google ở đó. Hoạt động trên mọi mạng.</string>
+    <string name="settings_cloud_sync_qr_start">Hiện mã QR</string>
+    <string name="settings_cloud_sync_qr_stop">Ẩn mã QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Đang chờ điện thoại…</string>
+    <string name="settings_cloud_sync_qr_error">Không thể bắt đầu. Kết nối TV với Wi-Fi hoặc Ethernet rồi thử lại.</string>
+    <string name="settings_cloud_sync_google_expired">Mã đã hết hạn. Hiện mã mới để thử lại.</string>
+    <string name="settings_cloud_sync_error_google_off">Ứng dụng này chưa bật đăng nhập bằng Google.</string>
 </resources>

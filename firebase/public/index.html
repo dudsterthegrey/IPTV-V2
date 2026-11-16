@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b0e14">
+  <title>Sign in your TV</title>
+  <style>
+    *{box-sizing:border-box}
+    :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eff2f8;background:#0b0e14}
+    body{margin:0;min-height:100vh;min-height:100svh;padding:48px 24px;background:radial-gradient(ellipse at 50% 0,rgba(38,166,154,.16),transparent 65%);-webkit-font-smoothing:antialiased}
+    main{max-width:520px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:750;letter-spacing:-.6px;margin-bottom:40px}
+    .mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;color:#d6fff9;background:linear-gradient(140deg,#26a69a,#16655e)}
+    .mark svg{width:28px;height:28px}
+    h1{font-size:clamp(26px,6vw,34px);line-height:1.2;letter-spacing:-1px;margin:0 0 12px}
+    p{font-size:15px;line-height:1.6;color:#9ca4b6;margin:0 0 24px}
+    .card{background:linear-gradient(145deg,#171c24,#11151c);border:1px solid #29303c;border-radius:20px;padding:24px}
+    button{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:52px;padding:14px 20px;border:0;border-radius:11px;background:#fff;color:#1f1f1f;font:inherit;font-weight:650;font-size:16px;cursor:pointer}
+    button:disabled{opacity:.6;cursor:default}
+    button svg{width:20px;height:20px}
+    .status{margin:18px 0 0;font-size:14px;min-height:1.6em}
+    .ok{color:#7fe0c8}.err{color:#f0a898}
+    footer{margin-top:20px;font-size:12px;color:#7d8597;text-align:center;line-height:1.6}
+  </style>
+</head>
+<body>
+<main>
+  <div class="brand">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M8 9h16v11H8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m14 12 6 3.5-6 3.5v-7Z" fill="currentColor"/><path d="M12 24h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    <span>IPTV Player</span>
+  </div>
+  <h1 id="title">Sign in your TV</h1>
+  <p id="lead">Sign in with Google here and your TV signs in to the same account, so what you watch carries on from one TV to another.</p>
+  <div class="card">
+    <button id="google" type="button" disabled>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+      <span>Continue with Google</span>
+    </button>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </div>
+  <footer>Only open this page from the QR code on your TV. It expires after 5 minutes.</footer>
+</main>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, setDoc, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Public web settings of the Firebase project (not secrets; access is limited by the security rules).
+  const app = initializeApp({
+    apiKey: "AIzaSyA5KfzoiH9BXXyyNYPIlC5EcmPEqH1LTd8",
+    authDomain: "iptv-v2-b0b85.firebaseapp.com",
+    projectId: "iptv-v2-b0b85",
+  });
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const button = document.getElementById("google");
+  const status = document.getElementById("status");
+  const code = new URLSearchParams(location.search).get("c") || "";
+
+  function show(text, kind) {
+    status.textContent = text;
+    status.className = "status " + (kind || "");
+  }
+
+  async function finish(result) {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    if (!credential || (!credential.idToken && !credential.accessToken)) throw new Error("no-credential");
+    show("Signing in your TV…");
+    const data = { uid: result.user.uid, createdAt: serverTimestamp() };
+    if (credential.idToken) data.idToken = credential.idToken;
+    if (credential.accessToken) data.accessToken = credential.accessToken;
+    await setDoc(doc(db, "pairings", code), data);
+    await signOut(auth);
+    button.hidden = true;
+    document.getElementById("title").textContent = "Your TV is signing in";
+    document.getElementById("lead").textContent = "You can close this page. Your TV shows your account in a few seconds.";
+    show("Signed in as " + (result.user.email || "your Google account") + ".", "ok");
+  }
+
+  function fail(error) {
+    console.warn(error);
+    const reason = error && error.code;
+    if (reason === "auth/popup-closed-by-user" || reason === "auth/cancelled-popup-request") show("");
+    else if (reason === "permission-denied") show("This code has already been used or is not valid. Scan the QR code on your TV again.", "err");
+    else if (reason === "auth/operation-not-allowed") show("Google sign-in is not turned on for this app yet.", "err");
+    else show("Something went wrong. Check your connection and try again.", "err");
+    button.disabled = false;
+  }
+
+  if (!/^[0-9a-f]{32}$/.test(code)) {
+    show("This link is not complete. Scan the QR code on your TV again.", "err");
+  } else {
+    button.disabled = false;
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      show("");
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      try {
+        await finish(await signInWithPopup(auth, provider));
+      } catch (error) {
+        if (error && error.code === "auth/popup-blocked") {
+          await signInWithRedirect(auth, provider);
+        } else {
+          fail(error);
+        }
+      }
+    });
+    getRedirectResult(auth).then((result) => { if (result) return finish(result); }).catch(fail);
+  }
+</script>
+</body>
+</html>

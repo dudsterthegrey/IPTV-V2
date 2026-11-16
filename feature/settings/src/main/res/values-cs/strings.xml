@@ -1020,4 +1020,14 @@
     <string name="settings_cloud_sync_error_weak_password">Použijte heslo alespoň o 6 znacích.</string>
     <string name="settings_cloud_sync_error_invalid_email">Tato e-mailová adresa nevypadá správně.</string>
     <string name="settings_cloud_sync_error_too_many">Příliš mnoho pokusů. Zkuste to za pár minut.</string>
+    <string name="settings_cloud_sync_phone_title">Přihlásit se telefonem</string>
+    <string name="settings_cloud_sync_phone_description">Naskenujte kód telefonem ve stejné síti Wi-Fi a na telefonu zadejte e-mail a heslo.</string>
+    <string name="settings_cloud_sync_google_title">Přihlásit se přes Google</string>
+    <string name="settings_cloud_sync_google_description">Naskenujte kód telefonem a přihlaste se v něm účtem Google. Funguje v jakékoli síti.</string>
+    <string name="settings_cloud_sync_qr_start">Zobrazit QR kód</string>
+    <string name="settings_cloud_sync_qr_stop">Skrýt QR kód</string>
+    <string name="settings_cloud_sync_qr_waiting">Čekání na telefon…</string>
+    <string name="settings_cloud_sync_qr_error">Nelze spustit. Připojte televizor k Wi-Fi nebo Ethernetu a zkuste to znovu.</string>
+    <string name="settings_cloud_sync_google_expired">Platnost kódu vypršela. Zobrazte nový a zkuste to znovu.</string>
+    <string name="settings_cloud_sync_error_google_off">Přihlášení přes Google zatím není pro tuto aplikaci zapnuté.</string>
 </resources>

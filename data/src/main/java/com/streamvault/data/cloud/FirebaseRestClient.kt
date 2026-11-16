@@ -51,6 +51,37 @@ class FirebaseRestClient @Inject constructor(
     suspend fun createAccount(email: String, password: String) =
         authenticate("accounts:signUp", email, password)
 
+    /**
+     * Signs in with a Google ID token that a phone left at `pairings/{code}` (see firebase/public),
+     * then deletes that pairing. Returns false while the phone has not finished yet.
+     */
+    suspend fun signInFromPairing(code: String): Boolean {
+        check(isConfigured) { "Cloud sync is not configured in this build" }
+        val fields = withContext(Dispatchers.IO) {
+            okHttpClient.newCall(Request.Builder().url("$documentsBase/pairings/$code?key=$apiKey").get().build()).execute().use { response ->
+                if (response.code == 404) return@withContext null
+                if (!response.isSuccessful) throw IOException("Firestore HTTP ${response.code}")
+                JSONObject(response.body?.string().orEmpty()).optJSONObject("fields")
+            }
+        } ?: return false
+        val googleIdToken = fields.optJSONObject("idToken")?.optString("stringValue").orEmpty()
+        val googleAccessToken = fields.optJSONObject("accessToken")?.optString("stringValue").orEmpty()
+        if (googleIdToken.isBlank() && googleAccessToken.isBlank()) return false
+        val postBody = buildString {
+            if (googleIdToken.isNotBlank()) append("id_token=").append(googleIdToken).append('&')
+            if (googleAccessToken.isNotBlank()) append("access_token=").append(googleAccessToken).append('&')
+            append("providerId=google.com")
+        }
+        val json = postJson(
+            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=$apiKey",
+            JSONObject().put("postBody", postBody).put("requestUri", "http://localhost")
+                .put("returnSecureToken", true).put("returnIdpCredential", true)
+        )
+        storeSession(json, fallbackEmail = "")
+        runCatching { execute(Request.Builder().url("$documentsBase/pairings/$code").delete()) }
+        return true
+    }
+
     /** Emails a password-reset link to [email]. */
     suspend fun sendPasswordReset(email: String) {
         postJson(
@@ -99,6 +130,9 @@ class FirebaseRestClient @Inject constructor(
         }
     }
 
+    /** The project's Firebase Hosting site, which serves the phone's Google sign-in page. */
+    val hostingUrl: String get() = "https://$projectId.firebaseapp.com"
+
     private val documentsBase get() = "https://firestore.googleapis.com/v1/projects/$projectId/databases/(default)/documents"
 
     private fun uid(): String = prefs.getString(KEY_UID, null) ?: throw NotSignedInException()
@@ -109,11 +143,15 @@ class FirebaseRestClient @Inject constructor(
             "https://identitytoolkit.googleapis.com/v1/$endpoint?key=$apiKey",
             JSONObject().put("email", email.trim()).put("password", password).put("returnSecureToken", true)
         )
+        storeSession(json, fallbackEmail = email.trim())
+    }
+
+    private suspend fun storeSession(json: JSONObject, fallbackEmail: String) {
         tokenMutex.withLock {
             prefs.edit()
                 .putString(KEY_REFRESH_TOKEN, json.optString("refreshToken"))
                 .putString(KEY_UID, json.optString("localId"))
-                .putString(KEY_EMAIL, json.optString("email").ifBlank { email.trim() })
+                .putString(KEY_EMAIL, json.optString("email").ifBlank { fallbackEmail })
                 .apply()
             idToken = json.optString("idToken").takeIf { it.isNotBlank() }
             idTokenExpiresAt = System.currentTimeMillis() + tokenLifetimeMs(json.optString("expiresIn"))

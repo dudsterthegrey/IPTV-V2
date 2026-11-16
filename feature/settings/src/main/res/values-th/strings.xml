@@ -1009,4 +1009,14 @@
     <string name="settings_cloud_sync_error_weak_password">ใช้รหัสผ่านอย่างน้อย 6 ตัว</string>
     <string name="settings_cloud_sync_error_invalid_email">ที่อยู่อีเมลนี้ดูไม่ถูกต้อง</string>
     <string name="settings_cloud_sync_error_too_many">ลองหลายครั้งเกินไป ลองใหม่อีกครั้งในอีกไม่กี่นาที</string>
+    <string name="settings_cloud_sync_phone_title">ลงชื่อเข้าใช้ด้วยโทรศัพท์</string>
+    <string name="settings_cloud_sync_phone_description">สแกนรหัสด้วยโทรศัพท์ที่ใช้ Wi-Fi เดียวกัน แล้วพิมพ์อีเมลและรหัสผ่านบนโทรศัพท์</string>
+    <string name="settings_cloud_sync_google_title">ลงชื่อเข้าใช้ด้วย Google</string>
+    <string name="settings_cloud_sync_google_description">สแกนรหัสด้วยโทรศัพท์แล้วลงชื่อเข้าใช้ด้วยบัญชี Google ที่นั่น ใช้ได้กับทุกเครือข่าย</string>
+    <string name="settings_cloud_sync_qr_start">แสดงคิวอาร์โค้ด</string>
+    <string name="settings_cloud_sync_qr_stop">ซ่อนคิวอาร์โค้ด</string>
+    <string name="settings_cloud_sync_qr_waiting">กำลังรอโทรศัพท์ของคุณ…</string>
+    <string name="settings_cloud_sync_qr_error">เริ่มไม่ได้ เชื่อมต่อทีวีกับ Wi-Fi หรืออีเทอร์เน็ตแล้วลองอีกครั้ง</string>
+    <string name="settings_cloud_sync_google_expired">รหัสหมดอายุแล้ว แสดงรหัสใหม่เพื่อลองอีกครั้ง</string>
+    <string name="settings_cloud_sync_error_google_off">ยังไม่ได้เปิดการลงชื่อเข้าใช้ด้วย Google สำหรับแอปนี้</string>
 </resources>

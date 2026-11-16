@@ -1012,4 +1012,14 @@
     <string name="settings_cloud_sync_error_weak_password">Користете лозинка од најмалку 6 знаци.</string>
     <string name="settings_cloud_sync_error_invalid_email">Таа адреса на е-пошта не изгледа точно.</string>
     <string name="settings_cloud_sync_error_too_many">Премногу обиди. Обидете се за неколку минути.</string>
+    <string name="settings_cloud_sync_phone_title">Најава со телефон</string>
+    <string name="settings_cloud_sync_phone_description">Скенирајте го кодот со телефон на истата Wi-Fi мрежа, потоа внесете е-пошта и лозинка на телефонот.</string>
+    <string name="settings_cloud_sync_google_title">Најава со Google</string>
+    <string name="settings_cloud_sync_google_description">Скенирајте го кодот со телефонот и најавете се таму со Google сметка. Работи на секоја мрежа.</string>
+    <string name="settings_cloud_sync_qr_start">Прикажи QR код</string>
+    <string name="settings_cloud_sync_qr_stop">Сокриј QR код</string>
+    <string name="settings_cloud_sync_qr_waiting">Се чека телефонот…</string>
+    <string name="settings_cloud_sync_qr_error">Не може да започне. Поврзете го ТВ-то на Wi-Fi или Ethernet и обидете се повторно.</string>
+    <string name="settings_cloud_sync_google_expired">Кодот истече. Прикажете нов за повторен обид.</string>
+    <string name="settings_cloud_sync_error_google_off">Најавата со Google сè уште не е вклучена за оваа апликација.</string>
 </resources>

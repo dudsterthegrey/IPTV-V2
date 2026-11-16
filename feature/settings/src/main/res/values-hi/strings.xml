@@ -1012,4 +1012,14 @@
     <string name="settings_cloud_sync_error_weak_password">कम से कम 6 अक्षरों का पासवर्ड रखें।</string>
     <string name="settings_cloud_sync_error_invalid_email">यह ईमेल पता सही नहीं लगता।</string>
     <string name="settings_cloud_sync_error_too_many">बहुत ज़्यादा प्रयास। कुछ मिनट बाद फिर कोशिश करें।</string>
+    <string name="settings_cloud_sync_phone_title">अपने फ़ोन से साइन इन करें</string>
+    <string name="settings_cloud_sync_phone_description">उसी वाई-फ़ाई पर फ़ोन से कोड स्कैन करें, फिर फ़ोन पर अपना ईमेल और पासवर्ड लिखें।</string>
+    <string name="settings_cloud_sync_google_title">Google से साइन इन करें</string>
+    <string name="settings_cloud_sync_google_description">फ़ोन से कोड स्कैन करें और वहाँ अपने Google खाते से साइन इन करें। किसी भी नेटवर्क पर काम करता है।</string>
+    <string name="settings_cloud_sync_qr_start">QR कोड दिखाएँ</string>
+    <string name="settings_cloud_sync_qr_stop">QR कोड छिपाएँ</string>
+    <string name="settings_cloud_sync_qr_waiting">आपके फ़ोन की प्रतीक्षा…</string>
+    <string name="settings_cloud_sync_qr_error">शुरू नहीं हो सका। टीवी को वाई-फ़ाई या ईथरनेट से जोड़ें और फिर कोशिश करें।</string>
+    <string name="settings_cloud_sync_google_expired">कोड की समय-सीमा खत्म हो गई। फिर से कोशिश करने के लिए नया कोड दिखाएँ।</string>
+    <string name="settings_cloud_sync_error_google_off">इस ऐप के लिए Google साइन-इन अभी चालू नहीं है।</string>
 </resources>

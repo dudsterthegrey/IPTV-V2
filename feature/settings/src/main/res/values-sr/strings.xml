@@ -1015,4 +1015,14 @@
     <string name="settings_cloud_sync_error_weak_password">Користите лозинку од најмање 6 знакова.</string>
     <string name="settings_cloud_sync_error_invalid_email">Ова адреса е-поште не изгледа исправно.</string>
     <string name="settings_cloud_sync_error_too_many">Превише покушаја. Покушајте за неколико минута.</string>
+    <string name="settings_cloud_sync_phone_title">Пријава телефоном</string>
+    <string name="settings_cloud_sync_phone_description">Скенирајте кôд телефоном на истој Wi-Fi мрежи, па на телефону унесите е-пошту и лозинку.</string>
+    <string name="settings_cloud_sync_google_title">Пријава преко Google-а</string>
+    <string name="settings_cloud_sync_google_description">Скенирајте кôд телефоном и тамо се пријавите Google налогом. Ради на свакој мрежи.</string>
+    <string name="settings_cloud_sync_qr_start">Прикажи QR кôд</string>
+    <string name="settings_cloud_sync_qr_stop">Сакриј QR кôд</string>
+    <string name="settings_cloud_sync_qr_waiting">Чека се телефон…</string>
+    <string name="settings_cloud_sync_qr_error">Покретање није успело. Повежите ТВ на Wi-Fi или Ethernet и покушајте поново.</string>
+    <string name="settings_cloud_sync_google_expired">Кôд је истекао. Прикажите нови да бисте покушали поново.</string>
+    <string name="settings_cloud_sync_error_google_off">Пријава преко Google-а још није укључена за ову апликацију.</string>
 </resources>

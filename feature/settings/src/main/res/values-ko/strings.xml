@@ -1010,4 +1010,14 @@
     <string name="settings_cloud_sync_error_weak_password">6자 이상의 비밀번호를 사용하세요.</string>
     <string name="settings_cloud_sync_error_invalid_email">이메일 주소가 올바르지 않은 것 같습니다.</string>
     <string name="settings_cloud_sync_error_too_many">시도 횟수가 너무 많습니다. 몇 분 후 다시 시도하세요.</string>
+    <string name="settings_cloud_sync_phone_title">휴대폰으로 로그인</string>
+    <string name="settings_cloud_sync_phone_description">같은 Wi-Fi의 휴대폰으로 코드를 스캔한 다음 휴대폰에서 이메일과 비밀번호를 입력하세요.</string>
+    <string name="settings_cloud_sync_google_title">Google로 로그인</string>
+    <string name="settings_cloud_sync_google_description">휴대폰으로 코드를 스캔하고 거기서 Google 계정으로 로그인하세요. 어떤 네트워크에서도 작동합니다.</string>
+    <string name="settings_cloud_sync_qr_start">QR 코드 표시</string>
+    <string name="settings_cloud_sync_qr_stop">QR 코드 숨기기</string>
+    <string name="settings_cloud_sync_qr_waiting">휴대폰을 기다리는 중…</string>
+    <string name="settings_cloud_sync_qr_error">시작할 수 없습니다. TV를 Wi-Fi 또는 이더넷에 연결한 후 다시 시도하세요.</string>
+    <string name="settings_cloud_sync_google_expired">코드가 만료되었습니다. 새 코드를 표시해 다시 시도하세요.</string>
+    <string name="settings_cloud_sync_error_google_off">이 앱에서는 아직 Google 로그인이 켜져 있지 않습니다.</string>
 </resources>

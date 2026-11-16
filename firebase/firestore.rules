@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Each account's watch progress; only that account can read or write it.
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // "Sign in with Google on your phone": the TV shows a QR code with a random 32-character
+    // code, the phone signs in with Google and leaves its Google token here, and the TV (which
+    // knows the code) reads it once, signs in with it and deletes it. Listing is never allowed,
+    // so a pairing can only be read by whoever has its code.
+    match /pairings/{code} {
+      allow get: if code.matches('^[0-9a-f]{32}$');
+      allow create: if code.matches('^[0-9a-f]{32}$')
+        && request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.resource.data.keys().hasOnly(['idToken', 'accessToken', 'uid', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+  }
+}

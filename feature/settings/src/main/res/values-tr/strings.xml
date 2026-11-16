@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">En az 6 karakterli bir şifre kullanın.</string>
     <string name="settings_cloud_sync_error_invalid_email">Bu e-posta adresi doğru görünmüyor.</string>
     <string name="settings_cloud_sync_error_too_many">Çok fazla deneme. Birkaç dakika sonra tekrar deneyin.</string>
+    <string name="settings_cloud_sync_phone_title">Telefonla oturum açın</string>
+    <string name="settings_cloud_sync_phone_description">Kodu aynı Wi-Fi ağındaki bir telefonla tarayın, ardından e-posta ve şifrenizi telefona yazın.</string>
+    <string name="settings_cloud_sync_google_title">Google ile oturum açın</string>
+    <string name="settings_cloud_sync_google_description">Kodu telefonunuzla tarayın ve orada Google hesabınızla oturum açın. Her ağda çalışır.</string>
+    <string name="settings_cloud_sync_qr_start">QR kodu göster</string>
+    <string name="settings_cloud_sync_qr_stop">QR kodunu gizle</string>
+    <string name="settings_cloud_sync_qr_waiting">Telefonunuz bekleniyor…</string>
+    <string name="settings_cloud_sync_qr_error">Başlatılamadı. TV\'yi Wi-Fi veya Ethernet\'e bağlayıp tekrar deneyin.</string>
+    <string name="settings_cloud_sync_google_expired">Kodun süresi doldu. Tekrar denemek için yenisini gösterin.</string>
+    <string name="settings_cloud_sync_error_google_off">Bu uygulama için Google ile oturum açma henüz açık değil.</string>
 </resources>

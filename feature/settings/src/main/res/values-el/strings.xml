@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">Χρησιμοποιήστε κωδικό τουλάχιστον 6 χαρακτήρων.</string>
     <string name="settings_cloud_sync_error_invalid_email">Η διεύθυνση email δεν φαίνεται σωστή.</string>
     <string name="settings_cloud_sync_error_too_many">Πάρα πολλές προσπάθειες. Δοκιμάστε σε λίγα λεπτά.</string>
+    <string name="settings_cloud_sync_phone_title">Σύνδεση με το κινητό σας</string>
+    <string name="settings_cloud_sync_phone_description">Σαρώστε τον κωδικό με κινητό στο ίδιο Wi-Fi και πληκτρολογήστε email και κωδικό πρόσβασης στο κινητό.</string>
+    <string name="settings_cloud_sync_google_title">Σύνδεση με Google</string>
+    <string name="settings_cloud_sync_google_description">Σαρώστε τον κωδικό με το κινητό σας και συνδεθείτε εκεί με τον λογαριασμό Google. Λειτουργεί σε κάθε δίκτυο.</string>
+    <string name="settings_cloud_sync_qr_start">Εμφάνιση κωδικού QR</string>
+    <string name="settings_cloud_sync_qr_stop">Απόκρυψη κωδικού QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Αναμονή για το κινητό σας…</string>
+    <string name="settings_cloud_sync_qr_error">Δεν ήταν δυνατή η έναρξη. Συνδέστε την τηλεόραση σε Wi-Fi ή Ethernet και δοκιμάστε ξανά.</string>
+    <string name="settings_cloud_sync_google_expired">Ο κωδικός έληξε. Εμφανίστε νέο για να δοκιμάσετε ξανά.</string>
+    <string name="settings_cloud_sync_error_google_off">Η σύνδεση με Google δεν έχει ενεργοποιηθεί ακόμη για αυτή την εφαρμογή.</string>
 </resources>

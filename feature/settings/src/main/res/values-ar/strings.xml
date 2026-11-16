@@ -1026,4 +1026,14 @@
     <string name="settings_cloud_sync_error_weak_password">استخدم كلمة مرور من 6 أحرف على الأقل.</string>
     <string name="settings_cloud_sync_error_invalid_email">عنوان البريد هذا لا يبدو صحيحًا.</string>
     <string name="settings_cloud_sync_error_too_many">محاولات كثيرة جدًا. حاول بعد بضع دقائق.</string>
+    <string name="settings_cloud_sync_phone_title">تسجيل الدخول بهاتفك</string>
+    <string name="settings_cloud_sync_phone_description">امسح الرمز بهاتف متصل بشبكة Wi-Fi نفسها، ثم اكتب بريدك الإلكتروني وكلمة المرور على الهاتف.</string>
+    <string name="settings_cloud_sync_google_title">تسجيل الدخول باستخدام Google</string>
+    <string name="settings_cloud_sync_google_description">امسح الرمز بهاتفك وسجّل الدخول بحساب Google هناك. يعمل على أي شبكة.</string>
+    <string name="settings_cloud_sync_qr_start">عرض رمز QR</string>
+    <string name="settings_cloud_sync_qr_stop">إخفاء رمز QR</string>
+    <string name="settings_cloud_sync_qr_waiting">في انتظار هاتفك…</string>
+    <string name="settings_cloud_sync_qr_error">تعذّر البدء. وصّل التلفاز بشبكة Wi-Fi أو Ethernet وحاول مرة أخرى.</string>
+    <string name="settings_cloud_sync_google_expired">انتهت صلاحية الرمز. اعرض رمزًا جديدًا للمحاولة مرة أخرى.</string>
+    <string name="settings_cloud_sync_error_google_off">لم يتم تفعيل تسجيل الدخول باستخدام Google لهذا التطبيق بعد.</string>
 </resources>

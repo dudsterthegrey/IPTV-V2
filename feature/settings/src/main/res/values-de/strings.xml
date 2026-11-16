@@ -1010,4 +1010,14 @@
     <string name="settings_cloud_sync_error_weak_password">Nutze ein Passwort mit mindestens 6 Zeichen.</string>
     <string name="settings_cloud_sync_error_invalid_email">Diese E-Mail-Adresse sieht nicht richtig aus.</string>
     <string name="settings_cloud_sync_error_too_many">Zu viele Versuche. Versuche es in ein paar Minuten erneut.</string>
+    <string name="settings_cloud_sync_phone_title">Mit dem Handy anmelden</string>
+    <string name="settings_cloud_sync_phone_description">Scanne den Code mit einem Handy im selben WLAN und gib dort E-Mail und Passwort ein.</string>
+    <string name="settings_cloud_sync_google_title">Mit Google anmelden</string>
+    <string name="settings_cloud_sync_google_description">Scanne den Code mit dem Handy und melde dich dort mit deinem Google-Konto an. Funktioniert in jedem Netz.</string>
+    <string name="settings_cloud_sync_qr_start">QR-Code anzeigen</string>
+    <string name="settings_cloud_sync_qr_stop">QR-Code ausblenden</string>
+    <string name="settings_cloud_sync_qr_waiting">Warte auf dein Handy…</string>
+    <string name="settings_cloud_sync_qr_error">Start nicht möglich. Verbinde den Fernseher mit WLAN oder Ethernet und versuche es erneut.</string>
+    <string name="settings_cloud_sync_google_expired">Der Code ist abgelaufen. Zeige einen neuen an, um es erneut zu versuchen.</string>
+    <string name="settings_cloud_sync_error_google_off">Die Google-Anmeldung ist für diese App noch nicht aktiviert.</string>
 </resources>

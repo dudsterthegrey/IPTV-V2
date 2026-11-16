@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">Käytä vähintään 6 merkin salasanaa.</string>
     <string name="settings_cloud_sync_error_invalid_email">Sähköpostiosoite ei näytä oikealta.</string>
     <string name="settings_cloud_sync_error_too_many">Liian monta yritystä. Yritä hetken päästä.</string>
+    <string name="settings_cloud_sync_phone_title">Kirjaudu puhelimella</string>
+    <string name="settings_cloud_sync_phone_description">Skannaa koodi puhelimella samassa Wi-Fi-verkossa ja kirjoita sähköposti ja salasana puhelimeen.</string>
+    <string name="settings_cloud_sync_google_title">Kirjaudu Googlella</string>
+    <string name="settings_cloud_sync_google_description">Skannaa koodi puhelimella ja kirjaudu siellä Google-tilillä. Toimii missä tahansa verkossa.</string>
+    <string name="settings_cloud_sync_qr_start">Näytä QR-koodi</string>
+    <string name="settings_cloud_sync_qr_stop">Piilota QR-koodi</string>
+    <string name="settings_cloud_sync_qr_waiting">Odotetaan puhelinta…</string>
+    <string name="settings_cloud_sync_qr_error">Käynnistys epäonnistui. Yhdistä televisio Wi-Fiin tai Ethernetiin ja yritä uudelleen.</string>
+    <string name="settings_cloud_sync_google_expired">Koodi vanheni. Näytä uusi koodi ja yritä uudelleen.</string>
+    <string name="settings_cloud_sync_error_google_off">Google-kirjautumista ei ole vielä otettu käyttöön tässä sovelluksessa.</string>
 </resources>

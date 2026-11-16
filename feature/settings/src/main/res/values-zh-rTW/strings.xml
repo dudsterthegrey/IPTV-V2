@@ -1009,4 +1009,14 @@
     <string name="settings_cloud_sync_error_weak_password">請使用至少 6 個字元的密碼。</string>
     <string name="settings_cloud_sync_error_invalid_email">此電子郵件地址似乎不正確。</string>
     <string name="settings_cloud_sync_error_too_many">嘗試次數過多。請幾分鐘後再試。</string>
+    <string name="settings_cloud_sync_phone_title">用手機登入</string>
+    <string name="settings_cloud_sync_phone_description">用同一 Wi-Fi 下的手機掃描條碼，然後在手機上輸入電子郵件和密碼。</string>
+    <string name="settings_cloud_sync_google_title">使用 Google 登入</string>
+    <string name="settings_cloud_sync_google_description">用手機掃描條碼，並在手機上使用 Google 帳戶登入。任何網路皆可使用。</string>
+    <string name="settings_cloud_sync_qr_start">顯示 QR 碼</string>
+    <string name="settings_cloud_sync_qr_stop">隱藏 QR 碼</string>
+    <string name="settings_cloud_sync_qr_waiting">正在等待手機…</string>
+    <string name="settings_cloud_sync_qr_error">無法啟動。請將電視連上 Wi-Fi 或乙太網路後再試一次。</string>
+    <string name="settings_cloud_sync_google_expired">QR 碼已過期。請顯示新的 QR 碼再試一次。</string>
+    <string name="settings_cloud_sync_error_google_off">此應用程式尚未開啟 Google 登入。</string>
 </resources>

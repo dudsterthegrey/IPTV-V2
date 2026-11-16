@@ -1012,4 +1012,14 @@
     <string name="settings_cloud_sync_error_weak_password">6文字以上のパスワードにしてください。</string>
     <string name="settings_cloud_sync_error_invalid_email">メールアドレスが正しくないようです。</string>
     <string name="settings_cloud_sync_error_too_many">試行回数が多すぎます。数分後にもう一度お試しください。</string>
+    <string name="settings_cloud_sync_phone_title">スマホでサインイン</string>
+    <string name="settings_cloud_sync_phone_description">同じWi-Fiのスマホでコードを読み取り、スマホでメールアドレスとパスワードを入力します。</string>
+    <string name="settings_cloud_sync_google_title">Google でサインイン</string>
+    <string name="settings_cloud_sync_google_description">スマホでコードを読み取り、そこで Google アカウントでサインインします。どのネットワークでも使えます。</string>
+    <string name="settings_cloud_sync_qr_start">QR コードを表示</string>
+    <string name="settings_cloud_sync_qr_stop">QR コードを隠す</string>
+    <string name="settings_cloud_sync_qr_waiting">スマホを待っています…</string>
+    <string name="settings_cloud_sync_qr_error">開始できませんでした。テレビを Wi-Fi か有線 LAN に接続してもう一度お試しください。</string>
+    <string name="settings_cloud_sync_google_expired">コードの有効期限が切れました。新しいコードを表示してやり直してください。</string>
+    <string name="settings_cloud_sync_error_google_off">このアプリではまだ Google サインインが有効になっていません。</string>
 </resources>

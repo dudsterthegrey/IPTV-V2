@@ -1014,4 +1014,14 @@
     <string name="settings_cloud_sync_error_weak_password">Gunakan sandi minimal 6 karakter.</string>
     <string name="settings_cloud_sync_error_invalid_email">Alamat email itu sepertinya salah.</string>
     <string name="settings_cloud_sync_error_too_many">Terlalu banyak percobaan. Coba lagi beberapa menit lagi.</string>
+    <string name="settings_cloud_sync_phone_title">Masuk dengan ponsel</string>
+    <string name="settings_cloud_sync_phone_description">Pindai kode dengan ponsel di Wi-Fi yang sama, lalu ketik email dan sandi di ponsel.</string>
+    <string name="settings_cloud_sync_google_title">Masuk dengan Google</string>
+    <string name="settings_cloud_sync_google_description">Pindai kode dengan ponsel lalu masuk dengan akun Google di sana. Berfungsi di jaringan apa pun.</string>
+    <string name="settings_cloud_sync_qr_start">Tampilkan kode QR</string>
+    <string name="settings_cloud_sync_qr_stop">Sembunyikan kode QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Menunggu ponsel Anda…</string>
+    <string name="settings_cloud_sync_qr_error">Tidak dapat memulai. Hubungkan TV ke Wi-Fi atau Ethernet lalu coba lagi.</string>
+    <string name="settings_cloud_sync_google_expired">Kode kedaluwarsa. Tampilkan yang baru untuk mencoba lagi.</string>
+    <string name="settings_cloud_sync_error_google_off">Masuk dengan Google belum diaktifkan untuk aplikasi ini.</string>
 </resources>

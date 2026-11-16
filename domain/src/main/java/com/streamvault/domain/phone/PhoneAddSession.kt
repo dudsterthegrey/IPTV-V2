@@ -2,7 +2,7 @@ package com.streamvault.domain.phone
 
 import kotlinx.coroutines.flow.StateFlow
 
-enum class PhoneAddKind { STREMIO, EPG }
+enum class PhoneAddKind { STREMIO, EPG, CLOUD_ACCOUNT }
 
 data class PhoneAddState(
     val kind: PhoneAddKind? = null,

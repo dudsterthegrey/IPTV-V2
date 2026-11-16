@@ -10,6 +10,8 @@ import com.streamvault.domain.model.XmltvTimezonePolicy
 import com.streamvault.domain.phone.PhoneAddKind
 import com.streamvault.domain.phone.PhoneAddSession
 import com.streamvault.domain.phone.PhoneAddState
+import com.streamvault.domain.repository.CloudSyncErrors
+import com.streamvault.domain.repository.CloudSyncRepository
 import com.streamvault.domain.repository.EpgSourceRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.repository.StremioAddonRepository
@@ -61,6 +63,7 @@ class PhoneAddSessionImpl @Inject constructor(
     private val addons: StremioAddonRepository,
     private val epg: EpgSourceRepository,
     private val providers: ProviderRepository,
+    private val cloudSync: CloudSyncRepository,
 ) : PhoneAddSession {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val mutex = Mutex()
@@ -73,6 +76,7 @@ class PhoneAddSessionImpl @Inject constructor(
     private var token: String? = null
     private var kind: PhoneAddKind? = null
     private var expiresAt = 0L
+    @Volatile private var lastCloudError: String? = null
 
     override suspend fun start(kind: PhoneAddKind) = mutex.withLock {
         closeLocked()
@@ -197,6 +201,17 @@ class PhoneAddSessionImpl @Inject constructor(
     }
 
     private suspend fun submit(kind: PhoneAddKind, fields: Map<String, String>): Boolean = when (kind) {
+        PhoneAddKind.CLOUD_ACCOUNT -> {
+            val email = fields["email"]?.trim().orEmpty()
+            val password = fields["password"].orEmpty()
+            val result = when {
+                email.isEmpty() || password.isEmpty() -> Result.error(CloudSyncErrors.WRONG_EMAIL_OR_PASSWORD)
+                fields["action"] == "create" -> cloudSync.createAccount(email, password)
+                else -> cloudSync.signIn(email, password)
+            }
+            lastCloudError = (result as? Result.Error)?.message
+            result !is Result.Error
+        }
         PhoneAddKind.STREMIO -> {
             val url = fields["url"]?.trim().orEmpty()
             url.isNotEmpty() && addons.installAddon(url) is Result.Success
@@ -237,6 +252,7 @@ class PhoneAddSessionImpl @Inject constructor(
     }
 
     private suspend fun form(strings: Context, kind: PhoneAddKind, secret: String, error: Boolean = false): String {
+        if (kind == PhoneAddKind.CLOUD_ACCOUNT) return cloudForm(strings, secret, error)
         val title = if (kind == PhoneAddKind.STREMIO) strings.getString(StremioR.string.stremio_install_title)
             else strings.getString(SettingsR.string.settings_epg_add_source)
         val description = if (kind == PhoneAddKind.STREMIO) strings.getString(StremioR.string.stremio_install_description)
@@ -290,6 +306,49 @@ class PhoneAddSessionImpl @Inject constructor(
               </div>
               <aside class="warning"><span class="warning-icon" aria-hidden="true">!</span><p>$warning</p></aside>
               <footer>$sameWifi</footer>
+            </main>
+        """.trimIndent()
+        return page(body)
+    }
+
+    private fun cloudForm(strings: Context, secret: String, error: Boolean): String {
+        val errorMessage = when (lastCloudError) {
+            CloudSyncErrors.EMAIL_IN_USE -> SettingsR.string.settings_cloud_sync_error_email_in_use
+            CloudSyncErrors.WEAK_PASSWORD -> SettingsR.string.settings_cloud_sync_error_weak_password
+            CloudSyncErrors.INVALID_EMAIL -> SettingsR.string.settings_cloud_sync_error_invalid_email
+            CloudSyncErrors.TOO_MANY_ATTEMPTS -> SettingsR.string.settings_cloud_sync_error_too_many
+            CloudSyncErrors.WRONG_EMAIL_OR_PASSWORD -> SettingsR.string.settings_cloud_sync_error_credentials
+            else -> SettingsR.string.settings_cloud_sync_failed
+        }
+        val errorText = if (error) "<p class=\"form-error\" role=\"alert\">${strings.getString(errorMessage).html()}</p>" else ""
+        val email = strings.getString(SettingsR.string.settings_cloud_sync_email).html()
+        val password = strings.getString(SettingsR.string.settings_cloud_sync_password).html()
+        val body = """
+            <main>
+              <div class="brand">
+                <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M8 9h16v11H8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m14 12 6 3.5-6 3.5v-7Z" fill="currentColor"/><path d="M12 24h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span>${strings.getString(ProviderR.string.setup_title_streamvault).html()}</span>
+              </div>
+              <header>
+                <span class="eyebrow"><span class="status-dot" aria-hidden="true"></span>${strings.getString(ProviderR.string.setup_phone_pairing_idle).html()}</span>
+                <h1>${strings.getString(SettingsR.string.settings_cloud_sync_sign_in).html()}</h1>
+                <p>${strings.getString(SettingsR.string.settings_cloud_sync_sign_in_hint).html()}</p>
+              </header>
+              <div class="form-card">
+                <form method="post" action="/submit" accept-charset="utf-8">
+                  <input type="hidden" name="token" value="${secret.html()}">
+                  <div class="details-section">
+                    $errorText
+                    <label for="email">$email</label><input id="email" name="email" type="email" autocomplete="username" dir="ltr" required maxlength="320">
+                    <label for="password">$password</label><input id="password" name="password" type="password" autocomplete="current-password" dir="ltr" required minlength="6" maxlength="1024">
+                  </div>
+                  <div class="submit-section">
+                    <button type="submit" name="action" value="signin"><span>${strings.getString(SettingsR.string.settings_cloud_sync_sign_in_action).html()}</span><span class="button-arrow" aria-hidden="true">&rarr;</span></button>
+                    <button type="submit" name="action" value="create" class="secondary"><span>${strings.getString(SettingsR.string.settings_cloud_sync_create_account).html()}</span></button>
+                  </div>
+                </form>
+              </div>
+              <footer>${strings.getString(ProviderR.string.setup_phone_pairing_same_wifi).html()}</footer>
             </main>
         """.trimIndent()
         return page(body)
@@ -352,6 +411,7 @@ class PhoneAddSessionImpl @Inject constructor(
         button{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;min-height:52px;padding:14px 20px;border:1px solid #c4b5f6;border-radius:11px;background:linear-gradient(110deg,#c0acf6,#a98aeb);color:#1d1236;font:inherit;font-weight:750;font-size:15px;cursor:pointer;box-shadow:0 4px 20px #a98aeb16;transition:filter .15s,transform .15s}
         button:hover{filter:brightness(1.09)}button:active{transform:translateY(1px)}
         button:focus-visible{outline:2px solid #e0d6ff;outline-offset:4px}
+        button.secondary{margin-top:12px;background:transparent;color:#d7cfff;border-color:#4a4370;box-shadow:none}
         .button-arrow{font-size:21px;line-height:1}[dir=rtl] .button-arrow{transform:scaleX(-1)}
         .warning{display:flex;align-items:flex-start;gap:11px;border:1px solid #d4a76526;border-radius:12px;background:#d4a76507;padding:14px 16px;margin-top:20px}
         .warning p{font-size:12px;line-height:1.6;color:#b9a789}

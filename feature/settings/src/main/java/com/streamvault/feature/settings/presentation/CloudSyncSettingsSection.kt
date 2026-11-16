@@ -29,27 +29,74 @@ import androidx.lifecycle.viewModelScope
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
+import com.streamvault.core.ui.components.PhoneAddQrPanel
 import com.streamvault.core.ui.components.TvOutlinedTextField
 import com.streamvault.core.ui.design.AppColors
 import com.streamvault.core.ui.interaction.TvButton
 import com.streamvault.domain.model.Result
 import com.streamvault.domain.repository.CloudSyncErrors
 import com.streamvault.domain.repository.CloudSyncRepository
+import com.streamvault.domain.phone.PhoneAddKind
+import com.streamvault.domain.phone.PhoneAddSession
+import com.streamvault.domain.phone.PhoneAddState
 import com.streamvault.domain.repository.CloudSyncState
 import com.streamvault.feature.settings.R
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/** The "Sign in with Google" QR code: [url] while waiting for the phone, [error] when it ended badly. */
+data class GooglePhoneSignInState(val url: String? = null, val error: String? = null)
+
 @HiltViewModel
 class CloudSyncViewModel @Inject constructor(
-    private val cloudSync: CloudSyncRepository
+    private val cloudSync: CloudSyncRepository,
+    private val phoneAddSession: PhoneAddSession
 ) : ViewModel() {
     val state: StateFlow<CloudSyncState> = cloudSync.state
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CloudSyncState())
+
+    /** Option A: the phone, on the same Wi-Fi, types the email and password. */
+    val phoneState: StateFlow<PhoneAddState> = phoneAddSession.state
+
+    private val mutableGoogleState = MutableStateFlow(GooglePhoneSignInState())
+
+    /** Option B: the phone signs in with Google through the project's web page. */
+    val googleState: StateFlow<GooglePhoneSignInState> = mutableGoogleState.asStateFlow()
+    private var googleJob: Job? = null
+
+    fun startPhoneSignIn() {
+        viewModelScope.launch { phoneAddSession.start(PhoneAddKind.CLOUD_ACCOUNT) }
+    }
+
+    fun stopPhoneSignIn() = phoneAddSession.stop(PhoneAddKind.CLOUD_ACCOUNT)
+
+    fun startGoogleSignIn(onSignedIn: () -> Unit) {
+        googleJob?.cancel()
+        val pairing = cloudSync.newGooglePhonePairing() ?: return
+        mutableGoogleState.value = GooglePhoneSignInState(url = pairing.url)
+        googleJob = viewModelScope.launch {
+            val result = cloudSync.completeGooglePhonePairing(pairing)
+            mutableGoogleState.value = GooglePhoneSignInState(error = (result as? Result.Error)?.message)
+            if (result !is Result.Error) onSignedIn()
+        }
+    }
+
+    fun stopGoogleSignIn() {
+        googleJob?.cancel()
+        googleJob = null
+        mutableGoogleState.value = GooglePhoneSignInState()
+    }
+
+    override fun onCleared() {
+        phoneAddSession.stop(PhoneAddKind.CLOUD_ACCOUNT)
+    }
 
     suspend fun signIn(email: String, password: String): Result<Unit> = cloudSync.signIn(email, password)
     suspend fun createAccount(email: String, password: String): Result<Unit> = cloudSync.createAccount(email, password)
@@ -103,6 +150,39 @@ fun CloudSyncSettingsSection(viewModel: CloudSyncViewModel = hiltViewModel()) {
                 label = stringResource(R.string.settings_cloud_sync_sign_in),
                 value = stringResource(R.string.settings_cloud_sync_sign_in_value),
                 onClick = { showSignIn = true }
+            )
+            val phoneState by viewModel.phoneState.collectAsStateWithLifecycle()
+            val phoneActive = phoneState.kind == PhoneAddKind.CLOUD_ACCOUNT
+            PhoneAddQrPanel(
+                url = phoneState.url.takeIf { phoneActive },
+                title = stringResource(R.string.settings_cloud_sync_phone_title),
+                description = stringResource(R.string.settings_cloud_sync_phone_description),
+                status = when {
+                    !phoneActive -> null
+                    phoneState.error -> stringResource(R.string.settings_cloud_sync_qr_error)
+                    phoneState.url != null -> stringResource(R.string.settings_cloud_sync_qr_waiting)
+                    else -> null
+                },
+                startLabel = stringResource(R.string.settings_cloud_sync_qr_start),
+                stopLabel = stringResource(R.string.settings_cloud_sync_qr_stop),
+                onStart = viewModel::startPhoneSignIn,
+                onStop = viewModel::stopPhoneSignIn,
+            )
+            val googleState by viewModel.googleState.collectAsStateWithLifecycle()
+            PhoneAddQrPanel(
+                url = googleState.url,
+                title = stringResource(R.string.settings_cloud_sync_google_title),
+                description = stringResource(R.string.settings_cloud_sync_google_description),
+                status = when (googleState.error) {
+                    null -> googleState.url?.let { stringResource(R.string.settings_cloud_sync_qr_waiting) }
+                    CloudSyncErrors.PAIRING_EXPIRED -> stringResource(R.string.settings_cloud_sync_google_expired)
+                    CloudSyncErrors.GOOGLE_NOT_ENABLED -> stringResource(R.string.settings_cloud_sync_error_google_off)
+                    else -> stringResource(R.string.settings_cloud_sync_failed)
+                },
+                startLabel = stringResource(R.string.settings_cloud_sync_qr_start),
+                stopLabel = stringResource(R.string.settings_cloud_sync_qr_stop),
+                onStart = { viewModel.startGoogleSignIn(onSignedIn = { toast(messages.signedIn) }) },
+                onStop = viewModel::stopGoogleSignIn,
             )
         } else {
             SettingsRow(label = stringResource(R.string.settings_cloud_sync_account), value = email)

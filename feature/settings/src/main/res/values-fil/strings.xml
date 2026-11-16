@@ -1012,4 +1012,14 @@
     <string name="settings_cloud_sync_error_weak_password">Gumamit ng password na hindi bababa sa 6 character.</string>
     <string name="settings_cloud_sync_error_invalid_email">Mukhang mali ang email address na iyan.</string>
     <string name="settings_cloud_sync_error_too_many">Masyadong maraming pagsubok. Subukan ulit pagkalipas ng ilang minuto.</string>
+    <string name="settings_cloud_sync_phone_title">Mag-sign in gamit ang phone</string>
+    <string name="settings_cloud_sync_phone_description">I-scan ang code gamit ang phone sa parehong Wi-Fi, saka i-type ang email at password sa phone.</string>
+    <string name="settings_cloud_sync_google_title">Mag-sign in gamit ang Google</string>
+    <string name="settings_cloud_sync_google_description">I-scan ang code gamit ang phone at mag-sign in doon gamit ang Google account. Gumagana sa kahit anong network.</string>
+    <string name="settings_cloud_sync_qr_start">Ipakita ang QR code</string>
+    <string name="settings_cloud_sync_qr_stop">Itago ang QR code</string>
+    <string name="settings_cloud_sync_qr_waiting">Hinihintay ang iyong phone…</string>
+    <string name="settings_cloud_sync_qr_error">Hindi masimulan. Ikonekta ang TV sa Wi-Fi o Ethernet at subukan ulit.</string>
+    <string name="settings_cloud_sync_google_expired">Nag-expire na ang code. Magpakita ng bago para subukan ulit.</string>
+    <string name="settings_cloud_sync_error_google_off">Hindi pa naka-on ang pag-sign in gamit ang Google para sa app na ito.</string>
 </resources>

@@ -1017,4 +1017,14 @@
     <string name="settings_cloud_sync_error_weak_password">Folosește o parolă de cel puțin 6 caractere.</string>
     <string name="settings_cloud_sync_error_invalid_email">Adresa de e-mail pare greșită.</string>
     <string name="settings_cloud_sync_error_too_many">Prea multe încercări. Reîncearcă peste câteva minute.</string>
+    <string name="settings_cloud_sync_phone_title">Conectați-vă cu telefonul</string>
+    <string name="settings_cloud_sync_phone_description">Scanați codul cu un telefon din aceeași rețea Wi-Fi, apoi introduceți e-mailul și parola pe telefon.</string>
+    <string name="settings_cloud_sync_google_title">Conectați-vă cu Google</string>
+    <string name="settings_cloud_sync_google_description">Scanați codul cu telefonul și conectați-vă acolo cu contul Google. Funcționează în orice rețea.</string>
+    <string name="settings_cloud_sync_qr_start">Afișează codul QR</string>
+    <string name="settings_cloud_sync_qr_stop">Ascunde codul QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Se așteaptă telefonul…</string>
+    <string name="settings_cloud_sync_qr_error">Nu s-a putut porni. Conectați televizorul la Wi-Fi sau Ethernet și încercați din nou.</string>
+    <string name="settings_cloud_sync_google_expired">Codul a expirat. Afișați unul nou pentru a încerca din nou.</string>
+    <string name="settings_cloud_sync_error_google_off">Conectarea cu Google nu este încă activată pentru această aplicație.</string>
 </resources>

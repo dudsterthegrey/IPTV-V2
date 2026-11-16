@@ -21,7 +21,12 @@ object CloudSyncErrors {
     const val TOO_MANY_ATTEMPTS = "TOO_MANY_ATTEMPTS"
     const val NOT_CONFIGURED = "NOT_CONFIGURED"
     const val NETWORK = "NETWORK"
+    const val PAIRING_EXPIRED = "PAIRING_EXPIRED"
+    const val GOOGLE_NOT_ENABLED = "GOOGLE_NOT_ENABLED"
 }
+
+/** A "sign in with Google on your phone" request: the phone opens [url] (shown as a QR code). */
+data class GooglePhonePairing(val code: String, val url: String)
 
 /**
  * Keeps watch progress (movies and episodes) the same on every device signed in to the same
@@ -33,6 +38,15 @@ interface CloudSyncRepository {
     suspend fun signIn(email: String, password: String): Result<Unit>
 
     suspend fun createAccount(email: String, password: String): Result<Unit>
+
+    /** Starts a Google sign-in on a phone; null when this build has no cloud project. */
+    fun newGooglePhonePairing(): GooglePhonePairing?
+
+    /**
+     * Waits until the phone finishes signing in with Google for [pairing], then signs this device
+     * in to the same account. Fails with [CloudSyncErrors.PAIRING_EXPIRED] after [timeoutMs].
+     */
+    suspend fun completeGooglePhonePairing(pairing: GooglePhonePairing, timeoutMs: Long = 5 * 60_000L): Result<Unit>
 
     /** Emails a link to choose a new password. */
     suspend fun sendPasswordReset(email: String): Result<Unit>

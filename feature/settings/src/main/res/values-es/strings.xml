@@ -1010,4 +1010,14 @@
     <string name="settings_cloud_sync_error_weak_password">Usa una contraseña de al menos 6 caracteres.</string>
     <string name="settings_cloud_sync_error_invalid_email">Esa dirección de correo no parece correcta.</string>
     <string name="settings_cloud_sync_error_too_many">Demasiados intentos. Inténtalo en unos minutos.</string>
+    <string name="settings_cloud_sync_phone_title">Iniciar sesión con el móvil</string>
+    <string name="settings_cloud_sync_phone_description">Escanea el código con un móvil en la misma Wi-Fi y escribe tu correo y contraseña en el móvil.</string>
+    <string name="settings_cloud_sync_google_title">Iniciar sesión con Google</string>
+    <string name="settings_cloud_sync_google_description">Escanea el código con el móvil e inicia sesión allí con tu cuenta de Google. Funciona en cualquier red.</string>
+    <string name="settings_cloud_sync_qr_start">Mostrar código QR</string>
+    <string name="settings_cloud_sync_qr_stop">Ocultar código QR</string>
+    <string name="settings_cloud_sync_qr_waiting">Esperando a tu móvil…</string>
+    <string name="settings_cloud_sync_qr_error">No se pudo iniciar. Conecta la TV a Wi-Fi o Ethernet e inténtalo de nuevo.</string>
+    <string name="settings_cloud_sync_google_expired">El código caducó. Muestra uno nuevo para volver a intentarlo.</string>
+    <string name="settings_cloud_sync_error_google_off">El inicio de sesión con Google aún no está activado para esta app.</string>
 </resources>
