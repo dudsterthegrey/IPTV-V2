@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.4",
-  "versionCode": 9,
+  "versionName": "2.1.5",
+  "versionCode": 10,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "2e79e5f0968f2549e69d1d8d1425687d50e6794c59b326358762fdfe360d84a0",
-  "releaseNotes": "Profiles: add people under a provider, each with their own progress, favorites and tracked shows. Pick who's watching when the app starts.",
+  "sha256": "a234bbdebd0a2f6cd05ec687078666f209ea6e8038140c9fecc6a006dc6b132b",
+  "releaseNotes": "Home: filter Recently Added Movies and Series by genre, rating, country and year. Your choices are kept.",
   "publishedAt": "2026-11-16",
   "downloaderCode": "7935478"
 }
