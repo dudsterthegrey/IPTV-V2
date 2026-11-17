@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.6",
-  "versionCode": 11,
+  "versionName": "2.1.7",
+  "versionCode": 12,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "a4624dc67c23f042b0094c40cb68af87fecc5fbe3921e032f5e26c21ef08a1e5",
-  "releaseNotes": "Fixes search showing no matches on Fire TV and other slower devices.",
+  "sha256": "bc3538d14292d6d0fa1a3dc06c8e73fc3c9a97ddd8632c811664d0e94b29a265",
+  "releaseNotes": "Faster search: country details for the Home filters are now filled in only while the app is not on screen.",
   "publishedAt": "2026-11-17",
   "downloaderCode": "7935478"
 }
