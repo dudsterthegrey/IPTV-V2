@@ -298,4 +298,22 @@
     <string name="nav_sync_done">סונכרן</string>
     <string name="nav_sync_failed">הסנכרון נכשל</string>
     <string name="nav_sync_description">סנכרון התקדמות הצפייה עם המכשירים האחרים שלך עכשיו</string>
+    <string name="profiles_who_is_watching">מי צופה?</string>
+    <string name="profiles_add">הוספת פרופיל</string>
+    <string name="profiles_manage">ניהול פרופילים</string>
+    <string name="profiles_done">סיום</string>
+    <string name="profiles_new_title">פרופיל חדש</string>
+    <string name="profiles_edit_title">עריכת פרופיל</string>
+    <string name="profiles_name">שם</string>
+    <string name="profiles_save">שמירה</string>
+    <string name="profiles_cancel">ביטול</string>
+    <string name="profiles_delete">מחיקת פרופיל</string>
+    <string name="profiles_delete_note">מחיקת הפרופיל מוחקת גם את ההתקדמות, המועדפים והסדרות שבמעקב שלו בטלוויזיה הזו.</string>
+    <string name="profiles_default_name">ראשי</string>
+    <string name="profiles_button">פרופילים</string>
+    <string name="profiles_switching">מחליף פרופיל…</string>
+    <string name="profiles_error_name_taken">השם הזה כבר בשימוש.</string>
+    <string name="profiles_error_name_empty">הזינו שם.</string>
+    <string name="profiles_error_generic">משהו השתבש. נסו שוב.</string>
+    <string name="profiles_hint">לכל פרופיל יש התקדמות, מועדפים וסדרות במעקב משלו. השתמשו באותם שמות בטלוויזיות האחרות כדי לסנכרן אותם.</string>
 </resources>

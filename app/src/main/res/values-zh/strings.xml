@@ -298,4 +298,22 @@
     <string name="nav_sync_done">已同步</string>
     <string name="nav_sync_failed">同步失败</string>
     <string name="nav_sync_description">立即与其他设备同步观看进度</string>
+    <string name="profiles_who_is_watching">谁在观看？</string>
+    <string name="profiles_add">添加个人资料</string>
+    <string name="profiles_manage">管理个人资料</string>
+    <string name="profiles_done">完成</string>
+    <string name="profiles_new_title">新建个人资料</string>
+    <string name="profiles_edit_title">编辑个人资料</string>
+    <string name="profiles_name">名称</string>
+    <string name="profiles_save">保存</string>
+    <string name="profiles_cancel">取消</string>
+    <string name="profiles_delete">删除个人资料</string>
+    <string name="profiles_delete_note">删除此个人资料也会删除它在这台电视上的进度、收藏和追踪的剧集。</string>
+    <string name="profiles_default_name">主要</string>
+    <string name="profiles_button">个人资料</string>
+    <string name="profiles_switching">正在切换个人资料…</string>
+    <string name="profiles_error_name_taken">该名称已被使用。</string>
+    <string name="profiles_error_name_empty">请输入名称。</string>
+    <string name="profiles_error_generic">出了点问题，请重试。</string>
+    <string name="profiles_hint">每个个人资料都有自己的进度、收藏和追踪的剧集。在其他电视上使用相同名称即可同步。</string>
 </resources>

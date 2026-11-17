@@ -64,6 +64,7 @@ fun AppScreenScaffold(
         )
     val closeAppAction = LocalAppCloseAction.current
     val syncShortcut = LocalAppSyncShortcut.current
+    val profileShortcut = LocalAppProfileShortcut.current
     val closeAppLabel = stringResource(R.string.nav_close_app)
 
     CoreAppScreenScaffold(
@@ -83,6 +84,9 @@ fun AppScreenScaffold(
         header = header,
         topBarActions = {
             topBarActions?.invoke(this)
+            if (profileShortcut != null) {
+                AppProfileTopBarAction(profileShortcut)
+            }
             if (syncShortcut != null) {
                 AppSyncTopBarAction(syncShortcut)
             }

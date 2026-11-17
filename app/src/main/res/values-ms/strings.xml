@@ -352,4 +352,22 @@
     <string name="nav_sync_done">Disegerakkan</string>
     <string name="nav_sync_failed">Segerak gagal</string>
     <string name="nav_sync_description">Segerakkan kemajuan tontonan dengan peranti lain sekarang</string>
+    <string name="profiles_who_is_watching">Siapa yang menonton?</string>
+    <string name="profiles_add">Tambah profil</string>
+    <string name="profiles_manage">Urus profil</string>
+    <string name="profiles_done">Selesai</string>
+    <string name="profiles_new_title">Profil baharu</string>
+    <string name="profiles_edit_title">Edit profil</string>
+    <string name="profiles_name">Nama</string>
+    <string name="profiles_save">Simpan</string>
+    <string name="profiles_cancel">Batal</string>
+    <string name="profiles_delete">Padam profil</string>
+    <string name="profiles_delete_note">Memadam profil ini turut memadam kemajuan, kegemaran dan rancangan dijejak pada TV ini.</string>
+    <string name="profiles_default_name">Utama</string>
+    <string name="profiles_button">Profil</string>
+    <string name="profiles_switching">Menukar profil…</string>
+    <string name="profiles_error_name_taken">Nama itu sudah digunakan.</string>
+    <string name="profiles_error_name_empty">Masukkan nama.</string>
+    <string name="profiles_error_generic">Sesuatu tidak kena. Cuba lagi.</string>
+    <string name="profiles_hint">Setiap profil ada kemajuan, kegemaran dan rancangan dijejak sendiri. Gunakan nama yang sama pada TV lain untuk menyegerakkannya.</string>
 </resources>

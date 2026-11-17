@@ -320,4 +320,22 @@
     <string name="nav_sync_done">已同步</string>
     <string name="nav_sync_failed">同步失敗</string>
     <string name="nav_sync_description">立即與其他裝置同步觀看進度</string>
+    <string name="profiles_who_is_watching">誰在觀看？</string>
+    <string name="profiles_add">新增個人檔案</string>
+    <string name="profiles_manage">管理個人檔案</string>
+    <string name="profiles_done">完成</string>
+    <string name="profiles_new_title">新增個人檔案</string>
+    <string name="profiles_edit_title">編輯個人檔案</string>
+    <string name="profiles_name">名稱</string>
+    <string name="profiles_save">儲存</string>
+    <string name="profiles_cancel">取消</string>
+    <string name="profiles_delete">刪除個人檔案</string>
+    <string name="profiles_delete_note">刪除此個人檔案也會刪除它在這台電視上的進度、收藏和追蹤的節目。</string>
+    <string name="profiles_default_name">主要</string>
+    <string name="profiles_button">個人檔案</string>
+    <string name="profiles_switching">正在切換個人檔案…</string>
+    <string name="profiles_error_name_taken">此名稱已被使用。</string>
+    <string name="profiles_error_name_empty">請輸入名稱。</string>
+    <string name="profiles_error_generic">發生錯誤，請再試一次。</string>
+    <string name="profiles_hint">每個個人檔案都有自己的進度、收藏和追蹤的節目。在其他電視上使用相同名稱即可同步。</string>
 </resources>

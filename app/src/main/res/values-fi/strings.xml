@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Synkronoitu</string>
     <string name="nav_sync_failed">Synkronointi epäonnistui</string>
     <string name="nav_sync_description">Synkronoi katselukohta muihin laitteisiisi nyt</string>
+    <string name="profiles_who_is_watching">Kuka katsoo?</string>
+    <string name="profiles_add">Lisää profiili</string>
+    <string name="profiles_manage">Hallitse profiileja</string>
+    <string name="profiles_done">Valmis</string>
+    <string name="profiles_new_title">Uusi profiili</string>
+    <string name="profiles_edit_title">Muokkaa profiilia</string>
+    <string name="profiles_name">Nimi</string>
+    <string name="profiles_save">Tallenna</string>
+    <string name="profiles_cancel">Peruuta</string>
+    <string name="profiles_delete">Poista profiili</string>
+    <string name="profiles_delete_note">Profiilin poistaminen poistaa myös sen katselukohdat, suosikit ja seuratut sarjat tästä televisiosta.</string>
+    <string name="profiles_default_name">Pää</string>
+    <string name="profiles_button">Profiilit</string>
+    <string name="profiles_switching">Vaihdetaan profiilia…</string>
+    <string name="profiles_error_name_taken">Nimi on jo käytössä.</string>
+    <string name="profiles_error_name_empty">Anna nimi.</string>
+    <string name="profiles_error_generic">Jokin meni vikaan. Yritä uudelleen.</string>
+    <string name="profiles_hint">Jokaisella profiililla on omat katselukohdat, suosikit ja seuratut sarjat. Käytä samoja nimiä muissa televisioissa, niin ne synkronoituvat.</string>
 </resources>

@@ -351,4 +351,22 @@
     <string name="nav_sync_done">Sinkronizirano</string>
     <string name="nav_sync_failed">Sinkronizacija nije uspjela</string>
     <string name="nav_sync_description">Sinkroniziraj napredak gledanja s drugim uređajima sada</string>
+    <string name="profiles_who_is_watching">Tko gleda?</string>
+    <string name="profiles_add">Dodaj profil</string>
+    <string name="profiles_manage">Upravljanje profilima</string>
+    <string name="profiles_done">Gotovo</string>
+    <string name="profiles_new_title">Novi profil</string>
+    <string name="profiles_edit_title">Uredi profil</string>
+    <string name="profiles_name">Ime</string>
+    <string name="profiles_save">Spremi</string>
+    <string name="profiles_cancel">Odustani</string>
+    <string name="profiles_delete">Izbriši profil</string>
+    <string name="profiles_delete_note">Brisanjem profila brišu se i njegov napredak, favoriti i praćene serije na ovom TV-u.</string>
+    <string name="profiles_default_name">Glavni</string>
+    <string name="profiles_button">Profili</string>
+    <string name="profiles_switching">Mijenjanje profila…</string>
+    <string name="profiles_error_name_taken">To se ime već koristi.</string>
+    <string name="profiles_error_name_empty">Unesite ime.</string>
+    <string name="profiles_error_generic">Nešto nije u redu. Pokušajte ponovno.</string>
+    <string name="profiles_hint">Svaki profil ima vlastiti napredak, favorite i praćene serije. Koristite ista imena na drugim TV-ima da bi se sinkronizirali.</string>
 </resources>

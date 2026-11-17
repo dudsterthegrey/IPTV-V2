@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Gesynchroniseerd</string>
     <string name="nav_sync_failed">Synchroniseren mislukt</string>
     <string name="nav_sync_description">Kijkvoortgang nu synchroniseren met je andere apparaten</string>
+    <string name="profiles_who_is_watching">Wie kijkt er?</string>
+    <string name="profiles_add">Profiel toevoegen</string>
+    <string name="profiles_manage">Profielen beheren</string>
+    <string name="profiles_done">Klaar</string>
+    <string name="profiles_new_title">Nieuw profiel</string>
+    <string name="profiles_edit_title">Profiel bewerken</string>
+    <string name="profiles_name">Naam</string>
+    <string name="profiles_save">Opslaan</string>
+    <string name="profiles_cancel">Annuleren</string>
+    <string name="profiles_delete">Profiel verwijderen</string>
+    <string name="profiles_delete_note">Als je dit profiel verwijdert, worden ook de voortgang, favorieten en gevolgde series op deze tv verwijderd.</string>
+    <string name="profiles_default_name">Hoofd</string>
+    <string name="profiles_button">Profielen</string>
+    <string name="profiles_switching">Profiel wisselen…</string>
+    <string name="profiles_error_name_taken">Die naam wordt al gebruikt.</string>
+    <string name="profiles_error_name_empty">Voer een naam in.</string>
+    <string name="profiles_error_generic">Er ging iets mis. Probeer het opnieuw.</string>
+    <string name="profiles_hint">Elk profiel heeft eigen voortgang, favorieten en gevolgde series. Gebruik dezelfde namen op je andere tv’s om ze te synchroniseren.</string>
 </resources>

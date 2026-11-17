@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Sincronizat</string>
     <string name="nav_sync_failed">Sincronizare eșuată</string>
     <string name="nav_sync_description">Sincronizează acum progresul cu celelalte dispozitive</string>
+    <string name="profiles_who_is_watching">Cine privește?</string>
+    <string name="profiles_add">Adaugă profil</string>
+    <string name="profiles_manage">Gestionează profilurile</string>
+    <string name="profiles_done">Gata</string>
+    <string name="profiles_new_title">Profil nou</string>
+    <string name="profiles_edit_title">Editează profilul</string>
+    <string name="profiles_name">Nume</string>
+    <string name="profiles_save">Salvează</string>
+    <string name="profiles_cancel">Anulează</string>
+    <string name="profiles_delete">Șterge profilul</string>
+    <string name="profiles_delete_note">Ștergerea profilului șterge și progresul, favoritele și serialele urmărite de pe acest televizor.</string>
+    <string name="profiles_default_name">Principal</string>
+    <string name="profiles_button">Profiluri</string>
+    <string name="profiles_switching">Se schimbă profilul…</string>
+    <string name="profiles_error_name_taken">Numele este deja folosit.</string>
+    <string name="profiles_error_name_empty">Introdu un nume.</string>
+    <string name="profiles_error_generic">Ceva n-a mers bine. Încearcă din nou.</string>
+    <string name="profiles_hint">Fiecare profil are propriul progres, favorite și seriale urmărite. Folosește aceleași nume pe celelalte televizoare pentru sincronizare.</string>
 </resources>

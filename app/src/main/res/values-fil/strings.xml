@@ -351,4 +351,22 @@
     <string name="nav_sync_done">Na-sync na</string>
     <string name="nav_sync_failed">Nabigo ang sync</string>
     <string name="nav_sync_description">I-sync ngayon ang progreso ng panonood sa iba mong device</string>
+    <string name="profiles_who_is_watching">Sino ang nanonood?</string>
+    <string name="profiles_add">Magdagdag ng profile</string>
+    <string name="profiles_manage">Pamahalaan ang mga profile</string>
+    <string name="profiles_done">Tapos na</string>
+    <string name="profiles_new_title">Bagong profile</string>
+    <string name="profiles_edit_title">I-edit ang profile</string>
+    <string name="profiles_name">Pangalan</string>
+    <string name="profiles_save">I-save</string>
+    <string name="profiles_cancel">Kanselahin</string>
+    <string name="profiles_delete">Burahin ang profile</string>
+    <string name="profiles_delete_note">Kapag binura ang profile, mabubura rin ang progreso, mga paborito at sinusubaybayang palabas nito sa TV na ito.</string>
+    <string name="profiles_default_name">Pangunahin</string>
+    <string name="profiles_button">Mga profile</string>
+    <string name="profiles_switching">Nagpapalit ng profile…</string>
+    <string name="profiles_error_name_taken">Ginagamit na ang pangalang iyan.</string>
+    <string name="profiles_error_name_empty">Maglagay ng pangalan.</string>
+    <string name="profiles_error_generic">May nangyaring mali. Subukang muli.</string>
+    <string name="profiles_hint">May sariling progreso, paborito at sinusubaybayang palabas ang bawat profile. Gamitin ang parehong pangalan sa ibang TV para ma-sync.</string>
 </resources>

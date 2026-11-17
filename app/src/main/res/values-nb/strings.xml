@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Synkronisert</string>
     <string name="nav_sync_failed">Synkronisering mislyktes</string>
     <string name="nav_sync_description">Synkroniser avspillingsfremdrift med de andre enhetene nå</string>
+    <string name="profiles_who_is_watching">Hvem ser på?</string>
+    <string name="profiles_add">Legg til profil</string>
+    <string name="profiles_manage">Administrer profiler</string>
+    <string name="profiles_done">Ferdig</string>
+    <string name="profiles_new_title">Ny profil</string>
+    <string name="profiles_edit_title">Rediger profil</string>
+    <string name="profiles_name">Navn</string>
+    <string name="profiles_save">Lagre</string>
+    <string name="profiles_cancel">Avbryt</string>
+    <string name="profiles_delete">Slett profil</string>
+    <string name="profiles_delete_note">Sletting av profilen sletter også fremdrift, favoritter og fulgte serier på denne TV-en.</string>
+    <string name="profiles_default_name">Hoved</string>
+    <string name="profiles_button">Profiler</string>
+    <string name="profiles_switching">Bytter profil…</string>
+    <string name="profiles_error_name_taken">Det navnet er allerede i bruk.</string>
+    <string name="profiles_error_name_empty">Skriv inn et navn.</string>
+    <string name="profiles_error_generic">Noe gikk galt. Prøv igjen.</string>
+    <string name="profiles_hint">Hver profil har egen fremdrift, favoritter og fulgte serier. Bruk de samme navnene på de andre TV-ene for å synkronisere dem.</string>
 </resources>

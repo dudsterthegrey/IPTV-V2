@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Συγχρονίστηκε</string>
     <string name="nav_sync_failed">Αποτυχία συγχρ.</string>
     <string name="nav_sync_description">Συγχρονισμός προόδου προβολής με τις άλλες συσκευές σας τώρα</string>
+    <string name="profiles_who_is_watching">Ποιος βλέπει;</string>
+    <string name="profiles_add">Προσθήκη προφίλ</string>
+    <string name="profiles_manage">Διαχείριση προφίλ</string>
+    <string name="profiles_done">Τέλος</string>
+    <string name="profiles_new_title">Νέο προφίλ</string>
+    <string name="profiles_edit_title">Επεξεργασία προφίλ</string>
+    <string name="profiles_name">Όνομα</string>
+    <string name="profiles_save">Αποθήκευση</string>
+    <string name="profiles_cancel">Ακύρωση</string>
+    <string name="profiles_delete">Διαγραφή προφίλ</string>
+    <string name="profiles_delete_note">Η διαγραφή του προφίλ διαγράφει και την πρόοδο, τα αγαπημένα και τις σειρές που ακολουθεί σε αυτή την τηλεόραση.</string>
+    <string name="profiles_default_name">Κύριο</string>
+    <string name="profiles_button">Προφίλ</string>
+    <string name="profiles_switching">Αλλαγή προφίλ…</string>
+    <string name="profiles_error_name_taken">Αυτό το όνομα χρησιμοποιείται ήδη.</string>
+    <string name="profiles_error_name_empty">Εισαγάγετε όνομα.</string>
+    <string name="profiles_error_generic">Κάτι πήγε στραβά. Δοκιμάστε ξανά.</string>
+    <string name="profiles_hint">Κάθε προφίλ έχει δική του πρόοδο, αγαπημένα και σειρές. Χρησιμοποιήστε τα ίδια ονόματα στις άλλες τηλεοράσεις για συγχρονισμό.</string>
 </resources>

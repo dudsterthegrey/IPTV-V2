@@ -351,4 +351,22 @@
     <string name="nav_sync_done">Synced</string>
     <string name="nav_sync_failed">Sync failed</string>
     <string name="nav_sync_description">Sync watch progress with your other devices now</string>
+    <string name="profiles_who_is_watching">Who\'s watching?</string>
+    <string name="profiles_add">Add profile</string>
+    <string name="profiles_manage">Manage profiles</string>
+    <string name="profiles_done">Done</string>
+    <string name="profiles_new_title">New profile</string>
+    <string name="profiles_edit_title">Edit profile</string>
+    <string name="profiles_name">Name</string>
+    <string name="profiles_save">Save</string>
+    <string name="profiles_cancel">Cancel</string>
+    <string name="profiles_delete">Delete profile</string>
+    <string name="profiles_delete_note">Deleting this profile also deletes its progress, favorites and tracked shows on this TV.</string>
+    <string name="profiles_default_name">Main</string>
+    <string name="profiles_button">Profiles</string>
+    <string name="profiles_switching">Switching profile…</string>
+    <string name="profiles_error_name_taken">That name is already used.</string>
+    <string name="profiles_error_name_empty">Enter a name.</string>
+    <string name="profiles_error_generic">Something went wrong. Try again.</string>
+    <string name="profiles_hint">Each profile has its own progress, favorites and tracked shows. Use the same names on your other TVs to sync them.</string>
 </resources>

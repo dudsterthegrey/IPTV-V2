@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Szinkronizálva</string>
     <string name="nav_sync_failed">Sikertelen szinkron</string>
     <string name="nav_sync_description">Megtekintési előrehaladás szinkronizálása a többi eszközzel most</string>
+    <string name="profiles_who_is_watching">Ki néz?</string>
+    <string name="profiles_add">Profil hozzáadása</string>
+    <string name="profiles_manage">Profilok kezelése</string>
+    <string name="profiles_done">Kész</string>
+    <string name="profiles_new_title">Új profil</string>
+    <string name="profiles_edit_title">Profil szerkesztése</string>
+    <string name="profiles_name">Név</string>
+    <string name="profiles_save">Mentés</string>
+    <string name="profiles_cancel">Mégse</string>
+    <string name="profiles_delete">Profil törlése</string>
+    <string name="profiles_delete_note">A profil törlése a tévén tárolt előrehaladását, kedvenceit és követett sorozatait is törli.</string>
+    <string name="profiles_default_name">Fő</string>
+    <string name="profiles_button">Profilok</string>
+    <string name="profiles_switching">Profilváltás…</string>
+    <string name="profiles_error_name_taken">Ez a név már foglalt.</string>
+    <string name="profiles_error_name_empty">Adjon meg egy nevet.</string>
+    <string name="profiles_error_generic">Hiba történt. Próbálja újra.</string>
+    <string name="profiles_hint">Minden profilnak saját előrehaladása, kedvencei és követett sorozatai vannak. A szinkronizáláshoz használja ugyanazokat a neveket a többi tévén is.</string>
 </resources>

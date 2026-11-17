@@ -354,4 +354,22 @@
     <string name="nav_sync_done">همگام شد</string>
     <string name="nav_sync_failed">همگام‌سازی ناموفق</string>
     <string name="nav_sync_description">همگام‌سازی پیشرفت تماشا با دستگاه‌های دیگرتان</string>
+    <string name="profiles_who_is_watching">چه کسی تماشا می‌کند؟</string>
+    <string name="profiles_add">افزودن نمایه</string>
+    <string name="profiles_manage">مدیریت نمایه‌ها</string>
+    <string name="profiles_done">تمام</string>
+    <string name="profiles_new_title">نمایه جدید</string>
+    <string name="profiles_edit_title">ویرایش نمایه</string>
+    <string name="profiles_name">نام</string>
+    <string name="profiles_save">ذخیره</string>
+    <string name="profiles_cancel">لغو</string>
+    <string name="profiles_delete">حذف نمایه</string>
+    <string name="profiles_delete_note">با حذف این نمایه، پیشرفت، موارد دلخواه و سریال‌های دنبال‌شده آن در این تلویزیون هم حذف می‌شود.</string>
+    <string name="profiles_default_name">اصلی</string>
+    <string name="profiles_button">نمایه‌ها</string>
+    <string name="profiles_switching">در حال تغییر نمایه…</string>
+    <string name="profiles_error_name_taken">این نام قبلاً استفاده شده است.</string>
+    <string name="profiles_error_name_empty">یک نام وارد کنید.</string>
+    <string name="profiles_error_generic">مشکلی پیش آمد. دوباره تلاش کنید.</string>
+    <string name="profiles_hint">هر نمایه پیشرفت، موارد دلخواه و سریال‌های دنبال‌شده خودش را دارد. برای همگام‌سازی، در تلویزیون‌های دیگر هم همین نام‌ها را به کار ببرید.</string>
 </resources>

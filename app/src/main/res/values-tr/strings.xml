@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Eşitlendi</string>
     <string name="nav_sync_failed">Eşitleme başarısız</string>
     <string name="nav_sync_description">İzleme ilerlemesini diğer cihazlarınızla şimdi eşitleyin</string>
+    <string name="profiles_who_is_watching">Kim izliyor?</string>
+    <string name="profiles_add">Profil ekle</string>
+    <string name="profiles_manage">Profilleri yönet</string>
+    <string name="profiles_done">Bitti</string>
+    <string name="profiles_new_title">Yeni profil</string>
+    <string name="profiles_edit_title">Profili düzenle</string>
+    <string name="profiles_name">Ad</string>
+    <string name="profiles_save">Kaydet</string>
+    <string name="profiles_cancel">İptal</string>
+    <string name="profiles_delete">Profili sil</string>
+    <string name="profiles_delete_note">Bu profili silmek, bu TV’deki ilerlemesini, favorilerini ve takip ettiği dizileri de siler.</string>
+    <string name="profiles_default_name">Ana</string>
+    <string name="profiles_button">Profiller</string>
+    <string name="profiles_switching">Profil değiştiriliyor…</string>
+    <string name="profiles_error_name_taken">Bu ad zaten kullanılıyor.</string>
+    <string name="profiles_error_name_empty">Bir ad girin.</string>
+    <string name="profiles_error_generic">Bir sorun oluştu. Tekrar deneyin.</string>
+    <string name="profiles_hint">Her profilin kendi ilerlemesi, favorileri ve takip ettiği dizileri vardır. Eşitlemek için diğer TV’lerinizde aynı adları kullanın.</string>
 </resources>

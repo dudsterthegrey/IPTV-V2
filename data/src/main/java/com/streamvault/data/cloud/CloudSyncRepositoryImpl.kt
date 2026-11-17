@@ -18,6 +18,7 @@ import com.streamvault.domain.repository.GooglePhonePairing
 import com.streamvault.domain.repository.PlaybackHistoryRepository
 import com.streamvault.domain.repository.ProviderRepository
 import com.streamvault.domain.repository.SeriesRepository
+import com.streamvault.domain.repository.ViewerProfileRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
@@ -50,7 +51,8 @@ class CloudSyncRepositoryImpl @Inject constructor(
     private val movieDao: MovieDao,
     private val seriesDao: SeriesDao,
     private val episodeDao: EpisodeDao,
-    private val seriesRepository: SeriesRepository
+    private val seriesRepository: SeriesRepository,
+    private val viewerProfileRepository: ViewerProfileRepository
 ) : CloudSyncRepository {
     private val prefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
     private val syncMutex = Mutex()
@@ -141,6 +143,12 @@ class CloudSyncRepositoryImpl @Inject constructor(
         else -> CloudSyncErrors.WRONG_EMAIL_OR_PASSWORD
     }
 
+    override suspend fun syncEverything(): Result<Unit> {
+        // Another profile's items were skipped by earlier fetches, so look at everything again.
+        prefs.edit().putLong(KEY_LAST_PULLED_AT, 0L).apply()
+        return syncNow()
+    }
+
     override suspend fun syncNow(): Result<Unit> = syncMutex.withLock {
         if (!firebase.isConfigured || firebase.signedInEmail == null) return@withLock Result.success(Unit)
         mutableState.value = mutableState.value.copy(isSyncing = true)
@@ -169,8 +177,10 @@ class CloudSyncRepositoryImpl @Inject constructor(
             .filter { it.contentType == ContentType.MOVIE || it.contentType == ContentType.SERIES_EPISODE }
         var newestPushed = lastPushed
         val providerKeys = HashMap<Long, String?>()
+        val profileKeys = HashMap<Long, String>()
         changed.sortedBy { it.lastWatchedAt }.forEach { history ->
             val providerKey = providerKeys.getOrPut(history.providerId) { providerKey(history.providerId) } ?: return@forEach
+            val profileKey = profileKeys.getOrPut(history.providerId) { viewerProfileRepository.activeProfileKey(history.providerId) }
             val identity = remoteIdentity(history) ?: return@forEach
             val fields = JSONObject()
                 .put("providerKey", string(providerKey))
@@ -186,7 +196,10 @@ class CloudSyncRepositoryImpl @Inject constructor(
                 .put("watchedStatus", string(history.watchedStatus.name))
                 .put("lastWatchedAt", integer(history.lastWatchedAt))
                 .put("updatedAt", integer(System.currentTimeMillis()))
-            val documentId = sha256("$providerKey|${history.contentType.name}|${identity.second.orEmpty()}|${identity.first}").take(40)
+                .put("profile", string(profileKey))
+            // The primary profile keeps the ids used before profiles existed.
+            val profilePart = if (profileKey.isEmpty()) "" else "|profile:$profileKey"
+            val documentId = sha256("$providerKey|${history.contentType.name}|${identity.second.orEmpty()}|${identity.first}$profilePart").take(40)
             firebase.putHistoryDocument(documentId, fields)
             newestPushed = maxOf(newestPushed, history.lastWatchedAt)
         }
@@ -200,9 +213,13 @@ class CloudSyncRepositoryImpl @Inject constructor(
         val documents = firebase.historyUpdatedSince(since)
         val localProviders = providerRepository.getProviders().first().associateBy { providerKeyOf(it.serverUrl, it.username) }
         var newestSeen = lastPulled
+        val profileKeys = HashMap<Long, String>()
         documents.forEach { fields ->
             newestSeen = maxOf(newestSeen, fields.long("updatedAt"))
             val provider = localProviders[fields.str("providerKey")] ?: return@forEach
+            // Only the active profile's items; documents from before profiles belong to the primary.
+            val profileKey = profileKeys.getOrPut(provider.id) { viewerProfileRepository.activeProfileKey(provider.id) }
+            if (fields.str("profile") != profileKey) return@forEach
             applyRemote(provider.id, fields)
         }
         prefs.edit().putLong(KEY_LAST_PULLED_AT, newestSeen).apply()

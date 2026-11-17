@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Синхронізовано</string>
     <string name="nav_sync_failed">Помилка синхронізації</string>
     <string name="nav_sync_description">Синхронізувати прогрес перегляду з іншими пристроями</string>
+    <string name="profiles_who_is_watching">Хто дивиться?</string>
+    <string name="profiles_add">Додати профіль</string>
+    <string name="profiles_manage">Керувати профілями</string>
+    <string name="profiles_done">Готово</string>
+    <string name="profiles_new_title">Новий профіль</string>
+    <string name="profiles_edit_title">Редагувати профіль</string>
+    <string name="profiles_name">Імʼя</string>
+    <string name="profiles_save">Зберегти</string>
+    <string name="profiles_cancel">Скасувати</string>
+    <string name="profiles_delete">Видалити профіль</string>
+    <string name="profiles_delete_note">Видалення профілю також видалить його прогрес, обране та відстежувані серіали на цьому телевізорі.</string>
+    <string name="profiles_default_name">Основний</string>
+    <string name="profiles_button">Профілі</string>
+    <string name="profiles_switching">Перемикання профілю…</string>
+    <string name="profiles_error_name_taken">Це імʼя вже використовується.</string>
+    <string name="profiles_error_name_empty">Введіть імʼя.</string>
+    <string name="profiles_error_generic">Щось пішло не так. Спробуйте ще раз.</string>
+    <string name="profiles_hint">Кожен профіль має власний прогрес, обране та відстежувані серіали. Використовуйте ті самі імена на інших телевізорах для синхронізації.</string>
 </resources>

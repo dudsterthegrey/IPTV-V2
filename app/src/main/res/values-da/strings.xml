@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Synkroniseret</string>
     <string name="nav_sync_failed">Synkronisering mislykkedes</string>
     <string name="nav_sync_description">Synkroniser afspilningsforløb med dine andre enheder nu</string>
+    <string name="profiles_who_is_watching">Hvem ser med?</string>
+    <string name="profiles_add">Tilføj profil</string>
+    <string name="profiles_manage">Administrer profiler</string>
+    <string name="profiles_done">Færdig</string>
+    <string name="profiles_new_title">Ny profil</string>
+    <string name="profiles_edit_title">Rediger profil</string>
+    <string name="profiles_name">Navn</string>
+    <string name="profiles_save">Gem</string>
+    <string name="profiles_cancel">Annuller</string>
+    <string name="profiles_delete">Slet profil</string>
+    <string name="profiles_delete_note">Sletning af profilen sletter også dens forløb, favoritter og fulgte serier på dette TV.</string>
+    <string name="profiles_default_name">Primær</string>
+    <string name="profiles_button">Profiler</string>
+    <string name="profiles_switching">Skifter profil…</string>
+    <string name="profiles_error_name_taken">Det navn er allerede i brug.</string>
+    <string name="profiles_error_name_empty">Indtast et navn.</string>
+    <string name="profiles_error_generic">Noget gik galt. Prøv igen.</string>
+    <string name="profiles_hint">Hver profil har sit eget forløb, favoritter og fulgte serier. Brug de samme navne på dine andre TV’er for at synkronisere dem.</string>
 </resources>

@@ -252,6 +252,15 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       Google and leaves its Google token at `pairings/{code}`; the TV polls that document every 2 s
       for 5 minutes, signs in with `accounts:signInWithIdp`, then deletes it. The phone page is in
       English only.
+- [ ] **Profiles per provider** (2.1.4): "Who's watching?" (`app/profiles/ViewerProfilePicker.kt`)
+      at app start when the active provider has 2+ profiles, and from the profile button in the top
+      bar. Each profile has its own progress and watched marks, favorites and custom groups, tracked
+      shows and search history. Done by swapping (`data/profile/ViewerProfileRepositoryImpl.kt`):
+      live tables hold only the active profile's rows; the others wait in plain-SQL
+      `profile_parked_<table>` copies (not Room entities), swapped in one transaction, then the
+      movie/episode progress copies are rebuilt. Cloud sync tags items with the profile (lowercase
+      name; "" for the primary profile, which keeps the old document ids) and only fetches the
+      active profile's. Not yet: backups only include the active profile; Stremio progress is shared.
 - [ ] **Sync button in the top bar** (2.1.2): while signed in to sync, every page with the top
       bar (Home, Live TV, Movies, Series, Genres, Search…) shows a small "Sync" button next to the
       close-app icon (`AppSyncTopBarAction.kt`, fed from `MainActivity` through

@@ -56,4 +56,7 @@ interface CloudSyncRepository {
 
     /** Sends this device's new progress, then fetches the other devices'. */
     suspend fun syncNow(): Result<Unit>
+
+    /** Like [syncNow], but fetches everything again; used after switching profile. */
+    suspend fun syncEverything(): Result<Unit> = syncNow()
 }

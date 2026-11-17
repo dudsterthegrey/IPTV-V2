@@ -299,4 +299,22 @@
     <string name="nav_sync_done">同期完了</string>
     <string name="nav_sync_failed">同期に失敗</string>
     <string name="nav_sync_description">視聴の進行状況を他のデバイスと今すぐ同期</string>
+    <string name="profiles_who_is_watching">誰が視聴しますか？</string>
+    <string name="profiles_add">プロフィールを追加</string>
+    <string name="profiles_manage">プロフィールの管理</string>
+    <string name="profiles_done">完了</string>
+    <string name="profiles_new_title">新しいプロフィール</string>
+    <string name="profiles_edit_title">プロフィールを編集</string>
+    <string name="profiles_name">名前</string>
+    <string name="profiles_save">保存</string>
+    <string name="profiles_cancel">キャンセル</string>
+    <string name="profiles_delete">プロフィールを削除</string>
+    <string name="profiles_delete_note">このプロフィールを削除すると、このテレビ上の視聴状況、お気に入り、追跡中の番組も削除されます。</string>
+    <string name="profiles_default_name">メイン</string>
+    <string name="profiles_button">プロフィール</string>
+    <string name="profiles_switching">プロフィールを切り替え中…</string>
+    <string name="profiles_error_name_taken">その名前は既に使われています。</string>
+    <string name="profiles_error_name_empty">名前を入力してください。</string>
+    <string name="profiles_error_generic">問題が発生しました。もう一度お試しください。</string>
+    <string name="profiles_hint">プロフィールごとに視聴状況、お気に入り、追跡中の番組が分かれます。他のテレビでも同じ名前にすると同期されます。</string>
 </resources>

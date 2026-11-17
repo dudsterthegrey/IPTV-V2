@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Synchronizováno</string>
     <string name="nav_sync_failed">Synchronizace selhala</string>
     <string name="nav_sync_description">Synchronizovat průběh sledování s ostatními zařízeními</string>
+    <string name="profiles_who_is_watching">Kdo se dívá?</string>
+    <string name="profiles_add">Přidat profil</string>
+    <string name="profiles_manage">Spravovat profily</string>
+    <string name="profiles_done">Hotovo</string>
+    <string name="profiles_new_title">Nový profil</string>
+    <string name="profiles_edit_title">Upravit profil</string>
+    <string name="profiles_name">Jméno</string>
+    <string name="profiles_save">Uložit</string>
+    <string name="profiles_cancel">Zrušit</string>
+    <string name="profiles_delete">Smazat profil</string>
+    <string name="profiles_delete_note">Smazáním profilu se na této televizi smaže i jeho průběh, oblíbené a sledované seriály.</string>
+    <string name="profiles_default_name">Hlavní</string>
+    <string name="profiles_button">Profily</string>
+    <string name="profiles_switching">Přepínání profilu…</string>
+    <string name="profiles_error_name_taken">Toto jméno se už používá.</string>
+    <string name="profiles_error_name_empty">Zadejte jméno.</string>
+    <string name="profiles_error_generic">Něco se pokazilo. Zkuste to znovu.</string>
+    <string name="profiles_hint">Každý profil má vlastní průběh, oblíbené a sledované seriály. Pro synchronizaci použijte stejná jména i na ostatních televizích.</string>
 </resources>

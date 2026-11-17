@@ -38,6 +38,7 @@ import javax.inject.Inject
 import com.streamvault.data.preferences.PreferencesRepository
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Composable
@@ -131,6 +132,8 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
 
     @Inject
     lateinit var cloudSyncRepository: dagger.Lazy<com.streamvault.domain.repository.CloudSyncRepository>
+
+    private val viewerProfilesViewModel: com.streamvault.app.profiles.ViewerProfilesViewModel by viewModels()
 
     @Inject
     lateinit var externalNavigationRequestParser: ExternalNavigationRequestParser
@@ -288,13 +291,58 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
                             val cloudSyncState by cloudSync.state.collectAsState(
                                 initial = com.streamvault.domain.repository.CloudSyncState()
                             )
+                            val profileState by viewerProfilesViewModel.state.collectAsState()
+                            val profileBusy by viewerProfilesViewModel.busy.collectAsState()
+                            val profileError by viewerProfilesViewModel.error.collectAsState()
+                            var profilePickerOpen by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
+                            var askedForProfile by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
+                            // "Who's watching?" once per app start, when the provider has profiles.
+                            LaunchedEffect(profileState) {
+                                val loaded = profileState ?: return@LaunchedEffect
+                                if (!askedForProfile && loaded.providerId != null) {
+                                    askedForProfile = true
+                                    if (loaded.profiles.size >= 2) profilePickerOpen = true
+                                }
+                            }
+                            val activeProfile = profileState?.active
                             CompositionLocalProvider(
                                 com.streamvault.app.ui.components.shell.LocalAppSyncShortcut provides
                                     com.streamvault.app.ui.components.shell.AppSyncShortcut(
                                         state = cloudSyncState,
                                         onSyncNow = { lifecycleScope.launch { cloudSync.syncNow() } }
-                                    )
+                                    ),
+                                com.streamvault.app.ui.components.shell.LocalAppProfileShortcut provides
+                                    profileState?.providerId?.let {
+                                        com.streamvault.app.ui.components.shell.AppProfileShortcut(
+                                            name = activeProfile?.name,
+                                            colorIndex = activeProfile?.colorIndex ?: 0,
+                                            onOpen = { profilePickerOpen = true }
+                                        )
+                                    }
                             ) {
+                                val pickerState = profileState
+                                if (profilePickerOpen && pickerState != null) {
+                                    com.streamvault.app.profiles.ViewerProfilePicker(
+                                        state = pickerState,
+                                        busy = profileBusy,
+                                        error = profileError,
+                                        onPick = { profile ->
+                                            if (profile.isActive || profile.id == 0L) {
+                                                profilePickerOpen = false
+                                            } else {
+                                                viewerProfilesViewModel.switchTo(profile.id) { profilePickerOpen = false }
+                                            }
+                                        },
+                                        onAdd = viewerProfilesViewModel::add,
+                                        onRename = { profile, name, done -> viewerProfilesViewModel.rename(profile.id, name, done) },
+                                        onDelete = { profile, done -> viewerProfilesViewModel.delete(profile.id, done) },
+                                        onClearError = viewerProfilesViewModel::clearError,
+                                        onClose = {
+                                            viewerProfilesViewModel.clearError()
+                                            profilePickerOpen = false
+                                        }
+                                    )
+                                }
                                 AppNavigation(
                                     coordinator = appNavigationCoordinator,
                                     settingsPlatformHost = settingsPlatformHost,

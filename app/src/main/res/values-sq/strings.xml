@@ -351,4 +351,22 @@
     <string name="nav_sync_done">U sinkronizua</string>
     <string name="nav_sync_failed">Sinkronizimi dështoi</string>
     <string name="nav_sync_description">Sinkronizo tani progresin me pajisjet e tjera</string>
+    <string name="profiles_who_is_watching">Kush po shikon?</string>
+    <string name="profiles_add">Shto profil</string>
+    <string name="profiles_manage">Menaxho profilet</string>
+    <string name="profiles_done">U krye</string>
+    <string name="profiles_new_title">Profil i ri</string>
+    <string name="profiles_edit_title">Ndrysho profilin</string>
+    <string name="profiles_name">Emri</string>
+    <string name="profiles_save">Ruaj</string>
+    <string name="profiles_cancel">Anulo</string>
+    <string name="profiles_delete">Fshi profilin</string>
+    <string name="profiles_delete_note">Fshirja e profilit fshin edhe progresin, të preferuarat dhe serialet e ndjekura në këtë televizor.</string>
+    <string name="profiles_default_name">Kryesor</string>
+    <string name="profiles_button">Profilet</string>
+    <string name="profiles_switching">Po ndërrohet profili…</string>
+    <string name="profiles_error_name_taken">Ky emër përdoret tashmë.</string>
+    <string name="profiles_error_name_empty">Shkruani një emër.</string>
+    <string name="profiles_error_generic">Diçka shkoi keq. Provoni përsëri.</string>
+    <string name="profiles_hint">Çdo profil ka progresin, të preferuarat dhe serialet e veta. Përdorni të njëjtat emra në televizorët e tjerë për t’i sinkronizuar.</string>
 </resources>

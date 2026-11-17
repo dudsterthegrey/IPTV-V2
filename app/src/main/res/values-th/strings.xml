@@ -351,4 +351,22 @@
     <string name="nav_sync_done">ซิงค์แล้ว</string>
     <string name="nav_sync_failed">ซิงค์ไม่สำเร็จ</string>
     <string name="nav_sync_description">ซิงค์ความคืบหน้าการดูกับอุปกรณ์อื่นของคุณตอนนี้</string>
+    <string name="profiles_who_is_watching">ใครกำลังดู?</string>
+    <string name="profiles_add">เพิ่มโปรไฟล์</string>
+    <string name="profiles_manage">จัดการโปรไฟล์</string>
+    <string name="profiles_done">เสร็จ</string>
+    <string name="profiles_new_title">โปรไฟล์ใหม่</string>
+    <string name="profiles_edit_title">แก้ไขโปรไฟล์</string>
+    <string name="profiles_name">ชื่อ</string>
+    <string name="profiles_save">บันทึก</string>
+    <string name="profiles_cancel">ยกเลิก</string>
+    <string name="profiles_delete">ลบโปรไฟล์</string>
+    <string name="profiles_delete_note">การลบโปรไฟล์นี้จะลบความคืบหน้า รายการโปรด และรายการที่ติดตามบนทีวีเครื่องนี้ด้วย</string>
+    <string name="profiles_default_name">หลัก</string>
+    <string name="profiles_button">โปรไฟล์</string>
+    <string name="profiles_switching">กำลังสลับโปรไฟล์…</string>
+    <string name="profiles_error_name_taken">ชื่อนี้ถูกใช้แล้ว</string>
+    <string name="profiles_error_name_empty">ใส่ชื่อ</string>
+    <string name="profiles_error_generic">เกิดข้อผิดพลาด ลองอีกครั้ง</string>
+    <string name="profiles_hint">แต่ละโปรไฟล์มีความคืบหน้า รายการโปรด และรายการที่ติดตามของตัวเอง ใช้ชื่อเดียวกันบนทีวีเครื่องอื่นเพื่อซิงค์</string>
 </resources>

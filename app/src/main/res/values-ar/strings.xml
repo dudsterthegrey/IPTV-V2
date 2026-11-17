@@ -300,4 +300,22 @@
     <string name="nav_sync_done">تمت المزامنة</string>
     <string name="nav_sync_failed">فشلت المزامنة</string>
     <string name="nav_sync_description">مزامنة تقدم المشاهدة مع أجهزتك الأخرى الآن</string>
+    <string name="profiles_who_is_watching">من يشاهد؟</string>
+    <string name="profiles_add">إضافة ملف شخصي</string>
+    <string name="profiles_manage">إدارة الملفات الشخصية</string>
+    <string name="profiles_done">تم</string>
+    <string name="profiles_new_title">ملف شخصي جديد</string>
+    <string name="profiles_edit_title">تعديل الملف الشخصي</string>
+    <string name="profiles_name">الاسم</string>
+    <string name="profiles_save">حفظ</string>
+    <string name="profiles_cancel">إلغاء</string>
+    <string name="profiles_delete">حذف الملف الشخصي</string>
+    <string name="profiles_delete_note">يؤدي حذف هذا الملف الشخصي إلى حذف تقدمه ومفضلاته وعروضه المتابَعة على هذا التلفاز.</string>
+    <string name="profiles_default_name">الرئيسي</string>
+    <string name="profiles_button">الملفات الشخصية</string>
+    <string name="profiles_switching">جارٍ تبديل الملف الشخصي…</string>
+    <string name="profiles_error_name_taken">هذا الاسم مستخدم بالفعل.</string>
+    <string name="profiles_error_name_empty">أدخل اسمًا.</string>
+    <string name="profiles_error_generic">حدث خطأ ما. حاول مرة أخرى.</string>
+    <string name="profiles_hint">لكل ملف شخصي تقدمه ومفضلاته وعروضه المتابَعة. استخدم الأسماء نفسها على أجهزة التلفاز الأخرى لمزامنتها.</string>
 </resources>

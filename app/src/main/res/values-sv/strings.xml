@@ -299,4 +299,22 @@
     <string name="nav_sync_done">Synkat</string>
     <string name="nav_sync_failed">Synkningen misslyckades</string>
     <string name="nav_sync_description">Synka tittarförloppet med dina andra enheter nu</string>
+    <string name="profiles_who_is_watching">Vem tittar?</string>
+    <string name="profiles_add">Lägg till profil</string>
+    <string name="profiles_manage">Hantera profiler</string>
+    <string name="profiles_done">Klar</string>
+    <string name="profiles_new_title">Ny profil</string>
+    <string name="profiles_edit_title">Redigera profil</string>
+    <string name="profiles_name">Namn</string>
+    <string name="profiles_save">Spara</string>
+    <string name="profiles_cancel">Avbryt</string>
+    <string name="profiles_delete">Ta bort profil</string>
+    <string name="profiles_delete_note">Om profilen tas bort raderas även dess förlopp, favoriter och följda serier på den här tv:n.</string>
+    <string name="profiles_default_name">Huvud</string>
+    <string name="profiles_button">Profiler</string>
+    <string name="profiles_switching">Byter profil…</string>
+    <string name="profiles_error_name_taken">Namnet används redan.</string>
+    <string name="profiles_error_name_empty">Ange ett namn.</string>
+    <string name="profiles_error_generic">Något gick fel. Försök igen.</string>
+    <string name="profiles_hint">Varje profil har eget förlopp, favoriter och följda serier. Använd samma namn på dina andra tv-apparater för att synka dem.</string>
 </resources>

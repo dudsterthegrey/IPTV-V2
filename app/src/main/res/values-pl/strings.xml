@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Zsynchronizowano</string>
     <string name="nav_sync_failed">Błąd synchronizacji</string>
     <string name="nav_sync_description">Synchronizuj teraz postęp oglądania z innymi urządzeniami</string>
+    <string name="profiles_who_is_watching">Kto ogląda?</string>
+    <string name="profiles_add">Dodaj profil</string>
+    <string name="profiles_manage">Zarządzaj profilami</string>
+    <string name="profiles_done">Gotowe</string>
+    <string name="profiles_new_title">Nowy profil</string>
+    <string name="profiles_edit_title">Edytuj profil</string>
+    <string name="profiles_name">Nazwa</string>
+    <string name="profiles_save">Zapisz</string>
+    <string name="profiles_cancel">Anuluj</string>
+    <string name="profiles_delete">Usuń profil</string>
+    <string name="profiles_delete_note">Usunięcie profilu usuwa też jego postęp, ulubione i śledzone seriale na tym telewizorze.</string>
+    <string name="profiles_default_name">Główny</string>
+    <string name="profiles_button">Profile</string>
+    <string name="profiles_switching">Przełączanie profilu…</string>
+    <string name="profiles_error_name_taken">Ta nazwa jest już używana.</string>
+    <string name="profiles_error_name_empty">Wpisz nazwę.</string>
+    <string name="profiles_error_generic">Coś poszło nie tak. Spróbuj ponownie.</string>
+    <string name="profiles_hint">Każdy profil ma własny postęp, ulubione i śledzone seriale. Użyj tych samych nazw na innych telewizorach, aby je synchronizować.</string>
 </resources>

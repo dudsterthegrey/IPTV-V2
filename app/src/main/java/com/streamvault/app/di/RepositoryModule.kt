@@ -103,6 +103,11 @@ abstract class RepositoryModule {
     abstract fun bindCatalogInsightsRepository(impl: CatalogInsightsRepositoryImpl): CatalogInsightsRepository
 
     @Binds @Singleton
+    abstract fun bindViewerProfileRepository(
+        impl: com.streamvault.data.profile.ViewerProfileRepositoryImpl
+    ): com.streamvault.domain.repository.ViewerProfileRepository
+
+    @Binds @Singleton
     abstract fun bindCloudSyncRepository(impl: com.streamvault.data.cloud.CloudSyncRepositoryImpl): CloudSyncRepository
 
     @Binds @Singleton

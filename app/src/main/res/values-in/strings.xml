@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Tersinkron</string>
     <string name="nav_sync_failed">Gagal sinkron</string>
     <string name="nav_sync_description">Sinkronkan progres tontonan dengan perangkat lain sekarang</string>
+    <string name="profiles_who_is_watching">Siapa yang menonton?</string>
+    <string name="profiles_add">Tambah profil</string>
+    <string name="profiles_manage">Kelola profil</string>
+    <string name="profiles_done">Selesai</string>
+    <string name="profiles_new_title">Profil baru</string>
+    <string name="profiles_edit_title">Edit profil</string>
+    <string name="profiles_name">Nama</string>
+    <string name="profiles_save">Simpan</string>
+    <string name="profiles_cancel">Batal</string>
+    <string name="profiles_delete">Hapus profil</string>
+    <string name="profiles_delete_note">Menghapus profil ini juga menghapus progres, favorit, dan acara yang dilacak di TV ini.</string>
+    <string name="profiles_default_name">Utama</string>
+    <string name="profiles_button">Profil</string>
+    <string name="profiles_switching">Mengganti profil…</string>
+    <string name="profiles_error_name_taken">Nama itu sudah dipakai.</string>
+    <string name="profiles_error_name_empty">Masukkan nama.</string>
+    <string name="profiles_error_generic">Terjadi kesalahan. Coba lagi.</string>
+    <string name="profiles_hint">Setiap profil punya progres, favorit, dan acara yang dilacak sendiri. Gunakan nama yang sama di TV lain untuk menyinkronkannya.</string>
 </resources>

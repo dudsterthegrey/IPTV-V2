@@ -298,4 +298,22 @@
     <string name="nav_sync_done">Đã đồng bộ</string>
     <string name="nav_sync_failed">Đồng bộ thất bại</string>
     <string name="nav_sync_description">Đồng bộ tiến độ xem với các thiết bị khác ngay</string>
+    <string name="profiles_who_is_watching">Ai đang xem?</string>
+    <string name="profiles_add">Thêm hồ sơ</string>
+    <string name="profiles_manage">Quản lý hồ sơ</string>
+    <string name="profiles_done">Xong</string>
+    <string name="profiles_new_title">Hồ sơ mới</string>
+    <string name="profiles_edit_title">Chỉnh sửa hồ sơ</string>
+    <string name="profiles_name">Tên</string>
+    <string name="profiles_save">Lưu</string>
+    <string name="profiles_cancel">Hủy</string>
+    <string name="profiles_delete">Xóa hồ sơ</string>
+    <string name="profiles_delete_note">Xóa hồ sơ này cũng sẽ xóa tiến độ, mục yêu thích và chương trình theo dõi trên TV này.</string>
+    <string name="profiles_default_name">Chính</string>
+    <string name="profiles_button">Hồ sơ</string>
+    <string name="profiles_switching">Đang chuyển hồ sơ…</string>
+    <string name="profiles_error_name_taken">Tên này đã được dùng.</string>
+    <string name="profiles_error_name_empty">Nhập tên.</string>
+    <string name="profiles_error_generic">Đã xảy ra lỗi. Hãy thử lại.</string>
+    <string name="profiles_hint">Mỗi hồ sơ có tiến độ, mục yêu thích và chương trình theo dõi riêng. Dùng cùng tên trên các TV khác để đồng bộ.</string>
 </resources>

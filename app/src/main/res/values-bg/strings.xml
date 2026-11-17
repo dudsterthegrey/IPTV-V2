@@ -354,4 +354,22 @@
     <string name="nav_sync_done">Синхронизирано</string>
     <string name="nav_sync_failed">Неуспешна синхр.</string>
     <string name="nav_sync_description">Синхронизиране на напредъка с другите ви устройства сега</string>
+    <string name="profiles_who_is_watching">Кой гледа?</string>
+    <string name="profiles_add">Добави профил</string>
+    <string name="profiles_manage">Управление на профили</string>
+    <string name="profiles_done">Готово</string>
+    <string name="profiles_new_title">Нов профил</string>
+    <string name="profiles_edit_title">Редактиране на профил</string>
+    <string name="profiles_name">Име</string>
+    <string name="profiles_save">Запази</string>
+    <string name="profiles_cancel">Отказ</string>
+    <string name="profiles_delete">Изтрий профила</string>
+    <string name="profiles_delete_note">Изтриването на профила изтрива и напредъка, любимите и следените му сериали на този телевизор.</string>
+    <string name="profiles_default_name">Основен</string>
+    <string name="profiles_button">Профили</string>
+    <string name="profiles_switching">Смяна на профила…</string>
+    <string name="profiles_error_name_taken">Това име вече се използва.</string>
+    <string name="profiles_error_name_empty">Въведете име.</string>
+    <string name="profiles_error_generic">Нещо се обърка. Опитайте отново.</string>
+    <string name="profiles_hint">Всеки профил има свой напредък, любими и следени сериали. Използвайте същите имена на другите телевизори, за да се синхронизират.</string>
 </resources>
