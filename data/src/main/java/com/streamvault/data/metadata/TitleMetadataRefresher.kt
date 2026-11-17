@@ -155,6 +155,7 @@ class TitleMetadataRefresher @Inject constructor(
             val batch = dao.pendingCountryLookups(providerId, TMDB_BATCH)
             if (batch.isEmpty()) return 0
             val failed = java.util.concurrent.atomic.AtomicInteger()
+            val found = java.util.concurrent.ConcurrentLinkedQueue<Pair<TitleMetadataEntity, String>>()
             try {
                 coroutineScope {
                     batch.map { row ->
@@ -173,7 +174,7 @@ class TitleMetadataRefresher @Inject constructor(
                                 if (details == null) {
                                     failed.incrementAndGet()
                                 } else {
-                                    dao.updateCountries(row.providerId, row.contentType, row.remoteId, encodeCountries(details.countries))
+                                    found += row to encodeCountries(details.countries)
                                 }
                             }
                         }
@@ -183,6 +184,8 @@ class TitleMetadataRefresher @Inject constructor(
                 Log.i(TAG, "TMDB rate limit; pausing country lookups")
                 delay(RATE_LIMIT_BACKOFF_MS)
             }
+            // One write per batch: every write makes open screens (Home's filters) query again.
+            if (found.isNotEmpty()) dao.updateCountriesBatch(found.toList())
             processed += batch.size
             // Network trouble: stop rather than retry the same titles in a loop.
             if (failed.get() == batch.size) break

@@ -3,16 +3,24 @@ package com.streamvault.data.search
 import com.streamvault.data.local.dao.SearchDao
 import com.streamvault.data.local.dao.SearchHitEntity
 import com.streamvault.data.local.dao.SearchTitleRow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.coroutineContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
  * Tokenized titles of one provider's catalog, kept in memory for the typo-tolerant search pass.
- * Rebuilt at most every [MAX_AGE_MS] so catalog refreshes show up.
+ * Rebuilt at most every [MAX_AGE_MS] so catalog refreshes show up. The build runs in its own
+ * scope, so a search that stops waiting for it (see SearchRepositoryImpl) doesn't throw the work
+ * away: the next search finds it ready.
  */
 @Singleton
 class FuzzySearchIndex @Inject constructor(
@@ -28,8 +36,11 @@ class FuzzySearchIndex @Inject constructor(
     )
 
     private val mutex = Mutex()
+    private val buildScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var cachedProviderId: Long? = null
     private var cached: ProviderTitles? = null
+    private var building: Deferred<ProviderTitles>? = null
+    private var buildingProviderId: Long? = null
 
     /**
      * Typo-tolerant hits for the sections that found fewer than [minHits] exact hits, best first,
@@ -48,15 +59,21 @@ class FuzzySearchIndex @Inject constructor(
         val queryTokens = FuzzyTitleMatcher.tokenize(query)
         if (queryTokens.none { it.length >= 3 }) return@withContext emptyList()
         val titles = titlesFor(providerId)
+        val context = coroutineContext
         buildList {
             fun section(enabled: Boolean, type: String, sectionRank: Int, entries: List<Entry>) {
                 if (!enabled) return
                 val exact = exactHits.filter { it.contentType == type }
                 if (exact.size >= minHits) return
                 val exactIds = exact.mapTo(HashSet()) { it.contentId }
-                entries.asSequence()
-                    .filter { it.id !in exactIds }
-                    .mapNotNull { entry -> FuzzyTitleMatcher.score(queryTokens, entry.tokens)?.let { entry to it } }
+                val scored = ArrayList<Pair<Entry, Int>>()
+                entries.forEachIndexed { index, entry ->
+                    // Large catalogs take a while on a TV; let a search that gave up stop here.
+                    if (index % CANCEL_CHECK_EVERY == 0) context.ensureActive()
+                    if (entry.id in exactIds) return@forEachIndexed
+                    FuzzyTitleMatcher.score(queryTokens, entry.tokens)?.let { scored += entry to it }
+                }
+                scored
                     .sortedWith(compareBy<Pair<Entry, Int>> { it.second }.thenBy { it.first.title.length })
                     .take((maxPerSection - exact.size).coerceAtLeast(0))
                     .forEach { (entry, score) ->
@@ -94,22 +111,33 @@ class FuzzySearchIndex @Inject constructor(
         return (if (trailingYear) words.dropLast(1) else words).joinToString(" ")
     }
 
-    private suspend fun titlesFor(providerId: Long): ProviderTitles = mutex.withLock {
-        val current = cached
-        if (current != null && cachedProviderId == providerId &&
-            System.currentTimeMillis() - current.builtAt < MAX_AGE_MS
-        ) {
-            return current
+    private suspend fun titlesFor(providerId: Long): ProviderTitles {
+        val job = mutex.withLock {
+            val current = cached
+            if (current != null && cachedProviderId == providerId &&
+                System.currentTimeMillis() - current.builtAt < MAX_AGE_MS
+            ) {
+                return current
+            }
+            building?.takeIf { buildingProviderId == providerId && it.isActive }
+                ?: buildScope.async {
+                    val built = ProviderTitles(
+                        builtAt = System.currentTimeMillis(),
+                        channels = searchDao.channelTitles(providerId).toEntries(),
+                        movies = searchDao.movieTitles(providerId).toEntries(),
+                        series = searchDao.seriesTitles(providerId).toEntries()
+                    )
+                    mutex.withLock {
+                        cachedProviderId = providerId
+                        cached = built
+                    }
+                    built
+                }.also {
+                    building = it
+                    buildingProviderId = providerId
+                }
         }
-        val built = ProviderTitles(
-            builtAt = System.currentTimeMillis(),
-            channels = searchDao.channelTitles(providerId).toEntries(),
-            movies = searchDao.movieTitles(providerId).toEntries(),
-            series = searchDao.seriesTitles(providerId).toEntries()
-        )
-        cachedProviderId = providerId
-        cached = built
-        built
+        return job.await()
     }
 
     private fun List<SearchTitleRow>.toEntries(): List<Entry> =
@@ -118,6 +146,7 @@ class FuzzySearchIndex @Inject constructor(
     private companion object {
         const val MAX_AGE_MS = 15 * 60 * 1000L
         const val MIN_EXACT_HITS = 8
+        const val CANCEL_CHECK_EVERY = 2_000
         // Exact hits use match ranks 0..2; typo matches always come after them.
         const val FUZZY_RANK_BASE = 100
         val QUALITY_TOKENS = setOf("4k", "uhd", "fhd", "hd", "sd", "hdr", "1080p", "720p", "2160p")

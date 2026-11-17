@@ -335,15 +335,20 @@ class SearchRepositoryImpl @Inject constructor(
         includeSeries: Boolean,
         maxResultsPerSection: Int
     ): List<SearchHitEntity> = try {
-        fuzzySearchIndex.extraHits(
-            providerId = providerId,
-            query = query,
-            exactHits = exactHits,
-            includeLive = includeLive,
-            includeMovies = includeMovies,
-            includeSeries = includeSeries,
-            maxPerSection = maxResultsPerSection
-        )
+        // Typo matches are extras: past the budget, show the exact matches rather than wait.
+        kotlinx.coroutines.withTimeoutOrNull(TYPO_TOLERANT_BUDGET_MS) {
+            fuzzySearchIndex.extraHits(
+                providerId = providerId,
+                query = query,
+                exactHits = exactHits,
+                includeLive = includeLive,
+                includeMovies = includeMovies,
+                includeSeries = includeSeries,
+                maxPerSection = maxResultsPerSection
+            )
+        } ?: emptyList<SearchHitEntity>().also {
+            Log.i(TAG, "Typo-tolerant search skipped (over ${TYPO_TOLERANT_BUDGET_MS} ms): provider=$providerId")
+        }
     } catch (cancelled: kotlinx.coroutines.CancellationException) {
         throw cancelled
     } catch (error: Exception) {
@@ -481,6 +486,7 @@ class SearchRepositoryImpl @Inject constructor(
 
     private companion object {
         const val TAG = "SearchRepository"
+        const val TYPO_TOLERANT_BUDGET_MS = 1_500L
         const val LIVE_TYPE = "LIVE"
         const val MOVIE_TYPE = "MOVIE"
         const val SERIES_TYPE = "SERIES"

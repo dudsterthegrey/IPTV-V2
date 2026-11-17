@@ -129,7 +129,7 @@ class SearchContentTest {
         val useCase = SearchContent(
             searchRepository = FakeSearchRepository(
                 searchContentFlow = flow {
-                    delay(3_000L)
+                    delay(7_000L)
                     emit(SearchRepositoryResult(movies = listOf(Movie(id = 2L, name = "Late Movie"))))
                 }
             ),

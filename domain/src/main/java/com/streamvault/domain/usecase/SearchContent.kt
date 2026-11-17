@@ -40,7 +40,8 @@ class SearchContent @Inject constructor(
     private val providerSyncStateReader: ProviderSyncStateReader
 ) {
     private companion object {
-        const val SEARCH_RESPONSE_TIMEOUT_MS = 2_500L
+        // Generous for slow TV boxes; the typo-tolerant pass has its own, shorter budget.
+        const val SEARCH_RESPONSE_TIMEOUT_MS = 6_000L
     }
 
     private val logger = Logger.getLogger("SearchContent")

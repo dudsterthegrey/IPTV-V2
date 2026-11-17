@@ -15,6 +15,7 @@ import com.streamvault.domain.model.CatalogShelfFilterOptions
 import androidx.sqlite.db.SimpleSQLiteQuery
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.debounce
 import com.streamvault.domain.model.Movie
 import com.streamvault.domain.model.Series
 import com.streamvault.domain.repository.CatalogInsightsRepository
@@ -186,11 +187,13 @@ class CatalogInsightsRepositoryImpl @Inject constructor(
         return SimpleSQLiteQuery(sql.toString(), args.toTypedArray())
     }
 
+    @OptIn(kotlinx.coroutines.FlowPreview::class)
     override fun observeShelfFilterOptions(providerId: Long, isSeries: Boolean): Flow<CatalogShelfFilterOptions> {
         val type = if (isSeries) "SERIES" else "MOVIE"
+        // While the metadata worker is filling titles in, these change often; settle first.
         return combine(
-            observeGenreCounts(providerId, isSeries),
-            titleMetadataDao.observeCountryLists(providerId, type)
+            observeGenreCounts(providerId, isSeries).debounce(OPTIONS_SETTLE_MS),
+            titleMetadataDao.observeCountryLists(providerId, type).debounce(OPTIONS_SETTLE_MS)
         ) { genres, countryLists ->
             val counts = HashMap<String, Int>()
             countryLists.forEach { stored ->
@@ -223,6 +226,7 @@ class CatalogInsightsRepositoryImpl @Inject constructor(
         const val PREFS_NAME = "catalog_insights"
         const val KEY_COUNTRY = "top_ten_country"
         const val KEY_RECENT_MOVIES_FILTER = "recent_movies_filter"
+        const val OPTIONS_SETTLE_MS = 2_000L
         const val KEY_RECENT_SERIES_FILTER = "recent_series_filter"
         const val TOP_TEN = 10
         const val DAY_MS = 24L * 60 * 60 * 1000

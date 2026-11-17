@@ -166,6 +166,11 @@ interface TitleMetadataDao {
     @Query("UPDATE title_metadata SET countries = :countries WHERE provider_id = :providerId AND content_type = :contentType AND remote_id = :remoteId")
     suspend fun updateCountries(providerId: Long, contentType: String, remoteId: Long, countries: String)
 
+    @Transaction
+    suspend fun updateCountriesBatch(rows: List<Pair<TitleMetadataEntity, String>>) {
+        rows.forEach { (row, countries) -> updateCountries(row.providerId, row.contentType, row.remoteId, countries) }
+    }
+
     @Query("SELECT countries FROM title_metadata WHERE provider_id = :providerId AND content_type = :contentType AND countries IS NOT NULL AND countries != ''")
     fun observeCountryLists(providerId: Long, contentType: String): Flow<List<String>>
 
