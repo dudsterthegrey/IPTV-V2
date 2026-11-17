@@ -3,10 +3,17 @@ package com.streamvault.feature.catalog.presentation.dashboard
 import com.streamvault.domain.model.AppHomeDashboardShelf
 
 internal fun resolveVisibleDashboardShelves(
-    uiState: DashboardUiState
+    uiState: DashboardUiState,
+    keepRecentMovies: Boolean = false,
+    keepRecentSeries: Boolean = false
 ): List<AppHomeDashboardShelf> = AppHomeDashboardShelf
     .normalizeForStorage(uiState.homeDashboardShelves)
-    .filter(uiState::hasContentFor)
+    .filter { shelf ->
+        // A filtered shelf stays, even when nothing matches, so its filters can be changed back.
+        uiState.hasContentFor(shelf) ||
+            (shelf == AppHomeDashboardShelf.RECENT_MOVIES && keepRecentMovies) ||
+            (shelf == AppHomeDashboardShelf.RECENT_SERIES && keepRecentSeries)
+    }
 
 internal fun DashboardUiState.hasContentFor(shelf: AppHomeDashboardShelf): Boolean = when (shelf) {
     AppHomeDashboardShelf.FAVORITE_CHANNELS -> favoriteChannels.isNotEmpty()

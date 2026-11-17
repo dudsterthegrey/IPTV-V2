@@ -440,4 +440,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Natal</string>
     <string name="dashboard_top_ten_none">Tidak ada judul Top 10 negara ini di katalog penyedia Anda. Coba negara lain.</string>
+    <string name="shelf_filter_genre">Genre</string>
+    <string name="shelf_filter_rating">Rating</string>
+    <string name="shelf_filter_country">Negara</string>
+    <string name="shelf_filter_year">Tahun</string>
+    <string name="shelf_filter_any">Semua</string>
+    <string name="shelf_filter_clear">Hapus filter</string>
+    <string name="shelf_filter_done">Selesai</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Belum ada yang cocok dengan filter ini.</string>
+    <string name="shelf_filter_countries_pending">Negara muncul saat judul dicocokkan secara online. Ini bisa memakan waktu setelah pembaruan.</string>
+    <string name="shelf_filter_year_this">Tahun ini</string>
+    <string name="shelf_filter_year_last_3">3 tahun terakhir</string>
+    <string name="shelf_filter_year_last_10">10 tahun terakhir</string>
+    <string name="shelf_filter_year_older">Sebelum 1990</string>
 </resources>

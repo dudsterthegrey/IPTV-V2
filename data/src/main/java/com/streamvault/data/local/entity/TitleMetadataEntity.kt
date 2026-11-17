@@ -36,5 +36,7 @@ data class TitleMetadataEntity(
     @ColumnInfo(name = "imdb_rating") val imdbRating: Double? = null,
     @ColumnInfo(name = "imdb_votes", defaultValue = "0") val imdbVotes: Int = 0,
     /** When TMDB was asked about this title; 0 = not yet. A failed match is still "asked". */
-    @ColumnInfo(name = "tmdb_checked_at", defaultValue = "0") val tmdbCheckedAt: Long = 0L
+    @ColumnInfo(name = "tmdb_checked_at", defaultValue = "0") val tmdbCheckedAt: Long = 0L,
+    /** TMDB's countries as "|US|GB|"; null until TMDB has been asked, "" when it lists none. */
+    val countries: String? = null
 )

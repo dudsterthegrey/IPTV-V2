@@ -426,4 +426,19 @@
     <string name="genre_western">وسترن</string>
     <string name="genre_christmas">کریسمس</string>
     <string name="dashboard_top_ten_none">هیچ‌کدام از ۱۰ عنوان برتر این کشور در فهرست ارائه‌دهنده شما نیست. کشور دیگری را امتحان کنید.</string>
+    <string name="shelf_filter_genre">ژانر</string>
+    <string name="shelf_filter_rating">امتیاز</string>
+    <string name="shelf_filter_country">کشور</string>
+    <string name="shelf_filter_year">سال</string>
+    <string name="shelf_filter_any">همه</string>
+    <string name="shelf_filter_clear">پاک کردن فیلترها</string>
+    <string name="shelf_filter_done">تمام</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">هنوز چیزی با این فیلترها مطابقت ندارد.</string>
+    <string name="shelf_filter_countries_pending">کشورها با تطبیق آنلاین عنوان‌ها نمایش داده می‌شوند. پس از به‌روزرسانی ممکن است کمی طول بکشد.</string>
+    <string name="shelf_filter_year_this">امسال</string>
+    <string name="shelf_filter_year_last_3">۳ سال اخیر</string>
+    <string name="shelf_filter_year_last_10">۱۰ سال اخیر</string>
+    <string name="shelf_filter_year_older">پیش از ۱۹۹۰</string>
 </resources>

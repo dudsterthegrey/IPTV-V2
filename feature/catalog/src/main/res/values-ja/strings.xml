@@ -440,4 +440,19 @@
     <string name="genre_western">西部劇</string>
     <string name="genre_christmas">クリスマス</string>
     <string name="dashboard_top_ten_none">この国のトップ10はプロバイダーのカタログにありません。別の国を選んでください。</string>
+    <string name="shelf_filter_genre">ジャンル</string>
+    <string name="shelf_filter_rating">評価</string>
+    <string name="shelf_filter_country">国</string>
+    <string name="shelf_filter_year">年</string>
+    <string name="shelf_filter_any">すべて</string>
+    <string name="shelf_filter_clear">フィルターをクリア</string>
+    <string name="shelf_filter_done">完了</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">このフィルターに一致する作品はまだありません。</string>
+    <string name="shelf_filter_countries_pending">作品がオンラインで照合されると国が表示されます。更新後はしばらくかかることがあります。</string>
+    <string name="shelf_filter_year_this">今年</string>
+    <string name="shelf_filter_year_last_3">過去3年</string>
+    <string name="shelf_filter_year_last_10">過去10年</string>
+    <string name="shelf_filter_year_older">1990年以前</string>
 </resources>

@@ -61,6 +61,7 @@ import com.streamvault.feature.catalog.presentation.components.ChannelCard
 import com.streamvault.feature.catalog.presentation.components.ContinueWatchingRow
 import com.streamvault.feature.catalog.presentation.components.EpisodeShelfRow
 import com.streamvault.feature.catalog.presentation.components.TopTenRow
+import com.streamvault.feature.catalog.presentation.components.ShelfFilterBar
 import com.streamvault.feature.catalog.presentation.components.toPlaybackHistory
 import com.streamvault.feature.catalog.presentation.components.MovieCard
 import com.streamvault.core.ui.image.rememberCrossfadeImageModel
@@ -111,6 +112,10 @@ fun DashboardScreen(
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val recentMoviesFilter by viewModel.recentMoviesFilter.collectAsStateWithLifecycle()
+    val recentSeriesFilter by viewModel.recentSeriesFilter.collectAsStateWithLifecycle()
+    val recentMoviesFilterOptions by viewModel.recentMoviesFilterOptions.collectAsStateWithLifecycle()
+    val recentSeriesFilterOptions by viewModel.recentSeriesFilterOptions.collectAsStateWithLifecycle()
     val recordingChannelIds by viewModel.recordingChannelIds.collectAsStateWithLifecycle()
     val scheduledChannelIds by viewModel.scheduledChannelIds.collectAsStateWithLifecycle()
     val nowMs by CatalogChannelProgressTicker.nowMs.collectAsStateWithLifecycle()
@@ -142,7 +147,7 @@ fun DashboardScreen(
                 )
                 return@scaffold
             }
-            val orderedSections = rememberDashboardSections(uiState)
+            val orderedSections = rememberDashboardSections(uiState, recentMoviesFilter.isActive, recentSeriesFilter.isActive)
             val onContinueWatchingItemClick: (PlaybackHistory) -> Unit = { history ->
                 val rawSeriesId = history.seriesId ?: history.contentId
                 // An episode card resumes that episode directly; only a whole-series entry opens the
@@ -276,7 +281,15 @@ fun DashboardScreen(
                         title = stringResource(R.string.dashboard_recent_movies),
                         items = uiState.recentMovies,
                         keySelector = { it.id },
-                        onSeeAll = { onDestinationRequested(AppDestination.Movies) }
+                        onSeeAll = { onDestinationRequested(AppDestination.Movies) },
+                        belowHeader = {
+                            ShelfFilterBar(
+                                filter = recentMoviesFilter,
+                                options = recentMoviesFilterOptions,
+                                onFilterChange = { viewModel.setRecentShelfFilter(isSeries = false, filter = it) }
+                            )
+                        },
+                        emptyMessage = stringResource(R.string.shelf_filter_none)
                     ) { movie ->
                         MovieCard(
                             movie = movie,
@@ -288,7 +301,15 @@ fun DashboardScreen(
                         title = stringResource(R.string.dashboard_recent_series),
                         items = uiState.recentSeries,
                         keySelector = { it.id },
-                        onSeeAll = { onDestinationRequested(AppDestination.Series) }
+                        onSeeAll = { onDestinationRequested(AppDestination.Series) },
+                        belowHeader = {
+                            ShelfFilterBar(
+                                filter = recentSeriesFilter,
+                                options = recentSeriesFilterOptions,
+                                onFilterChange = { viewModel.setRecentShelfFilter(isSeries = true, filter = it) }
+                            )
+                        },
+                        emptyMessage = stringResource(R.string.shelf_filter_none)
                     ) { series ->
                         SeriesCard(
                             series = series,
@@ -993,9 +1014,13 @@ private fun PinnedCategoriesSection(
 
 @Composable
 private fun rememberDashboardSections(
-    uiState: DashboardUiState
+    uiState: DashboardUiState,
+    keepRecentMovies: Boolean,
+    keepRecentSeries: Boolean
 ): List<AppHomeDashboardShelf> {
     return remember(
+        keepRecentMovies,
+        keepRecentSeries,
         uiState.homeDashboardShelves,
         uiState.liveShortcuts,
         uiState.favoriteChannels,
@@ -1018,7 +1043,7 @@ private fun rememberDashboardSections(
         uiState.pinnedMovieCategories,
         uiState.pinnedSeriesCategories
     ) {
-        resolveVisibleDashboardShelves(uiState)
+        resolveVisibleDashboardShelves(uiState, keepRecentMovies, keepRecentSeries)
     }
 }
 

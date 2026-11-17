@@ -252,6 +252,13 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
       Google and leaves its Google token at `pairings/{code}`; the TV polls that document every 2 s
       for 5 minutes, signs in with `accounts:signInWithIdp`, then deletes it. The phone page is in
       English only.
+- [ ] **Home shelf filters** (2.1.5): Recently Added Movies and Recently Updated Series have
+      Genre, Rating, Country and Year chips (`CatalogShelfFilterBar.kt`). Genres and countries
+      toggle several at a time; changes apply and are saved at once (per shelf, in
+      `catalog_insights` prefs). Countries come from TMDB (`title_metadata.countries`, migration
+      93->94) in the same request that already fetched the IMDb id; titles matched before 2.1.5
+      are filled in by the metadata worker. A filtered shelf stays visible with a message when
+      nothing matches.
 - [ ] **Profiles per provider** (2.1.4): "Who's watching?" (`app/profiles/ViewerProfilePicker.kt`)
       at app start when the active provider has 2+ profiles, and from the profile button in the top
       bar. Each profile has its own progress and watched marks, favorites and custom groups, tracked

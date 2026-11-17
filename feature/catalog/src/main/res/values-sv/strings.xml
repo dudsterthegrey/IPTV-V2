@@ -440,4 +440,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Jul</string>
     <string name="dashboard_top_ten_none">Ingen av landets topp 10 finns hos din leverantör. Prova ett annat land.</string>
+    <string name="shelf_filter_genre">Genre</string>
+    <string name="shelf_filter_rating">Betyg</string>
+    <string name="shelf_filter_country">Land</string>
+    <string name="shelf_filter_year">År</string>
+    <string name="shelf_filter_any">Alla</string>
+    <string name="shelf_filter_clear">Rensa filter</string>
+    <string name="shelf_filter_done">Klar</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Inget matchar de här filtren än.</string>
+    <string name="shelf_filter_countries_pending">Länder visas när titlar matchas online. Det kan ta en stund efter en uppdatering.</string>
+    <string name="shelf_filter_year_this">I år</string>
+    <string name="shelf_filter_year_last_3">Senaste 3 åren</string>
+    <string name="shelf_filter_year_last_10">Senaste 10 åren</string>
+    <string name="shelf_filter_year_older">Före 1990</string>
 </resources>

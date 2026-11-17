@@ -440,4 +440,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Noel</string>
     <string name="dashboard_top_ten_none">Bu ülkenin ilk 10 listesindekilerin hiçbiri sağlayıcınızda yok. Başka bir ülke deneyin.</string>
+    <string name="shelf_filter_genre">Tür</string>
+    <string name="shelf_filter_rating">Puan</string>
+    <string name="shelf_filter_country">Ülke</string>
+    <string name="shelf_filter_year">Yıl</string>
+    <string name="shelf_filter_any">Tümü</string>
+    <string name="shelf_filter_clear">Filtreleri temizle</string>
+    <string name="shelf_filter_done">Bitti</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Henüz bu filtrelerle eşleşen bir şey yok.</string>
+    <string name="shelf_filter_countries_pending">Ülkeler, başlıklar çevrimiçi eşleştikçe görünür. Güncellemeden sonra biraz sürebilir.</string>
+    <string name="shelf_filter_year_this">Bu yıl</string>
+    <string name="shelf_filter_year_last_3">Son 3 yıl</string>
+    <string name="shelf_filter_year_last_10">Son 10 yıl</string>
+    <string name="shelf_filter_year_older">1990 öncesi</string>
 </resources>

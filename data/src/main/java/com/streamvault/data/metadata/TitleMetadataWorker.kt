@@ -53,6 +53,11 @@ class TitleMetadataWorker(
                     maxTitles = TITLES_PER_RUN,
                     shouldPause = { AutomaticSyncActivity.hasPlayback || isStopped }
                 )
+                pending += refresher.lookUpCountries(
+                    providerId = providerId,
+                    maxTitles = TITLES_PER_RUN,
+                    shouldPause = { AutomaticSyncActivity.hasPlayback || isStopped }
+                )
             }
             refresher.refreshImdbRatings(providerIds)
             if (pending > 0) enqueueContinuation(applicationContext)

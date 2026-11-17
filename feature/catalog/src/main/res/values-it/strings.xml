@@ -440,4 +440,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Natale</string>
     <string name="dashboard_top_ten_none">Nessun titolo della Top 10 di questo paese è nel catalogo del tuo provider. Prova un altro paese.</string>
+    <string name="shelf_filter_genre">Genere</string>
+    <string name="shelf_filter_rating">Valutazione</string>
+    <string name="shelf_filter_country">Paese</string>
+    <string name="shelf_filter_year">Anno</string>
+    <string name="shelf_filter_any">Tutti</string>
+    <string name="shelf_filter_clear">Cancella filtri</string>
+    <string name="shelf_filter_done">Fine</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Ancora nulla corrisponde a questi filtri.</string>
+    <string name="shelf_filter_countries_pending">I paesi compaiono man mano che i titoli vengono abbinati online. Dopo un aggiornamento può volerci un po’.</string>
+    <string name="shelf_filter_year_this">Quest\'anno</string>
+    <string name="shelf_filter_year_last_3">Ultimi 3 anni</string>
+    <string name="shelf_filter_year_last_10">Ultimi 10 anni</string>
+    <string name="shelf_filter_year_older">Prima del 1990</string>
 </resources>

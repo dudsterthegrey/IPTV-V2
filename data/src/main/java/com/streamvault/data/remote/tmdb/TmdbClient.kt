@@ -70,6 +70,29 @@ class TmdbClient @Inject constructor(
             ?.first
     }
 
+    /** A TMDB title's IMDb id and countries (ISO 3166-1, e.g. "US"). */
+    data class TmdbDetails(val imdbId: String?, val countries: List<String>)
+
+    /**
+     * IMDb id and countries of a TMDB title in one request. Countries are the origin countries,
+     * or the production countries when TMDB has no origin.
+     */
+    suspend fun details(tmdbId: Long, isSeries: Boolean): TmdbDetails? {
+        val path = if (isSeries) "tv/$tmdbId" else "movie/$tmdbId"
+        val json = getJson(baseUrl(path).addQueryParameter("append_to_response", "external_ids").build()) ?: return null
+        val imdbId = (json.optJSONObject("external_ids")?.optString("imdb_id") ?: json.optString("imdb_id"))
+            ?.takeIf { it.startsWith("tt") }
+        val origin = json.optJSONArray("origin_country")?.let { list -> (0 until list.length()).map { list.optString(it) } }.orEmpty()
+        val production = json.optJSONArray("production_countries")?.let { list ->
+            (0 until list.length()).mapNotNull { list.optJSONObject(it)?.optString("iso_3166_1") }
+        }.orEmpty()
+        val countries = origin.ifEmpty { production }
+            .map { it.trim().uppercase() }
+            .filter { it.length == 2 }
+            .distinct()
+        return TmdbDetails(imdbId, countries)
+    }
+
     /** The IMDb id ("tt0903747") of a TMDB title, if TMDB knows it. */
     suspend fun imdbId(tmdbId: Long, isSeries: Boolean): String? {
         val path = if (isSeries) "tv/$tmdbId/external_ids" else "movie/$tmdbId/external_ids"

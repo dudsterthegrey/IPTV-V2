@@ -440,4 +440,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Karácsony</string>
     <string name="dashboard_top_ten_none">Az ország top 10-es listájából egyik cím sincs meg a szolgáltatónál. Próbáljon másik országot.</string>
+    <string name="shelf_filter_genre">Műfaj</string>
+    <string name="shelf_filter_rating">Értékelés</string>
+    <string name="shelf_filter_country">Ország</string>
+    <string name="shelf_filter_year">Év</string>
+    <string name="shelf_filter_any">Mind</string>
+    <string name="shelf_filter_clear">Szűrők törlése</string>
+    <string name="shelf_filter_done">Kész</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Még semmi sem felel meg ezeknek a szűrőknek.</string>
+    <string name="shelf_filter_countries_pending">Az országok a címek online azonosításával jelennek meg. Frissítés után ez eltarthat egy ideig.</string>
+    <string name="shelf_filter_year_this">Idén</string>
+    <string name="shelf_filter_year_last_3">Az elmúlt 3 év</string>
+    <string name="shelf_filter_year_last_10">Az elmúlt 10 év</string>
+    <string name="shelf_filter_year_older">1990 előtt</string>
 </resources>

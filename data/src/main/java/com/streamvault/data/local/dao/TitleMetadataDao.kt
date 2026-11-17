@@ -5,6 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RawQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 import androidx.room.Transaction
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.streamvault.data.local.entity.MovieEntity
@@ -62,7 +64,7 @@ interface TitleMetadataDao {
         UPDATE title_metadata
         SET tmdb_id = :tmdbId, imdb_id = :imdbId, original_language = :originalLanguage,
             tmdb_genre_ids = :tmdbGenreIds, popularity = :popularity, genres = :genres,
-            tmdb_checked_at = :checkedAt
+            tmdb_checked_at = :checkedAt, countries = :countries
         WHERE provider_id = :providerId AND content_type = :contentType AND remote_id = :remoteId
         """
     )
@@ -76,7 +78,8 @@ interface TitleMetadataDao {
         tmdbGenreIds: String,
         popularity: Double,
         genres: String,
-        checkedAt: Long
+        checkedAt: Long,
+        countries: String?
     )
 
     @Query("SELECT DISTINCT imdb_id FROM title_metadata WHERE imdb_id IS NOT NULL AND imdb_id != ''")
@@ -155,6 +158,23 @@ interface TitleMetadataDao {
 
     @Query("SELECT * FROM series WHERE provider_id = :providerId AND series_id IN (SELECT remote_id FROM title_metadata WHERE provider_id = :providerId AND content_type = 'SERIES' AND tmdb_id = :tmdbId) LIMIT 1")
     suspend fun seriesByTmdbId(providerId: Long, tmdbId: Long): SeriesEntity?
+
+    /** Titles matched on TMDB before countries were kept; filled in a little at a time. */
+    @Query("SELECT * FROM title_metadata WHERE provider_id = :providerId AND tmdb_id IS NOT NULL AND countries IS NULL LIMIT :limit")
+    suspend fun pendingCountryLookups(providerId: Long, limit: Int): List<TitleMetadataEntity>
+
+    @Query("UPDATE title_metadata SET countries = :countries WHERE provider_id = :providerId AND content_type = :contentType AND remote_id = :remoteId")
+    suspend fun updateCountries(providerId: Long, contentType: String, remoteId: Long, countries: String)
+
+    @Query("SELECT countries FROM title_metadata WHERE provider_id = :providerId AND content_type = :contentType AND countries IS NOT NULL AND countries != ''")
+    fun observeCountryLists(providerId: Long, contentType: String): Flow<List<String>>
+
+    /** Home shelf filters; see CatalogInsightsRepositoryImpl for the query. */
+    @RawQuery(observedEntities = [MovieEntity::class, TitleMetadataEntity::class])
+    fun observeFilteredMovies(query: SupportSQLiteQuery): Flow<List<MovieEntity>>
+
+    @RawQuery(observedEntities = [SeriesEntity::class, TitleMetadataEntity::class])
+    fun observeFilteredSeries(query: SupportSQLiteQuery): Flow<List<SeriesEntity>>
 }
 
 /**

@@ -29,6 +29,10 @@ import com.streamvault.domain.repository.TrackedSeriesRepository
 import com.streamvault.domain.repository.EpisodeShelfRepository
 import com.streamvault.domain.repository.CatalogInsightsRepository
 import com.streamvault.domain.repository.TopTenEntry
+import com.streamvault.domain.model.CatalogShelfFilter
+import com.streamvault.domain.model.CatalogShelfFilterOptions
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import com.streamvault.domain.model.EpisodeShelfItem
 import com.streamvault.domain.repository.MovieRepository
 import com.streamvault.domain.repository.PlaybackHistoryRepository
@@ -261,7 +265,13 @@ class DashboardViewModel @Inject constructor(
         combinedProfileId: Long?
     ): Flow<DashboardUiState> {
         val movieShelf = combine(
-            movieRepository.getFreshPreview(provider.id, MOVIE_SHELF_LIMIT),
+            catalogInsightsRepository.observeRecentShelfFilter(isSeries = false).flatMapLatest { filter ->
+                if (filter.isActive) {
+                    catalogInsightsRepository.observeFilteredRecentMovies(provider.id, filter, MOVIE_SHELF_LIMIT)
+                } else {
+                    movieRepository.getFreshPreview(provider.id, MOVIE_SHELF_LIMIT)
+                }
+            },
             preferencesRepository.parentalControlLevel
         ) { movies, level ->
             movies
@@ -285,7 +295,13 @@ class DashboardViewModel @Inject constructor(
                 .take(MOVIE_SHELF_LIMIT)
         }
         val seriesShelf = combine(
-            seriesRepository.getFreshPreview(provider.id, SERIES_SHELF_LIMIT),
+            catalogInsightsRepository.observeRecentShelfFilter(isSeries = true).flatMapLatest { filter ->
+                if (filter.isActive) {
+                    catalogInsightsRepository.observeFilteredRecentSeries(provider.id, filter, SERIES_SHELF_LIMIT)
+                } else {
+                    seriesRepository.getFreshPreview(provider.id, SERIES_SHELF_LIMIT)
+                }
+            },
             preferencesRepository.parentalControlLevel
         ) { series, level ->
             series
@@ -563,6 +579,32 @@ class DashboardViewModel @Inject constructor(
             // its country button) never disappears while loading.
             flow { emit(country to catalogInsightsRepository.topTenToday(providerId, country)) }
         }
+
+    /** Saved filters of the "Recently added" movie and series shelves. */
+    val recentMoviesFilter: StateFlow<CatalogShelfFilter> = catalogInsightsRepository
+        .observeRecentShelfFilter(isSeries = false)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, CatalogShelfFilter())
+    val recentSeriesFilter: StateFlow<CatalogShelfFilter> = catalogInsightsRepository
+        .observeRecentShelfFilter(isSeries = true)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, CatalogShelfFilter())
+
+    /** Genres and countries the active provider's movies / series can be filtered by. */
+    val recentMoviesFilterOptions: StateFlow<CatalogShelfFilterOptions> = shelfFilterOptions(isSeries = false)
+    val recentSeriesFilterOptions: StateFlow<CatalogShelfFilterOptions> = shelfFilterOptions(isSeries = true)
+
+    private fun shelfFilterOptions(isSeries: Boolean): StateFlow<CatalogShelfFilterOptions> =
+        providerRepository.getActiveProvider()
+            .map { it?.id }
+            .distinctUntilChanged()
+            .flatMapLatest { providerId ->
+                if (providerId == null) flowOf(CatalogShelfFilterOptions())
+                else catalogInsightsRepository.observeShelfFilterOptions(providerId, isSeries)
+            }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CatalogShelfFilterOptions())
+
+    fun setRecentShelfFilter(isSeries: Boolean, filter: CatalogShelfFilter) {
+        viewModelScope.launch { catalogInsightsRepository.setRecentShelfFilter(isSeries, filter) }
+    }
 
     /** Picks the Top 10 country; null = worldwide. */
     fun selectTopTenCountry(countryCode: String?) {

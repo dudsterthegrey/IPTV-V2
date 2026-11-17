@@ -440,4 +440,19 @@
     <string name="genre_western">غرب أمريكي</string>
     <string name="genre_christmas">عيد الميلاد</string>
     <string name="dashboard_top_ten_none">لا يتوفر أي من أفضل 10 في هذا البلد لدى مزوّدك. جرّب بلدًا آخر.</string>
+    <string name="shelf_filter_genre">النوع</string>
+    <string name="shelf_filter_rating">التقييم</string>
+    <string name="shelf_filter_country">البلد</string>
+    <string name="shelf_filter_year">السنة</string>
+    <string name="shelf_filter_any">الكل</string>
+    <string name="shelf_filter_clear">مسح عوامل التصفية</string>
+    <string name="shelf_filter_done">تم</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">لا شيء يطابق عوامل التصفية هذه بعد.</string>
+    <string name="shelf_filter_countries_pending">تظهر البلدان عند مطابقة العناوين عبر الإنترنت. قد يستغرق ذلك بعض الوقت بعد التحديث.</string>
+    <string name="shelf_filter_year_this">هذا العام</string>
+    <string name="shelf_filter_year_last_3">آخر 3 سنوات</string>
+    <string name="shelf_filter_year_last_10">آخر 10 سنوات</string>
+    <string name="shelf_filter_year_older">قبل 1990</string>
 </resources>

@@ -440,4 +440,19 @@
     <string name="genre_western">מערבון</string>
     <string name="genre_christmas">חג המולד</string>
     <string name="dashboard_top_ten_none">אף אחד מעשרת המובילים במדינה הזו לא נמצא אצל הספק שלך. נסו מדינה אחרת.</string>
+    <string name="shelf_filter_genre">ז\'אנר</string>
+    <string name="shelf_filter_rating">דירוג</string>
+    <string name="shelf_filter_country">מדינה</string>
+    <string name="shelf_filter_year">שנה</string>
+    <string name="shelf_filter_any">הכול</string>
+    <string name="shelf_filter_clear">ניקוי מסננים</string>
+    <string name="shelf_filter_done">סיום</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">עדיין אין התאמות למסננים האלה.</string>
+    <string name="shelf_filter_countries_pending">המדינות מופיעות ככל שהכותרים מותאמים ברשת. אחרי עדכון זה עשוי לקחת זמן.</string>
+    <string name="shelf_filter_year_this">השנה</string>
+    <string name="shelf_filter_year_last_3">3 השנים האחרונות</string>
+    <string name="shelf_filter_year_last_10">10 השנים האחרונות</string>
+    <string name="shelf_filter_year_older">לפני 1990</string>
 </resources>

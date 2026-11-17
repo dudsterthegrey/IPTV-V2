@@ -440,4 +440,19 @@
     <string name="genre_western">Lännenelokuva</string>
     <string name="genre_christmas">Joulu</string>
     <string name="dashboard_top_ten_none">Tämän maan Top 10 -listan nimikkeitä ei löydy palveluntarjoajaltasi. Kokeile toista maata.</string>
+    <string name="shelf_filter_genre">Lajityyppi</string>
+    <string name="shelf_filter_rating">Arvosana</string>
+    <string name="shelf_filter_country">Maa</string>
+    <string name="shelf_filter_year">Vuosi</string>
+    <string name="shelf_filter_any">Kaikki</string>
+    <string name="shelf_filter_clear">Tyhjennä suodattimet</string>
+    <string name="shelf_filter_done">Valmis</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Mikään ei vielä vastaa näitä suodattimia.</string>
+    <string name="shelf_filter_countries_pending">Maat tulevat näkyviin, kun nimikkeet tunnistetaan verkossa. Päivityksen jälkeen siihen voi mennä hetki.</string>
+    <string name="shelf_filter_year_this">Tänä vuonna</string>
+    <string name="shelf_filter_year_last_3">Viimeiset 3 vuotta</string>
+    <string name="shelf_filter_year_last_10">Viimeiset 10 vuotta</string>
+    <string name="shelf_filter_year_older">Ennen vuotta 1990</string>
 </resources>

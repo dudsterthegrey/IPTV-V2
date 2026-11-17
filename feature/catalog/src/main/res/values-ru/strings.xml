@@ -440,4 +440,19 @@
     <string name="genre_western">Вестерн</string>
     <string name="genre_christmas">Рождество</string>
     <string name="dashboard_top_ten_none">Ни одного тайтла из топ-10 этой страны нет у вашего провайдера. Выберите другую страну.</string>
+    <string name="shelf_filter_genre">Жанр</string>
+    <string name="shelf_filter_rating">Рейтинг</string>
+    <string name="shelf_filter_country">Страна</string>
+    <string name="shelf_filter_year">Год</string>
+    <string name="shelf_filter_any">Все</string>
+    <string name="shelf_filter_clear">Сбросить фильтры</string>
+    <string name="shelf_filter_done">Готово</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Пока ничего не подходит под эти фильтры.</string>
+    <string name="shelf_filter_countries_pending">Страны появляются по мере сопоставления тайтлов онлайн. После обновления это может занять время.</string>
+    <string name="shelf_filter_year_this">В этом году</string>
+    <string name="shelf_filter_year_last_3">Последние 3 года</string>
+    <string name="shelf_filter_year_last_10">Последние 10 лет</string>
+    <string name="shelf_filter_year_older">До 1990 года</string>
 </resources>

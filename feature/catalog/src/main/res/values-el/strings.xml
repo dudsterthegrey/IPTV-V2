@@ -440,4 +440,19 @@
     <string name="genre_western">Γουέστερν</string>
     <string name="genre_christmas">Χριστουγεννιάτικα</string>
     <string name="dashboard_top_ten_none">Κανένας τίτλος από το Top 10 αυτής της χώρας δεν υπάρχει στον πάροχό σας. Δοκιμάστε άλλη χώρα.</string>
+    <string name="shelf_filter_genre">Είδος</string>
+    <string name="shelf_filter_rating">Βαθμολογία</string>
+    <string name="shelf_filter_country">Χώρα</string>
+    <string name="shelf_filter_year">Έτος</string>
+    <string name="shelf_filter_any">Όλα</string>
+    <string name="shelf_filter_clear">Εκκαθάριση φίλτρων</string>
+    <string name="shelf_filter_done">Τέλος</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Τίποτα δεν ταιριάζει ακόμη με αυτά τα φίλτρα.</string>
+    <string name="shelf_filter_countries_pending">Οι χώρες εμφανίζονται καθώς οι τίτλοι αντιστοιχίζονται online. Μετά από ενημέρωση μπορεί να πάρει λίγο χρόνο.</string>
+    <string name="shelf_filter_year_this">Φέτος</string>
+    <string name="shelf_filter_year_last_3">Τελευταία 3 χρόνια</string>
+    <string name="shelf_filter_year_last_10">Τελευταία 10 χρόνια</string>
+    <string name="shelf_filter_year_older">Πριν το 1990</string>
 </resources>

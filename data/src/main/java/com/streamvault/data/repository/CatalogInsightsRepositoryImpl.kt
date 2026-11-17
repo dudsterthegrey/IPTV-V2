@@ -10,6 +10,11 @@ import com.streamvault.data.remote.tmdb.TmdbTitle
 import com.streamvault.data.search.FuzzySearchIndex
 import com.streamvault.domain.model.CatalogGenre
 import com.streamvault.domain.model.CatalogGenreCount
+import com.streamvault.domain.model.CatalogShelfFilter
+import com.streamvault.domain.model.CatalogShelfFilterOptions
+import androidx.sqlite.db.SimpleSQLiteQuery
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import com.streamvault.domain.model.Movie
 import com.streamvault.domain.model.Series
 import com.streamvault.domain.repository.CatalogInsightsRepository
@@ -115,9 +120,110 @@ class CatalogInsightsRepositoryImpl @Inject constructor(
 
     private fun genrePattern(genre: CatalogGenre) = "%|${genre.key}|%"
 
+    override fun observeFilteredRecentMovies(providerId: Long, filter: CatalogShelfFilter, limit: Int): Flow<List<Movie>> {
+        val year = "COALESCE(m.year, CAST(substr(COALESCE(mo.year, mo.release_date), 1, 4) AS INTEGER))"
+        val query = filteredQuery(
+            select = "SELECT mo.* FROM movies mo LEFT JOIN title_metadata m " +
+                "ON m.provider_id = mo.provider_id AND m.content_type = 'MOVIE' AND m.remote_id = mo.stream_id " +
+                "WHERE mo.provider_id = ? AND mo.added_at > 0",
+            rating = "mo.rating",
+            year = year,
+            order = "ORDER BY mo.added_at DESC, mo.name ASC, mo.id ASC",
+            providerId = providerId,
+            filter = filter,
+            limit = limit
+        )
+        return titleMetadataDao.observeFilteredMovies(query).map { rows -> rows.map { it.toDomain() } }
+    }
+
+    override fun observeFilteredRecentSeries(providerId: Long, filter: CatalogShelfFilter, limit: Int): Flow<List<Series>> {
+        val year = "COALESCE(m.year, CAST(substr(se.release_date, 1, 4) AS INTEGER))"
+        val query = filteredQuery(
+            select = "SELECT se.* FROM series se LEFT JOIN title_metadata m " +
+                "ON m.provider_id = se.provider_id AND m.content_type = 'SERIES' AND m.remote_id = se.series_id " +
+                "WHERE se.provider_id = ? AND se.last_modified > 0",
+            rating = "se.rating",
+            year = year,
+            order = "ORDER BY se.last_modified DESC, se.name ASC",
+            providerId = providerId,
+            filter = filter,
+            limit = limit
+        )
+        return titleMetadataDao.observeFilteredSeries(query).map { rows -> rows.map { it.toDomain() } }
+    }
+
+    /** The shelf's own query plus one condition per active filter; genres and countries match any. */
+    private fun filteredQuery(
+        select: String,
+        rating: String,
+        year: String,
+        order: String,
+        providerId: Long,
+        filter: CatalogShelfFilter,
+        limit: Int
+    ): SimpleSQLiteQuery {
+        val sql = StringBuilder(select)
+        val args = mutableListOf<Any>(providerId)
+        if (filter.genres.isNotEmpty()) {
+            sql.append(" AND (").append(filter.genres.joinToString(" OR ") { "m.genres LIKE ?" }).append(")")
+            filter.genres.forEach { args += genrePattern(it) }
+        }
+        if (filter.countries.isNotEmpty()) {
+            sql.append(" AND (").append(filter.countries.joinToString(" OR ") { "m.countries LIKE ?" }).append(")")
+            filter.countries.forEach { args += "%|$it|%" }
+        }
+        if (filter.minRating > 0) {
+            sql.append(" AND $rating >= ?")
+            args += filter.minRating
+        }
+        filter.year.range()?.let { range ->
+            sql.append(" AND $year BETWEEN ? AND ?")
+            args += range.first
+            args += range.last
+        }
+        sql.append(' ').append(order).append(" LIMIT ?")
+        args += limit
+        return SimpleSQLiteQuery(sql.toString(), args.toTypedArray())
+    }
+
+    override fun observeShelfFilterOptions(providerId: Long, isSeries: Boolean): Flow<CatalogShelfFilterOptions> {
+        val type = if (isSeries) "SERIES" else "MOVIE"
+        return combine(
+            observeGenreCounts(providerId, isSeries),
+            titleMetadataDao.observeCountryLists(providerId, type)
+        ) { genres, countryLists ->
+            val counts = HashMap<String, Int>()
+            countryLists.forEach { stored ->
+                stored.split('|').filter { it.length == 2 }.forEach { counts[it] = (counts[it] ?: 0) + 1 }
+            }
+            CatalogShelfFilterOptions(
+                genres = genres.map { it.genre },
+                countries = counts.entries.sortedByDescending { it.value }.map { it.key }
+            )
+        }.distinctUntilChanged()
+    }
+
+    private val shelfFilters: Map<Boolean, MutableStateFlow<CatalogShelfFilter>> by lazy {
+        listOf(false, true).associateWith { isSeries ->
+            MutableStateFlow(CatalogShelfFilter.decode(prefs.getString(shelfFilterKey(isSeries), null)))
+        }
+    }
+
+    override fun observeRecentShelfFilter(isSeries: Boolean): Flow<CatalogShelfFilter> =
+        shelfFilters.getValue(isSeries).asStateFlow()
+
+    override suspend fun setRecentShelfFilter(isSeries: Boolean, filter: CatalogShelfFilter) {
+        prefs.edit().putString(shelfFilterKey(isSeries), filter.encode()).apply()
+        shelfFilters.getValue(isSeries).value = filter
+    }
+
+    private fun shelfFilterKey(isSeries: Boolean) = if (isSeries) KEY_RECENT_SERIES_FILTER else KEY_RECENT_MOVIES_FILTER
+
     private companion object {
         const val PREFS_NAME = "catalog_insights"
         const val KEY_COUNTRY = "top_ten_country"
+        const val KEY_RECENT_MOVIES_FILTER = "recent_movies_filter"
+        const val KEY_RECENT_SERIES_FILTER = "recent_series_filter"
         const val TOP_TEN = 10
         const val DAY_MS = 24L * 60 * 60 * 1000
     }

@@ -440,4 +440,19 @@
     <string name="genre_western">Вестерн</string>
     <string name="genre_christmas">Різдво</string>
     <string name="dashboard_top_ten_none">Жодного з топ-10 цієї країни немає у вашого провайдера. Виберіть іншу країну.</string>
+    <string name="shelf_filter_genre">Жанр</string>
+    <string name="shelf_filter_rating">Рейтинг</string>
+    <string name="shelf_filter_country">Країна</string>
+    <string name="shelf_filter_year">Рік</string>
+    <string name="shelf_filter_any">Усі</string>
+    <string name="shelf_filter_clear">Скинути фільтри</string>
+    <string name="shelf_filter_done">Готово</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Поки нічого не відповідає цим фільтрам.</string>
+    <string name="shelf_filter_countries_pending">Країни зʼявляються, коли назви зіставляються онлайн. Після оновлення це може зайняти час.</string>
+    <string name="shelf_filter_year_this">Цього року</string>
+    <string name="shelf_filter_year_last_3">Останні 3 роки</string>
+    <string name="shelf_filter_year_last_10">Останні 10 років</string>
+    <string name="shelf_filter_year_older">До 1990 року</string>
 </resources>

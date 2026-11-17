@@ -440,4 +440,19 @@
     <string name="genre_western">서부극</string>
     <string name="genre_christmas">크리스마스</string>
     <string name="dashboard_top_ten_none">이 국가의 Top 10 중 제공업체에 있는 작품이 없습니다. 다른 국가를 선택해 보세요.</string>
+    <string name="shelf_filter_genre">장르</string>
+    <string name="shelf_filter_rating">평점</string>
+    <string name="shelf_filter_country">국가</string>
+    <string name="shelf_filter_year">연도</string>
+    <string name="shelf_filter_any">전체</string>
+    <string name="shelf_filter_clear">필터 지우기</string>
+    <string name="shelf_filter_done">완료</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">아직 이 필터에 맞는 항목이 없습니다.</string>
+    <string name="shelf_filter_countries_pending">작품이 온라인에서 매칭되면 국가가 표시됩니다. 업데이트 후에는 시간이 걸릴 수 있습니다.</string>
+    <string name="shelf_filter_year_this">올해</string>
+    <string name="shelf_filter_year_last_3">최근 3년</string>
+    <string name="shelf_filter_year_last_10">최근 10년</string>
+    <string name="shelf_filter_year_older">1990년 이전</string>
 </resources>

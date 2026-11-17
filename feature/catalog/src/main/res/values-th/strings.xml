@@ -426,4 +426,19 @@
     <string name="genre_western">คาวบอย</string>
     <string name="genre_christmas">คริสต์มาส</string>
     <string name="dashboard_top_ten_none">ไม่มีรายการท็อป 10 ของประเทศนี้ในผู้ให้บริการของคุณ ลองเลือกประเทศอื่น</string>
+    <string name="shelf_filter_genre">ประเภท</string>
+    <string name="shelf_filter_rating">คะแนน</string>
+    <string name="shelf_filter_country">ประเทศ</string>
+    <string name="shelf_filter_year">ปี</string>
+    <string name="shelf_filter_any">ทั้งหมด</string>
+    <string name="shelf_filter_clear">ล้างตัวกรอง</string>
+    <string name="shelf_filter_done">เสร็จ</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">ยังไม่มีรายการที่ตรงกับตัวกรองนี้</string>
+    <string name="shelf_filter_countries_pending">ประเทศจะแสดงเมื่อจับคู่ชื่อเรื่องทางออนไลน์ หลังอัปเดตอาจใช้เวลาสักพัก</string>
+    <string name="shelf_filter_year_this">ปีนี้</string>
+    <string name="shelf_filter_year_last_3">3 ปีที่ผ่านมา</string>
+    <string name="shelf_filter_year_last_10">10 ปีที่ผ่านมา</string>
+    <string name="shelf_filter_year_older">ก่อนปี 1990</string>
 </resources>

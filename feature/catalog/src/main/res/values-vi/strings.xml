@@ -440,4 +440,19 @@
     <string name="genre_western">Miền Tây</string>
     <string name="genre_christmas">Giáng sinh</string>
     <string name="dashboard_top_ten_none">Không có nội dung nào trong Top 10 của quốc gia này ở nhà cung cấp. Hãy thử quốc gia khác.</string>
+    <string name="shelf_filter_genre">Thể loại</string>
+    <string name="shelf_filter_rating">Đánh giá</string>
+    <string name="shelf_filter_country">Quốc gia</string>
+    <string name="shelf_filter_year">Năm</string>
+    <string name="shelf_filter_any">Tất cả</string>
+    <string name="shelf_filter_clear">Xóa bộ lọc</string>
+    <string name="shelf_filter_done">Xong</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Chưa có nội dung nào khớp với bộ lọc này.</string>
+    <string name="shelf_filter_countries_pending">Quốc gia sẽ hiện khi tên được khớp trực tuyến. Có thể mất một lúc sau khi cập nhật.</string>
+    <string name="shelf_filter_year_this">Năm nay</string>
+    <string name="shelf_filter_year_last_3">3 năm gần đây</string>
+    <string name="shelf_filter_year_last_10">10 năm gần đây</string>
+    <string name="shelf_filter_year_older">Trước năm 1990</string>
 </resources>

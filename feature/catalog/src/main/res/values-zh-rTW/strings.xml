@@ -426,4 +426,19 @@
     <string name="genre_western">西部</string>
     <string name="genre_christmas">聖誕</string>
     <string name="dashboard_top_ten_none">您的供應商沒有該國家/地區前 10 名的任何內容。請換一個國家/地區。</string>
+    <string name="shelf_filter_genre">類型</string>
+    <string name="shelf_filter_rating">評分</string>
+    <string name="shelf_filter_country">國家/地區</string>
+    <string name="shelf_filter_year">年份</string>
+    <string name="shelf_filter_any">全部</string>
+    <string name="shelf_filter_clear">清除篩選</string>
+    <string name="shelf_filter_done">完成</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">目前沒有符合這些篩選條件的內容。</string>
+    <string name="shelf_filter_countries_pending">線上比對作品後會顯示國家/地區。更新後可能需要一段時間。</string>
+    <string name="shelf_filter_year_this">今年</string>
+    <string name="shelf_filter_year_last_3">近 3 年</string>
+    <string name="shelf_filter_year_last_10">近 10 年</string>
+    <string name="shelf_filter_year_older">1990 年以前</string>
 </resources>

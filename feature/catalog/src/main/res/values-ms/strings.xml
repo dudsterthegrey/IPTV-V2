@@ -426,4 +426,19 @@
     <string name="genre_western">Barat</string>
     <string name="genre_christmas">Krismas</string>
     <string name="dashboard_top_ten_none">Tiada tajuk Top 10 negara ini dalam katalog penyedia anda. Cuba negara lain.</string>
+    <string name="shelf_filter_genre">Genre</string>
+    <string name="shelf_filter_rating">Penarafan</string>
+    <string name="shelf_filter_country">Negara</string>
+    <string name="shelf_filter_year">Tahun</string>
+    <string name="shelf_filter_any">Semua</string>
+    <string name="shelf_filter_clear">Kosongkan penapis</string>
+    <string name="shelf_filter_done">Selesai</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Belum ada yang sepadan dengan penapis ini.</string>
+    <string name="shelf_filter_countries_pending">Negara muncul apabila tajuk dipadankan dalam talian. Ini mungkin mengambil masa selepas kemas kini.</string>
+    <string name="shelf_filter_year_this">Tahun ini</string>
+    <string name="shelf_filter_year_last_3">3 tahun lepas</string>
+    <string name="shelf_filter_year_last_10">10 tahun lepas</string>
+    <string name="shelf_filter_year_older">Sebelum 1990</string>
 </resources>

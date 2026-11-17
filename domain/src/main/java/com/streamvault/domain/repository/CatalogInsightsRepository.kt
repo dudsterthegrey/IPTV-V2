@@ -2,6 +2,8 @@ package com.streamvault.domain.repository
 
 import com.streamvault.domain.model.CatalogGenre
 import com.streamvault.domain.model.CatalogGenreCount
+import com.streamvault.domain.model.CatalogShelfFilter
+import com.streamvault.domain.model.CatalogShelfFilterOptions
 import com.streamvault.domain.model.Movie
 import com.streamvault.domain.model.Series
 import kotlinx.coroutines.flow.Flow
@@ -34,4 +36,18 @@ interface CatalogInsightsRepository {
     val topTenCountry: Flow<String?>
 
     suspend fun setTopTenCountry(countryCode: String?)
+
+    /** Recently added movies matching [filter], newest first. */
+    fun observeFilteredRecentMovies(providerId: Long, filter: CatalogShelfFilter, limit: Int): Flow<List<Movie>>
+
+    /** Recently updated series matching [filter], newest first. */
+    fun observeFilteredRecentSeries(providerId: Long, filter: CatalogShelfFilter, limit: Int): Flow<List<Series>>
+
+    /** Genres and countries the provider's movies or series ([isSeries]) can be filtered by. */
+    fun observeShelfFilterOptions(providerId: Long, isSeries: Boolean): Flow<CatalogShelfFilterOptions>
+
+    /** The saved filter of the recently added movies ([isSeries] false) or series shelf. */
+    fun observeRecentShelfFilter(isSeries: Boolean): Flow<CatalogShelfFilter>
+
+    suspend fun setRecentShelfFilter(isSeries: Boolean, filter: CatalogShelfFilter)
 }

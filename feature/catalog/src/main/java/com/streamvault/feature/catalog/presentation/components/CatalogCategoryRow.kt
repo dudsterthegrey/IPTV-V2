@@ -52,6 +52,8 @@ fun <T : Any> CategoryRow(
     isPinned: Boolean = false,
     keySelector: (T) -> Any,
     contentTypeSelector: ((T) -> Any?)? = null,
+    belowHeader: (@Composable () -> Unit)? = null,
+    emptyMessage: String? = null,
     itemContent: @Composable (T) -> Unit
 ) {
     val resolvedContentTypeSelector: (T) -> Any? = contentTypeSelector ?: { null }
@@ -146,6 +148,18 @@ fun <T : Any> CategoryRow(
             )
         }
 
+        if (belowHeader != null) {
+            androidx.compose.foundation.layout.Box(Modifier.padding(start = 17.dp, end = 17.dp)) { belowHeader() }
+        }
+        if (items.isEmpty() && emptyMessage != null) {
+            Text(
+                text = emptyMessage,
+                style = MaterialTheme.typography.bodyMedium,
+                color = OnSurface.copy(alpha = 0.7f),
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)
+            )
+            return@Column
+        }
         LazyRow(
             modifier = Modifier.focusRestorer(),
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 10.dp),

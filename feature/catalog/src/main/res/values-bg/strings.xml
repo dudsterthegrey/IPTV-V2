@@ -426,4 +426,19 @@
     <string name="genre_western">Уестърн</string>
     <string name="genre_christmas">Коледа</string>
     <string name="dashboard_top_ten_none">Нито едно от топ 10 за тази държава не е в каталога на доставчика. Опитайте друга държава.</string>
+    <string name="shelf_filter_genre">Жанр</string>
+    <string name="shelf_filter_rating">Оценка</string>
+    <string name="shelf_filter_country">Държава</string>
+    <string name="shelf_filter_year">Година</string>
+    <string name="shelf_filter_any">Всички</string>
+    <string name="shelf_filter_clear">Изчисти филтрите</string>
+    <string name="shelf_filter_done">Готово</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Все още няма нищо, отговарящо на филтрите.</string>
+    <string name="shelf_filter_countries_pending">Държавите се появяват, докато заглавията се съпоставят онлайн. След обновяване може да отнеме време.</string>
+    <string name="shelf_filter_year_this">Тази година</string>
+    <string name="shelf_filter_year_last_3">Последните 3 години</string>
+    <string name="shelf_filter_year_last_10">Последните 10 години</string>
+    <string name="shelf_filter_year_older">Преди 1990</string>
 </resources>

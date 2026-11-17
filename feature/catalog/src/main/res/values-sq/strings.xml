@@ -426,4 +426,19 @@
     <string name="genre_western">Uestern</string>
     <string name="genre_christmas">Krishtlindje</string>
     <string name="dashboard_top_ten_none">Asnjë titull nga top 10 i këtij vendi nuk është te ofruesi juaj. Provoni një vend tjetër.</string>
+    <string name="shelf_filter_genre">Zhanri</string>
+    <string name="shelf_filter_rating">Vlerësimi</string>
+    <string name="shelf_filter_country">Vendi</string>
+    <string name="shelf_filter_year">Viti</string>
+    <string name="shelf_filter_any">Të gjitha</string>
+    <string name="shelf_filter_clear">Pastro filtrat</string>
+    <string name="shelf_filter_done">U krye</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Asgjë nuk përputhet ende me këto filtra.</string>
+    <string name="shelf_filter_countries_pending">Vendet shfaqen ndërsa titujt përputhen në internet. Pas një përditësimi mund të zgjasë pak.</string>
+    <string name="shelf_filter_year_this">Këtë vit</string>
+    <string name="shelf_filter_year_last_3">3 vitet e fundit</string>
+    <string name="shelf_filter_year_last_10">10 vitet e fundit</string>
+    <string name="shelf_filter_year_older">Para vitit 1990</string>
 </resources>

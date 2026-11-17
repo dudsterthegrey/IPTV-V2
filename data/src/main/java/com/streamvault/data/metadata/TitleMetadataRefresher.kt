@@ -120,7 +120,7 @@ class TitleMetadataRefresher @Inject constructor(
             // Network trouble: leave it unchecked for the next run.
             return
         }
-        val imdbId = match?.let { runCatching { tmdb.imdbId(it.id, isSeries) }.getOrNull() }
+        val details = match?.let { runCatching { tmdb.details(it.id, isSeries) }.getOrNull() }
         val genreIds = match?.genreIds.orEmpty()
         val genres = GenreClassifier.classify(
             providerGenre = null,
@@ -133,14 +133,65 @@ class TitleMetadataRefresher @Inject constructor(
             contentType = row.contentType,
             remoteId = row.remoteId,
             tmdbId = match?.id,
-            imdbId = imdbId,
+            imdbId = details?.imdbId,
             originalLanguage = match?.originalLanguage,
             tmdbGenreIds = genreIds.joinToString(","),
             popularity = match?.popularity ?: 0.0,
             genres = CatalogGenre.encode(withAnimeRule(genres, match?.originalLanguage)),
-            checkedAt = System.currentTimeMillis()
+            checkedAt = System.currentTimeMillis(),
+            countries = details?.countries?.let(::encodeCountries)
         )
     }
+
+    /**
+     * Fetches countries for up to [maxTitles] titles matched before countries were kept (one
+     * TMDB request each). Returns how many are still waiting.
+     */
+    suspend fun lookUpCountries(providerId: Long, maxTitles: Int, shouldPause: () -> Boolean): Int {
+        if (!tmdb.isConfigured) return 0
+        var processed = 0
+        val gate = Semaphore(TMDB_PARALLEL_LOOKUPS)
+        while (processed < maxTitles && !shouldPause()) {
+            val batch = dao.pendingCountryLookups(providerId, TMDB_BATCH)
+            if (batch.isEmpty()) return 0
+            val failed = java.util.concurrent.atomic.AtomicInteger()
+            try {
+                coroutineScope {
+                    batch.map { row ->
+                        async {
+                            gate.withPermit {
+                                val tmdbId = row.tmdbId ?: return@withPermit
+                                val details = try {
+                                    tmdb.details(tmdbId, row.contentType == SERIES)
+                                } catch (rateLimited: TmdbRateLimitedException) {
+                                    throw rateLimited
+                                } catch (cancelled: CancellationException) {
+                                    throw cancelled
+                                } catch (error: Exception) {
+                                    null
+                                }
+                                if (details == null) {
+                                    failed.incrementAndGet()
+                                } else {
+                                    dao.updateCountries(row.providerId, row.contentType, row.remoteId, encodeCountries(details.countries))
+                                }
+                            }
+                        }
+                    }.awaitAll()
+                }
+            } catch (rateLimited: TmdbRateLimitedException) {
+                Log.i(TAG, "TMDB rate limit; pausing country lookups")
+                delay(RATE_LIMIT_BACKOFF_MS)
+            }
+            processed += batch.size
+            // Network trouble: stop rather than retry the same titles in a loop.
+            if (failed.get() == batch.size) break
+        }
+        return dao.pendingCountryLookups(providerId, 1).size
+    }
+
+    private fun encodeCountries(countries: List<String>): String =
+        if (countries.isEmpty()) "" else countries.joinToString("|", prefix = "|", postfix = "|")
 
     /**
      * Downloads IMDb's ratings (about 8 MB, refreshed weekly or once enough new titles were

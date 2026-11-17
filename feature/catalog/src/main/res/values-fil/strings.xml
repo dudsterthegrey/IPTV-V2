@@ -426,4 +426,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Pasko</string>
     <string name="dashboard_top_ten_none">Wala sa catalog ng provider mo ang alinman sa Top 10 ng bansang ito. Sumubok ng ibang bansa.</string>
+    <string name="shelf_filter_genre">Genre</string>
+    <string name="shelf_filter_rating">Rating</string>
+    <string name="shelf_filter_country">Bansa</string>
+    <string name="shelf_filter_year">Taon</string>
+    <string name="shelf_filter_any">Lahat</string>
+    <string name="shelf_filter_clear">I-clear ang mga filter</string>
+    <string name="shelf_filter_done">Tapos na</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Wala pang tumutugma sa mga filter na ito.</string>
+    <string name="shelf_filter_countries_pending">Lumalabas ang mga bansa habang tinutugma online ang mga title. Maaaring matagalan pagkatapos ng update.</string>
+    <string name="shelf_filter_year_this">Ngayong taon</string>
+    <string name="shelf_filter_year_last_3">Huling 3 taon</string>
+    <string name="shelf_filter_year_last_10">Huling 10 taon</string>
+    <string name="shelf_filter_year_older">Bago ang 1990</string>
 </resources>

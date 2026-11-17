@@ -426,4 +426,19 @@
     <string name="genre_western">Вестерн</string>
     <string name="genre_christmas">Божић</string>
     <string name="dashboard_top_ten_none">Ниједан наслов из топ 10 ове земље није код вашег провајдера. Пробајте другу земљу.</string>
+    <string name="shelf_filter_genre">Жанр</string>
+    <string name="shelf_filter_rating">Оцена</string>
+    <string name="shelf_filter_country">Земља</string>
+    <string name="shelf_filter_year">Година</string>
+    <string name="shelf_filter_any">Све</string>
+    <string name="shelf_filter_clear">Обриши филтере</string>
+    <string name="shelf_filter_done">Готово</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Ништа још не одговара овим филтерима.</string>
+    <string name="shelf_filter_countries_pending">Земље се појављују како се наслови упарују на мрежи. После ажурирања то може потрајати.</string>
+    <string name="shelf_filter_year_this">Ове године</string>
+    <string name="shelf_filter_year_last_3">Последње 3 године</string>
+    <string name="shelf_filter_year_last_10">Последњих 10 година</string>
+    <string name="shelf_filter_year_older">Пре 1990.</string>
 </resources>

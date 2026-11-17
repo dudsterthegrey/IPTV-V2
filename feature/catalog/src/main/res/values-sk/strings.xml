@@ -426,4 +426,19 @@
     <string name="genre_western">Western</string>
     <string name="genre_christmas">Vianoce</string>
     <string name="dashboard_top_ten_none">Žiadny titul z top 10 tejto krajiny nie je v katalógu poskytovateľa. Skúste inú krajinu.</string>
+    <string name="shelf_filter_genre">Žáner</string>
+    <string name="shelf_filter_rating">Hodnotenie</string>
+    <string name="shelf_filter_country">Krajina</string>
+    <string name="shelf_filter_year">Rok</string>
+    <string name="shelf_filter_any">Všetky</string>
+    <string name="shelf_filter_clear">Zrušiť filtre</string>
+    <string name="shelf_filter_done">Hotovo</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Filtrom zatiaľ nič nezodpovedá.</string>
+    <string name="shelf_filter_countries_pending">Krajiny sa zobrazia, keď sa tituly spárujú online. Po aktualizácii to môže chvíľu trvať.</string>
+    <string name="shelf_filter_year_this">Tento rok</string>
+    <string name="shelf_filter_year_last_3">Posledné 3 roky</string>
+    <string name="shelf_filter_year_last_10">Posledných 10 rokov</string>
+    <string name="shelf_filter_year_older">Pred rokom 1990</string>
 </resources>

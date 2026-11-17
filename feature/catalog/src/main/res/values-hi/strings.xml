@@ -426,4 +426,19 @@
     <string name="genre_western">वेस्टर्न</string>
     <string name="genre_christmas">क्रिसमस</string>
     <string name="dashboard_top_ten_none">इस देश के टॉप 10 में से कोई भी आपके प्रदाता के पास नहीं है। कोई और देश चुनें।</string>
+    <string name="shelf_filter_genre">शैली</string>
+    <string name="shelf_filter_rating">रेटिंग</string>
+    <string name="shelf_filter_country">देश</string>
+    <string name="shelf_filter_year">वर्ष</string>
+    <string name="shelf_filter_any">सभी</string>
+    <string name="shelf_filter_clear">फ़िल्टर हटाएं</string>
+    <string name="shelf_filter_done">हो गया</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">अभी इन फ़िल्टर से कुछ मेल नहीं खाता।</string>
+    <string name="shelf_filter_countries_pending">शीर्षक ऑनलाइन मिलान होने पर देश दिखते हैं। अपडेट के बाद इसमें कुछ समय लग सकता है।</string>
+    <string name="shelf_filter_year_this">इस वर्ष</string>
+    <string name="shelf_filter_year_last_3">पिछले 3 वर्ष</string>
+    <string name="shelf_filter_year_last_10">पिछले 10 वर्ष</string>
+    <string name="shelf_filter_year_older">1990 से पहले</string>
 </resources>

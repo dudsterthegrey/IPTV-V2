@@ -440,4 +440,19 @@
     <string name="genre_western">Faroeste</string>
     <string name="genre_christmas">Natal</string>
     <string name="dashboard_top_ten_none">Nenhum título do Top 10 deste país está no seu provedor. Tente outro país.</string>
+    <string name="shelf_filter_genre">Gênero</string>
+    <string name="shelf_filter_rating">Avaliação</string>
+    <string name="shelf_filter_country">País</string>
+    <string name="shelf_filter_year">Ano</string>
+    <string name="shelf_filter_any">Todos</string>
+    <string name="shelf_filter_clear">Limpar filtros</string>
+    <string name="shelf_filter_done">Concluído</string>
+    <string name="shelf_filter_rating_value">%1$d+ ★</string>
+    <string name="shelf_filter_more">%1$s +%2$d</string>
+    <string name="shelf_filter_none">Nada corresponde a esses filtros ainda.</string>
+    <string name="shelf_filter_countries_pending">Os países aparecem conforme os títulos são identificados online. Pode demorar um pouco após uma atualização.</string>
+    <string name="shelf_filter_year_this">Este ano</string>
+    <string name="shelf_filter_year_last_3">Últimos 3 anos</string>
+    <string name="shelf_filter_year_last_10">Últimos 10 anos</string>
+    <string name="shelf_filter_year_older">Antes de 1990</string>
 </resources>
