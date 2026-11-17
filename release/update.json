@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.5",
-  "versionCode": 10,
+  "versionName": "2.1.6",
+  "versionCode": 11,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "a234bbdebd0a2f6cd05ec687078666f209ea6e8038140c9fecc6a006dc6b132b",
-  "releaseNotes": "Home: filter Recently Added Movies and Series by genre, rating, country and year. Your choices are kept.",
-  "publishedAt": "2026-11-16",
+  "sha256": "a4624dc67c23f042b0094c40cb68af87fecc5fbe3921e032f5e26c21ef08a1e5",
+  "releaseNotes": "Fixes search showing no matches on Fire TV and other slower devices.",
+  "publishedAt": "2026-11-17",
   "downloaderCode": "7935478"
 }
