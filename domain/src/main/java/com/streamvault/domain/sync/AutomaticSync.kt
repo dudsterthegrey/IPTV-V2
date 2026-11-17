@@ -102,4 +102,12 @@ object AutomaticSyncActivity {
         players.containsValue(providerId)
     }
     fun stopped(owner: Any) { synchronized(players) { players.remove(owner); mutablePlaybackActive.value = players.isNotEmpty() } }
+
+    /** True while the app is on screen; background work that competes with browsing waits for it. */
+    @Volatile
+    var appOnScreen: Boolean = false
+        private set
+
+    fun appShown() { appOnScreen = true }
+    fun appHidden() { appOnScreen = false }
 }

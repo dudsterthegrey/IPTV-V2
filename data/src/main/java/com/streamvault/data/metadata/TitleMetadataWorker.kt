@@ -53,11 +53,16 @@ class TitleMetadataWorker(
                     maxTitles = TITLES_PER_RUN,
                     shouldPause = { AutomaticSyncActivity.hasPlayback || isStopped }
                 )
-                pending += refresher.lookUpCountries(
-                    providerId = providerId,
-                    maxTitles = TITLES_PER_RUN,
-                    shouldPause = { AutomaticSyncActivity.hasPlayback || isStopped }
-                )
+                // Countries are only for the Home filters, and filling them in for a whole library
+                // slows search on a TV box; do it while the app is off screen. Leaving the app
+                // schedules the next run (see backgroundFill), so this is not counted as pending.
+                if (!AutomaticSyncActivity.appOnScreen) {
+                    refresher.lookUpCountries(
+                        providerId = providerId,
+                        maxTitles = TITLES_PER_RUN,
+                        shouldPause = { AutomaticSyncActivity.hasPlayback || AutomaticSyncActivity.appOnScreen || isStopped }
+                    ).let { left -> if (left > 0 && !AutomaticSyncActivity.appOnScreen) pending += left }
+                }
             }
             refresher.refreshImdbRatings(providerIds)
             if (pending > 0) enqueueContinuation(applicationContext)
@@ -94,6 +99,18 @@ class TitleMetadataWorker(
                 ExistingWorkPolicy.KEEP,
                 OneTimeWorkRequestBuilder<TitleMetadataWorker>()
                     .setInitialDelay(1, TimeUnit.MINUTES)
+                    .setConstraints(networkConstraints)
+                    .build()
+            )
+        }
+
+        /** Called when the app leaves the screen: continue filling in metadata soon. */
+        fun backgroundFill(context: Context) {
+            WorkManager.getInstance(context).enqueueUniqueWork(
+                ONE_SHOT_NAME,
+                ExistingWorkPolicy.APPEND_OR_REPLACE,
+                OneTimeWorkRequestBuilder<TitleMetadataWorker>()
+                    .setInitialDelay(30, TimeUnit.SECONDS)
                     .setConstraints(networkConstraints)
                     .build()
             )

@@ -366,6 +366,19 @@ class MainActivity : ComponentActivity(), CatalogPlatformHost {
         databaseStartupCoordinator.start()
     }
 
+    override fun onStart() {
+        super.onStart()
+        com.streamvault.domain.sync.AutomaticSyncActivity.appShown()
+    }
+
+    override fun onStop() {
+        com.streamvault.domain.sync.AutomaticSyncActivity.appHidden()
+        if (!isChangingConfigurations) {
+            com.streamvault.data.metadata.TitleMetadataWorker.backgroundFill(applicationContext)
+        }
+        super.onStop()
+    }
+
     override fun onResume() {
         super.onResume()
         applyImmersiveSystemUi()
