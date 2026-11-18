@@ -92,7 +92,9 @@ enum class NavigationChrome {
 data class UiDestination(
     val id: String,
     val label: String,
-    val icon: ImageVector
+    val icon: ImageVector,
+    /** Shown as a bare icon at the start of the top bar, ahead of the other tabs. */
+    val iconOnly: Boolean = false
 )
 
 @Composable
@@ -305,7 +307,8 @@ private fun TopNavigationBar(
                     .padding(horizontal = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                destinations.forEach { destination ->
+                // Icon-only shortcuts (Search) come first, just left of Home.
+                destinations.sortedBy { !it.iconOnly }.forEach { destination ->
                     val requester = focusRequesters.getOrPut(destination.id) { FocusRequester() }
                     TopNavigationButton(
                         destination = destination,
@@ -423,13 +426,15 @@ private fun TopNavigationButton(
                 imageVector = destination.icon,
                 contentDescription = destination.label,
                 tint = if (selected) BrowseColors.Brand else BrowseColors.TextSecondary,
-                modifier = Modifier.size(14.dp)
+                modifier = Modifier.size(if (destination.iconOnly) 18.dp else 14.dp)
             )
-            Text(
-                text = destination.label,
-                style = MaterialTheme.typography.labelSmall,
-                color = if (selected) BrowseColors.TextPrimary else BrowseColors.TextSecondary
-            )
+            if (!destination.iconOnly) {
+                Text(
+                    text = destination.label,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = if (selected) BrowseColors.TextPrimary else BrowseColors.TextSecondary
+                )
+            }
         }
     }
 }

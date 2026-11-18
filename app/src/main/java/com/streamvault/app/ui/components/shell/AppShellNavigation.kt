@@ -153,7 +153,8 @@ internal fun rememberAppDestinationItems(
         UiDestination(
             id = item.route,
             label = stringResource(item.labelRes),
-            icon = item.icon
+            icon = item.icon,
+            iconOnly = item.route == Routes.SEARCH
         )
     }
 }
