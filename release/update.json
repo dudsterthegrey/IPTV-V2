@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.7",
-  "versionCode": 12,
+  "versionName": "2.1.8",
+  "versionCode": 13,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "bc3538d14292d6d0fa1a3dc06c8e73fc3c9a97ddd8632c811664d0e94b29a265",
-  "releaseNotes": "Faster search: country details for the Home filters are now filled in only while the app is not on screen.",
-  "publishedAt": "2026-11-17",
+  "sha256": "4a9e4716d51045bbee50503220abcfd7f0c091a297f764e7ff0b523f9d293df6",
+  "releaseNotes": "Search is now one press away: a search icon sits at the start of the top bar, just left of Home.",
+  "publishedAt": "2026-11-18",
   "downloaderCode": "7935478"
 }
