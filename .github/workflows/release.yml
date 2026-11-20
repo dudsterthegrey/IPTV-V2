@@ -1,0 +1,167 @@
+# Builds the signed release APK on GitHub, so updates can be made from any device.
+#
+# On every push to main: if versionCode in app/build.gradle.kts is higher than the one in
+# release/update.json, build the release APK, check it is signed with the app's own key,
+# copy it to release/IPTVPlayer-V2-2.0.0.apk and update release/update.json. Otherwise nothing
+# is built. "Run workflow" (Actions tab) always builds and keeps the APK as a download; it only
+# publishes when the version is new.
+#
+# Needs four repository secrets (Settings > Secrets and variables > Actions):
+#   KEYSTORE_BASE64    the release keystore (keystore/iptv-v2-release.jks), base64-encoded
+#   KEYSTORE_PASSWORD  storePassword from keystore.properties
+#   KEY_ALIAS          keyAlias from keystore.properties
+#   KEY_PASSWORD       keyPassword from keystore.properties
+# See docs/RELEASING.md.
+
+name: Release APK
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "release/**"
+      - "docs/**"
+      - "**/*.md"
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: "Release notes shown in the app's update prompt (optional; defaults to the last commit's title)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  # SHA-256 of the release signing certificate (public, not a secret). A build signed with any
+  # other key would not install over the app people already have, so it is never published.
+  EXPECTED_CERT_SHA256: f16bbba9d1df6f60c393cdb51a876a306ba3096e1aa146980ed037348d037269
+  APK_PATH: release/IPTVPlayer-V2-2.0.0.apk
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Compare version with the published one
+        id: version
+        run: |
+          code=$(grep -oP 'versionCode = \K[0-9]+' app/build.gradle.kts | head -1)
+          name=$(grep -oP 'versionName = "\K[^"]+' app/build.gradle.kts | head -1)
+          published=$(python3 -c 'import json; print(json.load(open("release/update.json"))["versionCode"])')
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          if [ "$code" -gt "$published" ]; then publish=true; else publish=false; fi
+          if [ "$publish" = true ] || [ "${{ github.event_name }}" = workflow_dispatch ]; then build=true; else build=false; fi
+          echo "publish=$publish" >> "$GITHUB_OUTPUT"
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+          echo "Project: $name ($code). Published: $published. Build: $build. Publish: $publish." | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "$build" = false ]; then
+            echo "Nothing to release: raise versionCode and versionName in app/build.gradle.kts to publish an update." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Set up JDK 17
+        if: steps.version.outputs.build == 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        if: steps.version.outputs.build == 'true'
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Restore the signing key
+        if: steps.version.outputs.build == 'true'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          for name in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository secret $name is missing. See docs/RELEASING.md."
+              exit 1
+            fi
+          done
+          mkdir -p keystore
+          printf '%s' "$KEYSTORE_BASE64" | tr -d ' \r\n' | base64 -d > keystore/iptv-v2-release.jks
+          {
+            echo "storeFile=keystore/iptv-v2-release.jks"
+            echo "storePassword=$KEYSTORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > keystore.properties
+
+      - name: Build the release APK
+        if: steps.version.outputs.build == 'true'
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleRelease --console=plain --warning-mode=none
+
+      - name: Check the APK's signature
+        if: steps.version.outputs.build == 'true'
+        run: |
+          apk=$(ls app/build/outputs/apk/release/*.apk | head -1)
+          apksigner=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)apksigner
+          actual=$("$apksigner" verify --print-certs "$apk" | grep -m1 'certificate SHA-256 digest' | awk '{print $NF}')
+          if [ "$actual" != "$EXPECTED_CERT_SHA256" ]; then
+            echo "::error::The APK is signed with a different key ($actual). It would not install as an update, so it was not published."
+            exit 1
+          fi
+          echo "BUILT_APK=$apk" >> "$GITHUB_ENV"
+          echo "Signature matches the app's release key." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the APK as a download
+        if: steps.version.outputs.build == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: IPTVPlayer-V2-${{ steps.version.outputs.name }}
+          path: ${{ env.BUILT_APK }}
+          retention-days: 14
+
+      - name: Publish to release/ and update.json
+        if: steps.version.outputs.publish == 'true'
+        env:
+          NOTES_INPUT: ${{ github.event.inputs.notes }}
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
+        run: |
+          rm -f keystore.properties keystore/iptv-v2-release.jks
+          cp "$BUILT_APK" "$APK_PATH"
+          notes="$NOTES_INPUT"
+          [ -n "$notes" ] || notes=$(git log -1 --format=%s)
+          sha=$(sha256sum "$APK_PATH" | cut -d' ' -f1)
+          NOTES="$notes" SHA="$sha" python3 - <<'EOF'
+          import datetime, json, os
+          path = "release/update.json"
+          data = json.load(open(path, encoding="utf-8"))
+          data.update(
+              versionName=os.environ["VERSION_NAME"],
+              versionCode=int(os.environ["VERSION_CODE"]),
+              sha256=os.environ["SHA"],
+              releaseNotes=os.environ["NOTES"],
+              publishedAt=datetime.date.today().isoformat(),
+          )
+          with open(path, "w", encoding="utf-8", newline="\n") as f:
+              f.write(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add "$APK_PATH" release/update.json
+          git commit -m "Release APK $VERSION_NAME (versionCode $VERSION_CODE) and update manifest"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Published $VERSION_NAME ($VERSION_CODE). Devices will see the update." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove the signing key
+        if: always()
+        run: rm -f keystore.properties keystore/iptv-v2-release.jks
