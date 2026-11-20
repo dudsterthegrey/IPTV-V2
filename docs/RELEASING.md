@@ -30,7 +30,7 @@ repository secret**.
 
 | Secret | Value |
 | --- | --- |
-| `KEYSTORE_BASE64` | The keystore file, base64-encoded (command below) |
+| `KEYSTORE_BASE64` (or `KEYSTORE`) | The keystore file, base64-encoded (command below) |
 | `KEYSTORE_PASSWORD` | `storePassword` from `keystore.properties` |
 | `KEY_ALIAS` | `keyAlias` from `keystore.properties` |
 | `KEY_PASSWORD` | `keyPassword` from `keystore.properties` |
