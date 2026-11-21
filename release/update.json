@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.8",
-  "versionCode": 13,
+  "versionName": "2.1.9",
+  "versionCode": 14,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "4a9e4716d51045bbee50503220abcfd7f0c091a297f764e7ff0b523f9d293df6",
-  "releaseNotes": "Search is now one press away: a search icon sits at the start of the top bar, just left of Home.",
-  "publishedAt": "2026-11-18",
+  "sha256": "2168503fa712685f4d73c9abc19a7e61dcb98e463128c5b5895b6943a81695d1",
+  "releaseNotes": "Fix release publish: mark gradlew executable, autostash before rebase",
+  "publishedAt": "2026-11-21",
   "downloaderCode": "7935478"
 }
