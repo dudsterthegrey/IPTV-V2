@@ -1022,4 +1022,5 @@
     <string name="settings_cloud_sync_qr_error">Hindi masimulan. Ikonekta ang TV sa Wi-Fi o Ethernet at subukan ulit.</string>
     <string name="settings_cloud_sync_google_expired">Nag-expire na ang code. Magpakita ng bago para subukan ulit.</string>
     <string name="settings_cloud_sync_error_google_off">Hindi pa naka-on ang pag-sign in gamit ang Google para sa app na ito.</string>
+    <string name="settings_backup_include_passwords">Isama ang mga password</string>
 </resources>

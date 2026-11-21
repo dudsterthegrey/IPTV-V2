@@ -296,9 +296,13 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - To reproduce a release-only bug on the emulator, build `:app:assembleMinifiedQa`: R8-shrunk
   like release but with the debug app's ID and key, so it installs over the debug build and
   keeps its provider and history. Reinstall the normal debug build afterwards.
-- Updates: raise `versionCode`, build the release, and copy it over
-  `release/IPTVPlayer-V2-2.0.0.apk` (the Downloader code points at that file name; the name
-  stays 2.0.0, Settings › About shows the real version).
+- Updates: raise `versionCode` and `versionName` and push to `main`. GitHub Actions builds the
+  signed release and commits it over `release/IPTVPlayer-V2-2.0.0.apk` plus `update.json`
+  (see `docs/RELEASING.md`). The Downloader code points at that file name; the name stays
+  2.0.0, and Settings › About shows the real version.
+- Logins stay on the device: provider passwords and the sync sign-in token are encrypted with
+  the Android Keystore, and backups (file and Google Drive) leave passwords out unless
+  "Include passwords" is switched on in the export dialog.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port

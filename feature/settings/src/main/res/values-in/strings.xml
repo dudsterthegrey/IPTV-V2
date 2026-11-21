@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Tidak dapat memulai. Hubungkan TV ke Wi-Fi atau Ethernet lalu coba lagi.</string>
     <string name="settings_cloud_sync_google_expired">Kode kedaluwarsa. Tampilkan yang baru untuk mencoba lagi.</string>
     <string name="settings_cloud_sync_error_google_off">Masuk dengan Google belum diaktifkan untuk aplikasi ini.</string>
+    <string name="settings_backup_include_passwords">Sertakan kata sandi</string>
 </resources>

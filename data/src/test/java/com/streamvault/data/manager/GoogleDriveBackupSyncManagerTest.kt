@@ -94,7 +94,7 @@ class GoogleDriveBackupSyncManagerTest {
             ProviderCredentials("https://example.com", "alice", "secret")
         )
 
-        val result = manager.pushBackup(credentials)
+        val result = manager.pushBackup(credentials, com.streamvault.domain.manager.BackupExportPlan(exportPasswords = true))
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         val upload = server.takeRequest()
@@ -104,6 +104,18 @@ class GoogleDriveBackupSyncManagerTest {
         assertThat(uploadBody).contains("streamvault-drive-bundle-v2")
         assertThat(uploadBody).contains("backupJson")
         assertThat(uploadBody).contains("alice")
+    }
+
+    @Test
+    fun pushBackup_leavesPasswordsOutUnlessAskedFor() = runTest {
+        server.enqueue(MockResponse().setResponseCode(200).setBody("{}"))
+        enqueueFileList(emptyList())
+
+        val result = manager().pushBackup(listOf(ProviderCredentials("https://example.com", "alice", "drive-secret")))
+
+        assertThat(result).isInstanceOf(Result.Success::class.java)
+        val uploadBody = server.takeRequest().body.readUtf8()
+        assertThat(uploadBody).doesNotContain("drive-secret")
     }
 
     @Test
@@ -595,7 +607,8 @@ class GoogleDriveBackupSyncManagerTest {
         enqueueFileList(emptyList()) // Retention pass.
         val driveManager = manager()
         val credentials = listOf(ProviderCredentials("https://example.com", "user", "secret"))
-        assertThat(driveManager.pushBackup(credentials)).isInstanceOf(Result.Success::class.java)
+        assertThat(driveManager.pushBackup(credentials, com.streamvault.domain.manager.BackupExportPlan(exportPasswords = true)))
+            .isInstanceOf(Result.Success::class.java)
         val upload = server.takeRequest()
         assertThat(upload.getHeader("Authorization")).isEqualTo("Bearer test-token")
         val boundary = requireNotNull(upload.getHeader("Content-Type")).substringAfter("boundary=")

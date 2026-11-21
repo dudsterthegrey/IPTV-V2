@@ -181,7 +181,7 @@ class SettingsDriveBackupActions(
             // Read credentials before starting the export so the Drive manager
             // can commit one matching backup+credentials bundle atomically.
             val credentials = runCatching {
-                if (plan.exportProviders) providerRepository.getAllProviderCredentials() else emptyList()
+                if (plan.exportProviders && plan.exportPasswords) providerRepository.getAllProviderCredentials() else emptyList()
             }.getOrElse { error ->
                 uiState.update {
                     it.copy(

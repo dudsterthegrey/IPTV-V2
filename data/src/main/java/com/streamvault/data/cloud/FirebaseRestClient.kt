@@ -1,6 +1,7 @@
 package com.streamvault.data.cloud
 
 import android.content.Context
+import com.streamvault.data.security.CredentialCrypto
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
@@ -33,7 +34,9 @@ class FirebaseRestClient @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val okHttpClient: OkHttpClient,
     @param:Named("firebaseProjectId") private val projectId: String,
-    @param:Named("firebaseApiKey") private val apiKey: String
+    @param:Named("firebaseApiKey") private val apiKey: String,
+    // The refresh token signs this device in for good, so it is stored encrypted (Android Keystore).
+    private val credentialCrypto: CredentialCrypto
 ) {
     val isConfigured: Boolean get() = projectId.isNotBlank() && apiKey.isNotBlank()
 
@@ -149,7 +152,7 @@ class FirebaseRestClient @Inject constructor(
     private suspend fun storeSession(json: JSONObject, fallbackEmail: String) {
         tokenMutex.withLock {
             prefs.edit()
-                .putString(KEY_REFRESH_TOKEN, json.optString("refreshToken"))
+                .putString(KEY_REFRESH_TOKEN, credentialCrypto.encryptIfNeeded(json.optString("refreshToken")))
                 .putString(KEY_UID, json.optString("localId"))
                 .putString(KEY_EMAIL, json.optString("email").ifBlank { fallbackEmail })
                 .apply()
@@ -175,13 +178,17 @@ class FirebaseRestClient @Inject constructor(
         check(isConfigured) { "Cloud sync is not configured in this build" }
         val now = System.currentTimeMillis()
         idToken?.takeIf { now < idTokenExpiresAt }?.let { return it }
-        val refreshToken = prefs.getString(KEY_REFRESH_TOKEN, null) ?: throw NotSignedInException()
+        // Tokens saved before 2.1.9 are plain text; decryptIfNeeded passes those through.
+        val refreshToken = prefs.getString(KEY_REFRESH_TOKEN, null)
+            ?.let(credentialCrypto::decryptIfNeeded)
+            ?.takeIf { it.isNotBlank() }
+            ?: throw NotSignedInException()
         val refreshed = postForm(
             "https://securetoken.googleapis.com/v1/token?key=$apiKey",
             FormBody.Builder().add("grant_type", "refresh_token").add("refresh_token", refreshToken).build()
         )
         val token = refreshed.optString("id_token").takeIf { it.isNotBlank() } ?: throw NotSignedInException()
-        prefs.edit().putString(KEY_REFRESH_TOKEN, refreshed.optString("refresh_token")).apply()
+        prefs.edit().putString(KEY_REFRESH_TOKEN, credentialCrypto.encryptIfNeeded(refreshed.optString("refresh_token"))).apply()
         idToken = token
         idTokenExpiresAt = now + tokenLifetimeMs(refreshed.optString("expires_in"))
         token

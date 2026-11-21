@@ -1027,4 +1027,5 @@
     <string name="settings_cloud_sync_qr_error">לא ניתן להתחיל. חברו את הטלוויזיה ל-Wi-Fi או ל-Ethernet ונסו שוב.</string>
     <string name="settings_cloud_sync_google_expired">פג תוקף הקוד. הציגו קוד חדש כדי לנסות שוב.</string>
     <string name="settings_cloud_sync_error_google_off">התחברות עם Google עדיין לא הופעלה לאפליקציה הזו.</string>
+    <string name="settings_backup_include_passwords">כלול סיסמאות</string>
 </resources>

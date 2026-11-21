@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Başlatılamadı. TV\'yi Wi-Fi veya Ethernet\'e bağlayıp tekrar deneyin.</string>
     <string name="settings_cloud_sync_google_expired">Kodun süresi doldu. Tekrar denemek için yenisini gösterin.</string>
     <string name="settings_cloud_sync_error_google_off">Bu uygulama için Google ile oturum açma henüz açık değil.</string>
+    <string name="settings_backup_include_passwords">Şifreleri dahil et</string>
 </resources>

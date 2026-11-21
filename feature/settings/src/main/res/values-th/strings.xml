@@ -1019,4 +1019,5 @@
     <string name="settings_cloud_sync_qr_error">เริ่มไม่ได้ เชื่อมต่อทีวีกับ Wi-Fi หรืออีเทอร์เน็ตแล้วลองอีกครั้ง</string>
     <string name="settings_cloud_sync_google_expired">รหัสหมดอายุแล้ว แสดงรหัสใหม่เพื่อลองอีกครั้ง</string>
     <string name="settings_cloud_sync_error_google_off">ยังไม่ได้เปิดการลงชื่อเข้าใช้ด้วย Google สำหรับแอปนี้</string>
+    <string name="settings_backup_include_passwords">รวมรหัสผ่าน</string>
 </resources>

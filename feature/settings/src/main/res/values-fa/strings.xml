@@ -1022,4 +1022,5 @@
     <string name="settings_cloud_sync_qr_error">شروع نشد. تلویزیون را به Wi-Fi یا Ethernet وصل کنید و دوباره امتحان کنید.</string>
     <string name="settings_cloud_sync_google_expired">کد منقضی شد. برای تلاش دوباره کد جدیدی نمایش دهید.</string>
     <string name="settings_cloud_sync_error_google_off">ورود با Google هنوز برای این برنامه فعال نشده است.</string>
+    <string name="settings_backup_include_passwords">شامل کردن رمزهای عبور</string>
 </resources>

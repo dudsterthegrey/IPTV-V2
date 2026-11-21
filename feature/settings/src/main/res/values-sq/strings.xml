@@ -1022,4 +1022,5 @@
     <string name="settings_cloud_sync_qr_error">Nuk u nis dot. Lidheni televizorin me Wi-Fi ose Ethernet dhe provoni përsëri.</string>
     <string name="settings_cloud_sync_google_expired">Kodi skadoi. Shfaqni një të ri për të provuar përsëri.</string>
     <string name="settings_cloud_sync_error_google_off">Hyrja me Google nuk është aktivizuar ende për këtë aplikacion.</string>
+    <string name="settings_backup_include_passwords">Përfshi fjalëkalimet</string>
 </resources>

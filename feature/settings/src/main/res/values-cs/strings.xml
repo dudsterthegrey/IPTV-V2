@@ -1030,4 +1030,5 @@
     <string name="settings_cloud_sync_qr_error">Nelze spustit. Připojte televizor k Wi-Fi nebo Ethernetu a zkuste to znovu.</string>
     <string name="settings_cloud_sync_google_expired">Platnost kódu vypršela. Zobrazte nový a zkuste to znovu.</string>
     <string name="settings_cloud_sync_error_google_off">Přihlášení přes Google zatím není pro tuto aplikaci zapnuté.</string>
+    <string name="settings_backup_include_passwords">Zahrnout hesla</string>
 </resources>

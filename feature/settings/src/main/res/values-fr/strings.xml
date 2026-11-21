@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Impossible de démarrer. Connectez la TV au Wi-Fi ou à l\'Ethernet et réessayez.</string>
     <string name="settings_cloud_sync_google_expired">Le code a expiré. Affichez-en un nouveau pour réessayer.</string>
     <string name="settings_cloud_sync_error_google_off">La connexion Google n\'est pas encore activée pour cette appli.</string>
+    <string name="settings_backup_include_passwords">Inclure les mots de passe</string>
 </resources>

@@ -490,7 +490,12 @@ data class BackupExportPlan(
     val exportPlaybackHistory: Boolean = true,
     val exportMultiViewPresets: Boolean = true,
     val exportRecordingSchedules: Boolean = true,
-    val exportStremioAddons: Boolean = true
+    val exportStremioAddons: Boolean = true,
+    /**
+     * Provider and sports-source passwords. Off unless asked for: a backup file or Drive copy
+     * with readable passwords is an easy target, and a restore can ask for them again.
+     */
+    val exportPasswords: Boolean = false
 ) {
     val hasSections: Boolean get() = exportPreferences || exportProviders || exportSavedLibrary ||
         exportPlaybackHistory || exportMultiViewPresets || exportRecordingSchedules || exportStremioAddons

@@ -1022,4 +1022,5 @@
     <string name="settings_cloud_sync_qr_error">開始できませんでした。テレビを Wi-Fi か有線 LAN に接続してもう一度お試しください。</string>
     <string name="settings_cloud_sync_google_expired">コードの有効期限が切れました。新しいコードを表示してやり直してください。</string>
     <string name="settings_cloud_sync_error_google_off">このアプリではまだ Google サインインが有効になっていません。</string>
+    <string name="settings_backup_include_passwords">パスワードを含める</string>
 </resources>

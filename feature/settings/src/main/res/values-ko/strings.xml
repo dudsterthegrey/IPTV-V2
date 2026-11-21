@@ -1020,4 +1020,5 @@
     <string name="settings_cloud_sync_qr_error">시작할 수 없습니다. TV를 Wi-Fi 또는 이더넷에 연결한 후 다시 시도하세요.</string>
     <string name="settings_cloud_sync_google_expired">코드가 만료되었습니다. 새 코드를 표시해 다시 시도하세요.</string>
     <string name="settings_cloud_sync_error_google_off">이 앱에서는 아직 Google 로그인이 켜져 있지 않습니다.</string>
+    <string name="settings_backup_include_passwords">비밀번호 포함</string>
 </resources>

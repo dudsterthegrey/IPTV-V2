@@ -1019,4 +1019,5 @@
     <string name="settings_cloud_sync_qr_error">Tidak dapat bermula. Sambungkan TV ke Wi-Fi atau Ethernet dan cuba lagi.</string>
     <string name="settings_cloud_sync_google_expired">Kod telah tamat tempoh. Tunjukkan yang baharu untuk mencuba lagi.</string>
     <string name="settings_cloud_sync_error_google_off">Log masuk Google belum dihidupkan untuk apl ini.</string>
+    <string name="settings_backup_include_passwords">Sertakan kata laluan</string>
 </resources>

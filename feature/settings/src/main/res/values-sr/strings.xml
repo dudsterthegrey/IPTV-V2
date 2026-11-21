@@ -1025,4 +1025,5 @@
     <string name="settings_cloud_sync_qr_error">Покретање није успело. Повежите ТВ на Wi-Fi или Ethernet и покушајте поново.</string>
     <string name="settings_cloud_sync_google_expired">Кôд је истекао. Прикажите нови да бисте покушали поново.</string>
     <string name="settings_cloud_sync_error_google_off">Пријава преко Google-а још није укључена за ову апликацију.</string>
+    <string name="settings_backup_include_passwords">Укључи лозинке</string>
 </resources>

@@ -1020,4 +1020,5 @@
     <string name="settings_cloud_sync_qr_error">Impossibile avviare. Collega la TV al Wi-Fi o all\'Ethernet e riprova.</string>
     <string name="settings_cloud_sync_google_expired">Il codice è scaduto. Mostrane uno nuovo per riprovare.</string>
     <string name="settings_cloud_sync_error_google_off">L\'accesso con Google non è ancora attivo per questa app.</string>
+    <string name="settings_backup_include_passwords">Includi password</string>
 </resources>

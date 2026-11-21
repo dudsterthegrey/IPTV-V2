@@ -1030,4 +1030,5 @@
     <string name="settings_cloud_sync_qr_error">Nie udało się uruchomić. Podłącz telewizor do Wi-Fi lub Ethernetu i spróbuj ponownie.</string>
     <string name="settings_cloud_sync_google_expired">Kod wygasł. Pokaż nowy, aby spróbować ponownie.</string>
     <string name="settings_cloud_sync_error_google_off">Logowanie przez Google nie jest jeszcze włączone w tej aplikacji.</string>
+    <string name="settings_backup_include_passwords">Dołącz hasła</string>
 </resources>

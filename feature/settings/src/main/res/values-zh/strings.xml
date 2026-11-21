@@ -1020,4 +1020,5 @@
     <string name="settings_cloud_sync_qr_error">无法启动。请将电视连接到 Wi-Fi 或以太网后重试。</string>
     <string name="settings_cloud_sync_google_expired">二维码已过期。请显示新的二维码重试。</string>
     <string name="settings_cloud_sync_error_google_off">此应用尚未开启 Google 登录。</string>
+    <string name="settings_backup_include_passwords">包含密码</string>
 </resources>

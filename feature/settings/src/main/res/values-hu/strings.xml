@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Nem sikerült elindítani. Csatlakoztassa a tévét Wi-Fi-hez vagy Ethernethez, és próbálja újra.</string>
     <string name="settings_cloud_sync_google_expired">A kód lejárt. Jelenítsen meg újat az újrapróbálkozáshoz.</string>
     <string name="settings_cloud_sync_error_google_off">A Google-bejelentkezés még nincs bekapcsolva ehhez az alkalmazáshoz.</string>
+    <string name="settings_backup_include_passwords">Jelszavak belefoglalása</string>
 </resources>

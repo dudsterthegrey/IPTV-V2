@@ -1019,4 +1019,5 @@
     <string name="settings_cloud_sync_qr_error">無法啟動。請將電視連上 Wi-Fi 或乙太網路後再試一次。</string>
     <string name="settings_cloud_sync_google_expired">QR 碼已過期。請顯示新的 QR 碼再試一次。</string>
     <string name="settings_cloud_sync_error_google_off">此應用程式尚未開啟 Google 登入。</string>
+    <string name="settings_backup_include_passwords">包含密碼</string>
 </resources>

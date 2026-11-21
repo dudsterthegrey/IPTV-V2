@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Kunne ikke starte. Forbind tv\'et til Wi-Fi eller Ethernet, og prøv igen.</string>
     <string name="settings_cloud_sync_google_expired">Koden er udløbet. Vis en ny for at prøve igen.</string>
     <string name="settings_cloud_sync_error_google_off">Log ind med Google er ikke slået til for denne app endnu.</string>
+    <string name="settings_backup_include_passwords">Medtag adgangskoder</string>
 </resources>

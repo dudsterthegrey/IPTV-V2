@@ -77,7 +77,12 @@ jobs:
 
       - name: Set up Gradle
         if: steps.version.outputs.build == 'true'
-        uses: gradle/actions/setup-gradle@v4
+        # Third-party action that runs next to the signing key: pinned to an exact commit (v5.0.2),
+        # so a hijacked tag can't swap in code that reads the secrets.
+        uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c
+        with:
+          # Only main writes the build cache; nothing else can seed it.
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
       - name: Restore the signing key
         if: steps.version.outputs.build == 'true'

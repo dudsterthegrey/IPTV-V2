@@ -50,7 +50,7 @@ class BackupExportSelectionTest {
     private lateinit var output: File
 
     private fun plan(mask: Int) = BackupExportPlan(mask and 1 != 0, mask and 2 != 0, mask and 4 != 0,
-        mask and 8 != 0, mask and 16 != 0, mask and 32 != 0, mask and 64 != 0)
+        mask and 8 != 0, mask and 16 != 0, mask and 32 != 0, mask and 64 != 0, exportPasswords = mask and 128 != 0)
 
     @Before
     fun setUp() = runBlocking {
@@ -102,9 +102,10 @@ class BackupExportSelectionTest {
     fun tearDown() { database.close(); output.delete() }
 
     @Test
-    fun `all 127 nonempty selections omit unselected fields and inspect with matching import choices`() = runBlocking {
-        for (mask in 1..127) {
+    fun `all nonempty selections omit unselected fields and inspect with matching import choices`() = runBlocking {
+        for (mask in (1..255).filter { it and 127 != 0 }) {
             val selection = plan(mask)
+            val withPasswords = selection.exportProviders && selection.exportPasswords
             val result = manager.exportConfig(output.toURI().toString(), selection)
             assertWithMessage("selection mask=%s", mask).that(result).isInstanceOf(Result.Success::class.java)
             val json = JsonParser.parseString(output.readText()).asJsonObject
@@ -112,7 +113,7 @@ class BackupExportSelectionTest {
                 "preferences" to selection.exportPreferences,
                 "portableProviderPreferences" to selection.exportPreferences,
                 "providerSnapshots" to selection.exportProviders,
-                "providerCredentials" to selection.exportProviders,
+                "providerCredentials" to withPasswords,
                 "portableFavorites" to selection.exportSavedLibrary,
                 "portableCustomGroups" to selection.exportSavedLibrary,
                 "portableProtectedContent" to selection.exportSavedLibrary,
@@ -128,7 +129,8 @@ class BackupExportSelectionTest {
             fields.forEach { (field, selected) ->
                 assertWithMessage("selection mask=%s field=%s", mask, field).that(json.has(field) && !json[field].isJsonNull).isEqualTo(selected)
             }
-            assertThat(output.readText().contains("provider-secret")).isEqualTo(selection.exportProviders)
+            // Passwords only leave the device when asked for.
+            assertWithMessage("password mask=%s", mask).that(output.readText().contains("provider-secret")).isEqualTo(withPasswords)
             assertThat(output.readText().contains("addon-secret")).isEqualTo(selection.exportStremioAddons)
             if (selection.exportPreferences) {
                 assertThat(json["preferences"].asJsonObject.has("hiddenChannels_18")).isEqualTo(selection.exportSavedLibrary)
@@ -136,7 +138,7 @@ class BackupExportSelectionTest {
             val inspected = ImportBackup(manager).inspect(InspectBackupCommand(output.toURI().toString()))
             assertWithMessage("inspect mask=%s", mask).that(inspected).isInstanceOf(InspectBackupResult.Success::class.java)
             val success = inspected as InspectBackupResult.Success
-            assertWithMessage("availability mask=%s", mask).that(success.preview.availableSections).isEqualTo(selection)
+            assertWithMessage("availability mask=%s", mask).that(success.preview.availableSections).isEqualTo(selection.copy(exportPasswords = withPasswords))
             assertThat(success.defaultPlan.importProviders).isEqualTo(selection.exportProviders)
             assertThat(success.defaultPlan.importSavedLibrary).isEqualTo(selection.exportSavedLibrary)
             assertThat(success.defaultPlan.importStremioAddons).isEqualTo(selection.exportStremioAddons)

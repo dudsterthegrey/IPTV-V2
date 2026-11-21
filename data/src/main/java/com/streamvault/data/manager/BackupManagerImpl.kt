@@ -394,7 +394,7 @@ class BackupManagerImpl @Inject constructor(
             val providerEntities = if (needsProviders) providerDao.getAll().first() else emptyList()
             val sportsStore = sportsProviderStore.takeIf { plan.exportProviders }
             val sportsProviderConfigs = sportsStore?.configurations()
-            val sportsProviderCredentials = sportsProviderConfigs.orEmpty().mapNotNull { config ->
+            val sportsProviderCredentials = sportsProviderConfigs.orEmpty().filter { plan.exportPasswords }.mapNotNull { config ->
                 sportsStore?.credentials(config.instanceId)?.let { credentials ->
                     SportsProviderCredentialsBackup(
                         instanceId = config.instanceId,
@@ -429,7 +429,8 @@ class BackupManagerImpl @Inject constructor(
                     "Cannot export backup because one or more providers have no typed configuration snapshot"
                 )
             }
-            val providerCredentials = sourceProviders.takeIf { plan.exportProviders }.orEmpty().mapNotNull { it.toBackupCredentials() }
+            val providerCredentials = sourceProviders.takeIf { plan.exportProviders && plan.exportPasswords }.orEmpty()
+                .mapNotNull { it.toBackupCredentials() }
             val providerSnapshots = providers.takeIf { plan.exportProviders }.orEmpty().map { provider ->
                 val configuration = when (val config = provider.toTypedConfiguration()) {
                     is com.streamvault.domain.model.XtreamConfig -> config.copy(password = "")
@@ -1159,7 +1160,9 @@ class BackupManagerImpl @Inject constructor(
                         exportPlaybackHistory = backupData.playbackHistory != null || backupData.portablePlaybackHistory != null || backupData.stremioPlaybackHistory != null,
                         exportMultiViewPresets = backupData.multiViewPresets != null || backupData.portableMultiViewPresets != null || backupData.portableMultiViewPresetsV14 != null,
                         exportRecordingSchedules = backupData.scheduledRecordings != null || backupData.recordingStorage != null,
-                        exportStremioAddons = backupData.stremioAddons != null
+                        exportStremioAddons = backupData.stremioAddons != null,
+                        exportPasswords = !backupData.providerCredentials.isNullOrEmpty() ||
+                            !backupData.sportsProviderCredentials.isNullOrEmpty()
                     ),
                     protectedCategoryCount = backupData.protectedCategories.orEmpty().size,
                     scheduledRecordingCount = backupData.scheduledRecordings.orEmpty().normalizedRecurringBackups().size,

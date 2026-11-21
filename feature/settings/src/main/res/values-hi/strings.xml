@@ -1022,4 +1022,5 @@
     <string name="settings_cloud_sync_qr_error">शुरू नहीं हो सका। टीवी को वाई-फ़ाई या ईथरनेट से जोड़ें और फिर कोशिश करें।</string>
     <string name="settings_cloud_sync_google_expired">कोड की समय-सीमा खत्म हो गई। फिर से कोशिश करने के लिए नया कोड दिखाएँ।</string>
     <string name="settings_cloud_sync_error_google_off">इस ऐप के लिए Google साइन-इन अभी चालू नहीं है।</string>
+    <string name="settings_backup_include_passwords">पासवर्ड शामिल करें</string>
 </resources>

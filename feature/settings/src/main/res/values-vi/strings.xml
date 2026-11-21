@@ -1021,4 +1021,5 @@
     <string name="settings_cloud_sync_qr_error">Không thể bắt đầu. Kết nối TV với Wi-Fi hoặc Ethernet rồi thử lại.</string>
     <string name="settings_cloud_sync_google_expired">Mã đã hết hạn. Hiện mã mới để thử lại.</string>
     <string name="settings_cloud_sync_error_google_off">Ứng dụng này chưa bật đăng nhập bằng Google.</string>
+    <string name="settings_backup_include_passwords">Bao gồm mật khẩu</string>
 </resources>

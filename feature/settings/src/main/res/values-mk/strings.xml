@@ -1022,4 +1022,5 @@
     <string name="settings_cloud_sync_qr_error">Не може да започне. Поврзете го ТВ-то на Wi-Fi или Ethernet и обидете се повторно.</string>
     <string name="settings_cloud_sync_google_expired">Кодот истече. Прикажете нов за повторен обид.</string>
     <string name="settings_cloud_sync_error_google_off">Најавата со Google сè уште не е вклучена за оваа апликација.</string>
+    <string name="settings_backup_include_passwords">Вклучи лозинки</string>
 </resources>

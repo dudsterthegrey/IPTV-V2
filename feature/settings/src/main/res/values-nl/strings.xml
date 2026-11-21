@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Starten mislukt. Verbind de tv met wifi of ethernet en probeer het opnieuw.</string>
     <string name="settings_cloud_sync_google_expired">De code is verlopen. Toon een nieuwe om het opnieuw te proberen.</string>
     <string name="settings_cloud_sync_error_google_off">Inloggen met Google staat nog niet aan voor deze app.</string>
+    <string name="settings_backup_include_passwords">Wachtwoorden opnemen</string>
 </resources>

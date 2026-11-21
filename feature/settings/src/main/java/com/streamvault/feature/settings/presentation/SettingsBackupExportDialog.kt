@@ -23,8 +23,8 @@ import com.streamvault.feature.settings.R
 
 internal val BackupExportPlanSaver = listSaver<BackupExportPlan, Boolean>(
     save = { listOf(it.exportPreferences, it.exportProviders, it.exportSavedLibrary, it.exportPlaybackHistory,
-        it.exportMultiViewPresets, it.exportRecordingSchedules, it.exportStremioAddons) },
-    restore = { BackupExportPlan(it[0], it[1], it[2], it[3], it[4], it[5], it[6]) }
+        it.exportMultiViewPresets, it.exportRecordingSchedules, it.exportStremioAddons, it.exportPasswords) },
+    restore = { BackupExportPlan(it[0], it[1], it[2], it[3], it[4], it[5], it[6], it.getOrElse(7) { false }) }
 )
 
 @Composable
@@ -50,6 +50,11 @@ internal fun BackupExportDialog(
                 { plan = plan.copy(exportPreferences = it) }, modifier = Modifier.focusRequester(firstFocus))
             BackupToggleRow(stringResource(R.string.settings_backup_section_providers), plan.exportProviders,
                 { plan = plan.copy(exportProviders = it) })
+            if (plan.exportProviders) {
+                // Off by default so backups don't carry readable logins.
+                BackupToggleRow(stringResource(R.string.settings_backup_include_passwords), plan.exportPasswords,
+                    { plan = plan.copy(exportPasswords = it) })
+            }
             BackupToggleRow(stringResource(R.string.settings_backup_section_saved), plan.exportSavedLibrary,
                 { plan = plan.copy(exportSavedLibrary = it) })
             BackupToggleRow(stringResource(R.string.settings_backup_section_history), plan.exportPlaybackHistory,
@@ -60,8 +65,7 @@ internal fun BackupExportDialog(
                 { plan = plan.copy(exportRecordingSchedules = it) })
             BackupToggleRow(stringResource(R.string.settings_backup_section_stremio_addons), plan.exportStremioAddons,
                 { plan = plan.copy(exportStremioAddons = it) })
-            if (plan.exportProviders || plan.exportStremioAddons || plan.exportSavedLibrary ||
-                plan.exportPlaybackHistory || plan.exportMultiViewPresets || plan.exportRecordingSchedules) {
+            if ((plan.exportProviders && plan.exportPasswords) || plan.exportStremioAddons) {
                 Text(stringResource(R.string.settings_backup_credentials_notice),
                     style = MaterialTheme.typography.bodySmall, color = OnSurfaceDim)
             }

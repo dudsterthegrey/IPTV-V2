@@ -1024,4 +1024,5 @@
     <string name="settings_cloud_sync_qr_error">Käynnistys epäonnistui. Yhdistä televisio Wi-Fiin tai Ethernetiin ja yritä uudelleen.</string>
     <string name="settings_cloud_sync_google_expired">Koodi vanheni. Näytä uusi koodi ja yritä uudelleen.</string>
     <string name="settings_cloud_sync_error_google_off">Google-kirjautumista ei ole vielä otettu käyttöön tässä sovelluksessa.</string>
+    <string name="settings_backup_include_passwords">Sisällytä salasanat</string>
 </resources>

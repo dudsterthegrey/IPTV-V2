@@ -1030,4 +1030,5 @@
     <string name="settings_cloud_sync_qr_error">Не удалось запустить. Подключите телевизор к Wi-Fi или Ethernet и повторите попытку.</string>
     <string name="settings_cloud_sync_google_expired">Срок действия кода истёк. Покажите новый, чтобы повторить.</string>
     <string name="settings_cloud_sync_error_google_off">Вход через Google для этого приложения ещё не включён.</string>
+    <string name="settings_backup_include_passwords">Включить пароли</string>
 </resources>

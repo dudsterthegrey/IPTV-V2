@@ -280,7 +280,7 @@ class GoogleDriveBackupSyncManager private constructor(
                     val bundle = JSONObject()
                         .put("format", DRIVE_BUNDLE_FORMAT)
                         .put("backupJson", backupJson)
-                        .put("credentials", (if (plan.exportProviders) credentials else emptyList()).toJsonArray())
+                        .put("credentials", (if (plan.exportProviders && plan.exportPasswords) credentials else emptyList()).toJsonArray())
                     bundleFile.writeText(bundle.toString(), Charsets.UTF_8)
                     bundleFile.length() > 0L && bundleFile.length() <= MAX_DRIVE_FILE_BYTES
                 } catch (t: Throwable) {

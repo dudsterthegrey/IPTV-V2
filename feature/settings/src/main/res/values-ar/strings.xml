@@ -1036,4 +1036,5 @@
     <string name="settings_cloud_sync_qr_error">تعذّر البدء. وصّل التلفاز بشبكة Wi-Fi أو Ethernet وحاول مرة أخرى.</string>
     <string name="settings_cloud_sync_google_expired">انتهت صلاحية الرمز. اعرض رمزًا جديدًا للمحاولة مرة أخرى.</string>
     <string name="settings_cloud_sync_error_google_off">لم يتم تفعيل تسجيل الدخول باستخدام Google لهذا التطبيق بعد.</string>
+    <string name="settings_backup_include_passwords">تضمين كلمات المرور</string>
 </resources>
