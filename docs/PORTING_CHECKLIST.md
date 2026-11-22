@@ -303,6 +303,10 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - Logins stay on the device: provider passwords and the sync sign-in token are encrypted with
   the Android Keystore, and backups (file and Google Drive) leave passwords out unless
   "Include passwords" is switched on in the export dialog.
+- Icon and TV banner use a matrix-style neon green look. `tools/icon/matrix_icon.py`
+  regenerates every launcher icon density, the adaptive-icon background
+  (`drawable-nodpi/ic_launcher_background_matrix.png`) and the banners from the original
+  artwork in `tools/icon/source/`.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port
