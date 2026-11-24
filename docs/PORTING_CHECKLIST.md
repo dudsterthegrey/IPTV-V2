@@ -307,6 +307,9 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
   regenerates every launcher icon density, the adaptive-icon background
   (`drawable-nodpi/ic_launcher_background_matrix.png`) and the banners from the original
   artwork in `tools/icon/source/`.
+- OpenSubtitles search tries several searches in turn (TMDB id, cleaned title with season and
+  episode filters, then plain "title SxxEyy" text) and stops at the first that finds
+  subtitles. `SubtitleSearchTitle` strips provider tags such as "EN - " or "(2011)" first.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port

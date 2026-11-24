@@ -53,17 +53,20 @@ class OpenSubtitlesApi @Inject constructor(
         val parentImdbId: Long? = null,
         val seasonNumber: Int? = null,
         val episodeNumber: Int? = null,
+        val year: Int? = null,
         val languages: String? = null,
         val orderBy: String? = null,
     ) {
         fun toQueryParams(): Map<String, String> = buildMap {
-            query?.takeIf { it.isNotBlank() }?.let { put("query", it) }
+            // OpenSubtitles redirects requests whose values are not lowercase.
+            query?.trim()?.takeIf { it.isNotBlank() }?.let { put("query", it.lowercase()) }
             tmdbId?.takeIf { it > 0 }?.let { put("tmdb_id", it.toString()) }
             imdbId?.takeIf { it > 0 }?.let { put("imdb_id", it.toString()) }
             parentTmdbId?.takeIf { it > 0 }?.let { put("parent_tmdb_id", it.toString()) }
             parentImdbId?.takeIf { it > 0 }?.let { put("parent_imdb_id", it.toString()) }
             seasonNumber?.takeIf { it > 0 }?.let { put("season_number", it.toString()) }
             episodeNumber?.takeIf { it > 0 }?.let { put("episode_number", it.toString()) }
+            year?.takeIf { it > 0 }?.let { put("year", it.toString()) }
             languages?.takeIf { it.isNotBlank() }?.let { put("languages", it) }
             orderBy?.takeIf { it.isNotBlank() }?.let { put("order_by", it) }
         }

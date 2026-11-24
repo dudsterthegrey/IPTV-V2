@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.common.truth.Truth.assertThat
 import com.streamvault.data.remote.subtitle.OpenSubtitlesApi
 import com.streamvault.data.remote.subtitle.OpenSubtitlesSessionStore
+import com.streamvault.domain.model.ContentType
 import java.io.File
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -60,5 +61,65 @@ class OpenSubtitlesRepositoryImplTest {
 
         assertThat(durable.exists()).isFalse()
         assertThat(legacy.exists()).isFalse()
+    }
+
+    @Test
+    fun `episode search tries tmdb, then title with season filters, then plain text`() {
+        val attempts = repository.buildSearchAttempts(
+            contentType = ContentType.SERIES_EPISODE,
+            title = "EN - New Girl (2011)",
+            year = null,
+            tmdbId = null,
+            parentTmdbId = 1420L,
+            seasonNumber = 6,
+            episodeNumber = 3,
+            language = "en",
+        )
+
+        assertThat(attempts.map { it.toQueryParams() }).containsExactly(
+            mapOf("parent_tmdb_id" to "1420", "season_number" to "6", "episode_number" to "3",
+                "languages" to "en", "order_by" to "download_count"),
+            mapOf("query" to "new girl", "season_number" to "6", "episode_number" to "3",
+                "languages" to "en", "order_by" to "download_count"),
+            mapOf("query" to "new girl s06e03", "languages" to "en", "order_by" to "download_count"),
+        ).inOrder()
+    }
+
+    @Test
+    fun `episode search without a tmdb id starts with the cleaned title`() {
+        val attempts = repository.buildSearchAttempts(
+            contentType = ContentType.SERIES_EPISODE,
+            title = "New Girl",
+            year = null,
+            tmdbId = null,
+            parentTmdbId = null,
+            seasonNumber = 6,
+            episodeNumber = 3,
+            language = "auto",
+        )
+
+        assertThat(attempts.map { it.toQueryParams()["query"] })
+            .containsExactly("new girl", "new girl s06e03").inOrder()
+        assertThat(attempts.first().toQueryParams()).doesNotContainKey("languages")
+    }
+
+    @Test
+    fun `movie search tries tmdb, then title with year, then title alone`() {
+        val attempts = repository.buildSearchAttempts(
+            contentType = ContentType.MOVIE,
+            title = "EN - Alien",
+            year = 1979,
+            tmdbId = 348L,
+            parentTmdbId = null,
+            seasonNumber = null,
+            episodeNumber = null,
+            language = null,
+        )
+
+        assertThat(attempts.map { it.toQueryParams() - "order_by" }).containsExactly(
+            mapOf("tmdb_id" to "348"),
+            mapOf("query" to "alien", "year" to "1979"),
+            mapOf("query" to "alien"),
+        ).inOrder()
     }
 }

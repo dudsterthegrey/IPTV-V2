@@ -113,7 +113,7 @@ class OpenSubtitlesApiDownloadTest {
     }
 
     @Test
-    fun `search sorts query parameters and encodes spaces with plus`() = runBlocking {
+    fun `search sorts query parameters, lowercases the query and encodes spaces with plus`() = runBlocking {
         val server = MockWebServer()
         server.start()
         try {
@@ -127,7 +127,7 @@ class OpenSubtitlesApiDownloadTest {
 
             assertThat(result.isSuccess).isTrue()
             assertThat(server.takeRequest().path)
-                .isEqualTo("/api/v1/subtitles?languages=en&query=Star+Trek&tmdb_id=42")
+                .isEqualTo("/api/v1/subtitles?languages=en&query=star+trek&tmdb_id=42")
         } finally {
             server.shutdown()
         }

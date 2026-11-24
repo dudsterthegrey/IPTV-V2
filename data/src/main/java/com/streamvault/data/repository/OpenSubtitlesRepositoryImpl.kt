@@ -7,6 +7,7 @@ import com.streamvault.data.remote.subtitle.OpenSubtitlesCredentials
 import com.streamvault.data.remote.subtitle.OpenSubtitlesSession
 import com.streamvault.data.remote.subtitle.OpenSubtitlesSessionStore
 import com.streamvault.data.remote.subtitle.OpenSubtitlesSubtitleDto
+import com.streamvault.data.remote.subtitle.SubtitleSearchTitle
 import com.streamvault.data.remote.subtitle.OPENSUBTITLES_DEFAULT_BASE_HOST
 import com.streamvault.domain.manager.OpenSubtitlesAccount
 import com.streamvault.domain.manager.OpenSubtitlesAccountManager
@@ -123,14 +124,8 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
         episodeNumber: Int?,
         language: String?,
     ): Result<List<ExternalSubtitle>> = try {
-        val query = buildSearchQuery(contentType, title, year, tmdbId, parentTmdbId, seasonNumber, episodeNumber, language)
-        requestWithOptionalSession { session ->
-            api.search(
-                query = query,
-                token = session?.token,
-                baseUrlHost = session?.baseUrl ?: OPENSUBTITLES_DEFAULT_BASE_HOST,
-            )
-        }
+        val attempts = buildSearchAttempts(contentType, title, year, tmdbId, parentTmdbId, seasonNumber, episodeNumber, language)
+        searchUntilFound(attempts)
             .map { subtitles -> subtitles.mapNotNull(::mapSubtitle) }
     } catch (e: Exception) {
         if (e is CancellationException) throw e
@@ -314,7 +309,30 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
         return File(directory, "$fileId.srt")
     }
 
-    private fun buildSearchQuery(
+    /**
+     * Runs each search in turn and returns the first one that finds subtitles. Provider titles and
+     * TMDB ids are often slightly off, and OpenSubtitles needs every parameter to match, so a single
+     * strict search misses common shows. An error stops the cascade so key and rate-limit problems
+     * still reach the user.
+     */
+    private suspend fun searchUntilFound(
+        attempts: List<OpenSubtitlesApi.SearchQuery>,
+    ): Result<List<OpenSubtitlesSubtitleDto>> {
+        var last: Result<List<OpenSubtitlesSubtitleDto>> = Result.success(emptyList())
+        for (attempt in attempts) {
+            last = requestWithOptionalSession { session ->
+                api.search(
+                    query = attempt,
+                    token = session?.token,
+                    baseUrlHost = session?.baseUrl ?: OPENSUBTITLES_DEFAULT_BASE_HOST,
+                )
+            }
+            if (last !is Result.Success || last.data.isNotEmpty()) return last
+        }
+        return last
+    }
+
+    internal fun buildSearchAttempts(
         contentType: ContentType,
         title: String,
         year: Int?,
@@ -323,54 +341,39 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
         seasonNumber: Int?,
         episodeNumber: Int?,
         language: String?,
-    ): OpenSubtitlesApi.SearchQuery {
+    ): List<OpenSubtitlesApi.SearchQuery> {
         val languageCode = language?.trim()?.lowercase()?.takeIf { it.isNotBlank() && it != "auto" && it != "all" }
-        return when (contentType) {
-            ContentType.MOVIE -> OpenSubtitlesApi.SearchQuery(
-                query = buildTitleQuery(title, year),
-                tmdbId = tmdbId?.takeIf { it > 0 },
-                languages = languageCode,
-                orderBy = "download_count",
-            )
-            ContentType.SERIES -> OpenSubtitlesApi.SearchQuery(
-                query = title.trim().takeIf { it.isNotBlank() },
-                tmdbId = tmdbId?.takeIf { it > 0 },
-                languages = languageCode,
-                orderBy = "download_count",
-            )
-            ContentType.SERIES_EPISODE -> OpenSubtitlesApi.SearchQuery(
-                query = buildEpisodeQuery(title, seasonNumber, episodeNumber),
-                parentTmdbId = parentTmdbId?.takeIf { it > 0 },
-                seasonNumber = seasonNumber,
-                episodeNumber = episodeNumber,
-                languages = languageCode,
-                orderBy = "download_count",
-            )
-            else -> OpenSubtitlesApi.SearchQuery(
-                query = title.trim().takeIf { it.isNotBlank() },
-                languages = languageCode,
-                orderBy = "download_count",
-            )
-        }
-    }
-
-    private fun buildTitleQuery(title: String, year: Int?): String? {
-        val normalized = title.trim()
-        if (normalized.isBlank()) return null
-        return if (year != null && year > 0) "$normalized $year" else normalized
-    }
-
-    private fun buildEpisodeQuery(title: String, seasonNumber: Int?, episodeNumber: Int?): String? {
-        val normalized = title.trim()
-        if (normalized.isBlank()) return null
+        val cleanTitle = SubtitleSearchTitle.clean(title).takeIf { it.isNotBlank() }
+        val validYear = year?.takeIf { it in 1870..2100 }
         val season = seasonNumber?.takeIf { it > 0 }
         val episode = episodeNumber?.takeIf { it > 0 }
-        return when {
-            season != null && episode != null ->
-                "$normalized S${season.toString().padStart(2, '0')}E${episode.toString().padStart(2, '0')}"
-            season != null -> "$normalized S${season.toString().padStart(2, '0')}"
-            else -> normalized
+        val base = OpenSubtitlesApi.SearchQuery(languages = languageCode, orderBy = "download_count")
+        val attempts = when (contentType) {
+            ContentType.SERIES_EPISODE -> listOfNotNull(
+                parentTmdbId?.takeIf { it > 0 }?.let {
+                    base.copy(parentTmdbId = it, seasonNumber = season, episodeNumber = episode)
+                },
+                cleanTitle?.let { base.copy(query = it, seasonNumber = season, episodeNumber = episode) },
+                cleanTitle?.let { base.copy(query = episodeQuery(it, season, episode)) },
+            )
+            ContentType.MOVIE -> listOfNotNull(
+                tmdbId?.takeIf { it > 0 }?.let { base.copy(tmdbId = it) },
+                cleanTitle?.takeIf { validYear != null }?.let { base.copy(query = it, year = validYear) },
+                cleanTitle?.let { base.copy(query = it) },
+            )
+            else -> listOfNotNull(
+                tmdbId?.takeIf { it > 0 }?.let { base.copy(tmdbId = it) },
+                cleanTitle?.let { base.copy(query = it) },
+            )
         }
+        return attempts.distinct()
+    }
+
+    private fun episodeQuery(title: String, season: Int?, episode: Int?): String = when {
+        season != null && episode != null ->
+            "$title S${season.toString().padStart(2, '0')}E${episode.toString().padStart(2, '0')}"
+        season != null -> "$title S${season.toString().padStart(2, '0')}"
+        else -> title
     }
 
     private fun Result<*>.isUnauthorized(): Boolean =
