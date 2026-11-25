@@ -310,6 +310,16 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
 - OpenSubtitles search tries several searches in turn (TMDB id, cleaned title with season and
   episode filters, then plain "title SxxEyy" text) and stops at the first that finds
   subtitles. `SubtitleSearchTitle` strips provider tags such as "EN - " or "(2011)" first.
+- Speed on TV sticks with large Xtream libraries:
+  - Guide imports keep only programmes from the catch-up retention (at least 12 hours back) to
+    5 days ahead (`GuideIngestWindow`), for the provider guide and external guide sources.
+  - The background guide refresh no longer waits for playback to stop or memory to free up
+    when the provider has no guide data for the next two hours.
+  - Database 95 adds channel indexes on number and a covering index for category counts.
+    Channel list queries check the provider with `EXISTS` instead of joining `providers`,
+    which had made SQLite scan and sort every channel.
+  - `LibraryQueryBenchmarkTest` (run with `LIBRARY_BENCHMARK=1`) times the Live TV, guide and
+    home queries on a 20,000-channel, 40,000-movie library.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port

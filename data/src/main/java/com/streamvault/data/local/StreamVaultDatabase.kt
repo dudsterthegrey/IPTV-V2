@@ -12,7 +12,7 @@ import org.json.JSONObject
 import java.net.URI
 import java.security.MessageDigest
 
-internal const val STREAM_VAULT_DATABASE_VERSION = 94
+internal const val STREAM_VAULT_DATABASE_VERSION = 95
 
 @Database(
     entities = [

@@ -118,10 +118,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
         ORDER BY c.number ASC
         """
     )
@@ -138,10 +138,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.error_count = 0
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.error_count = 0
         ORDER BY c.number ASC
         """
     )
@@ -158,10 +158,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.error_count = 0
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.error_count = 0
         ORDER BY c.number ASC
         LIMIT :limit
         """
@@ -179,10 +179,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
         ORDER BY c.number ASC
         LIMIT :limit
         """
@@ -200,10 +200,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.category_id = :categoryId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.category_id = :categoryId
         ORDER BY c.number ASC
         LIMIT :limit
         """
@@ -224,10 +224,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.category_id = :categoryId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.category_id = :categoryId
         ORDER BY c.number ASC
         """
     )
@@ -244,10 +244,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.category_id = :categoryId AND c.error_count = 0
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.category_id = :categoryId AND c.error_count = 0
         ORDER BY c.number ASC
         """
     )
@@ -264,10 +264,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.category_id = :categoryId AND c.error_count = 0
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.category_id = :categoryId AND c.error_count = 0
         ORDER BY c.number ASC
         LIMIT :limit
         """
@@ -289,10 +289,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
         ORDER BY c.number ASC
         LIMIT :limit OFFSET :offset
         """
@@ -310,10 +310,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.error_count = 0
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.error_count = 0
         ORDER BY c.number ASC
         LIMIT :limit OFFSET :offset
         """
@@ -331,10 +331,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.category_id = :categoryId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.category_id = :categoryId
         ORDER BY c.number ASC
         LIMIT :limit OFFSET :offset
         """
@@ -352,10 +352,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.category_id = :categoryId AND c.error_count = 0
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.category_id = :categoryId AND c.error_count = 0
         ORDER BY c.number ASC
         LIMIT :limit OFFSET :offset
         """
@@ -376,11 +376,11 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         JOIN channels_fts ON c.id = channels_fts.rowid
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
           AND channels_fts MATCH :query
         ORDER BY c.name ASC
         LIMIT :limit
@@ -399,10 +399,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
           AND (
               LOWER(c.name) LIKE LOWER(:queryLike) ESCAPE '\'
               OR LOWER(COALESCE(c.group_title, '')) LIKE LOWER(:queryLike) ESCAPE '\'
@@ -425,11 +425,11 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         JOIN channels_fts ON c.id = channels_fts.rowid
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
           AND c.category_id = :categoryId
           AND channels_fts MATCH :query
         ORDER BY c.name ASC
@@ -449,10 +449,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId
           AND c.category_id = :categoryId
           AND (
               LOWER(c.name) LIKE LOWER(:queryLike) ESCAPE '\'
@@ -485,10 +485,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.id = :id
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.id = :id
         LIMIT 1
         """
     )
@@ -564,10 +564,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.id IN (:ids)
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.id IN (:ids)
         """
     )
     abstract fun getByIds(ids: List<Long>): Flow<List<ChannelBrowseEntity>>
@@ -583,10 +583,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.logical_group_id IN (:logicalGroupIds)
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.logical_group_id IN (:logicalGroupIds)
         ORDER BY c.provider_id ASC, c.number ASC, c.name ASC
         """
     )
@@ -603,10 +603,10 @@ abstract class ChannelDao {
                ec.icon_url AS epg_icon_url,
                c.is_adult, c.is_user_protected, c.logical_group_id, c.error_count
         FROM channels c
-        JOIN providers p ON p.id = c.provider_id
         LEFT JOIN channel_epg_mappings cem ON cem.provider_channel_id = c.id AND cem.provider_id = c.provider_id
         LEFT JOIN epg_channels ec ON ec.epg_source_id = cem.epg_source_id AND ec.xmltv_channel_id = cem.xmltv_channel_id
-        WHERE c.provider_id = :providerId AND c.logical_group_id = :logicalGroupId
+        WHERE EXISTS (SELECT 1 FROM providers p WHERE p.id = c.provider_id)
+          AND c.provider_id = :providerId AND c.logical_group_id = :logicalGroupId
         ORDER BY c.number ASC, c.name ASC
         """
     )

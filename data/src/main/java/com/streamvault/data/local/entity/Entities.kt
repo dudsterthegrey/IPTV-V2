@@ -208,10 +208,14 @@ data class BackupRestoreCheckpointEntity(
     )],
     indices = [
         Index(value = ["provider_id"]),
-        Index(value = ["provider_id", "category_id"]),
+        // Channel lists are ordered by number; these let them read in order instead of sorting
+        // every channel of a large provider on each refresh.
+        Index(value = ["provider_id", "number"]),
+        Index(value = ["provider_id", "category_id", "number"]),
         Index(value = ["provider_id", "stream_id"], unique = true),
         Index(value = ["logical_group_id"]),
-        Index(value = ["provider_id", "category_id", "logical_group_id"])
+        // Includes name so the per-category counts never have to read the wide channel rows.
+        Index(value = ["provider_id", "category_id", "logical_group_id", "name"])
     ]
 )
 data class ChannelEntity(
