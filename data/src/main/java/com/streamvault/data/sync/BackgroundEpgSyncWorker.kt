@@ -15,6 +15,7 @@ import androidx.work.WorkRequest
 import androidx.work.WorkerParameters
 import com.streamvault.data.local.entity.ProviderWorkflowPhase
 import com.streamvault.data.local.entity.ProviderWorkflowReason
+import com.streamvault.data.local.dao.ProgramDao
 import com.streamvault.data.local.dao.ProviderDao
 import com.streamvault.data.local.dao.XtreamIndexJobDao
 import com.streamvault.domain.model.ProviderType
@@ -41,21 +42,13 @@ class BackgroundEpgSyncWorker(
         fun xtreamIndexJobDao(): XtreamIndexJobDao
         fun automaticSyncRunner(): AutomaticSyncRunner
         fun preferencesRepository(): PreferencesRepository
+        fun programDao(): ProgramDao
     }
 
     override suspend fun doWork(): Result {
         val providerId = inputData.getLong(KEY_PROVIDER_ID, INVALID_PROVIDER_ID)
         if (providerId == INVALID_PROVIDER_ID) {
             return Result.failure()
-        }
-
-        // Defer the run when the device is currently under memory pressure. The streamed
-        // Stalker EPG path is heap-frugal but the surrounding sync work (channel inserts,
-        // EPG resolution) can still allocate; retrying later avoids piling onto a stressed
-        // system. WorkManager will re-enqueue with backoff.
-        if (applicationContext.isCurrentlyLowOnMemoryForSync()) {
-            Log.w(TAG, "Deferring background EPG sync for provider $providerId: device low on memory")
-            return Result.retry()
         }
 
         val force = inputData.getBoolean(KEY_FORCE_REFRESH, false)
@@ -66,8 +59,25 @@ class BackgroundEpgSyncWorker(
                 applicationContext,
                 BackgroundEpgSyncWorkerEntryPoint::class.java
             )
+            // A guide that is already empty gains nothing from waiting: on a TV that is mostly
+            // playing live channels, waiting for playback or memory to free up meant the guide
+            // could stay empty for days.
+            val guideCoversSoon = entryPoint.programDao().hasProgramsEndingAfter(
+                providerId,
+                System.currentTimeMillis() + GUIDE_COVERAGE_NEEDED_MILLIS
+            )
+
+            // Defer the run when the device is currently under memory pressure. The streamed
+            // Stalker EPG path is heap-frugal but the surrounding sync work (channel inserts,
+            // EPG resolution) can still allocate; retrying later avoids piling onto a stressed
+            // system. WorkManager will re-enqueue with backoff.
+            if (guideCoversSoon && applicationContext.isCurrentlyLowOnMemoryForSync()) {
+                Log.w(TAG, "Deferring background EPG sync for provider $providerId: device low on memory")
+                return Result.retry()
+            }
+
             val provider = entryPoint.providerDao().getById(providerId)
-            if (provider != null && shouldDeferBackgroundEpgForPlayback(
+            if (provider != null && guideCoversSoon && shouldDeferBackgroundEpgForPlayback(
                     userInitiated = userInitiated,
                     deferWhileBusy = entryPoint.automaticSyncRunner().settings(providerId).deferWhileBusy,
                     playbackActive = AutomaticSyncActivity.hasPlayback
@@ -170,6 +180,8 @@ class BackgroundEpgSyncWorker(
         private const val KEY_FORCE_REFRESH = "force_refresh"
         private const val KEY_USER_INITIATED = "user_initiated"
         private const val INVALID_PROVIDER_ID = -1L
+        /** Guide data must reach this far ahead before the refresh may wait for a better time. */
+        private const val GUIDE_COVERAGE_NEEDED_MILLIS = 2L * 60L * 60L * 1000L
         /**
          * Default delay before the first background EPG sync runs after enqueue. This
          * replaces the in-process [kotlinx.coroutines.delay] previously used by the

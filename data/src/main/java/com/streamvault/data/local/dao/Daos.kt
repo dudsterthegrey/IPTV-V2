@@ -3490,6 +3490,9 @@ interface ProgramDao {
     @Query("SELECT COALESCE(MAX(catch_up_days), 0) FROM channels WHERE catch_up_supported = 1")
     suspend fun getMaxCatchUpDays(): Int
 
+    @Query("SELECT EXISTS(SELECT 1 FROM programs WHERE provider_id = :providerId AND end_time > :endAfter LIMIT 1)")
+    suspend fun hasProgramsEndingAfter(providerId: Long, endAfter: Long): Boolean
+
     @Query("DELETE FROM programs WHERE provider_id = :providerId")
     suspend fun deleteByProvider(providerId: Long)
 
