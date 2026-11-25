@@ -3487,6 +3487,9 @@ interface ProgramDao {
     @Query("DELETE FROM programs WHERE end_time < :beforeTime")
     suspend fun deleteOld(beforeTime: Long): Int
 
+    @Query("SELECT COALESCE(MAX(catch_up_days), 0) FROM channels WHERE catch_up_supported = 1")
+    suspend fun getMaxCatchUpDays(): Int
+
     @Query("DELETE FROM programs WHERE provider_id = :providerId")
     suspend fun deleteByProvider(providerId: Long)
 
@@ -4136,6 +4139,9 @@ interface EpgProgrammeDao {
 
     @Query("DELETE FROM epg_programmes WHERE end_time < :beforeTime")
     suspend fun deleteOld(beforeTime: Long): Int
+
+    @Query("SELECT COALESCE(MAX(catch_up_days), 0) FROM channels WHERE catch_up_supported = 1")
+    suspend fun getMaxCatchUpDays(): Int
 
     @Query("SELECT COUNT(*) FROM epg_programmes WHERE epg_source_id = :sourceId")
     suspend fun countBySource(sourceId: Long): Int

@@ -61,6 +61,14 @@ import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import java.util.zip.GZIPOutputStream
 
+/** Guide times near the current clock, so imports keep them inside the stored guide window. */
+private val recentGuideStartMillis: Long = System.currentTimeMillis() - 30L * 60L * 1000L
+private val recentGuideEndMillis: Long = recentGuideStartMillis + 60L * 60L * 1000L
+private fun xmltvTime(millis: Long): String =
+    java.text.SimpleDateFormat("yyyyMMddHHmmss", java.util.Locale.US)
+        .apply { timeZone = java.util.TimeZone.getTimeZone("UTC") }
+        .format(java.util.Date(millis)) + " +0000"
+
 class EpgSourceRepositoryImplTest {
 
     @Test
@@ -370,7 +378,7 @@ class EpgSourceRepositoryImplTest {
                       <channel id="myepg.ch1">
                         <display-name>MyEPG Channel</display-name>
                       </channel>
-                      <programme channel="myepg.ch1" start="20260101000000 +0000" stop="20260101010000 +0000">
+                      <programme channel="myepg.ch1" start="${xmltvTime(recentGuideStartMillis)}" stop="${xmltvTime(recentGuideEndMillis)}">
                         <title>MyEPG News</title>
                       </programme>
                     </tv>

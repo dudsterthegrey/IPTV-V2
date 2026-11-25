@@ -53,6 +53,14 @@ import java.util.concurrent.atomic.AtomicInteger
 import java.util.zip.GZIPOutputStream
 
 @OptIn(ExperimentalCoroutinesApi::class)
+/** Guide times near the current clock, so imports keep them inside the stored guide window. */
+private val recentGuideStartMillis: Long = System.currentTimeMillis() - 30L * 60L * 1000L
+private val recentGuideEndMillis: Long = recentGuideStartMillis + 60L * 60L * 1000L
+private fun xmltvTime(millis: Long): String =
+    java.text.SimpleDateFormat("yyyyMMddHHmmss", java.util.Locale.US)
+        .apply { timeZone = java.util.TimeZone.getTimeZone("UTC") }
+        .format(java.util.Date(millis)) + " +0000"
+
 class EpgRepositoryImplTest {
 
     private val programDao: ProgramDao = mock()
@@ -237,8 +245,8 @@ class EpgRepositoryImplTest {
                             channelId = "channel-1",
                             title = "News",
                             description = "",
-                            startTime = 1_735_722_000_000L,
-                            endTime = 1_735_725_600_000L,
+                            startTime = recentGuideStartMillis,
+                            endTime = recentGuideEndMillis,
                             lang = "en"
                         )
                     )
@@ -288,7 +296,7 @@ class EpgRepositoryImplTest {
                 gzip(
                     """
                     <tv>
-                      <programme channel="bbc1.uk" start="20260101000000 +0000" stop="20260101010000 +0000">
+                      <programme channel="bbc1.uk" start="${xmltvTime(recentGuideStartMillis)}" stop="${xmltvTime(recentGuideEndMillis)}">
                         <title>Morning News</title>
                       </programme>
                     </tv>
@@ -319,7 +327,7 @@ class EpgRepositoryImplTest {
                 body = gzip(
                     """
                     <tv>
-                      <programme channel="bbc1.uk" start="20260101000000 +0000" stop="20260101010000 +0000">
+                      <programme channel="bbc1.uk" start="${xmltvTime(recentGuideStartMillis)}" stop="${xmltvTime(recentGuideEndMillis)}">
                         <title>CDN Morning News</title>
                       </programme>
                     </tv>
@@ -596,8 +604,8 @@ class EpgRepositoryImplTest {
                             channelId = "channel-$index",
                             title = "Program $index",
                             description = "",
-                            startTime = 1_735_722_000_000L + index,
-                            endTime = 1_735_725_600_000L + index,
+                            startTime = recentGuideStartMillis + index,
+                            endTime = recentGuideEndMillis + index,
                             lang = "en"
                         )
                     )

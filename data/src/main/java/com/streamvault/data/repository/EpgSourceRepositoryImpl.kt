@@ -5,6 +5,7 @@ import android.net.Uri
 import android.util.Log
 import com.streamvault.data.epg.EpgNameNormalizer
 import com.streamvault.data.epg.EpgResolutionEngine
+import com.streamvault.data.epg.GuideIngestWindow
 import com.streamvault.data.local.DatabaseTransactionRunner
 import com.streamvault.data.local.dao.ChannelEpgMappingDao
 import com.streamvault.data.local.dao.EpgChannelDao
@@ -376,6 +377,9 @@ class EpgSourceRepositoryImpl @Inject constructor(
                     }
                 }
 
+                val ingestWindow = GuideIngestWindow.forCatchUpLookup(now = now) {
+                    epgProgrammeDao.getMaxCatchUpDays()
+                }
                 val channelBatch = ArrayList<EpgChannelEntity>(CHANNEL_BATCH_SIZE)
                 val programmeBatch = ArrayList<EpgProgrammeEntity>(PROGRAMME_BATCH_SIZE)
                 var channelCount = 0
@@ -409,6 +413,9 @@ class EpgSourceRepositoryImpl @Inject constructor(
                                 }
                             },
                             onProgramme = { programme ->
+                                if (!ingestWindow.keeps(programme.startTime, programme.endTime)) {
+                                    return@parseStreamingWithChannels
+                                }
                                 programmeBatch.add(
                                     EpgProgrammeEntity(
                                         epgSourceId = stagingId,

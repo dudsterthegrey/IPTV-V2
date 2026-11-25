@@ -1,6 +1,7 @@
 package com.streamvault.data.repository
 
 import android.util.Log
+import com.streamvault.data.epg.GuideIngestWindow
 import com.streamvault.data.local.DatabaseTransactionRunner
 import com.streamvault.data.local.dao.ProgramDao
 import com.streamvault.data.local.dao.ProviderDao
@@ -272,6 +273,9 @@ class EpgRepositoryImpl @Inject constructor(
                     ?.timezone
                     ?.trim()
                     ?.takeIf(String::isNotEmpty)
+                val ingestWindow = GuideIngestWindow.forCatchUpLookup(now = System.currentTimeMillis()) {
+                    programDao.getMaxCatchUpDays()
+                }
                 val batch = ArrayList<ProgramEntity>(EPG_PROGRAM_BATCH_SIZE)
                 suspend fun flushBatch() {
                     if (batch.isEmpty()) return
@@ -335,6 +339,7 @@ class EpgRepositoryImpl @Inject constructor(
                             }
                             xmltvParser.maybeDecompressGzip(epgUrl, limitedStream).use { xmlInput ->
                                 xmltvParser.parseStreaming(xmlInput, timezoneId = providerTimezoneId) { program ->
+                                    if (!ingestWindow.keeps(program.startTime, program.endTime)) return@parseStreaming
                                     batch.add(program.copy(providerId = stagingProviderId).toEntity())
                                     if (batch.size >= EPG_PROGRAM_BATCH_SIZE) {
                                         flushBatch()
