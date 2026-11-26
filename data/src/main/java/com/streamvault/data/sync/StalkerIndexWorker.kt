@@ -47,7 +47,10 @@ class StalkerIndexWorker(
         fun providerWorkflowRunner(): ProviderWorkflowRunner
     }
 
-    override suspend fun doWork(): Result {
+    override suspend fun doWork(): Result =
+        SyncForegroundPromotion.runPromotingWhenLong(this, SyncForegroundPromotion.Kind.LIBRARY) { doWorkInBackground() }
+
+    private suspend fun doWorkInBackground(): Result {
         val automatic = inputData.getBoolean("automatic_refresh", false)
         val policy = if (automatic) EntryPointAccessors.fromApplication(applicationContext, StalkerIndexWorkerEntryPoint::class.java)
             .automaticSyncRunner().settings(inputData.getLong(KEY_PROVIDER_ID, INVALID_PROVIDER_ID)) else null

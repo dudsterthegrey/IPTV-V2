@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Kitaplık güncellemeleri</string>
+    <string name="sync_notification_library">Kitaplığınız güncelleniyor</string>
+    <string name="sync_notification_guide">TV rehberi güncelleniyor</string>
+</resources>

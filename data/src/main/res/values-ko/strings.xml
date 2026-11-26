@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">라이브러리 업데이트</string>
+    <string name="sync_notification_library">라이브러리를 업데이트하는 중</string>
+    <string name="sync_notification_guide">TV 편성표를 업데이트하는 중</string>
+</resources>

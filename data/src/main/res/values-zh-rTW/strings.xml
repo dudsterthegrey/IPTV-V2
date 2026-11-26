@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">媒體庫更新</string>
+    <string name="sync_notification_library">正在更新您的媒體庫</string>
+    <string name="sync_notification_guide">正在更新電視節目表</string>
+</resources>

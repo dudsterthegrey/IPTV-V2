@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Mises à jour de la bibliothèque</string>
+    <string name="sync_notification_library">Mise à jour de votre bibliothèque</string>
+    <string name="sync_notification_guide">Mise à jour du guide TV</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Cập nhật thư viện</string>
+    <string name="sync_notification_library">Đang cập nhật thư viện của bạn</string>
+    <string name="sync_notification_guide">Đang cập nhật lịch phát sóng</string>
+</resources>

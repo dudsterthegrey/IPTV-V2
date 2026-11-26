@@ -170,7 +170,10 @@ class ProviderSyncWorker(
         fun databaseTransactionRunner(): DatabaseTransactionRunner
     }
 
-    override suspend fun doWork(): Result = kotlinx.coroutines.withContext(
+    override suspend fun doWork(): Result =
+        SyncForegroundPromotion.runPromotingWhenLong(this, SyncForegroundPromotion.Kind.LIBRARY) { doWorkInBackground() }
+
+    private suspend fun doWorkInBackground(): Result = kotlinx.coroutines.withContext(
         AutomaticSyncExecution.idleSatisfied.asContextElement(inputData.getBoolean("idle_constraint", false))
     ) { runProviderWork() }
 

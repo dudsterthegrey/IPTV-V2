@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Актуализации на библиотеката</string>
+    <string name="sync_notification_library">Библиотеката се актуализира</string>
+    <string name="sync_notification_guide">Телевизионният справочник се актуализира</string>
+</resources>

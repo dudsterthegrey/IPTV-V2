@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Pembaruan pustaka</string>
+    <string name="sync_notification_library">Memperbarui pustaka Anda</string>
+    <string name="sync_notification_guide">Memperbarui panduan TV</string>
+</resources>

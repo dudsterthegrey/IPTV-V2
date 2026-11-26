@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">ライブラリの更新</string>
+    <string name="sync_notification_library">ライブラリを更新しています</string>
+    <string name="sync_notification_guide">番組表を更新しています</string>
+</resources>

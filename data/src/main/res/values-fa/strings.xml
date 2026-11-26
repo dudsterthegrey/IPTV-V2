@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">به‌روزرسانی‌های کتابخانه</string>
+    <string name="sync_notification_library">در حال به‌روزرسانی کتابخانه شما</string>
+    <string name="sync_notification_guide">در حال به‌روزرسانی راهنمای تلویزیون</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Ενημερώσεις βιβλιοθήκης</string>
+    <string name="sync_notification_library">Ενημέρωση της βιβλιοθήκης σας</string>
+    <string name="sync_notification_guide">Ενημέρωση του οδηγού προγράμματος</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Kirjaston päivitykset</string>
+    <string name="sync_notification_library">Kirjastoa päivitetään</string>
+    <string name="sync_notification_guide">TV-opasta päivitetään</string>
+</resources>

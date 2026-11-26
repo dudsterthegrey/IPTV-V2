@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_notification_channel">Biblioteksuppdateringar</string>
+    <string name="sync_notification_library">Uppdaterar ditt bibliotek</string>
+    <string name="sync_notification_guide">Uppdaterar tv-guiden</string>
+</resources>

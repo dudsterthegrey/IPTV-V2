@@ -45,7 +45,10 @@ class BackgroundEpgSyncWorker(
         fun programDao(): ProgramDao
     }
 
-    override suspend fun doWork(): Result {
+    override suspend fun doWork(): Result =
+        SyncForegroundPromotion.runPromotingWhenLong(this, SyncForegroundPromotion.Kind.GUIDE) { doWorkInBackground() }
+
+    private suspend fun doWorkInBackground(): Result {
         val providerId = inputData.getLong(KEY_PROVIDER_ID, INVALID_PROVIDER_ID)
         if (providerId == INVALID_PROVIDER_ID) {
             return Result.failure()

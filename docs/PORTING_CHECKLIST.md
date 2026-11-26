@@ -318,6 +318,9 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
   - Database 95 adds channel indexes on number and a covering index for category counts.
     Channel list queries check the provider with `EXISTS` instead of joining `providers`,
     which had made SQLite scan and sort every channel.
+  - Library, guide and index sync workers still running after a minute become a foreground
+    service with a quiet notification (`SyncForegroundPromotion`), so Android does not stop
+    them at its 10-minute background limit. Strings live in `data/src/main/res`.
   - `LibraryQueryBenchmarkTest` (run with `LIBRARY_BENCHMARK=1`) times the Live TV, guide and
     home queries on a 20,000-channel, 40,000-movie library.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
