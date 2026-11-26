@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.10",
-  "versionCode": 15,
+  "versionName": "2.1.11",
+  "versionCode": 16,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "719056d5192dad334be347449bd5b5f86c58a6b9f6f86f07e57f374c1cf1187a",
-  "releaseNotes": "New matrix-style neon green app icon and TV banner (2.1.10)",
-  "publishedAt": "2026-11-22",
+  "sha256": "f4b036f4c79869fa1f4278f8900013d99851963b32d316d1027fde0fa8c43ef8",
+  "releaseNotes": "Faster Live TV and guide on large libraries, and better subtitle search (2.1.11)",
+  "publishedAt": "2026-11-26",
   "downloaderCode": "7935478"
 }
