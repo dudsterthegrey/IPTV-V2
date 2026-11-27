@@ -168,4 +168,43 @@ class PlayerTrackControllerExternalSubtitleAutoSelectTest {
         assertThat(parameters.overrides[onlineGroup]?.trackIndices).containsExactly(0)
         assertThat(parameters.disabledTrackTypes).doesNotContain(C.TRACK_TYPE_TEXT)
     }
+
+    @Test
+    fun `downloaded subtitle merged into the stream is switched on`() {
+        // MergingMediaSource renames the side-loaded track to "<source index>:<id>".
+        val mergedGroup = TrackGroup(
+            "1:online-subtitle",
+            Format.Builder()
+                .setId("1:$ONLINE_SUBTITLE_TRACK_ID")
+                .setSampleMimeType(MimeTypes.APPLICATION_SUBRIP)
+                .setLanguage("en")
+                .build()
+        )
+        val mergedTracks = Tracks(
+            listOf(Tracks.Group(mergedGroup, false, intArrayOf(C.FORMAT_HANDLED), booleanArrayOf(false)))
+        )
+        currentTracks = mergedTracks
+        // What the movie page and the in-player search save: a file but no track id yet.
+        controller.setVodTrackPreferences(
+            null,
+            VodTrackPreferences(
+                subtitle = VodTrackPreference(language = "en", label = "English", externalSubtitleDownloadId = "4242")
+            )
+        )
+        controller.requestExternalSubtitleAutoSelect(SubtitleTrackSource.ONLINE)
+
+        controller.onTracksChanged(mergedTracks)
+        controller.applyVodTrackPreferences(player)
+        controller.applyPendingExternalSubtitleAutoSelect(player)
+
+        assertThat(controller.availableSubtitleTracks.value.single().subtitleSource)
+            .isEqualTo(SubtitleTrackSource.ONLINE)
+        assertThat(parameters.disabledTrackTypes).doesNotContain(C.TRACK_TYPE_TEXT)
+        assertThat(parameters.overrides[mergedGroup]?.trackIndices).containsExactly(0)
+
+        // A later tracks-changed pass keeps it on.
+        controller.applyVodTrackPreferences(player)
+        assertThat(parameters.disabledTrackTypes).doesNotContain(C.TRACK_TYPE_TEXT)
+        assertThat(parameters.overrides[mergedGroup]?.trackIndices).containsExactly(0)
+    }
 }

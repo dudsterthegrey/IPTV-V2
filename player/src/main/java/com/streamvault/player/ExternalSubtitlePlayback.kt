@@ -35,6 +35,24 @@ internal fun TrackSelectionParameters.withExternalSubtitleEnabled(): TrackSelect
         .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, false)
         .build()
 
+/**
+ * Which kind of side-loaded subtitle a text track is. Media3's MergingMediaSource renames each
+ * merged track to "<source index>:<original id>", so the added subtitle shows up as
+ * "1:streamvault-online-subtitle" and an exact id match never recognised it: the track loaded
+ * but was never switched on.
+ */
+internal fun subtitleSourceForFormatId(formatId: String?): SubtitleTrackSource {
+    val id = formatId?.replace(mergedTrackIdPrefix, "")
+    return when (id) {
+        ONLINE_SUBTITLE_TRACK_ID -> SubtitleTrackSource.ONLINE
+        DEVICE_SUBTITLE_TRACK_ID -> SubtitleTrackSource.DEVICE
+        STREMIO_SUBTITLE_TRACK_ID -> SubtitleTrackSource.STREMIO
+        else -> SubtitleTrackSource.PROVIDER
+    }
+}
+
+private val mergedTrackIdPrefix = Regex("^(?:\\d+:)+")
+
 internal fun buildExternalSubtitleConfiguration(
     subtitleUri: Uri,
     language: String,
