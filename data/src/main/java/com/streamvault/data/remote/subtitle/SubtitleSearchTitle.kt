@@ -9,7 +9,8 @@ internal object SubtitleSearchTitle {
     private val providerPrefix = Regex(
         """^\s*(?:[\[(|]\s*[A-Za-z0-9+]{2,6}\s*[\])|]|[A-Z]{2}\s*:(?!\S)|[A-Z0-9+]{2,4}(?:-[A-Z0-9+]{2,4})?(?:\s+-|\s*\|)(?!\S))\s*"""
     )
-    private val bracketed = Regex("""\[[^\]]*]|\{[^}]*}|\([^)]*\)""")
+    // Android's ICU regex engine rejects a bare closing }, unlike desktop Java; escape both.
+    private val bracketed = Regex("""\[[^\]]*\]|\{[^}]*\}|\([^)]*\)""")
     private val episodeMarker = Regex(
         """(?i)(?:\b|_)(?:s\d{1,2}\s*[ex]\s*\d{1,3}|\d{1,2}x\d{2,3}|season\s*\d+|saison\s*\d+|staffel\s*\d+|s\d{1,2})\b.*$"""
     )

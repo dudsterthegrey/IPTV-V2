@@ -343,7 +343,14 @@ class OpenSubtitlesRepositoryImpl @Inject constructor(
         language: String?,
     ): List<OpenSubtitlesApi.SearchQuery> {
         val languageCode = language?.trim()?.lowercase()?.takeIf { it.isNotBlank() && it != "auto" && it != "all" }
-        val cleanTitle = SubtitleSearchTitle.clean(title).takeIf { it.isNotBlank() }
+        // The cleaner only improves matching; a failure in it must never stop the search.
+        val cleanTitle = try {
+            SubtitleSearchTitle.clean(title)
+        } catch (error: LinkageError) {
+            title.trim()
+        } catch (error: RuntimeException) {
+            title.trim()
+        }.takeIf { it.isNotBlank() }
         val validYear = year?.takeIf { it in 1870..2100 }
         val season = seasonNumber?.takeIf { it > 0 }
         val episode = episodeNumber?.takeIf { it > 0 }
