@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">Zadnje 3 godine</string>
     <string name="shelf_filter_year_last_10">Zadnjih 10 godina</string>
     <string name="shelf_filter_year_older">Prije 1990.</string>
+    <string name="detail_subtitles_button">Titlovi</string>
+    <string name="detail_subtitles_button_chosen">Titlovi: %1$s</string>
+    <string name="detail_subtitles_title">Odaberite titlove</string>
+    <string name="detail_subtitles_title_episode">Titlovi za S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Odabrani titlovi učitavaju se kada pritisnete Reproduciraj.</string>
+    <string name="detail_subtitles_all_languages">Svi jezici</string>
+    <string name="detail_subtitles_loading_languages">Učitavanje jezika…</string>
+    <string name="detail_subtitles_searching">Pretraživanje OpenSubtitlesa…</string>
+    <string name="detail_subtitles_no_results">Za ovaj naslov nema titlova.</string>
+    <string name="detail_subtitles_retry">Pokušaj ponovno</string>
+    <string name="detail_subtitles_error_languages">Popis jezika nije moguće učitati. Provjerite postavke OpenSubtitlesa i vezu.</string>
+    <string name="detail_subtitles_error_search">Pretraživanje OpenSubtitlesa nije uspjelo. Provjerite vezu i pokušajte ponovno.</string>
+    <string name="detail_subtitles_error_download">Te titlove nije moguće preuzeti. Pokušajte ponovno ili odaberite druge.</string>
+    <string name="detail_subtitles_remove">Ukloni odabrane titlove</string>
+    <string name="detail_subtitles_change_language">Promijeni jezik</string>
+    <string name="detail_subtitles_close">Zatvori</string>
+    <string name="detail_subtitles_release_unknown">Nepoznato izdanje</string>
+    <string name="detail_subtitles_downloading">Preuzimanje: %1$s…</string>
 </resources>

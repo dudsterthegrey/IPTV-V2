@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Τελευταία 3 χρόνια</string>
     <string name="shelf_filter_year_last_10">Τελευταία 10 χρόνια</string>
     <string name="shelf_filter_year_older">Πριν το 1990</string>
+    <string name="detail_subtitles_button">Υπότιτλοι</string>
+    <string name="detail_subtitles_button_chosen">Υπότιτλοι: %1$s</string>
+    <string name="detail_subtitles_title">Επιλογή υποτίτλων</string>
+    <string name="detail_subtitles_title_episode">Υπότιτλοι για Σ%1$d Ε%2$d</string>
+    <string name="detail_subtitles_description">Οι υπότιτλοι που επιλέγετε φορτώνονται όταν πατάτε Αναπαραγωγή.</string>
+    <string name="detail_subtitles_all_languages">Όλες οι γλώσσες</string>
+    <string name="detail_subtitles_loading_languages">Φόρτωση γλωσσών…</string>
+    <string name="detail_subtitles_searching">Αναζήτηση στο OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Δεν βρέθηκαν υπότιτλοι για αυτόν τον τίτλο.</string>
+    <string name="detail_subtitles_retry">Δοκιμάστε ξανά</string>
+    <string name="detail_subtitles_error_languages">Δεν ήταν δυνατή η φόρτωση της λίστας γλωσσών. Ελέγξτε τις ρυθμίσεις του OpenSubtitles και τη σύνδεση.</string>
+    <string name="detail_subtitles_error_search">Η αναζήτηση στο OpenSubtitles απέτυχε. Ελέγξτε τη σύνδεση και δοκιμάστε ξανά.</string>
+    <string name="detail_subtitles_error_download">Δεν ήταν δυνατή η λήψη αυτών των υποτίτλων. Δοκιμάστε ξανά ή επιλέξτε άλλους.</string>
+    <string name="detail_subtitles_remove">Αφαίρεση επιλεγμένων υποτίτλων</string>
+    <string name="detail_subtitles_change_language">Αλλαγή γλώσσας</string>
+    <string name="detail_subtitles_close">Κλείσιμο</string>
+    <string name="detail_subtitles_release_unknown">Άγνωστη έκδοση</string>
+    <string name="detail_subtitles_downloading">Λήψη %1$s…</string>
 </resources>

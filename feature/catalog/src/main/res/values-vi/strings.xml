@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">3 năm gần đây</string>
     <string name="shelf_filter_year_last_10">10 năm gần đây</string>
     <string name="shelf_filter_year_older">Trước năm 1990</string>
+    <string name="detail_subtitles_button">Phụ đề</string>
+    <string name="detail_subtitles_button_chosen">Phụ đề: %1$s</string>
+    <string name="detail_subtitles_title">Chọn phụ đề</string>
+    <string name="detail_subtitles_title_episode">Phụ đề cho P%1$d T%2$d</string>
+    <string name="detail_subtitles_description">Phụ đề bạn chọn sẽ được tải khi bạn nhấn Phát.</string>
+    <string name="detail_subtitles_all_languages">Tất cả ngôn ngữ</string>
+    <string name="detail_subtitles_loading_languages">Đang tải ngôn ngữ…</string>
+    <string name="detail_subtitles_searching">Đang tìm trên OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Không tìm thấy phụ đề cho nội dung này.</string>
+    <string name="detail_subtitles_retry">Thử lại</string>
+    <string name="detail_subtitles_error_languages">Không tải được danh sách ngôn ngữ. Hãy kiểm tra cài đặt OpenSubtitles và kết nối.</string>
+    <string name="detail_subtitles_error_search">Không tìm được trên OpenSubtitles. Hãy kiểm tra kết nối và thử lại.</string>
+    <string name="detail_subtitles_error_download">Không tải xuống được phụ đề này. Hãy thử lại hoặc chọn phụ đề khác.</string>
+    <string name="detail_subtitles_remove">Xóa phụ đề đã chọn</string>
+    <string name="detail_subtitles_change_language">Đổi ngôn ngữ</string>
+    <string name="detail_subtitles_close">Đóng</string>
+    <string name="detail_subtitles_release_unknown">Bản phát hành không rõ</string>
+    <string name="detail_subtitles_downloading">Đang tải xuống %1$s…</string>
 </resources>

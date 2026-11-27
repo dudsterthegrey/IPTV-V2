@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">3 tahun terakhir</string>
     <string name="shelf_filter_year_last_10">10 tahun terakhir</string>
     <string name="shelf_filter_year_older">Sebelum 1990</string>
+    <string name="detail_subtitles_button">Subtitel</string>
+    <string name="detail_subtitles_button_chosen">Subtitel: %1$s</string>
+    <string name="detail_subtitles_title">Pilih subtitel</string>
+    <string name="detail_subtitles_title_episode">Subtitel untuk S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Subtitel yang Anda pilih dimuat saat Anda menekan Putar.</string>
+    <string name="detail_subtitles_all_languages">Semua bahasa</string>
+    <string name="detail_subtitles_loading_languages">Memuat bahasa…</string>
+    <string name="detail_subtitles_searching">Mencari di OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Tidak ada subtitel untuk judul ini.</string>
+    <string name="detail_subtitles_retry">Coba lagi</string>
+    <string name="detail_subtitles_error_languages">Daftar bahasa tidak dapat dimuat. Periksa setelan OpenSubtitles dan koneksi.</string>
+    <string name="detail_subtitles_error_search">Pencarian OpenSubtitles gagal. Periksa koneksi dan coba lagi.</string>
+    <string name="detail_subtitles_error_download">Subtitel tersebut tidak dapat diunduh. Coba lagi atau pilih yang lain.</string>
+    <string name="detail_subtitles_remove">Hapus subtitel yang dipilih</string>
+    <string name="detail_subtitles_change_language">Ganti bahasa</string>
+    <string name="detail_subtitles_close">Tutup</string>
+    <string name="detail_subtitles_release_unknown">Rilis tidak dikenal</string>
+    <string name="detail_subtitles_downloading">Mengunduh %1$s…</string>
 </resources>

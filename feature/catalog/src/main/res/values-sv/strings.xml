@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Senaste 3 åren</string>
     <string name="shelf_filter_year_last_10">Senaste 10 åren</string>
     <string name="shelf_filter_year_older">Före 1990</string>
+    <string name="detail_subtitles_button">Undertexter</string>
+    <string name="detail_subtitles_button_chosen">Undertexter: %1$s</string>
+    <string name="detail_subtitles_title">Välj undertexter</string>
+    <string name="detail_subtitles_title_episode">Undertexter för S%1$d A%2$d</string>
+    <string name="detail_subtitles_description">Undertexterna du väljer läses in när du trycker på Spela upp.</string>
+    <string name="detail_subtitles_all_languages">Alla språk</string>
+    <string name="detail_subtitles_loading_languages">Läser in språk…</string>
+    <string name="detail_subtitles_searching">Söker på OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Inga undertexter hittades för den här titeln.</string>
+    <string name="detail_subtitles_retry">Försök igen</string>
+    <string name="detail_subtitles_error_languages">Det gick inte att läsa in språklistan. Kontrollera OpenSubtitles-inställningarna och anslutningen.</string>
+    <string name="detail_subtitles_error_search">Sökningen på OpenSubtitles misslyckades. Kontrollera anslutningen och försök igen.</string>
+    <string name="detail_subtitles_error_download">Det gick inte att ladda ned undertexterna. Försök igen eller välj andra.</string>
+    <string name="detail_subtitles_remove">Ta bort valda undertexter</string>
+    <string name="detail_subtitles_change_language">Byt språk</string>
+    <string name="detail_subtitles_close">Stäng</string>
+    <string name="detail_subtitles_release_unknown">Okänd utgåva</string>
+    <string name="detail_subtitles_downloading">Laddar ned %1$s…</string>
 </resources>

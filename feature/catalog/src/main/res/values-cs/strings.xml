@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Poslední 3 roky</string>
     <string name="shelf_filter_year_last_10">Posledních 10 let</string>
     <string name="shelf_filter_year_older">Před rokem 1990</string>
+    <string name="detail_subtitles_button">Titulky</string>
+    <string name="detail_subtitles_button_chosen">Titulky: %1$s</string>
+    <string name="detail_subtitles_title">Vybrat titulky</string>
+    <string name="detail_subtitles_title_episode">Titulky pro S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Vybrané titulky se načtou po stisknutí Přehrát.</string>
+    <string name="detail_subtitles_all_languages">Všechny jazyky</string>
+    <string name="detail_subtitles_loading_languages">Načítání jazyků…</string>
+    <string name="detail_subtitles_searching">Hledání na OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Pro tento titul nebyly nalezeny žádné titulky.</string>
+    <string name="detail_subtitles_retry">Zkusit znovu</string>
+    <string name="detail_subtitles_error_languages">Seznam jazyků se nepodařilo načíst. Zkontrolujte nastavení OpenSubtitles a připojení.</string>
+    <string name="detail_subtitles_error_search">Hledání na OpenSubtitles se nezdařilo. Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="detail_subtitles_error_download">Tyto titulky se nepodařilo stáhnout. Zkuste to znovu nebo vyberte jiné.</string>
+    <string name="detail_subtitles_remove">Odebrat vybrané titulky</string>
+    <string name="detail_subtitles_change_language">Změnit jazyk</string>
+    <string name="detail_subtitles_close">Zavřít</string>
+    <string name="detail_subtitles_release_unknown">Neznámé vydání</string>
+    <string name="detail_subtitles_downloading">Stahování: %1$s…</string>
 </resources>

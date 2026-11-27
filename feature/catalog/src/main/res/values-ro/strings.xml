@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Ultimii 3 ani</string>
     <string name="shelf_filter_year_last_10">Ultimii 10 ani</string>
     <string name="shelf_filter_year_older">Înainte de 1990</string>
+    <string name="detail_subtitles_button">Subtitrări</string>
+    <string name="detail_subtitles_button_chosen">Subtitrări: %1$s</string>
+    <string name="detail_subtitles_title">Alege subtitrări</string>
+    <string name="detail_subtitles_title_episode">Subtitrări pentru S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Subtitrările alese se încarcă atunci când apeși Redă.</string>
+    <string name="detail_subtitles_all_languages">Toate limbile</string>
+    <string name="detail_subtitles_loading_languages">Se încarcă limbile…</string>
+    <string name="detail_subtitles_searching">Se caută pe OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Nu s-au găsit subtitrări pentru acest titlu.</string>
+    <string name="detail_subtitles_retry">Reîncearcă</string>
+    <string name="detail_subtitles_error_languages">Lista de limbi nu a putut fi încărcată. Verifică setările OpenSubtitles și conexiunea.</string>
+    <string name="detail_subtitles_error_search">Căutarea pe OpenSubtitles a eșuat. Verifică conexiunea și încearcă din nou.</string>
+    <string name="detail_subtitles_error_download">Aceste subtitrări nu au putut fi descărcate. Încearcă din nou sau alege altele.</string>
+    <string name="detail_subtitles_remove">Elimină subtitrările alese</string>
+    <string name="detail_subtitles_change_language">Schimbă limba</string>
+    <string name="detail_subtitles_close">Închide</string>
+    <string name="detail_subtitles_release_unknown">Versiune necunoscută</string>
+    <string name="detail_subtitles_downloading">Se descarcă %1$s…</string>
 </resources>

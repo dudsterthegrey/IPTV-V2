@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">3 tahun lepas</string>
     <string name="shelf_filter_year_last_10">10 tahun lepas</string>
     <string name="shelf_filter_year_older">Sebelum 1990</string>
+    <string name="detail_subtitles_button">Sari kata</string>
+    <string name="detail_subtitles_button_chosen">Sari kata: %1$s</string>
+    <string name="detail_subtitles_title">Pilih sari kata</string>
+    <string name="detail_subtitles_title_episode">Sari kata untuk S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Sari kata yang anda pilih dimuatkan apabila anda menekan Main.</string>
+    <string name="detail_subtitles_all_languages">Semua bahasa</string>
+    <string name="detail_subtitles_loading_languages">Memuatkan bahasa…</string>
+    <string name="detail_subtitles_searching">Mencari di OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Tiada sari kata ditemui untuk tajuk ini.</string>
+    <string name="detail_subtitles_retry">Cuba lagi</string>
+    <string name="detail_subtitles_error_languages">Senarai bahasa tidak dapat dimuatkan. Semak tetapan OpenSubtitles dan sambungan.</string>
+    <string name="detail_subtitles_error_search">Carian OpenSubtitles gagal. Semak sambungan dan cuba lagi.</string>
+    <string name="detail_subtitles_error_download">Sari kata itu tidak dapat dimuat turun. Cuba lagi atau pilih yang lain.</string>
+    <string name="detail_subtitles_remove">Buang sari kata yang dipilih</string>
+    <string name="detail_subtitles_change_language">Tukar bahasa</string>
+    <string name="detail_subtitles_close">Tutup</string>
+    <string name="detail_subtitles_release_unknown">Keluaran tidak diketahui</string>
+    <string name="detail_subtitles_downloading">Memuat turun %1$s…</string>
 </resources>

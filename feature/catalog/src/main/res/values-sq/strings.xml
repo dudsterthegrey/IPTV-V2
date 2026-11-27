@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">3 vitet e fundit</string>
     <string name="shelf_filter_year_last_10">10 vitet e fundit</string>
     <string name="shelf_filter_year_older">Para vitit 1990</string>
+    <string name="detail_subtitles_button">Titrat</string>
+    <string name="detail_subtitles_button_chosen">Titrat: %1$s</string>
+    <string name="detail_subtitles_title">Zgjidh titrat</string>
+    <string name="detail_subtitles_title_episode">Titrat për S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Titrat që zgjidhni ngarkohen kur shtypni Luaj.</string>
+    <string name="detail_subtitles_all_languages">Të gjitha gjuhët</string>
+    <string name="detail_subtitles_loading_languages">Po ngarkohen gjuhët…</string>
+    <string name="detail_subtitles_searching">Po kërkohet në OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Nuk u gjetën titra për këtë titull.</string>
+    <string name="detail_subtitles_retry">Provo sërish</string>
+    <string name="detail_subtitles_error_languages">Lista e gjuhëve nuk u ngarkua. Kontrolloni cilësimet e OpenSubtitles dhe lidhjen.</string>
+    <string name="detail_subtitles_error_search">Kërkimi në OpenSubtitles dështoi. Kontrolloni lidhjen dhe provoni sërish.</string>
+    <string name="detail_subtitles_error_download">Këto titra nuk u shkarkuan. Provoni sërish ose zgjidhni të tjera.</string>
+    <string name="detail_subtitles_remove">Hiq titrat e zgjedhura</string>
+    <string name="detail_subtitles_change_language">Ndrysho gjuhën</string>
+    <string name="detail_subtitles_close">Mbyll</string>
+    <string name="detail_subtitles_release_unknown">Botim i panjohur</string>
+    <string name="detail_subtitles_downloading">Po shkarkohet %1$s…</string>
 </resources>

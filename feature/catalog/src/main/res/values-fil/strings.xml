@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">Huling 3 taon</string>
     <string name="shelf_filter_year_last_10">Huling 10 taon</string>
     <string name="shelf_filter_year_older">Bago ang 1990</string>
+    <string name="detail_subtitles_button">Mga subtitle</string>
+    <string name="detail_subtitles_button_chosen">Mga subtitle: %1$s</string>
+    <string name="detail_subtitles_title">Pumili ng subtitle</string>
+    <string name="detail_subtitles_title_episode">Mga subtitle para sa S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Maglo-load ang napili mong subtitle kapag pinindot mo ang Play.</string>
+    <string name="detail_subtitles_all_languages">Lahat ng wika</string>
+    <string name="detail_subtitles_loading_languages">Nilo-load ang mga wika…</string>
+    <string name="detail_subtitles_searching">Naghahanap sa OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Walang nahanap na subtitle para sa pamagat na ito.</string>
+    <string name="detail_subtitles_retry">Subukang muli</string>
+    <string name="detail_subtitles_error_languages">Hindi ma-load ang listahan ng wika. Tingnan ang mga setting ng OpenSubtitles at ang koneksyon.</string>
+    <string name="detail_subtitles_error_search">Hindi makapaghanap sa OpenSubtitles. Tingnan ang koneksyon at subukang muli.</string>
+    <string name="detail_subtitles_error_download">Hindi ma-download ang subtitle na iyon. Subukang muli o pumili ng iba.</string>
+    <string name="detail_subtitles_remove">Alisin ang napiling subtitle</string>
+    <string name="detail_subtitles_change_language">Palitan ang wika</string>
+    <string name="detail_subtitles_close">Isara</string>
+    <string name="detail_subtitles_release_unknown">Hindi kilalang release</string>
+    <string name="detail_subtitles_downloading">Dina-download ang %1$s…</string>
 </resources>

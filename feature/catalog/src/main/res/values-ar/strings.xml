@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">آخر 3 سنوات</string>
     <string name="shelf_filter_year_last_10">آخر 10 سنوات</string>
     <string name="shelf_filter_year_older">قبل 1990</string>
+    <string name="detail_subtitles_button">الترجمة</string>
+    <string name="detail_subtitles_button_chosen">الترجمة: %1$s</string>
+    <string name="detail_subtitles_title">اختر الترجمة</string>
+    <string name="detail_subtitles_title_episode">ترجمة الموسم %1$d الحلقة %2$d</string>
+    <string name="detail_subtitles_description">يتم تحميل الترجمة التي تختارها عند الضغط على تشغيل.</string>
+    <string name="detail_subtitles_all_languages">كل اللغات</string>
+    <string name="detail_subtitles_loading_languages">جارٍ تحميل اللغات…</string>
+    <string name="detail_subtitles_searching">جارٍ البحث في OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">لم يتم العثور على ترجمة لهذا العنوان.</string>
+    <string name="detail_subtitles_retry">حاول مرة أخرى</string>
+    <string name="detail_subtitles_error_languages">تعذر تحميل قائمة اللغات. تحقق من إعدادات OpenSubtitles والاتصال.</string>
+    <string name="detail_subtitles_error_search">تعذر البحث في OpenSubtitles. تحقق من الاتصال وحاول مرة أخرى.</string>
+    <string name="detail_subtitles_error_download">تعذر تنزيل هذه الترجمة. حاول مرة أخرى أو اختر ترجمة أخرى.</string>
+    <string name="detail_subtitles_remove">إزالة الترجمة المختارة</string>
+    <string name="detail_subtitles_change_language">تغيير اللغة</string>
+    <string name="detail_subtitles_close">إغلاق</string>
+    <string name="detail_subtitles_release_unknown">إصدار غير معروف</string>
+    <string name="detail_subtitles_downloading">جارٍ تنزيل %1$s…</string>
 </resources>

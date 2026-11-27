@@ -490,4 +490,22 @@
     <string name="shelf_filter_year_last_3">Last 3 years</string>
     <string name="shelf_filter_year_last_10">Last 10 years</string>
     <string name="shelf_filter_year_older">Before 1990</string>
+    <string name="detail_subtitles_button">Subtitles</string>
+    <string name="detail_subtitles_button_chosen">Subtitles: %1$s</string>
+    <string name="detail_subtitles_title">Choose subtitles</string>
+    <string name="detail_subtitles_title_episode">Subtitles for S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">The subtitles you pick load when you press Play.</string>
+    <string name="detail_subtitles_all_languages">All languages</string>
+    <string name="detail_subtitles_loading_languages">Loading languages…</string>
+    <string name="detail_subtitles_searching">Searching OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">No subtitles found for this title.</string>
+    <string name="detail_subtitles_retry">Try again</string>
+    <string name="detail_subtitles_error_languages">Couldn\'t load the language list. Check your OpenSubtitles settings and connection.</string>
+    <string name="detail_subtitles_error_search">Couldn\'t search OpenSubtitles. Check your connection and try again.</string>
+    <string name="detail_subtitles_error_download">Couldn\'t download that subtitle. Try again or pick another one.</string>
+    <string name="detail_subtitles_remove">Remove chosen subtitles</string>
+    <string name="detail_subtitles_change_language">Change language</string>
+    <string name="detail_subtitles_close">Close</string>
+    <string name="detail_subtitles_release_unknown">Unknown release</string>
+    <string name="detail_subtitles_downloading">Downloading %1$s…</string>
 </resources>

@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">۳ سال اخیر</string>
     <string name="shelf_filter_year_last_10">۱۰ سال اخیر</string>
     <string name="shelf_filter_year_older">پیش از ۱۹۹۰</string>
+    <string name="detail_subtitles_button">زیرنویس</string>
+    <string name="detail_subtitles_button_chosen">زیرنویس: %1$s</string>
+    <string name="detail_subtitles_title">انتخاب زیرنویس</string>
+    <string name="detail_subtitles_title_episode">زیرنویس فصل %1$d قسمت %2$d</string>
+    <string name="detail_subtitles_description">زیرنویسی که انتخاب می‌کنید با زدن پخش بارگیری می‌شود.</string>
+    <string name="detail_subtitles_all_languages">همه زبان‌ها</string>
+    <string name="detail_subtitles_loading_languages">در حال بارگیری زبان‌ها…</string>
+    <string name="detail_subtitles_searching">در حال جستجو در OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">زیرنویسی برای این عنوان پیدا نشد.</string>
+    <string name="detail_subtitles_retry">تلاش دوباره</string>
+    <string name="detail_subtitles_error_languages">فهرست زبان‌ها بارگیری نشد. تنظیمات OpenSubtitles و اتصال را بررسی کنید.</string>
+    <string name="detail_subtitles_error_search">جستجو در OpenSubtitles انجام نشد. اتصال را بررسی کنید و دوباره تلاش کنید.</string>
+    <string name="detail_subtitles_error_download">این زیرنویس دانلود نشد. دوباره تلاش کنید یا زیرنویس دیگری انتخاب کنید.</string>
+    <string name="detail_subtitles_remove">حذف زیرنویس انتخاب‌شده</string>
+    <string name="detail_subtitles_change_language">تغییر زبان</string>
+    <string name="detail_subtitles_close">بستن</string>
+    <string name="detail_subtitles_release_unknown">نسخه نامشخص</string>
+    <string name="detail_subtitles_downloading">در حال دانلود %1$s…</string>
 </resources>

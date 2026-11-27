@@ -127,6 +127,7 @@ data class SportsEventChannelPick(
 private fun VodTrackPreferenceScope.storageKey(): String = when (this) {
     is VodTrackPreferenceScope.Movie -> "$providerId|movie|$contentId"
     is VodTrackPreferenceScope.Series -> "$providerId|series|$contentId"
+    is VodTrackPreferenceScope.Episode -> "$providerId|episode|$contentId"
 }
 
 @Singleton

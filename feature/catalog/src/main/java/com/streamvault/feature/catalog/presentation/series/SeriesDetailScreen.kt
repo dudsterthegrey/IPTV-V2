@@ -1,5 +1,7 @@
 package com.streamvault.feature.catalog.presentation.series
 
+import com.streamvault.feature.catalog.presentation.subtitles.DetailSubtitlesButton
+import com.streamvault.feature.catalog.presentation.subtitles.toSubtitleTarget
 import com.streamvault.core.ui.design.BrowseShapes
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -764,6 +766,7 @@ private fun SeriesDetailActions(
             onClick = { onResumeClick(resumeEpisode) },
             primary = true
         ) }
+        item { DetailSubtitlesButton(target = resumeEpisode.toSubtitleTarget(series)) }
         item { DetailActionButton(stringResource(R.string.stream_url_copy), onCopyUrl) }
         item { DetailActionButton(
             stringResource(if (isCasting) R.string.cast_launching else R.string.cast_button_label),

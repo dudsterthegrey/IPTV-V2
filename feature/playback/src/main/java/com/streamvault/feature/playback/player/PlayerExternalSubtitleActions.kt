@@ -186,7 +186,7 @@ internal fun PlayerViewModel.downloadExternalSubtitle(subtitleId: String) {
             when (val result = downloadExternalSubtitleUseCase(subtitle)) {
                 is Result.Success -> {
                     val previousDownloadId = activeVodTrackPreferences?.subtitle?.externalSubtitleDownloadId
-                    if (currentContentType == ContentType.MOVIE || currentContentType == ContentType.VOD) {
+                    if (currentContentType.remembersOnlineSubtitle()) {
                         val updatedPreferences = (activeVodTrackPreferences ?: VodTrackPreferences()).copy(
                             subtitle = VodTrackPreference(
                                 language = subtitle.language,
@@ -198,7 +198,7 @@ internal fun PlayerViewModel.downloadExternalSubtitle(subtitleId: String) {
                         playerEngine.setVodTrackPreferences(updatedPreferences)
                     }
                     playerEngine.addExternalSubtitle(Uri.fromFile(result.data), subtitle.language)
-                    if ((currentContentType == ContentType.MOVIE || currentContentType == ContentType.VOD) &&
+                    if ((currentContentType.remembersOnlineSubtitle()) &&
                         previousDownloadId != null && previousDownloadId != subtitle.downloadId
                     ) {
                         try {
@@ -227,7 +227,7 @@ internal fun PlayerViewModel.downloadExternalSubtitle(subtitleId: String) {
 }
 
 internal suspend fun PlayerViewModel.restoreRememberedOpenSubtitle() {
-    if (currentContentType != ContentType.MOVIE && currentContentType != ContentType.VOD) return
+    if (!currentContentType.remembersOnlineSubtitle()) return
     val preference = activeVodTrackPreferences?.subtitle ?: return
     val downloadId = preference.externalSubtitleDownloadId ?: return
     val cachedFile = downloadExternalSubtitleUseCase.cachedSubtitleFile(downloadId)
@@ -293,3 +293,7 @@ private data class ExternalSubtitleQuery(
     val seasonNumber: Int? = null,
     val episodeNumber: Int? = null,
 )
+
+/** Movies and single episodes remember the online subtitle picked for them. */
+internal fun ContentType.remembersOnlineSubtitle(): Boolean =
+    this == ContentType.MOVIE || this == ContentType.VOD || this == ContentType.SERIES_EPISODE

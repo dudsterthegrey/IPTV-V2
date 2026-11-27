@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">3 השנים האחרונות</string>
     <string name="shelf_filter_year_last_10">10 השנים האחרונות</string>
     <string name="shelf_filter_year_older">לפני 1990</string>
+    <string name="detail_subtitles_button">כתוביות</string>
+    <string name="detail_subtitles_button_chosen">כתוביות: %1$s</string>
+    <string name="detail_subtitles_title">בחירת כתוביות</string>
+    <string name="detail_subtitles_title_episode">כתוביות לעונה %1$d פרק %2$d</string>
+    <string name="detail_subtitles_description">הכתוביות שבחרת ייטענו כשתלחץ על הפעלה.</string>
+    <string name="detail_subtitles_all_languages">כל השפות</string>
+    <string name="detail_subtitles_loading_languages">טוען שפות…</string>
+    <string name="detail_subtitles_searching">מחפש ב-OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">לא נמצאו כתוביות לכותר הזה.</string>
+    <string name="detail_subtitles_retry">נסה שוב</string>
+    <string name="detail_subtitles_error_languages">לא ניתן לטעון את רשימת השפות. בדוק את הגדרות OpenSubtitles ואת החיבור.</string>
+    <string name="detail_subtitles_error_search">החיפוש ב-OpenSubtitles נכשל. בדוק את החיבור ונסה שוב.</string>
+    <string name="detail_subtitles_error_download">לא ניתן להוריד את הכתוביות האלה. נסה שוב או בחר אחרות.</string>
+    <string name="detail_subtitles_remove">הסרת הכתוביות שנבחרו</string>
+    <string name="detail_subtitles_change_language">שינוי שפה</string>
+    <string name="detail_subtitles_close">סגירה</string>
+    <string name="detail_subtitles_release_unknown">גרסה לא ידועה</string>
+    <string name="detail_subtitles_downloading">מוריד %1$s…</string>
 </resources>

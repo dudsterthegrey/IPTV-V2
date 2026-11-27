@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Seneste 3 år</string>
     <string name="shelf_filter_year_last_10">Seneste 10 år</string>
     <string name="shelf_filter_year_older">Før 1990</string>
+    <string name="detail_subtitles_button">Undertekster</string>
+    <string name="detail_subtitles_button_chosen">Undertekster: %1$s</string>
+    <string name="detail_subtitles_title">Vælg undertekster</string>
+    <string name="detail_subtitles_title_episode">Undertekster til S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">De undertekster, du vælger, indlæses, når du trykker på Afspil.</string>
+    <string name="detail_subtitles_all_languages">Alle sprog</string>
+    <string name="detail_subtitles_loading_languages">Indlæser sprog…</string>
+    <string name="detail_subtitles_searching">Søger på OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Der blev ikke fundet undertekster til denne titel.</string>
+    <string name="detail_subtitles_retry">Prøv igen</string>
+    <string name="detail_subtitles_error_languages">Sproglisten kunne ikke indlæses. Tjek dine OpenSubtitles-indstillinger og forbindelsen.</string>
+    <string name="detail_subtitles_error_search">Søgningen på OpenSubtitles mislykkedes. Tjek forbindelsen, og prøv igen.</string>
+    <string name="detail_subtitles_error_download">Underteksterne kunne ikke downloades. Prøv igen, eller vælg nogle andre.</string>
+    <string name="detail_subtitles_remove">Fjern valgte undertekster</string>
+    <string name="detail_subtitles_change_language">Skift sprog</string>
+    <string name="detail_subtitles_close">Luk</string>
+    <string name="detail_subtitles_release_unknown">Ukendt udgivelse</string>
+    <string name="detail_subtitles_downloading">Downloader %1$s…</string>
 </resources>

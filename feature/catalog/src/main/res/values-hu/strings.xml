@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Az elmúlt 3 év</string>
     <string name="shelf_filter_year_last_10">Az elmúlt 10 év</string>
     <string name="shelf_filter_year_older">1990 előtt</string>
+    <string name="detail_subtitles_button">Feliratok</string>
+    <string name="detail_subtitles_button_chosen">Feliratok: %1$s</string>
+    <string name="detail_subtitles_title">Felirat kiválasztása</string>
+    <string name="detail_subtitles_title_episode">Feliratok: %1$d. évad %2$d. rész</string>
+    <string name="detail_subtitles_description">A kiválasztott felirat a Lejátszás megnyomásakor töltődik be.</string>
+    <string name="detail_subtitles_all_languages">Minden nyelv</string>
+    <string name="detail_subtitles_loading_languages">Nyelvek betöltése…</string>
+    <string name="detail_subtitles_searching">Keresés az OpenSubtitles oldalon…</string>
+    <string name="detail_subtitles_no_results">Ehhez a címhez nem található felirat.</string>
+    <string name="detail_subtitles_retry">Újra</string>
+    <string name="detail_subtitles_error_languages">A nyelvlista nem tölthető be. Ellenőrizd az OpenSubtitles beállításait és a kapcsolatot.</string>
+    <string name="detail_subtitles_error_search">Az OpenSubtitles keresés sikertelen. Ellenőrizd a kapcsolatot, és próbáld újra.</string>
+    <string name="detail_subtitles_error_download">Ez a felirat nem tölthető le. Próbáld újra, vagy válassz másikat.</string>
+    <string name="detail_subtitles_remove">Kiválasztott felirat eltávolítása</string>
+    <string name="detail_subtitles_change_language">Nyelv módosítása</string>
+    <string name="detail_subtitles_close">Bezárás</string>
+    <string name="detail_subtitles_release_unknown">Ismeretlen kiadás</string>
+    <string name="detail_subtitles_downloading">Letöltés: %1$s…</string>
 </resources>

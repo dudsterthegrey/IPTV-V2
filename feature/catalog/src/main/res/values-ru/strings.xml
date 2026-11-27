@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Последние 3 года</string>
     <string name="shelf_filter_year_last_10">Последние 10 лет</string>
     <string name="shelf_filter_year_older">До 1990 года</string>
+    <string name="detail_subtitles_button">Субтитры</string>
+    <string name="detail_subtitles_button_chosen">Субтитры: %1$s</string>
+    <string name="detail_subtitles_title">Выбрать субтитры</string>
+    <string name="detail_subtitles_title_episode">Субтитры для С%1$d Э%2$d</string>
+    <string name="detail_subtitles_description">Выбранные субтитры загрузятся, когда вы нажмёте «Воспроизвести».</string>
+    <string name="detail_subtitles_all_languages">Все языки</string>
+    <string name="detail_subtitles_loading_languages">Загрузка языков…</string>
+    <string name="detail_subtitles_searching">Поиск в OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Субтитры для этого названия не найдены.</string>
+    <string name="detail_subtitles_retry">Повторить</string>
+    <string name="detail_subtitles_error_languages">Не удалось загрузить список языков. Проверьте настройки OpenSubtitles и подключение.</string>
+    <string name="detail_subtitles_error_search">Не удалось выполнить поиск в OpenSubtitles. Проверьте подключение и повторите попытку.</string>
+    <string name="detail_subtitles_error_download">Не удалось скачать эти субтитры. Повторите попытку или выберите другие.</string>
+    <string name="detail_subtitles_remove">Удалить выбранные субтитры</string>
+    <string name="detail_subtitles_change_language">Сменить язык</string>
+    <string name="detail_subtitles_close">Закрыть</string>
+    <string name="detail_subtitles_release_unknown">Неизвестный релиз</string>
+    <string name="detail_subtitles_downloading">Загрузка: %1$s…</string>
 </resources>

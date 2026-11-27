@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">3 ปีที่ผ่านมา</string>
     <string name="shelf_filter_year_last_10">10 ปีที่ผ่านมา</string>
     <string name="shelf_filter_year_older">ก่อนปี 1990</string>
+    <string name="detail_subtitles_button">คำบรรยาย</string>
+    <string name="detail_subtitles_button_chosen">คำบรรยาย: %1$s</string>
+    <string name="detail_subtitles_title">เลือกคำบรรยาย</string>
+    <string name="detail_subtitles_title_episode">คำบรรยายสำหรับ S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">คำบรรยายที่คุณเลือกจะโหลดเมื่อกดเล่น</string>
+    <string name="detail_subtitles_all_languages">ทุกภาษา</string>
+    <string name="detail_subtitles_loading_languages">กำลังโหลดภาษา…</string>
+    <string name="detail_subtitles_searching">กำลังค้นหาใน OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">ไม่พบคำบรรยายสำหรับเรื่องนี้</string>
+    <string name="detail_subtitles_retry">ลองอีกครั้ง</string>
+    <string name="detail_subtitles_error_languages">โหลดรายการภาษาไม่ได้ ตรวจสอบการตั้งค่า OpenSubtitles และการเชื่อมต่อ</string>
+    <string name="detail_subtitles_error_search">ค้นหาใน OpenSubtitles ไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง</string>
+    <string name="detail_subtitles_error_download">ดาวน์โหลดคำบรรยายนี้ไม่ได้ ลองอีกครั้งหรือเลือกอันอื่น</string>
+    <string name="detail_subtitles_remove">ลบคำบรรยายที่เลือก</string>
+    <string name="detail_subtitles_change_language">เปลี่ยนภาษา</string>
+    <string name="detail_subtitles_close">ปิด</string>
+    <string name="detail_subtitles_release_unknown">ไม่ทราบรุ่น</string>
+    <string name="detail_subtitles_downloading">กำลังดาวน์โหลด %1$s…</string>
 </resources>

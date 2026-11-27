@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Ultimi 3 anni</string>
     <string name="shelf_filter_year_last_10">Ultimi 10 anni</string>
     <string name="shelf_filter_year_older">Prima del 1990</string>
+    <string name="detail_subtitles_button">Sottotitoli</string>
+    <string name="detail_subtitles_button_chosen">Sottotitoli: %1$s</string>
+    <string name="detail_subtitles_title">Scegli i sottotitoli</string>
+    <string name="detail_subtitles_title_episode">Sottotitoli per S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">I sottotitoli scelti vengono caricati quando premi Riproduci.</string>
+    <string name="detail_subtitles_all_languages">Tutte le lingue</string>
+    <string name="detail_subtitles_loading_languages">Caricamento delle lingue…</string>
+    <string name="detail_subtitles_searching">Ricerca su OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Nessun sottotitolo trovato per questo titolo.</string>
+    <string name="detail_subtitles_retry">Riprova</string>
+    <string name="detail_subtitles_error_languages">Impossibile caricare l\'elenco delle lingue. Controlla le impostazioni di OpenSubtitles e la connessione.</string>
+    <string name="detail_subtitles_error_search">Impossibile cercare su OpenSubtitles. Controlla la connessione e riprova.</string>
+    <string name="detail_subtitles_error_download">Impossibile scaricare questi sottotitoli. Riprova o scegline altri.</string>
+    <string name="detail_subtitles_remove">Rimuovi i sottotitoli scelti</string>
+    <string name="detail_subtitles_change_language">Cambia lingua</string>
+    <string name="detail_subtitles_close">Chiudi</string>
+    <string name="detail_subtitles_release_unknown">Versione sconosciuta</string>
+    <string name="detail_subtitles_downloading">Download di %1$s…</string>
 </resources>

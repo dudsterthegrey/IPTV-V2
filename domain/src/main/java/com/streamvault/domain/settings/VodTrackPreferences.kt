@@ -31,4 +31,14 @@ sealed interface VodTrackPreferenceScope {
         override val providerId: Long,
         override val contentId: Long
     ) : VodTrackPreferenceScope
+
+    /**
+     * One episode, keyed by its episode id. Holds an online subtitle chosen for that episode
+     * before playback; audio and other track choices stay on [Series]. Device-local, so it is not
+     * part of backups.
+     */
+    data class Episode(
+        override val providerId: Long,
+        override val contentId: Long
+    ) : VodTrackPreferenceScope
 }

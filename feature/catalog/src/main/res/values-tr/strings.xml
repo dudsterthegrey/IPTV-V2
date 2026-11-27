@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Son 3 yıl</string>
     <string name="shelf_filter_year_last_10">Son 10 yıl</string>
     <string name="shelf_filter_year_older">1990 öncesi</string>
+    <string name="detail_subtitles_button">Altyazılar</string>
+    <string name="detail_subtitles_button_chosen">Altyazılar: %1$s</string>
+    <string name="detail_subtitles_title">Altyazı seç</string>
+    <string name="detail_subtitles_title_episode">S%1$d B%2$d için altyazılar</string>
+    <string name="detail_subtitles_description">Seçtiğiniz altyazılar Oynat\'a bastığınızda yüklenir.</string>
+    <string name="detail_subtitles_all_languages">Tüm diller</string>
+    <string name="detail_subtitles_loading_languages">Diller yükleniyor…</string>
+    <string name="detail_subtitles_searching">OpenSubtitles\'ta aranıyor…</string>
+    <string name="detail_subtitles_no_results">Bu başlık için altyazı bulunamadı.</string>
+    <string name="detail_subtitles_retry">Tekrar dene</string>
+    <string name="detail_subtitles_error_languages">Dil listesi yüklenemedi. OpenSubtitles ayarlarını ve bağlantıyı kontrol edin.</string>
+    <string name="detail_subtitles_error_search">OpenSubtitles\'ta arama yapılamadı. Bağlantıyı kontrol edip tekrar deneyin.</string>
+    <string name="detail_subtitles_error_download">Bu altyazı indirilemedi. Tekrar deneyin veya başka birini seçin.</string>
+    <string name="detail_subtitles_remove">Seçilen altyazıları kaldır</string>
+    <string name="detail_subtitles_change_language">Dili değiştir</string>
+    <string name="detail_subtitles_close">Kapat</string>
+    <string name="detail_subtitles_release_unknown">Bilinmeyen sürüm</string>
+    <string name="detail_subtitles_downloading">%1$s indiriliyor…</string>
 </resources>

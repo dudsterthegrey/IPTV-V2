@@ -3642,6 +3642,8 @@ class BackupManagerImpl @Inject constructor(
                     is VodTrackPreferenceScope.Series -> seriesDao.getById(scope.contentId)
                         ?.takeIf { it.providerId == scope.providerId }
                         ?.toPortableContentReference(providerReference)
+                    // Points at a subtitle file downloaded on this device only.
+                    is VodTrackPreferenceScope.Episode -> null
                 } ?: return@mapNotNull null
                 PortableVodTrackPreferenceBackup(contentReference, trackPreferences)
             }

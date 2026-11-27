@@ -93,9 +93,23 @@ internal fun PlayerViewModel.persistVodTrackPreferences(
         seriesId = currentSeriesId
     ) ?: return
     activeVodTrackPreferences = updated
+    val episodeScope = buildEpisodeSubtitleScope(currentContentType, currentProviderId, currentContentId)
     viewModelScope.launch {
-        vodTrackPreferenceSaveMutex.withLock {
-            playerPreferencesCoordinator.setVodTrackPreferences(scope, updated)
+        // A failed save only loses the remembered choice; it must not crash playback.
+        try { vodTrackPreferenceSaveMutex.withLock {
+            if (episodeScope != null) {
+                // A downloaded subtitle belongs to this episode only; the series entry keeps the rest.
+                playerPreferencesCoordinator.setVodTrackPreferences(
+                    episodeScope,
+                    VodTrackPreferences(subtitle = updated.subtitle?.takeIf { it.externalSubtitleDownloadId != null })
+                )
+                playerPreferencesCoordinator.setVodTrackPreferences(
+                    scope,
+                    updated.copy(subtitle = updated.subtitle?.copy(externalSubtitleDownloadId = null))
+                )
+            } else {
+                playerPreferencesCoordinator.setVodTrackPreferences(scope, updated)
+            }
             if (persistGlobal) {
                 playerPreferencesCoordinator.setGlobalVodTrackPreferences(
                     updated.copy(
@@ -103,6 +117,10 @@ internal fun PlayerViewModel.persistVodTrackPreferences(
                     )
                 )
             }
+        } } catch (cancelled: CancellationException) {
+            throw cancelled
+        } catch (error: Exception) {
+            android.util.Log.w("PlayerTrackPrefs", "Could not save track preferences: ${error.javaClass.simpleName}")
         }
     }
 }

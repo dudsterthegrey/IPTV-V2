@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">Последните 3 години</string>
     <string name="shelf_filter_year_last_10">Последните 10 години</string>
     <string name="shelf_filter_year_older">Преди 1990</string>
+    <string name="detail_subtitles_button">Субтитри</string>
+    <string name="detail_subtitles_button_chosen">Субтитри: %1$s</string>
+    <string name="detail_subtitles_title">Изберете субтитри</string>
+    <string name="detail_subtitles_title_episode">Субтитри за С%1$d Е%2$d</string>
+    <string name="detail_subtitles_description">Избраните субтитри се зареждат, когато натиснете Пусни.</string>
+    <string name="detail_subtitles_all_languages">Всички езици</string>
+    <string name="detail_subtitles_loading_languages">Зареждане на езиците…</string>
+    <string name="detail_subtitles_searching">Търсене в OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Няма намерени субтитри за това заглавие.</string>
+    <string name="detail_subtitles_retry">Опитайте отново</string>
+    <string name="detail_subtitles_error_languages">Списъкът с езици не може да се зареди. Проверете настройките на OpenSubtitles и връзката.</string>
+    <string name="detail_subtitles_error_search">Търсенето в OpenSubtitles не бе успешно. Проверете връзката и опитайте отново.</string>
+    <string name="detail_subtitles_error_download">Тези субтитри не могат да се изтеглят. Опитайте отново или изберете други.</string>
+    <string name="detail_subtitles_remove">Премахване на избраните субтитри</string>
+    <string name="detail_subtitles_change_language">Смяна на езика</string>
+    <string name="detail_subtitles_close">Затвори</string>
+    <string name="detail_subtitles_release_unknown">Неизвестна версия</string>
+    <string name="detail_subtitles_downloading">Изтегляне на %1$s…</string>
 </resources>

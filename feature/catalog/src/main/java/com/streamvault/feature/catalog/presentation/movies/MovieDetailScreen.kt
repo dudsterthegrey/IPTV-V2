@@ -1,5 +1,7 @@
 package com.streamvault.feature.catalog.presentation.movies
 
+import com.streamvault.feature.catalog.presentation.subtitles.DetailSubtitlesButton
+import com.streamvault.feature.catalog.presentation.subtitles.toSubtitleTarget
 import com.streamvault.core.ui.design.BrowseShapes
 import android.content.Intent
 import android.content.ClipData
@@ -542,6 +544,7 @@ private fun MovieDetailHeroText(
                 modifier = Modifier.focusRequester(playButtonFocusRequester),
                 primary = true
             ) }
+            item { DetailSubtitlesButton(target = movie.toSubtitleTarget()) }
             item { DetailActionButton(stringResource(R.string.stream_url_copy), onCopyUrl) }
             item { DetailActionButton(stringResource(R.string.download_button_label), onDownload) }
             item { DetailActionButton(

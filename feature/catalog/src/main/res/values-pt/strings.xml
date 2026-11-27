@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Últimos 3 anos</string>
     <string name="shelf_filter_year_last_10">Últimos 10 anos</string>
     <string name="shelf_filter_year_older">Antes de 1990</string>
+    <string name="detail_subtitles_button">Legendas</string>
+    <string name="detail_subtitles_button_chosen">Legendas: %1$s</string>
+    <string name="detail_subtitles_title">Escolher legendas</string>
+    <string name="detail_subtitles_title_episode">Legendas para T%1$d E%2$d</string>
+    <string name="detail_subtitles_description">As legendas escolhidas são carregadas quando premir Reproduzir.</string>
+    <string name="detail_subtitles_all_languages">Todos os idiomas</string>
+    <string name="detail_subtitles_loading_languages">A carregar idiomas…</string>
+    <string name="detail_subtitles_searching">A pesquisar no OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Não foram encontradas legendas para este título.</string>
+    <string name="detail_subtitles_retry">Tentar novamente</string>
+    <string name="detail_subtitles_error_languages">Não foi possível carregar a lista de idiomas. Verifique as definições do OpenSubtitles e a ligação.</string>
+    <string name="detail_subtitles_error_search">Não foi possível pesquisar no OpenSubtitles. Verifique a ligação e tente novamente.</string>
+    <string name="detail_subtitles_error_download">Não foi possível transferir essas legendas. Tente novamente ou escolha outras.</string>
+    <string name="detail_subtitles_remove">Remover as legendas escolhidas</string>
+    <string name="detail_subtitles_change_language">Mudar de idioma</string>
+    <string name="detail_subtitles_close">Fechar</string>
+    <string name="detail_subtitles_release_unknown">Versão desconhecida</string>
+    <string name="detail_subtitles_downloading">A transferir %1$s…</string>
 </resources>

@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Siste 3 år</string>
     <string name="shelf_filter_year_last_10">Siste 10 år</string>
     <string name="shelf_filter_year_older">Før 1990</string>
+    <string name="detail_subtitles_button">Undertekster</string>
+    <string name="detail_subtitles_button_chosen">Undertekster: %1$s</string>
+    <string name="detail_subtitles_title">Velg undertekster</string>
+    <string name="detail_subtitles_title_episode">Undertekster for S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Undertekstene du velger, lastes inn når du trykker på Spill av.</string>
+    <string name="detail_subtitles_all_languages">Alle språk</string>
+    <string name="detail_subtitles_loading_languages">Laster inn språk…</string>
+    <string name="detail_subtitles_searching">Søker på OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Fant ingen undertekster for denne tittelen.</string>
+    <string name="detail_subtitles_retry">Prøv igjen</string>
+    <string name="detail_subtitles_error_languages">Kunne ikke laste inn språklisten. Sjekk OpenSubtitles-innstillingene og tilkoblingen.</string>
+    <string name="detail_subtitles_error_search">Søket på OpenSubtitles mislyktes. Sjekk tilkoblingen og prøv igjen.</string>
+    <string name="detail_subtitles_error_download">Kunne ikke laste ned undertekstene. Prøv igjen eller velg andre.</string>
+    <string name="detail_subtitles_remove">Fjern valgte undertekster</string>
+    <string name="detail_subtitles_change_language">Bytt språk</string>
+    <string name="detail_subtitles_close">Lukk</string>
+    <string name="detail_subtitles_release_unknown">Ukjent utgivelse</string>
+    <string name="detail_subtitles_downloading">Laster ned %1$s…</string>
 </resources>

@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">近 3 年</string>
     <string name="shelf_filter_year_last_10">近 10 年</string>
     <string name="shelf_filter_year_older">1990 年以前</string>
+    <string name="detail_subtitles_button">字幕</string>
+    <string name="detail_subtitles_button_chosen">字幕：%1$s</string>
+    <string name="detail_subtitles_title">選擇字幕</string>
+    <string name="detail_subtitles_title_episode">第 %1$d 季第 %2$d 集的字幕</string>
+    <string name="detail_subtitles_description">按下播放時會載入你選擇的字幕。</string>
+    <string name="detail_subtitles_all_languages">所有語言</string>
+    <string name="detail_subtitles_loading_languages">正在載入語言…</string>
+    <string name="detail_subtitles_searching">正在搜尋 OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">找不到此影片的字幕。</string>
+    <string name="detail_subtitles_retry">重試</string>
+    <string name="detail_subtitles_error_languages">無法載入語言清單。請檢查 OpenSubtitles 設定和網路連線。</string>
+    <string name="detail_subtitles_error_search">無法搜尋 OpenSubtitles。請檢查網路連線後重試。</string>
+    <string name="detail_subtitles_error_download">無法下載該字幕。請重試或選擇其他字幕。</string>
+    <string name="detail_subtitles_remove">移除已選字幕</string>
+    <string name="detail_subtitles_change_language">變更語言</string>
+    <string name="detail_subtitles_close">關閉</string>
+    <string name="detail_subtitles_release_unknown">未知版本</string>
+    <string name="detail_subtitles_downloading">正在下載%1$s…</string>
 </resources>

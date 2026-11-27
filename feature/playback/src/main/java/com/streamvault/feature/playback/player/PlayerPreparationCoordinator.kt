@@ -210,8 +210,13 @@ class PlayerPreparationCoordinator @Inject constructor(
             contentId = contentId,
             seriesId = seriesId
         ) ?: return null
-        return playerPreferencesCoordinator.getVodTrackPreferences(scope).first()
+        val base = playerPreferencesCoordinator.getVodTrackPreferences(scope).first()
             ?: playerPreferencesCoordinator.globalVodTrackPreferences.first()
+        val episodeScope = buildEpisodeSubtitleScope(contentType, providerId, contentId) ?: return base
+        return mergeEpisodeSubtitlePreference(
+            base = base,
+            episode = playerPreferencesCoordinator.getVodTrackPreferences(episodeScope).first()
+        )
     }
 
     private suspend fun shouldProbePlaybackUrl(request: Request, url: String): Boolean {

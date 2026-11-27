@@ -323,6 +323,10 @@ Built and unit-tested, but not yet tried with real shows. Use the TV emulator (`
     them at its 10-minute background limit. Strings live in `data/src/main/res`.
   - `LibraryQueryBenchmarkTest` (run with `LIBRARY_BENCHMARK=1`) times the Live TV, guide and
     home queries on a 20,000-channel, 40,000-movie library.
+- Movie and show pages have a Subtitles button (`DetailSubtitlesButton`). It searches
+  OpenSubtitles, downloads the chosen file and saves it for the movie or for the episode the
+  Play button starts (`VodTrackPreferenceScope.Episode`). The player loads it on Play. A
+  downloaded file never carries over to another episode, and episode entries are not backed up.
 - [ ] Optional: point the in-app updater (`APP_UPDATES_ENABLED`) at your own release feed
 
 ## Rules for every port

@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">Posledné 3 roky</string>
     <string name="shelf_filter_year_last_10">Posledných 10 rokov</string>
     <string name="shelf_filter_year_older">Pred rokom 1990</string>
+    <string name="detail_subtitles_button">Titulky</string>
+    <string name="detail_subtitles_button_chosen">Titulky: %1$s</string>
+    <string name="detail_subtitles_title">Vybrať titulky</string>
+    <string name="detail_subtitles_title_episode">Titulky pre S%1$d E%2$d</string>
+    <string name="detail_subtitles_description">Vybrané titulky sa načítajú po stlačení Prehrať.</string>
+    <string name="detail_subtitles_all_languages">Všetky jazyky</string>
+    <string name="detail_subtitles_loading_languages">Načítavajú sa jazyky…</string>
+    <string name="detail_subtitles_searching">Hľadá sa na OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Pre tento titul sa nenašli žiadne titulky.</string>
+    <string name="detail_subtitles_retry">Skúsiť znova</string>
+    <string name="detail_subtitles_error_languages">Zoznam jazykov sa nepodarilo načítať. Skontrolujte nastavenia OpenSubtitles a pripojenie.</string>
+    <string name="detail_subtitles_error_search">Hľadanie na OpenSubtitles zlyhalo. Skontrolujte pripojenie a skúste to znova.</string>
+    <string name="detail_subtitles_error_download">Tieto titulky sa nepodarilo stiahnuť. Skúste to znova alebo vyberte iné.</string>
+    <string name="detail_subtitles_remove">Odstrániť vybrané titulky</string>
+    <string name="detail_subtitles_change_language">Zmeniť jazyk</string>
+    <string name="detail_subtitles_close">Zavrieť</string>
+    <string name="detail_subtitles_release_unknown">Neznáme vydanie</string>
+    <string name="detail_subtitles_downloading">Sťahuje sa %1$s…</string>
 </resources>

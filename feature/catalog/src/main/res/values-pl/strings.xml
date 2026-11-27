@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Ostatnie 3 lata</string>
     <string name="shelf_filter_year_last_10">Ostatnie 10 lat</string>
     <string name="shelf_filter_year_older">Przed 1990</string>
+    <string name="detail_subtitles_button">Napisy</string>
+    <string name="detail_subtitles_button_chosen">Napisy: %1$s</string>
+    <string name="detail_subtitles_title">Wybierz napisy</string>
+    <string name="detail_subtitles_title_episode">Napisy do S%1$d O%2$d</string>
+    <string name="detail_subtitles_description">Wybrane napisy zostaną wczytane po naciśnięciu Odtwórz.</string>
+    <string name="detail_subtitles_all_languages">Wszystkie języki</string>
+    <string name="detail_subtitles_loading_languages">Wczytywanie języków…</string>
+    <string name="detail_subtitles_searching">Wyszukiwanie w OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Nie znaleziono napisów do tego tytułu.</string>
+    <string name="detail_subtitles_retry">Spróbuj ponownie</string>
+    <string name="detail_subtitles_error_languages">Nie udało się wczytać listy języków. Sprawdź ustawienia OpenSubtitles i połączenie.</string>
+    <string name="detail_subtitles_error_search">Wyszukiwanie w OpenSubtitles nie powiodło się. Sprawdź połączenie i spróbuj ponownie.</string>
+    <string name="detail_subtitles_error_download">Nie udało się pobrać tych napisów. Spróbuj ponownie lub wybierz inne.</string>
+    <string name="detail_subtitles_remove">Usuń wybrane napisy</string>
+    <string name="detail_subtitles_change_language">Zmień język</string>
+    <string name="detail_subtitles_close">Zamknij</string>
+    <string name="detail_subtitles_release_unknown">Nieznane wydanie</string>
+    <string name="detail_subtitles_downloading">Pobieranie: %1$s…</string>
 </resources>

@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Viimeiset 3 vuotta</string>
     <string name="shelf_filter_year_last_10">Viimeiset 10 vuotta</string>
     <string name="shelf_filter_year_older">Ennen vuotta 1990</string>
+    <string name="detail_subtitles_button">Tekstitykset</string>
+    <string name="detail_subtitles_button_chosen">Tekstitykset: %1$s</string>
+    <string name="detail_subtitles_title">Valitse tekstitykset</string>
+    <string name="detail_subtitles_title_episode">Tekstitykset: K%1$d J%2$d</string>
+    <string name="detail_subtitles_description">Valitsemasi tekstitykset ladataan, kun painat Toista.</string>
+    <string name="detail_subtitles_all_languages">Kaikki kielet</string>
+    <string name="detail_subtitles_loading_languages">Ladataan kieliä…</string>
+    <string name="detail_subtitles_searching">Haetaan OpenSubtitlesista…</string>
+    <string name="detail_subtitles_no_results">Tälle nimikkeelle ei löytynyt tekstityksiä.</string>
+    <string name="detail_subtitles_retry">Yritä uudelleen</string>
+    <string name="detail_subtitles_error_languages">Kieliluetteloa ei voitu ladata. Tarkista OpenSubtitles-asetukset ja yhteys.</string>
+    <string name="detail_subtitles_error_search">OpenSubtitles-haku epäonnistui. Tarkista yhteys ja yritä uudelleen.</string>
+    <string name="detail_subtitles_error_download">Tekstityksiä ei voitu ladata. Yritä uudelleen tai valitse toiset.</string>
+    <string name="detail_subtitles_remove">Poista valitut tekstitykset</string>
+    <string name="detail_subtitles_change_language">Vaihda kieli</string>
+    <string name="detail_subtitles_close">Sulje</string>
+    <string name="detail_subtitles_release_unknown">Tuntematon julkaisu</string>
+    <string name="detail_subtitles_downloading">Ladataan: %1$s…</string>
 </resources>

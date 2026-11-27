@@ -441,4 +441,22 @@
     <string name="shelf_filter_year_last_3">पिछले 3 वर्ष</string>
     <string name="shelf_filter_year_last_10">पिछले 10 वर्ष</string>
     <string name="shelf_filter_year_older">1990 से पहले</string>
+    <string name="detail_subtitles_button">सबटाइटल</string>
+    <string name="detail_subtitles_button_chosen">सबटाइटल: %1$s</string>
+    <string name="detail_subtitles_title">सबटाइटल चुनें</string>
+    <string name="detail_subtitles_title_episode">S%1$d E%2$d के सबटाइटल</string>
+    <string name="detail_subtitles_description">आपके चुने सबटाइटल चलाएँ दबाने पर लोड होंगे।</string>
+    <string name="detail_subtitles_all_languages">सभी भाषाएँ</string>
+    <string name="detail_subtitles_loading_languages">भाषाएँ लोड हो रही हैं…</string>
+    <string name="detail_subtitles_searching">OpenSubtitles पर खोज रहे हैं…</string>
+    <string name="detail_subtitles_no_results">इस शीर्षक के लिए कोई सबटाइटल नहीं मिला।</string>
+    <string name="detail_subtitles_retry">फिर से कोशिश करें</string>
+    <string name="detail_subtitles_error_languages">भाषा सूची लोड नहीं हो सकी। OpenSubtitles सेटिंग और कनेक्शन जाँचें।</string>
+    <string name="detail_subtitles_error_search">OpenSubtitles पर खोज नहीं हो सकी। कनेक्शन जाँचें और फिर से कोशिश करें।</string>
+    <string name="detail_subtitles_error_download">यह सबटाइटल डाउनलोड नहीं हो सका। फिर से कोशिश करें या कोई दूसरा चुनें।</string>
+    <string name="detail_subtitles_remove">चुने गए सबटाइटल हटाएँ</string>
+    <string name="detail_subtitles_change_language">भाषा बदलें</string>
+    <string name="detail_subtitles_close">बंद करें</string>
+    <string name="detail_subtitles_release_unknown">अज्ञात रिलीज़</string>
+    <string name="detail_subtitles_downloading">%1$s डाउनलोड हो रहा है…</string>
 </resources>

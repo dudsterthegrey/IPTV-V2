@@ -455,4 +455,22 @@
     <string name="shelf_filter_year_last_3">Afgelopen 3 jaar</string>
     <string name="shelf_filter_year_last_10">Afgelopen 10 jaar</string>
     <string name="shelf_filter_year_older">Vóór 1990</string>
+    <string name="detail_subtitles_button">Ondertitels</string>
+    <string name="detail_subtitles_button_chosen">Ondertitels: %1$s</string>
+    <string name="detail_subtitles_title">Ondertitels kiezen</string>
+    <string name="detail_subtitles_title_episode">Ondertitels voor S%1$d A%2$d</string>
+    <string name="detail_subtitles_description">De gekozen ondertitels worden geladen als je op Afspelen drukt.</string>
+    <string name="detail_subtitles_all_languages">Alle talen</string>
+    <string name="detail_subtitles_loading_languages">Talen laden…</string>
+    <string name="detail_subtitles_searching">Zoeken op OpenSubtitles…</string>
+    <string name="detail_subtitles_no_results">Geen ondertitels gevonden voor deze titel.</string>
+    <string name="detail_subtitles_retry">Opnieuw proberen</string>
+    <string name="detail_subtitles_error_languages">De talenlijst kon niet worden geladen. Controleer de OpenSubtitles-instellingen en de verbinding.</string>
+    <string name="detail_subtitles_error_search">Zoeken op OpenSubtitles is mislukt. Controleer de verbinding en probeer het opnieuw.</string>
+    <string name="detail_subtitles_error_download">Deze ondertitels konden niet worden gedownload. Probeer het opnieuw of kies andere.</string>
+    <string name="detail_subtitles_remove">Gekozen ondertitels verwijderen</string>
+    <string name="detail_subtitles_change_language">Taal wijzigen</string>
+    <string name="detail_subtitles_close">Sluiten</string>
+    <string name="detail_subtitles_release_unknown">Onbekende release</string>
+    <string name="detail_subtitles_downloading">%1$s downloaden…</string>
 </resources>
