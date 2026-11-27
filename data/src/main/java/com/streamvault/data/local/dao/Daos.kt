@@ -516,6 +516,9 @@ abstract class ChannelDao {
     @Query("SELECT * FROM channels WHERE provider_id = :providerId")
     abstract suspend fun getByProviderSync(providerId: Long): List<ChannelEntity>
 
+    @Query("SELECT id, name, epg_channel_id, category_id FROM channels WHERE provider_id = :providerId")
+    abstract suspend fun getEpgResolveRowsByProvider(providerId: Long): List<ChannelEpgResolveEntity>
+
     @Query("SELECT * FROM channels WHERE provider_id = :providerId AND category_id = :categoryId")
     abstract suspend fun getByCategorySync(providerId: Long, categoryId: Long): List<ChannelEntity>
 
@@ -3478,6 +3481,22 @@ interface ProgramDao {
         )
         suspend fun getChannelIdsWithPrograms(providerId: Long, channelIds: List<String>): List<String>
 
+    /** Guide ids of this provider's channels that have provider guide programmes, in one pass. */
+    @Query(
+        """
+        SELECT DISTINCT TRIM(c.epg_channel_id)
+        FROM channels c
+        WHERE c.provider_id = :providerId
+            AND c.epg_channel_id IS NOT NULL
+            AND TRIM(c.epg_channel_id) != ''
+            AND EXISTS (
+                SELECT 1 FROM programs p
+                WHERE p.provider_id = :providerId AND p.channel_id = TRIM(c.epg_channel_id)
+            )
+        """
+    )
+    suspend fun getProviderChannelIdsWithPrograms(providerId: Long): List<String>
+
     @Query("SELECT COUNT(*) FROM programs WHERE provider_id = :providerId")
     suspend fun countByProvider(providerId: Long): Int
 
@@ -4185,13 +4204,52 @@ abstract class ChannelEpgMappingDao {
     @Query("DELETE FROM channel_epg_mappings WHERE provider_id = :providerId")
     abstract suspend fun deleteByProvider(providerId: Long)
 
+    /**
+     * Makes the provider's mappings equal [mappings], writing only rows whose match changed.
+     * Rewriting all of them on every guide refresh made each channel list on screen reload.
+     */
     @Transaction
     open suspend fun replaceForProvider(providerId: Long, mappings: List<ChannelEpgMappingEntity>) {
-        deleteByProvider(providerId)
-        if (mappings.isNotEmpty()) {
-            insertAll(mappings)
+        replaceChangedForProvider(providerId, mappings, getForProvider(providerId))
+    }
+
+    /** As [replaceForProvider], reusing mappings the caller already read in this pass. */
+    @Transaction
+    open suspend fun replaceChangedForProvider(
+        providerId: Long,
+        mappings: List<ChannelEpgMappingEntity>,
+        currentMappings: List<ChannelEpgMappingEntity>,
+    ) {
+        if (mappings.isEmpty()) {
+            deleteByProvider(providerId)
+            return
+        }
+        val existing = currentMappings.associateBy { it.providerChannelId }
+        val keep = mappings.mapTo(HashSet(mappings.size)) { it.providerChannelId }
+        existing.keys.filterNot { it in keep }.chunked(500).forEach { stale ->
+            deleteForChannels(providerId, stale)
+        }
+        val changed = mappings.filter { mapping ->
+            val current = existing[mapping.providerChannelId]
+            current == null || !current.sameMatchAs(mapping)
+        }
+        if (changed.isNotEmpty()) {
+            insertAll(changed)
         }
     }
+
+    @Query("DELETE FROM channel_epg_mappings WHERE provider_id = :providerId AND provider_channel_id IN (:channelIds)")
+    abstract suspend fun deleteForChannels(providerId: Long, channelIds: List<Long>)
+
+    private fun ChannelEpgMappingEntity.sameMatchAs(other: ChannelEpgMappingEntity): Boolean =
+        sourceType == other.sourceType &&
+            epgSourceId == other.epgSourceId &&
+            xmltvChannelId == other.xmltvChannelId &&
+            matchType == other.matchType &&
+            confidence == other.confidence &&
+            failedAttempts == other.failedAttempts &&
+            source == other.source &&
+            isManualOverride == other.isManualOverride
 
     @Query("""
         SELECT source_type, match_type, COUNT(*) as cnt

@@ -277,6 +277,14 @@ data class ChannelGuideLookupEntity(
     @ColumnInfo(name = "epg_channel_id") val epgChannelId: String? = null
 )
 
+/** The channel columns guide matching needs, without the wide stream and playback fields. */
+data class ChannelEpgResolveEntity(
+    val id: Long,
+    val name: String,
+    @ColumnInfo(name = "epg_channel_id") val epgChannelId: String? = null,
+    @ColumnInfo(name = "category_id") val categoryId: Long? = null
+)
+
 data class ChannelGuideSyncEntity(
     val name: String,
     @ColumnInfo(name = "stream_id") val streamId: Long = 0,

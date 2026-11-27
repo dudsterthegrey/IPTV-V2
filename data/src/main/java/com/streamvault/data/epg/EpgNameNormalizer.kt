@@ -14,6 +14,12 @@ import java.util.Locale
 object EpgNameNormalizer {
 
     private val nonAlphanumericRegex = Regex("[^a-z0-9]")
+    private val diacriticsRegex = Regex("\\p{InCombiningDiacriticalMarks}+")
+
+    /** Accent stripping is only needed for non-ASCII names; most channel names skip it. */
+    private fun stripAccents(text: String): String =
+        if (text.all { it.code < 128 }) text
+        else Normalizer.normalize(text, Normalizer.Form.NFD).replace(diacriticsRegex, "")
 
     /**
      * Produces a normalized key from a channel display name.
@@ -26,8 +32,7 @@ object EpgNameNormalizer {
     fun normalize(name: String): String {
         if (name.isBlank()) return ""
         val lower = name.lowercase(Locale.ROOT)
-        val stripped = Normalizer.normalize(lower, Normalizer.Form.NFD)
-            .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+        val stripped = stripAccents(lower)
         return stripped.replace(nonAlphanumericRegex, "")
     }
 
@@ -46,8 +51,7 @@ object EpgNameNormalizer {
      */
     fun looseKey(name: String): String {
         if (name.isBlank()) return ""
-        var s = Normalizer.normalize(name.lowercase(Locale.ROOT).replace('.', ' '), Normalizer.Form.NFD)
-            .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+        var s = stripAccents(name.lowercase(Locale.ROOT).replace('.', ' '))
         s = countryPrefixRegex.replace(s.trim(), "")
         s = pacificRegex.replace(s, " west ")
         s = bracketRegex.replace(s, " ")

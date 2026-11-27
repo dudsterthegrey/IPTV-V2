@@ -140,6 +140,23 @@ class LibraryQueryBenchmarkTest {
         time("guide programmes 50 channels deep") {
             engine.getResolvedProgrammes(P, lastPage, now - hour, now + 6 * hour).size
         }
+        time("resolve step: load channels") { channelDao.getEpgResolveRowsByProvider(P).size }
+        val epgIds = channelDao.getByProviderSync(P).mapNotNull { it.epgChannelId }
+        time("resolve step: channels with programmes") { db.programDao().getProviderChannelIdsWithPrograms(P).size }
+        time("resolve step: load guide channels") { db.epgChannelDao().getBySources(listOf(1L)).size }
+        val names = channelDao.getByProviderSync(P).map { it.name }
+        time("resolve step: normalize names") {
+            names.sumOf { com.streamvault.data.epg.EpgNameNormalizer.normalize(it).length +
+                com.streamvault.data.epg.EpgNameNormalizer.looseKey(it).length }
+        }
+        time("resolve step: read mappings") { db.channelEpgMappingDao().getForProvider(P).size }
+        val epgChannels = db.epgChannelDao().getBySources(listOf(1L))
+        time("resolve step: guide name keys") {
+            epgChannels.sumOf { com.streamvault.data.epg.EpgNameNormalizer.looseKey(it.displayName).length +
+                (com.streamvault.data.epg.EpgNameNormalizer.countryOfXmltvId(it.xmltvChannelId)?.length ?: 0) }
+        }
+        val mappings = db.channelEpgMappingDao().getForProvider(P)
+        time("resolve step: write mappings") { db.channelEpgMappingDao().replaceForProvider(P, mappings); mappings.size }
         time("guide resolve whole provider") { engine.resolveForProvider(P, emptySet()).toString().length }
 
         val sql = db.openHelper.readableDatabase

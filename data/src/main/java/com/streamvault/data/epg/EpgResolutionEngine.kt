@@ -63,7 +63,7 @@ class EpgResolutionEngine @Inject constructor(
         providerId: Long,
         hiddenLiveCategoryIds: Set<Long> = emptySet()
     ): EpgResolutionSummary = withContext(Dispatchers.Default) {
-        val channels = channelDao.getByProviderSync(providerId)
+        val channels = channelDao.getEpgResolveRowsByProvider(providerId)
             .filterNot { channel -> channel.categoryId != null && channel.categoryId in hiddenLiveCategoryIds }
         val guideSourcePolicy = providerSnapshotDao.getConfig(providerId)?.guideSourcePolicy ?: GuideSourcePolicy.AUTO
         if (channels.isEmpty()) {
@@ -125,15 +125,7 @@ class EpgResolutionEngine @Inject constructor(
         // Check which channels have provider-native EPG data
         val providerEpgChannelIds = channels.mapNotNull { it.epgChannelId?.trim()?.takeIf(String::isNotEmpty) }
         val providerNativeChannelIds = if (providerEpgChannelIds.isNotEmpty()) {
-            // SQLite bind-variable cap is 999 on older Android; keep chunks small
-            // (same pattern as EpgRepositoryImpl.getPrograms).
-            if (providerEpgChannelIds.size <= 500) {
-                programDao.getChannelIdsWithPrograms(providerId, providerEpgChannelIds)
-            } else {
-                providerEpgChannelIds.chunked(500).flatMap { chunk ->
-                    programDao.getChannelIdsWithPrograms(providerId, chunk)
-                }
-            }.toHashSet()
+            programDao.getProviderChannelIdsWithPrograms(providerId).toHashSet()
         } else {
             emptySet()
         }
@@ -260,7 +252,7 @@ class EpgResolutionEngine @Inject constructor(
 
             // 5. No EPG
             unresolvedCount++
-            Log.v(TAG, "Unresolved: channel=${channel.name} (id=${channel.id}), " +
+            if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "Unresolved: channel=${channel.name} (id=${channel.id}), " +
                 "epgId=${channelEpgId ?: "null"}, " +
                 "normalizedName=$channelNormalizedName, " +
                 "idInAnySource=${enabledAssignments.any { channelEpgId != null && channelEpgId in (exactIdIndex[it.epgSourceId] ?: emptySet()) }}, " +
@@ -280,7 +272,7 @@ class EpgResolutionEngine @Inject constructor(
             )
         }
 
-        channelEpgMappingDao.replaceForProvider(providerId, mappings)
+        channelEpgMappingDao.replaceChangedForProvider(providerId, mappings, existingMappings)
 
         val summary = EpgResolutionSummary(
             totalChannels = channels.size,
