@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.13",
-  "versionCode": 18,
+  "versionName": "2.1.14",
+  "versionCode": 19,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "1beda2843906251f09a6e07d7b69e243dc9c3673204982c5c3bcb29109ffc72d",
-  "releaseNotes": "Subtitles on the movie and show pages, subtitle search crash fixed, faster guide matching (2.1.13)",
+  "sha256": "39ddb9b5af002171ad23b72505888e26e9e04e5218ff7b38dbc62bb40fb1028f",
+  "releaseNotes": "Downloaded subtitles now show on screen (2.1.14)",
   "publishedAt": "2026-11-27",
   "downloaderCode": "7935478"
 }
