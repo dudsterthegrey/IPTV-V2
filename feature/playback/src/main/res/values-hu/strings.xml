@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Engedélyezd az ébresztéseket és emlékeztetőket a StreamVault számára az Android beállításaiban, majd próbáld újra a felvételt.</string>
     <string name="player_mark_intro_end">Itt ér véget az intró</string>
     <string name="player_intro_end_saved">Mentve. A sorozat minden epizódja felajánlja az intró átugrását.</string>
+    <string name="player_sleep_timer">Elalvási időzítő</string>
+    <string name="player_sleep_timer_remaining">Elalvási időzítő: még %1$d perc</string>
 </resources>

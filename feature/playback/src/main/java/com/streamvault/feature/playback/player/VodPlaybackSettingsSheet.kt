@@ -72,17 +72,27 @@ internal fun VodPlaybackSettingsSheet(
     onStopCasting: () -> Unit,
     isMuted: Boolean,
     isCastConnected: Boolean,
+    sleepTimer: SleepTimerUiState = SleepTimerUiState(),
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val closeLabel = stringResource(R.string.player_close_playback_settings)
     val firstActionFocusRequester = remember { FocusRequester() }
+    val sleepTimerLabel = if (sleepTimer.stopTimerActive) {
+        stringResource(
+            R.string.player_sleep_timer_remaining,
+            ((sleepTimer.stopRemainingMs + 59_999L) / 60_000L).toInt()
+        )
+    } else {
+        stringResource(R.string.player_sleep_timer)
+    }
     val actions = buildList {
+        // First, so it is one press away when the panel opens.
+        add(VodSettingsAction("stop_timer", sleepTimerLabel, onClick = onOpenStopPlaybackTimer))
         if (state.showSubtitleAction) add(VodSettingsAction("subtitles", stringResource(R.string.player_subs), onClick = onOpenSubtitleTracks))
         if (state.showAudioAction) add(VodSettingsAction("audio", stringResource(R.string.player_audio), onClick = onOpenAudioTracks))
         if (state.showVideoQualityAction) add(VodSettingsAction("quality", stringResource(R.string.player_video_quality), onClick = onOpenVideoTracks))
         add(VodSettingsAction("speed", stringResource(R.string.player_playback_speed_title), onClick = onOpenPlaybackSpeed))
-        add(VodSettingsAction("stop_timer", stringResource(R.string.player_stop_playback_after), onClick = onOpenStopPlaybackTimer))
         add(VodSettingsAction("idle_timer", stringResource(R.string.player_idle_standby_after), onClick = onOpenIdleStandbyTimer))
         add(VodSettingsAction("aspect", stringResource(R.string.player_aspect_ratio), onClick = onToggleAspectRatio))
         add(VodSettingsAction("mute", stringResource(if (isMuted) R.string.player_unmute else R.string.player_mute), onClick = onToggleMute))

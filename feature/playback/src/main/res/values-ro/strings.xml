@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Permite alarmele și mementourile pentru StreamVault în setările Android, apoi încearcă să înregistrezi din nou.</string>
     <string name="player_mark_intro_end">Introducerea se termină aici</string>
     <string name="player_intro_end_saved">Salvat. Fiecare episod va oferi Omite introducerea.</string>
+    <string name="player_sleep_timer">Temporizator de oprire</string>
+    <string name="player_sleep_timer_remaining">Temporizator: mai sunt %1$d min</string>
 </resources>

@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Zezwól aplikacji StreamVault na alarmy i przypomnienia w ustawieniach Androida, a następnie spróbuj nagrać ponownie.</string>
     <string name="player_mark_intro_end">Tu kończy się czołówka</string>
     <string name="player_intro_end_saved">Zapisano. Każdy odcinek tego serialu zaproponuje Pomiń czołówkę.</string>
+    <string name="player_sleep_timer">Wyłącznik czasowy</string>
+    <string name="player_sleep_timer_remaining">Wyłącznik czasowy: zostało %1$d min</string>
 </resources>

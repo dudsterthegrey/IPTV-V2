@@ -223,6 +223,7 @@ internal fun PlayerControlsOverlayHost(
                 onStopCasting = viewModel::stopCasting,
                 isMuted = isMuted,
                 isCastConnected = isCastConnected,
+                sleepTimer = sleepTimerUiState,
                 onDismiss = onDismissVodSheet,
                 modifier = Modifier.fillMaxSize()
             )

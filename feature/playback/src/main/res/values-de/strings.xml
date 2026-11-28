@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Erlaube StreamVault in den Android-Einstellungen Alarme und Erinnerungen und versuche die Aufnahme erneut.</string>
     <string name="player_mark_intro_end">Intro endet hier</string>
     <string name="player_intro_end_saved">Gespeichert. Jede Folge dieser Serie bietet jetzt „Intro überspringen“.</string>
+    <string name="player_sleep_timer">Schlaf-Timer</string>
+    <string name="player_sleep_timer_remaining">Schlaf-Timer: noch %1$d Min.</string>
 </resources>

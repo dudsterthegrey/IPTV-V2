@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Permita alarmes e lembretes para o StreamVault nas definições do Android e tente gravar novamente.</string>
     <string name="player_mark_intro_end">A abertura termina aqui</string>
     <string name="player_intro_end_saved">Salvo. Todo episódio desta série oferecerá Pular abertura.</string>
+    <string name="player_sleep_timer">Temporizador para dormir</string>
+    <string name="player_sleep_timer_remaining">Temporizador: faltam %1$d min</string>
 </resources>

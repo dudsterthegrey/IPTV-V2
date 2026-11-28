@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Android की सेटिंग में StreamVault के लिए अलार्म और रिमाइंडर की अनुमति दें, फिर रिकॉर्डिंग दोबारा शुरू करें।</string>
     <string name="player_mark_intro_end">इंट्रो यहाँ खत्म</string>
     <string name="player_intro_end_saved">सहेजा गया। इस शो के हर एपिसोड में इंट्रो छोड़ें दिखेगा।</string>
+    <string name="player_sleep_timer">स्लीप टाइमर</string>
+    <string name="player_sleep_timer_remaining">स्लीप टाइमर: %1$d मिनट बाकी</string>
 </resources>

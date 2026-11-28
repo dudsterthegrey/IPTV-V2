@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">Lejo alarmet dhe rikujtuesit për StreamVault te cilësimet e Androidit, pastaj provo të regjistrosh përsëri.</string>
     <string name="player_mark_intro_end">Hyrja mbaron këtu</string>
     <string name="player_intro_end_saved">U ruajt. Çdo episod do të ofrojë Kalo hyrjen.</string>
+    <string name="player_sleep_timer">Kohëmatësi i gjumit</string>
+    <string name="player_sleep_timer_remaining">Kohëmatësi i gjumit: edhe %1$d min</string>
 </resources>

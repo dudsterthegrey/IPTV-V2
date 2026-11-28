@@ -3,4 +3,6 @@
     <string name="player_recording_exact_alarm_required">在 Android 設定中允許 StreamVault 使用鬧鐘和提醒，然後重新嘗試錄影。</string>
     <string name="player_mark_intro_end">片頭到此結束</string>
     <string name="player_intro_end_saved">已儲存。此劇的每一集都會提供「略過片頭」。</string>
+    <string name="player_sleep_timer">睡眠計時器</string>
+    <string name="player_sleep_timer_remaining">睡眠計時器：剩餘 %1$d 分鐘</string>
 </resources>
