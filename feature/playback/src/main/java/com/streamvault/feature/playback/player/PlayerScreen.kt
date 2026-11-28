@@ -1,5 +1,6 @@
 package com.streamvault.feature.playback.player
 
+import androidx.compose.runtime.mutableLongStateOf
 import android.view.KeyEvent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -443,6 +444,8 @@ fun PlayerScreen(
         )
     }
 
+    // When the controls hide, a press meant for them should not skip the movie.
+    var controlsHiddenAtMs by remember { mutableLongStateOf(0L) }
     LaunchedEffect(showControls) {
         if (showControls) {
             delay(100)
@@ -453,6 +456,7 @@ fun PlayerScreen(
             }
         } else {
             viewModel.cancelControlsAutoHide()
+            controlsHiddenAtMs = android.os.SystemClock.uptimeMillis()
             focusRequester.requestFocusSafely(tag = "PlayerScreen", target = "Player root")
         }
     }
@@ -608,6 +612,8 @@ fun PlayerScreen(
             showEpisodePicker = modalState.showEpisodePicker,
             showContentSearch = modalState.showContentSearch,
             showControls = showControls,
+            controlsJustHidden = !showControls && controlsHiddenAtMs > 0L &&
+                android.os.SystemClock.uptimeMillis() - controlsHiddenAtMs < CONTROLS_HIDE_GRACE_MS,
             hasPendingNumericChannelInput = viewModel.hasPendingNumericChannelInput(),
             canOpenEpisodePicker = contentType == "SERIES_EPISODE" &&
                 viewModel.currentSeries.value?.seasons.sanitizedForPlayer()
@@ -1207,3 +1213,7 @@ private fun AspectRatio.toPlayerSurfaceResizeMode(): PlayerSurfaceResizeMode = w
     AspectRatio.FILL -> PlayerSurfaceResizeMode.FILL
     AspectRatio.ZOOM -> PlayerSurfaceResizeMode.ZOOM
 }
+
+/** How long after the controls hide Left/Right reopen them instead of skipping. */
+private const val CONTROLS_HIDE_GRACE_MS = 2_000L
+

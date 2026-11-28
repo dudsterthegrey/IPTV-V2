@@ -46,6 +46,8 @@ internal data class PlayerInputState(
     val showEpisodePicker: Boolean = false,
     val showContentSearch: Boolean = false,
     val showControls: Boolean = false,
+    /** The controls closed moments ago; a Left/Right press was probably meant for them. */
+    val controlsJustHidden: Boolean = false,
     val hasPendingNumericChannelInput: Boolean = false,
     val canOpenEpisodePicker: Boolean = false,
     val showClosePlaybackConfirmation: Boolean = false
@@ -277,6 +279,10 @@ private fun directionalInputDecision(
 
     if (state.showControls) {
         return PlayerInputDecision(PlayerInputAction.Pass, notifyInteraction)
+    }
+
+    if (state.controlsJustHidden && state.contentType != "LIVE" && !state.isCatchUpPlayback) {
+        return PlayerInputDecision(PlayerInputAction.ToggleControls, notifyInteraction)
     }
 
     if (isLeft && state.showChannelListOverlay && state.contentType == "LIVE" && !state.isCatchUpPlayback) {

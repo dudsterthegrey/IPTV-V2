@@ -205,6 +205,24 @@ class PlayerInputPolicyTest {
     }
 
     @Test
+    fun `right just after the controls hide reopens them instead of skipping`() {
+        val justHidden = liveState(contentType = "MOVIE").copy(controlsJustHidden = true)
+
+        assertThat(playerInputDecision(justHidden, PlayerInputKey.DpadRight).action)
+            .isEqualTo(PlayerInputAction.ToggleControls)
+        assertThat(playerInputDecision(justHidden, PlayerInputKey.DpadLeft).action)
+            .isEqualTo(PlayerInputAction.ToggleControls)
+    }
+
+    @Test
+    fun `live tv keeps its channel list and guide shortcuts after the controls hide`() {
+        val justHidden = liveState(contentType = "LIVE").copy(controlsJustHidden = true)
+
+        assertThat(playerInputDecision(justHidden, PlayerInputKey.DpadRight).action)
+            .isEqualTo(PlayerInputAction.OpenEpg)
+    }
+
+    @Test
     fun `up opens episode picker for eligible non-live content`() {
         val decision = playerInputDecision(
             liveState(contentType = "SERIES_EPISODE", canOpenEpisodePicker = true),

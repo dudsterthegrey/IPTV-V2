@@ -1,5 +1,6 @@
 package com.streamvault.feature.playback.player
 
+import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -96,6 +97,16 @@ internal fun VodPlayerControlsOverlay(
             modifier = Modifier
                 .fillMaxSize()
                 .semantics { contentDescription = vodControlsLabel }
+                // Any remote press while the controls are open keeps them open. Only the
+                // timeline used to do this, so the controls hid while moving to Settings.
+                .onPreviewKeyEvent { event ->
+                    if (event.nativeKeyEvent.action == android.view.KeyEvent.ACTION_DOWN &&
+                        event.nativeKeyEvent.keyCode in controlsActivityKeys
+                    ) {
+                        onUserInteraction()
+                    }
+                    false
+                }
         ) {
             Box(
                 modifier = Modifier
@@ -192,6 +203,15 @@ internal fun VodPlayerControlsOverlay(
                         onSeekNextChapter = onSeekNextChapter
                     )
                     Spacer(modifier = Modifier.weight(1f))
+                    // Settings sits right after the transport buttons so it is a few presses away.
+                    if (overlayState.showSettingsAction) {
+                        VodControlButton(
+                            onClick = onOpenSettings,
+                            modifier = Modifier.semantics { contentDescription = settingsLabel }
+                        ) {
+                            Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        }
+                    }
                     if (overlayState.showChapterAction) {
                         VodActionButton(
                             icon = Icons.Default.MenuBook,
@@ -242,14 +262,6 @@ internal fun VodPlayerControlsOverlay(
                             onClick = onOpenAudioTracks
                         )
                     }
-                    if (overlayState.showSettingsAction) {
-                        VodControlButton(
-                            onClick = onOpenSettings,
-                            modifier = Modifier.semantics { contentDescription = settingsLabel }
-                        ) {
-                            Icon(imageVector = Icons.Default.Settings, contentDescription = null)
-                        }
-                    }
                     VodControlButton(
                         onClick = onClose,
                         modifier = Modifier.semantics { contentDescription = closeLabel }
@@ -291,3 +303,14 @@ private fun VodActionButton(
         Icon(imageVector = icon, contentDescription = null)
     }
 }
+
+private val controlsActivityKeys = setOf(
+    android.view.KeyEvent.KEYCODE_DPAD_UP,
+    android.view.KeyEvent.KEYCODE_DPAD_DOWN,
+    android.view.KeyEvent.KEYCODE_DPAD_LEFT,
+    android.view.KeyEvent.KEYCODE_DPAD_RIGHT,
+    android.view.KeyEvent.KEYCODE_DPAD_CENTER,
+    android.view.KeyEvent.KEYCODE_ENTER,
+    android.view.KeyEvent.KEYCODE_NUMPAD_ENTER,
+)
+
