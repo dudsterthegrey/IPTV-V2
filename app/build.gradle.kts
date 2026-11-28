@@ -98,8 +98,8 @@ android {
         applicationId = "com.dgeo.iptvplayer.v2"
         minSdk = 25
         targetSdk = 36
-        versionCode = 19
-        versionName = "2.1.14"
+        versionCode = 20
+        versionName = "2.1.15"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TRAKT_CLIENT_ID", buildStringLiteral(traktClientId))
         buildConfigField("String", "TRAKT_REDIRECT_URI", buildStringLiteral(traktRedirectUri))
