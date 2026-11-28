@@ -47,13 +47,23 @@ class PlayerPreparationCoordinator @Inject constructor(
         val vodTrackPreferences: VodTrackPreferences? = null,
         val playbackQualityScope: PlaybackQualityPreferenceScope? = null,
         val temporaryPlaybackQualityPreference: ScopedPlaybackQualityPreference? = null,
-        val requiredSourceType: ResolvedStreamType? = null
+        val requiredSourceType: ResolvedStreamType? = null,
+        /** A remembered downloaded subtitle to open together with the stream. */
+        val externalSubtitle: PendingExternalSubtitle? = null
+    )
+
+    internal data class PendingExternalSubtitle(
+        val uri: android.net.Uri,
+        val language: String,
+        val label: String?
     )
 
     internal sealed interface Result {
         data class Success(
             val streamInfo: StreamInfo,
-            val probeCacheKey: String?
+            val probeCacheKey: String?,
+            /** True when [Request.externalSubtitle] was opened with the stream. */
+            val externalSubtitleAttached: Boolean = false
         ) : Result
 
         data class Failure(
@@ -122,10 +132,22 @@ class PlayerPreparationCoordinator @Inject constructor(
         if (!isCurrent()) return null
 
         val engine = playerEngineCoordinator.currentEngine
+        // Opening the stream and then rebuilding it to add the subtitle made a second connection
+        // right after the first, which providers with a one-connection limit can refuse.
+        val subtitleAttached = request.externalSubtitle?.let { subtitle ->
+            engine.attachExternalSubtitleOnPrepare(
+                streamInfo = preparedStreamInfo,
+                subtitleUri = subtitle.uri,
+                language = subtitle.language,
+                label = subtitle.label,
+                subtitleSource = com.streamvault.player.SubtitleTrackSource.ONLINE
+            )
+        } ?: false
         engine.prepare(preparedStreamInfo)
         return Result.Success(
             streamInfo = preparedStreamInfo,
-            probeCacheKey = probeCacheKey
+            probeCacheKey = probeCacheKey,
+            externalSubtitleAttached = subtitleAttached
         )
     }
 

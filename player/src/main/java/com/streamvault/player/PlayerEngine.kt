@@ -159,6 +159,18 @@ interface PlayerEngine {
         label: String? = null,
         subtitleSource: SubtitleTrackSource? = null
     )
+    /**
+     * Attaches a side-loaded subtitle to the next [prepare] of [streamInfo], so the stream is
+     * opened once with it instead of being opened and then rebuilt. Returns false when this
+     * engine cannot, in which case callers add it after preparing as before.
+     */
+    fun attachExternalSubtitleOnPrepare(
+        streamInfo: StreamInfo,
+        subtitleUri: android.net.Uri,
+        language: String,
+        label: String? = null,
+        subtitleSource: SubtitleTrackSource = SubtitleTrackSource.ONLINE
+    ): Boolean = false
     fun setInjectedSubtitleText(text: String?)
     fun setLiveAudioTap(tap: LiveAudioTap?)
     fun clearLiveAudioTap() = setLiveAudioTap(null)

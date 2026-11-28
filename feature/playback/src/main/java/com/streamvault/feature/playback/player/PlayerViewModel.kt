@@ -1585,7 +1585,8 @@ class PlayerViewModel @Inject constructor(
                 temporaryPlaybackQualityPreference = temporaryPlaybackQualityPreferenceFlow.value,
                 requiredSourceType = requiredSourceType ?: episodeSourceState.source(episodeToken)?.let {
                     com.streamvault.player.playback.ResolvedStreamType.PROGRESSIVE
-                }
+                },
+                externalSubtitle = rememberedOpenSubtitleForPrepare()
             ),
             isCurrent = { isCurrent() }
         ) ?: return false
@@ -1606,7 +1607,7 @@ class PlayerViewModel @Inject constructor(
         val success = preparationResult as PlayerPreparationCoordinator.Result.Success
         success.probeCacheKey?.let(probePassedPlaybackKeys::add)
         if (!isCurrent()) return false
-        restoreRememberedOpenSubtitle()
+        if (!success.externalSubtitleAttached) restoreRememberedOpenSubtitle()
         if (!isCurrent()) return false
         currentResolvedPlaybackUrl = success.streamInfo.url
         currentResolvedStreamInfo = success.streamInfo

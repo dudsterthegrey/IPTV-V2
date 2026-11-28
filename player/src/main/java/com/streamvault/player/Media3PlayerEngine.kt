@@ -1278,6 +1278,28 @@ class Media3PlayerEngine @Inject constructor(
         )
     }
 
+    override fun attachExternalSubtitleOnPrepare(
+        streamInfo: StreamInfo,
+        subtitleUri: android.net.Uri,
+        language: String,
+        label: String?,
+        subtitleSource: SubtitleTrackSource
+    ): Boolean {
+        val trackId = buildExternalSubtitleConfiguration(subtitleUri, language, label, subtitleSource).id
+            ?: return false
+        // prepare() keeps a pending subtitle whose mediaId matches the stream it opens and merges
+        // it into that first media source.
+        activeExternalSubtitle = ActiveExternalSubtitle(
+            uri = subtitleUri,
+            language = language,
+            label = label,
+            source = subtitleSource,
+            trackId = trackId,
+            mediaId = mediaSourceFactory.compatibilityMediaIdFor(streamInfo)
+        )
+        return true
+    }
+
     private fun mergeExternalSubtitleMediaSource(
         mainMediaSource: androidx.media3.exoplayer.source.MediaSource,
         subtitle: ActiveExternalSubtitle

@@ -227,19 +227,30 @@ internal fun PlayerViewModel.downloadExternalSubtitle(subtitleId: String) {
 }
 
 internal suspend fun PlayerViewModel.restoreRememberedOpenSubtitle() {
-    if (!currentContentType.remembersOnlineSubtitle()) return
-    val preference = activeVodTrackPreferences?.subtitle ?: return
-    val downloadId = preference.externalSubtitleDownloadId ?: return
+    val pending = rememberedOpenSubtitleForPrepare() ?: return
+    playerEngine.addExternalSubtitle(
+        subtitleUri = pending.uri,
+        language = pending.language,
+        label = pending.label,
+        subtitleSource = SubtitleTrackSource.ONLINE
+    )
+}
+
+/** The remembered downloaded subtitle for the current movie or episode, if its file is cached. */
+internal suspend fun PlayerViewModel.rememberedOpenSubtitleForPrepare():
+    PlayerPreparationCoordinator.PendingExternalSubtitle? {
+    if (!currentContentType.remembersOnlineSubtitle()) return null
+    val preference = activeVodTrackPreferences?.subtitle ?: return null
+    val downloadId = preference.externalSubtitleDownloadId ?: return null
     val cachedFile = downloadExternalSubtitleUseCase.cachedSubtitleFile(downloadId)
     if (cachedFile == null) {
         clearRememberedOpenSubtitleForCurrentContent()
-        return
+        return null
     }
-    playerEngine.addExternalSubtitle(
-        subtitleUri = Uri.fromFile(cachedFile),
+    return PlayerPreparationCoordinator.PendingExternalSubtitle(
+        uri = Uri.fromFile(cachedFile),
         language = preference.language?.takeIf { it.isNotBlank() } ?: "und",
-        label = preference.label,
-        subtitleSource = SubtitleTrackSource.ONLINE
+        label = preference.label
     )
 }
 
