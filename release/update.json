@@ -1,9 +1,9 @@
 {
-  "versionName": "2.1.15",
-  "versionCode": 20,
+  "versionName": "2.1.16",
+  "versionCode": 21,
   "downloadUrl": "https://raw.githubusercontent.com/dudsterthegrey/IPTV-V2/main/release/IPTVPlayer-V2-2.0.0.apk",
-  "sha256": "9c4c9ecd11af7410a145cd5ca061513e88a1075c02f62199f08eb1e375687f7a",
-  "releaseNotes": "Movies keep playing through a brief 404 from the provider (2.1.15)",
+  "sha256": "6616f18f395d0c2aef046f6ff654583adb2da407b562a3f20cade96665cf304a",
+  "releaseNotes": "Movies with a saved subtitle open in one connection (2.1.16)",
   "publishedAt": "2026-11-28",
   "downloaderCode": "7935478"
 }
