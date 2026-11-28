@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap
 private const val PLAYBACK_PERF_TAG = "PlaybackPerf"
 private const val FAST_TRANSIENT_RETRY_DELAY_MS = 500L
 private const val MAX_WHOLE_SOURCE_RETRIES_PER_OUTAGE = 1
+private const val VOD_STARTED_NOT_FOUND_RETRY_ATTEMPTS = 3
 private const val LIVE_TRANSIENT_RETRY_ATTEMPTS = 10
 private const val LIVE_HLS_MALFORMED_RETRY_ATTEMPTS_AFTER_START = 12
 
@@ -261,8 +262,13 @@ class PlayerRetryPolicy(
             PlaybackErrorCategory.DECODER,
             PlaybackErrorCategory.CLEAR_TEXT_BLOCKED,
             PlaybackErrorCategory.SSL,
-            PlaybackErrorCategory.HTTP_AUTH,
-            PlaybackErrorCategory.HTTP_NOT_FOUND -> 0
+            PlaybackErrorCategory.HTTP_AUTH -> 0
+
+            // A movie or episode that is already playing has not disappeared. Xtream servers
+            // answer 404 mid-stream when a redirect token expires or the account's connection
+            // limit is briefly exceeded; a fresh request a moment later usually works.
+            PlaybackErrorCategory.HTTP_NOT_FOUND ->
+                if (playbackStarted && !streamContext.isLive) VOD_STARTED_NOT_FOUND_RETRY_ATTEMPTS else 0
 
             PlaybackErrorCategory.FORMAT_UNSUPPORTED -> if (playbackStarted) 1 else 0
 

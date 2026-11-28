@@ -259,6 +259,27 @@ class PlayerRetryPolicyTest {
     }
 
     @Test
+    fun `404 during a movie that is already playing is retried`() {
+        val error = loadError(responseCode = 404).exception
+        val vod = PlayerRetryPolicy(progressiveContext, playbackStarted = { true })
+
+        assertThat(progressiveContext.isLive).isFalse()
+        assertThat(vod.shouldRetry(error, progressiveContext, playbackStarted = true, attempt = 3)).isTrue()
+        assertThat(vod.shouldRetry(error, progressiveContext, playbackStarted = true, attempt = 4)).isFalse()
+        assertThat(vod.shouldRetryWholeSource(error, playbackStarted = true, attempt = 1)).isTrue()
+        assertThat(vod.getRetryDelayMsFor(loadError(responseCode = 404, errorCount = 1))).isEqualTo(1_000L)
+    }
+
+    @Test
+    fun `404 before a movie starts still fails fast`() {
+        val error = loadError(responseCode = 404).exception
+        val vod = PlayerRetryPolicy(progressiveContext, playbackStarted = { false })
+
+        assertThat(vod.shouldRetry(error, progressiveContext, playbackStarted = false, attempt = 1)).isFalse()
+        assertThat(vod.getRetryDelayMsFor(loadError(responseCode = 404, errorCount = 1))).isEqualTo(C.TIME_UNSET)
+    }
+
+    @Test
     fun `post-start live hls media refusals get one fast load retry then one source retry`() {
         var started = true
         val observed = PlayerRetryPolicy(liveContext, playbackStarted = { started })
