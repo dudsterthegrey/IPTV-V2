@@ -629,8 +629,19 @@ fun PlayerViewModel.updateSeekPreview(positionMs: Long?) {
     }
 
     val requestVersion = ++seekPreviewRequestVersion
+    val providerId = currentProviderId
     seekPreviewJob = viewModelScope.launch {
         delay(120)
+        // A preview frame is read over its own connection to the stream. On an account that
+        // allows one connection, that second connection makes the provider refuse the playing
+        // movie (often with a 404), so those accounts show the artwork instead.
+        if (!previewUrl.isLocalMediaUrl() && !allowsExtraStreamConnection(providerId)) {
+            _seekPreview.update { current ->
+                if (requestVersion != seekPreviewRequestVersion) current
+                else current.copy(isLoading = false, frameBitmap = null)
+            }
+            return@launch
+        }
         val bitmap = playerThumbnailCoordinator.loadFrame(
             streamUrl = previewUrl,
             streamInfo = previewStreamInfo,
@@ -659,3 +670,21 @@ internal fun PlayerViewModel.clearSeekPreview() {
     seekPreviewRequestVersion++
     _seekPreview.value = SeekPreviewState()
 }
+
+private suspend fun PlayerViewModel.allowsExtraStreamConnection(providerId: Long): Boolean {
+    if (providerId <= 0L) return true
+    val maxConnections = try {
+        playerProviderCoordinator.getProvider(providerId)?.maxConnections
+    } catch (cancelled: kotlinx.coroutines.CancellationException) {
+        throw cancelled
+    } catch (_: Exception) {
+        null
+    }
+    return (maxConnections ?: 1) > 1
+}
+
+private fun String.isLocalMediaUrl(): Boolean {
+    val scheme = substringBefore("://", missingDelimiterValue = "").lowercase()
+    return scheme == "file" || scheme == "content"
+}
+
